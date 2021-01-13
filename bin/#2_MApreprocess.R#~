@@ -11,14 +11,11 @@ library(data.table)
 library(taxonomizr)
 library(taxize)
 library(parallel)
-library(dada2)
-
-library(data.table)
 
 ## re-run or use pre-computed results for different parts of the pipeline:
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
-doFilter <- FALSE
-doMultiAmp <- FALSE
+doFilter <- TRUE
+doMultiAmp <- TRUE
 doTax <- TRUE
 
 ###################Full run Microbiome#######################
@@ -142,9 +139,9 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi11.Rds")
 sum(otu_table(PS)) ##Total denoised reads
 ### this is giving errors
 ##Primer data
-PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
+#PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 ###For primer analysis (Victor)
-saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
@@ -268,10 +265,10 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi12.Rds")
 sum(otu_table(PS)) ##Total denoised reads
 ### this is giving errors
 ##Primer data
-PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
+#PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 ###For primer analysis (Victor)
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
-saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
 ### and again
@@ -394,11 +391,11 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSCombi21.Rds")
 sum(otu_table(PS)) ##Total denoised reads
 ### this is giving errors
 ##Primer data
-PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
+#PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 ###For primer analysis (Victor)
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
-saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
 #saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
 ### and again###################Full run Microbiome 2_2#######################
 #Preparation of files
@@ -482,7 +479,6 @@ if(doMultiAmp){
    MA <- readRDS("/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_2.RDS")
 }
 ###New taxonomic assignment
-
 MA <- blastTaxAnnot(MA,
                     db = "/SAN/db/blastdb/nt/nt",
                     negative_gilist = "/SAN/db/blastdb/uncultured.gi",
@@ -520,31 +516,10 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSCombi22.Rds")
 sum(otu_table(PS)) ##Total denoised reads
 ### this is giving errors
 ##Primer data
-PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
+#PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 ###For primer analysis (Victor)
-#saveRDS(PS.l11, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
-#saveRDS(PS.l12, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
-#saveRDS(PS.l21, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
-saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
+#saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
 
-
-####
-MA11<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/MA1_1Tax.Rds")
-
-MA12<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/MA1_2Tax.Rds")
-
-MA21<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_1Tax.Rds")
-MA22<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_2Tax.Rds")
-
-if(!exists("sample.data")){
-    source("/SAN/Susanas_den/gitProj/HMHZ/bin/1_data_prep.R")
-}
-
-##Adding sample data
-#MAsample11 <- addSampleData(MA11, sample.data)
-
-MAsample12 <- addSampleData(MA12, sample.data)
-
-MAsample21 <- addSampleData(MA21, sample.data)
-
-MAsample22 <- addSampleData(MA22, sample.data)

@@ -191,10 +191,18 @@ PSTSS1 = transform_sample_counts(PS, function(x){(x / sum(x))*10000})
 
 ### beta diversity
 #I. Bray-Curtis distances
-BC_tri <-plot_ordination(PSTSS, Bra_MDSRA, color = "triASV")
-BC_tri <- ggplot(BC_tri$data, BC_hex$mapping)+ geom_point(size=1, alpha=0.5)+
-    labs(x="NMDS1", y="NMDS2", color="Trichuriidae")+
+
+Bra_MDSRA <- ordinate(PSTSS, "NMDS", "bray")
+
+Bra_MDSRA
+
+BC_itri <-plot_ordination(PSTSS, Bra_MDSRA, color = "itriASV")
+
+BC_itri <- ggplot(BC_itri$data, BC_itri$mapping)+ geom_point(size=1, alpha=0.5)+
+    labs(x="NMDS1", y="NMDS2", color="Trichuriidae intensity")+
     theme_minimal()
+
+BC_itri
 
 sample_data(PSTSS)$hexASV
 psmds <- metaMDS(otu_table(PSTSS))
@@ -207,11 +215,13 @@ gofp=goodness(psmds)
 plot(psmds, display="sites", main="OTU goodness of fit")
 points(psmds, display="sites", cex=gofp*50, pch = 21, bg="gray")
 head(Bra_MDSRA$vectors)
-png(filename = "fig/nMDS_tri.png",
+
+png(filename = "fig/nMDS_itri.png",
         width =6, height = 4, units = "in", res= 400)
-BC_tri
+BC_itri
 dev.off()
 
+head(sdata)
 
 #### permanovas on beta diversisty
 PSTSSBMI  <- PSTSS %>%
@@ -219,23 +229,26 @@ PSTSSBMI  <- PSTSS %>%
 
 PCdis=distance(PSTSS, method="bray")
 sdata=sample_data(PSTSS)
-permaPSTSS=adonis2(PCdis~sdata$EimASV+
-            sdata$oxyASV +
-            sdata$hexASV +
-            sdata$ascASV +
-            sdata$criASV +
-            sdata$hekASV+
-            sdata$hymASV+
-            sdata$triASV,
+permaPSTSS=adonis2(PCdis~sdata$iEimASV+
+            sdata$ioxyASV +
+            sdata$itriASV+
+            sdata$ihexASV +
+            sdata$iascASV +
+            sdata$icriASV +
+            sdata$ihekASV+
+            sdata$ihymASV,
         permutations = 10000, method = "bray")
 
 permaPSTSS
+
+sdata$itriASV
 
 anosimPSTSS=anosim(PCdis,sdata$EimASV, permutations=10000, distance="bray")
 
 ### testing AKP
 Bra_MDSRA <- ordinate(PSTSS, method = "MDS", distance = "bray", na.rm=TRUE)
 evals <- Bra_MDSRA$values[,1]
+
 summary(lm(evals~sdata$EimASV))
 sdata$dis <- evals
 sdata$EimASV <- as.factor(sdata$EimASV)
@@ -272,7 +285,10 @@ wilcox.test(sdata$dis~ sdata$hymASV)
 library(breakaway)
 library(DivNet)
 #### richness test
-## divnet takes forever and then aborts itself when I run at ASV level
+library(vegan)
+
+
+    ## divnet takes forever and then aborts itself when I run at ASV level
 
 #highP <- phyloseq_filter_prevalence(PSgen, prev.trh = 0.95, abund.trh = NULL,
 #                                   threshold_condition = "OR", abund.type = "total")
@@ -350,14 +366,14 @@ oxyDA=ggbarplot(resS, x="Row.names", y="log.changes",
 oxyDA
 }
 
-eimDA=plotDA(PS, "EimASV")
-oxyDA=plotDA(PS, "oxyASV")
-criDA=plotDA(PS, "criASV")
-triDA=plotDA(PS, "triASV")
-hexDA=plotDA(PS, "hexASV")
-ascDA=plotDA(PS, "ascASV")
-hekDA=plotDA(PS, "hekASV")
-hymDA=plotDA(PS, "hymASV")
+eimDA=plotDA(PS, "iEimASV")
+oxyDA=plotDA(PS, "ioxyASV")
+criDA=plotDA(PS, "icriASV")
+triDA=plotDA(PS, "itriASV")
+hexDA=plotDA(PS, "ihexASV")
+ascDA=plotDA(PS, "iascASV")
+hekDA=plotDA(PS, "ihekASV")
+hymDA=plotDA(PS, "ihymASV")
 
 png(filename = "fig/DAeim.png",
         width =4, height = 6, units = "in", res= 400)
@@ -404,3 +420,8 @@ png(filename = "fig/DAplat.png",
         width =4, height = 4, units = "in", res= 400)
 hymDA
 dev.off()
+
+#### Calculate normalized stochasticity ration (NST)
+library("NST")
+tNST(otups, sample_data(PS)$EimASV)
+

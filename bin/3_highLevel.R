@@ -33,6 +33,8 @@ PS <- subset_taxa(PS, !is.na(superkingdom) & !superkingdom %in% c("", "uncharact
 sort(phyloseq::sample_sums(PS))
 PS <- phyloseq::subset_samples(PS, phyloseq::sample_sums(PS) > 1000)
 
+# abundance filtering to 0.01%? Or keep prevalence filtering?
+
 # prevalence filtering at 0.05%
 PS=phyloseq_filter_prevalence(PS, prev.trh=0.005)
 
@@ -164,5 +166,86 @@ sample_data(PS)$triASV[na.omit(sample_data(PS)$Trichuris_muris>0)] <- "yes"
 #summary(sample_data(PS)$Hymenolepis_diminuta>0)
 #summary(sample_data(PS)$Hymenolepis_microstoma>0)
 #summary(sample_data(PS)$Mastophorus>0)
+
+###### categorize intensity level
+
+Trutheim <- sample_sums(PSeim)>mean(sample_sums(PSeim))
+
+Truthcri <- sample_sums(PScri)>mean(sample_sums(PScri))
+
+
+Truthcri
+
+#Truthsar <- sample_sums(PSsar)>=1 # 5 samples
+Truthoxy <- sample_sums(PSoxy)>mean(sample_sums(PSoxy))
+Truthtri <- sample_sums(PStri)>mean(sample_sums(PStri))
+Truthhex <- sample_sums(PStri)>mean(sample_sums(PStri))
+#Truthstr <- sample_sums(PSstr)>=1 # 2 samples
+Truthasc <- sample_sums(PSasc)>mean(sample_sums(PSasc))
+#Truthspi <-sample_sums(PStri)>mean(sample_sums(PStri))
+Truthhek <- sample_sums(PShek)>mean(sample_sums(PShek))
+Truthhym <- sample_sums(PShym)>mean(sample_sums(PShym))
+#Truthano <-
+
+# make a new variable called parasite (yes/no) if nematode or apicomplexa are present
+# apicomplexa
+for (i in 1:nsamples(PS))
+{ if (Trutheim[i]==TRUE)
+  {sample_data(PS)$iEimASV[i]="high"}
+  else {sample_data(PS)$iEimASV[i]="low"}
+}
+
+for (i in 1:nsamples(PS))
+{ if (Truthcri[i]==TRUE)
+  {sample_data(PS)$icriASV[i]="high"}
+  else {sample_data(PS)$icriASV[i]="low"}
+}
+
+                                        #nematoda
+for (i in 1:nsamples(PS))
+{ if (Truthoxy[i]==TRUE)
+  {sample_data(PS)$ioxyASV[i]="high"}
+  else {sample_data(PS)$ioxyASV[i]="low"}
+}
+for (i in 1:nsamples(PS))
+{ if (Truthtri[i]==TRUE)
+  {sample_data(PS)$itriASV[i]="high"}
+  else {sample_data(PS)$itriASV[i]="low"}
+}
+for (i in 1:nsamples(PS))
+{ if (Truthhex[i]==TRUE)
+  {sample_data(PS)$ihexASV[i]="high"}
+  else {sample_data(PS)$ihexASV[i]="low"}
+}
+for (i in 1:nsamples(PS))
+{ if (Truthasc[i]==TRUE)
+  {sample_data(PS)$iascASV[i]="high"}
+  else {sample_data(PS)$iascASV[i]="low"}
+}
+for (i in 1:nsamples(PS))
+{ if (Truthhek[i]==TRUE)
+  {sample_data(PS)$ihekASV[i]="high"}
+  else {sample_data(PS)$ihekASV[i]="low"}
+}
+#Platyhelminths
+for (i in 1:nsamples(PS))
+{ if (Truthhym[i]==TRUE)
+  {sample_data(PS)$ihymASV[i]="high"}
+  else {sample_data(PS)$ihymASV[i]="low"}
+}
+
+sample_data(PS)$rEim[i]=sample_sums(PSeim)
+
+sample_data(PS)$rcri[i]=sample_sums(PScri)
+
+sample_data(PS)$rtri[i]=sample_sums(PStri)
+
+sample_data(PS)$rhex[i]=sample_sums(PShex)
+
+sample_data(PS)$rasc[i]=sample_sums(PSasc)
+
+sample_data(PS)$rhek[i]=sample_sums(PShek)
+
+sample_data(PS)$rhym[i]=sample_sums(PShym)
 
 saveRDS(PS, file="tmp/PSpre.R")
