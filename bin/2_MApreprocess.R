@@ -12,8 +12,168 @@ library(taxonomizr)
 library(taxize)
 library(parallel)
 library(dada2)
+library(phyloseq)
+library(utils)
+library(Biostrings)
 
-library(data.table)
+blastTaxAnnot <- function (MA, db="nt/nt",
+			       num_threads= getOption("mc.cores", 1L),
+			       negative_gilist = system.file("extdata", "uncultured.gi",
+							     package = "MultiAmplicon"),
+			       infasta=paste0(tempfile(), ".fasta"),
+			       outblast=paste0(tempfile(), ".blt"),
+			       taxonSQL, ...
+			       ) {
+
+## Prevent R CMD check from complaining about the use of pipe expressions
+## standard data.table variables
+#if (getRversion() >= "2.15.1")
+#utils::globalVariables(c(".", ".I", ".N", ".SD"), utils::packageName(), add=F)
+#
+## Make sure data.table knows we know we're using it
+#.datatable.aware = TRUE
+
+SEQ <- getSequencesFromTable(MA)
+if(!file.exists(infasta)){
+Ssplit <- lapply(seq_along(SEQ), function (i) {
+			  if(!is.null(SEQ[[i]])){
+			  ampSEQ <- SEQ[[i]]
+			  SEQnames <- paste("A", i, "S", 1:length(ampSEQ), "R_", sep="_")
+			  names(ampSEQ) <- SEQnames
+			  Ssplit <- strsplit(ampSEQ, "NNNNNNNNNN")
+			  unlist(Ssplit)
+			  } else (NULL)
+			  })
+Biostrings::writeXStringSet(DNAStringSet(unlist(Ssplit)),
+					infasta)
+message("wrote file ", infasta,
+	" storing input sequences for blast\n")
+} else {
+message("file ", infasta, " exists, using existing file!",
+	" To extract input sequences for blast  again delete the file\n")
+}
+
+if(!file.exists(outblast)){
+DBmessage <-
+paste0("using database ", db, " resulting in as blast database full path\n")
+message(DBmessage)
+
+## We blast this file against NR with a gi-list excluding all
+## uncultured sequences
+## create the gi-list as a download from an NCBI Entrez Nucleotide
+## search '"environmental samples"[organism] OR metagenomes[orgn]'
+        ## or via command line: esearch -db nucleotide -query '"environmental
+        ## samples"[organism] OR metagenomes[orgn]' | efetch -format gi -mode
+## text > /SAN/db/blastdb/uncultured_gilist.txt
+command <- paste("blastn",
+		 "-negative_gilist",  negative_gilist,
+		 "-query", infasta,
+		 "-db", db,
+		 "-evalue",  1e-15,
+		 "-num_threads", num_threads,
+		 "-max_hsps", 1,
+		 "-max_target_seqs 25",
+		 "-out", outblast,
+		 "-outfmt", "'10 qaccver saccver pident length mismatch gapopen",
+		 "qstart qend sstart send evalue bitscore staxid'",
+		 ...)
+message("STARTED running blast with command:\n",
+	command)
+system(command)
+cat("\nFINISHED running blast\n")
+} else {
+message("file", outblast, " exists, using existing file!",
+	" To run blast again delete file")
+}
+## we read the blast file
+blast <- read.csv(outblast, header=FALSE)
+names(blast) <- c("query", "subject", "pident", "length", "mismatch",
+		  "gapopen", "qstart", "qend", "sstart", "send", "evalue",
+		  "bitscore", "staxid")
+blastT <- as.data.table(blast)
+blastT$staxid <- as.character(blastT$staxid)
+blastT$ampProd <- gsub("_R_\\d+", "", blastT$query)
+
+
+## retain only the maximal bitscore for each query and staxid
+blastT$qtaxid <- as.factor(paste(blastT$query, blastT$staxid, sep="|"))
+blastT <- blastT[blastT[, .I[bitscore == max(bitscore)], by=qtaxid][, V1]]
+
+## unique in case of multiple best hits in one taxID
+blastT <- blastT[!duplicated(blastT$qtaxid)]
+
+blastT <- blastT[blastT[, .I[bitscore == max(bitscore)], by=qtaxid][, V1]]
+
+## for each amplification product get the sum of the bitscores for
+## forward and reverse query (for non-merged sequences that is)
+blt <- blastT[, list(bitsum = sum(bitscore)), by=c("ampProd", "staxid")]
+
+## ## now we would hav to generated a taxonomizr sql database
+## read.nodes.sql("/SAN/db/taxonomy/nodes.dmp",
+		  ##                "/SAN/db/taxonomy/taxonomizr.sql")
+## read.names.sql("/SAN/db/taxonomy/names.dmp",
+		  ##                "/SAN/db/taxonomy/taxonomizr.sql")
+blast.tax <- getTaxonomy(unique(blt$staxid),
+			       "/SAN/db/taxonomy/taxonomizr.sql")
+blast.tax <- as.data.table(blast.tax, keep.rownames="staxid")
+blast.tax$staxid <- gsub("\\s*", "", blast.tax$staxid)
+blt <- merge(blt, blast.tax, by="staxid", all=TRUE)
+
+## get the best bitscore for each amplification product
+blt <- blt[blt[, .I[bitsum == max(bitsum)], by=ampProd][, V1]]
+
+get.unique.tax <- function(x, Nsupport=1) {
+## unique taxa at that level excluding potential NA's
+agnostic <- as.character(x)
+taxa <- agnostic[!is.na(agnostic)]
+ux <- unique(taxa)
+## but return NA if they are not unique
+if(length(taxa)>=Nsupport && ## number of supporting annotations
+	 length(ux)==1){ ## has to be a unique answer
+return(ux)
+} else {as.character(NA)}
+}
+
+## now if multiple taxa with bitscores are given, set NA at any
+## level
+B <- blt[,
+	 {list(superkingdom = get.unique.tax(superkingdom),
+			    phylum = get.unique.tax(phylum),
+			    class = get.unique.tax(class),
+			    order = get.unique.tax(order),
+			    family = get.unique.tax(family),
+			    genus = get.unique.tax(genus),
+			    species = get.unique.tax(species))
+	      },
+	      by=ampProd]
+
+B$amplicon <- gsub("A_(\\d+)_S_(\\d+)(_R_)?", "\\1", B$ampProd)
+B$sequence <- gsub("A_(\\d+)_S_(\\d+)(_R_)?", "\\2", B$ampProd)
+
+annot.l <- by(B, B$amplicon, function (x){
+		 taxDF <- as.data.frame(x)
+		 n.amp <- as.numeric(unique(x$amplicon))
+		 n.seq <- as.numeric(x$sequence)
+		 rownames(taxDF) <- SEQ[[n.amp]][n.seq]
+		 taxDF <- taxDF[SEQ[[n.amp]],
+				   c("superkingdom", "phylum", "class", "order", "family",
+				     "genus", "species")]
+		 rownames(taxDF) <- SEQ[[n.amp]]
+		 as.matrix(taxDF)
+		 })
+names(annot.l) <- names(SEQ)[as.numeric(names(annot.l))]
+annot.l <- lapply(annot.l[names(SEQ)], function (x) x) ## drop array
+taxTab.l <- lapply(annot.l, function (x) {
+			    if (!is.null(x)) {
+			    new("taxonomyTable", x)
+			    } else {NULL}
+			    })
+initialize(MA, taxonTable = taxTab.l)
+}
+
+
+
+#Sys.setenv("BLASTDB" = "/SAN/db/blastdb/")
 
 ## re-run or use pre-computed results for different parts of the pipeline:
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
@@ -482,7 +642,6 @@ if(doMultiAmp){
    MA <- readRDS("/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_2.RDS")
 }
 ###New taxonomic assignment
-
 MA <- blastTaxAnnot(MA,
                     db = "/SAN/db/blastdb/nt/nt",
                     negative_gilist = "/SAN/db/blastdb/uncultured.gi",
@@ -527,24 +686,3 @@ PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 #saveRDS(PS.l21, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
 saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
 
-
-####
-MA11<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/MA1_1Tax.Rds")
-
-MA12<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/MA1_2Tax.Rds")
-
-MA21<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_1Tax.Rds")
-MA22<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/MA2_2Tax.Rds")
-
-if(!exists("sample.data")){
-    source("/SAN/Susanas_den/gitProj/HMHZ/bin/1_data_prep.R")
-}
-
-##Adding sample data
-#MAsample11 <- addSampleData(MA11, sample.data)
-
-MAsample12 <- addSampleData(MA12, sample.data)
-
-MAsample21 <- addSampleData(MA21, sample.data)
-
-MAsample22 <- addSampleData(MA22, sample.data)
