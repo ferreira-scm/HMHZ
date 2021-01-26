@@ -60,18 +60,19 @@ rm(PSl21)
 rm(PSl22)
 rm(along)
 
+PS@tax_table
+
 
 ##Eliminate Unassigned to superkingdom level
 PS <- subset_taxa(PS, !is.na(superkingdom) & !superkingdom %in% c("", "uncharacterized"))
 
 # subset samples based on total read count
 sort(phyloseq::sample_sums(PS))
+
 PS <- phyloseq::subset_samples(PS, phyloseq::sample_sums(PS) > 1000)
 
-# abundance filtering to 0.01%? Or keep prevalence filtering?
-
 # prevalence filtering at 0.05%
-PS=phyloseq_filter_prevalence(PS, prev.trh=0.005)
+#PS=phyloseq_filter_prevalence(PS, prev.trh=0.005)
 
 ###A lot of Mus :(
 ## Host read numbers
@@ -79,15 +80,6 @@ sum(otu_table(subset_taxa(PS, genus%in%"Mus")))/sum(otu_table(PS))
 ###Eliminate reads assigned as "Mus"
 PS <- subset_taxa(PS, !genus %in% "Mus") ##Eliminate reads :S
 
-# Eliminate samples with no reads
-PS <- prune_samples(sample_sums(PS)>0, PS)
-
-
-# transform and agglomerate
-PSphy <-  tax_glom(PS, "phylum", NArm = FALSE)
-sample_data(PS)$depth <- sample_sums(PS)
-PSTSS = transform_sample_counts(PS, function(x){x / sum(x)})
-PSTSS1 = transform_sample_counts(PS, function(x){(x / sum(x))*10000})
 
 ### now I subset based on parasites for downstream analyses
 # first at phyla level
@@ -283,4 +275,28 @@ sample_data(PS)$rhek[i]=sample_sums(PShek)
 
 sample_data(PS)$rhym[i]=sample_sums(PShym)
 
+
+# Eliminate samples with no reads
+PS <- prune_samples(sample_sums(PS)>0, PS)
+
+# abundance filtering to 0.01%? Or keep prevalence filtering?
+physeqrF = filter_taxa(PS, function(x) mean(x) < 0.001,TRUE)
+x = taxa_sums(PS)
+keepTaxa = (x / sum(x) > 0.0001)
+summary(keepTaxa)
+pPS = prune_taxa(keepTaxa, PS)
+
+# Eliminate samples with no reads
+pPS <- prune_samples(sample_sums(pPS)>0, pPS)
+
+# transform and agglomerate
+PSphy <-  tax_glom(PS, "phylum", NArm = FALSE)
+sample_data(PS)$depth <- sample_sums(PS)
+PSTSS = transform_sample_counts(PS, function(x){x / sum(x)})
+PSTSS1 = transform_sample_counts(PS, function(x){(x / sum(x))*10000})
+
+
 saveRDS(PS, file="tmp/PSpre.R")
+
+
+PS <- readRDS("tmp/PSpre.R")

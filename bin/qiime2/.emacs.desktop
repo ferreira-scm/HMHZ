@@ -1,0 +1,55 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Jan 18 11:56:46 2021
+;; Desktop file format version 208
+;; Emacs version 26.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (24581 26990 793122 147000) (desktop . "208") "susana@harriet" nil nil ((((minibuffer . t) (tty-type . "screen.xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#F8F8F2") (cursor-color . "#999999") (background-color . "#1D2021") (font . "tty") (height . 76) (width . 274) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "DF5D-E60B-F65E-C92C") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 274) (pixel-height . 75) (total-width . 274) (total-height . 75) (normal-height . 1.0) (normal-width . 1.0) (buffer "pooled.sh" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 199) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/" "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/ma_sorted_qiime2.sh" "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/cutadapt_sort.sh" "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/pooled.sh"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/pooled.sh"
+  "pooled.sh"
+  'sh-mode
+  '(highlight-parentheses-mode TeX-PDF-mode)
+  199
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 24581 26990 790339 6000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/cutadapt_sort.sh"
+  "cutadapt_sort.sh"
+  'sh-mode
+  '(highlight-parentheses-mode TeX-PDF-mode)
+  367
+  '(14 nil)
+  nil
+  nil
+  '((buffer-display-time 24581 26881 872982 873000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/SAN/Susanas_den/gitProj/HMHZ/bin/qiime2/ma_sorted_qiime2.sh"
+  "ma_sorted_qiime2.sh"
+  'sh-mode
+  '(highlight-parentheses-mode TeX-PDF-mode)
+  619
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 24581 26640 868692 102000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+

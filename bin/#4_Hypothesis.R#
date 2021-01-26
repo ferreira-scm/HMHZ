@@ -188,16 +188,16 @@ dev.off()
 PSTSS = transform_sample_counts(PS, function(x){x / sum(x)})
 PSTSS1 = transform_sample_counts(PS, function(x){(x / sum(x))*10000})
 
-
+PS <- prune_taxa(taxa_sums(PS)>0, PS)
 
 ### beta diversity
 #I. Bray-Curtis distances
 
-Bra_MDSRA <- ordinate(PSTSS, "NMDS", "bray")
+Bra_MDSRA <- ordinate(PS, "NMDS", "bray")
 
 Bra_MDSRA
 
-BC_itri <-plot_ordination(PSTSS, Bra_MDSRA, color = "itriASV")
+BC_itri <-plot_ordination(PS, Bra_MDSRA, color = "itriASV")
 
 BC_itri <- ggplot(BC_itri$data, BC_itri$mapping)+ geom_point(size=1, alpha=0.5)+
     labs(x="NMDS1", y="NMDS2", color="Trichuriidae intensity")+
@@ -289,7 +289,7 @@ library(DivNet)
 library(vegan)
 
 
-    ## divnet takes forever and then aborts itself when I run at ASV level
+## divnet takes forever and then aborts itself when I run at ASV level
 
 #highP <- phyloseq_filter_prevalence(PSgen, prev.trh = 0.95, abund.trh = NULL,
 #                                   threshold_condition = "OR", abund.type = "total")
@@ -424,5 +424,5 @@ dev.off()
 
 #### Calculate normalized stochasticity ration (NST)
 library("NST")
-tNST(otups, sample_data(PS)$EimASV)
+tNST(otu_ta, sample_data(PS)$EimASV)
 
