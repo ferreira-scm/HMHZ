@@ -21,9 +21,9 @@ library(dplyr)
 
 ## re-run or use pre-computed results for different parts of the pipeline:
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
-doFilter <- TRUE
-doMultiAmp <- TRUE
-doTax <- TRUE
+doFilter <- FALSE
+doMultiAmp <- FALSE
+doTax <- FALSE
 
 ###################Full run Microbiome#######################
 #Preparation of files
@@ -144,11 +144,8 @@ if(!exists("sample.data")){
 
 ##To phyloseq
 ##Sample data
-PS <- toPhyloseq(MAsample, colnames(MAsample)) ##Now it work
+PS <- toPhyloseq(MA, colnames(MA)) ##Now it work
 #saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi11.Rds")
-
-
-
 
 PS@sam_data <- sample_data(sample.data)
 
@@ -162,6 +159,7 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi11.Rds")
 sum(otu_table(PS)) ##Total denoised reads
 ### this is giving errors
 ##Primer data
+
 PS.l <- toPhyloseq(MAsample, colnames(MAsample),  multi2Single=FALSE)
 ###For primer analysis (Victor)
 saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
