@@ -1,9 +1,8 @@
 # high level analysis of the "wild microbiome"
-# preprocessing
 
 library(ggplot2)
 library(reshape)
-library(phyloseq, lib="/usr/local/lib/R/site-library/")
+#library(phyloseq, lib="/usr/local/lib/R/site-library/")
 library(data.table)
 #library(parallel)
 library(microbiome)
@@ -17,87 +16,28 @@ library(tidyr)
 library(tidyverse)
 #library(geosphere)
 library(ggpubr)
+## using the devel
+devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 
-# merge all the runs
-PS11 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi11.Rds")
-PS12 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSCombi12.Rds")
-PS21 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSCombi21.Rds")
-PS22 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSCombi22.Rds")
-PS <- merge_phyloseq(PS11, PS12, PS21, PS22)
+PS <- readRDS(file = "tmp/interData/PhyloSeqCombi_HMHZ_All.Rds")
 
-PSl11 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist11.Rds")
-PSl12 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run1/PSlist12.Rds")
-PSl21 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist21.Rds")
-PSl22 <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/run2/PSlist22.Rds")
-
-###Eliminate the empty primers first and then merge the phyloseq lists... empty list make the next function bug
-PSl11[sapply(PSl11, is.null)]<- NULL
-PSl12[sapply(PSl12, is.null)]<- NULL
-PSl21[sapply(PSl21, is.null)]<- NULL
-PSl22[sapply(PSl22, is.null)]<- NULL
- ##Merge all the information from both experiments
-along<- names(PSl11)
-PSl <- lapply(along, function(i) merge_phyloseq(PSl11[[i]], PSl12[[i]],PSl21[[i]], PSl22[[i]]))
-names(PSl) <- names(PSl11)
-
-# adjusting amplicon names for some reason
-x<- names(PSl)
-x[6]<-"BGf_132_F.BGr_132_R"
-x[22]<-"LSU_Fwd_2_3Mod_55_F.LSU_Rev_4_54_R"
-x[28]<-"NLF184cw_74_F.NL818cw_74_R"
-names(PSl)<- x
-
-saveRDS(PSl, file="tmp/PSl.Rds")
-saveRDS(PS, file="tmp/PSCombi.Rds")
-
-PSl <- readRDS(file="tmp/PSl.Rds")
-
-# load qiime-derived PS
-
-PSq <- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/PSqiime200.RDS")
-PSq
-PS
-
-rm(PS11)
-rm(PS12)
-rm(PS21)
-rm(PS22)
-rm(PSl11)
-rm(PSl12)
-rm(PSl21)
-rm(PSl22)
-rm(along)
 
 ##Eliminate Unassigned to superkingdom level
 PS <- subset_taxa(PS, !is.na(superkingdom) & !superkingdom %in% c("", "uncharacterized"))
 
-PSl <- lapply(PSl, function(x){
-    subset_taxa(x, !is.na(superkingdom) & !superkingdom %in% c("", "uncharacterized"))})
-
-    
 # subset samples based on total read count (1000 reads)
 median(phyloseq::sample_sums(PS))
 
 PS <- phyloseq::subset_samples(PS, phyloseq::sample_sums(PS) > 1000)
 
-# can't do it for the PSl
-#lapply(PSl, function(x){
-#    subset_samples(x, phyloseq::sample_sums(x)>50
-#})
-
-# prevalence filtering at 0.05%
-#PS=phyloseq_filter_prevalence(PS, prev.trh=0.005)
+# prevalence filtering at 5%
+#pPPS=phyloseq_filter_prevalence(pPS, prev.trh=0.05)
 
 ###A lot of Mus :(
 ## Host read numbers
 sum(otu_table(subset_taxa(PS, genus%in%"Mus")))/sum(otu_table(PS))
 ###Eliminate reads assigned as "Mus"
 PS <- subset_taxa(PS, !genus %in% "Mus") ##Eliminate reads :S
-
-PSl <- lapply(PSl, function(x){
-     subset_taxa(x, !genus %in% "Mus")
-})
-
 
 # Eliminate samples with no reads
 PS <- prune_samples(sample_sums(PS)>0, PS)
@@ -145,18 +85,18 @@ PSpla <- subset_taxa(pPS, phylum%in%"Platyhelminthes")
 #for apicomplexa
 PSeim <- subset_taxa(pPS, family%in%"Eimeriidae")
 PScri <- subset_taxa(pPS, family%in%"Cryptosporidiidae")
-#PSsar <- subset_taxa(PS, family%in%"Sarcocystidae")
+PSsar <- subset_taxa(PS, family%in%"Sarcocystidae")
 # for nematoda
 PSoxy <- subset_taxa(pPS, family%in%"Oxyuridae")
 PStri <- subset_taxa(pPS, family%in%"Trichuridae")
 PShex <- subset_taxa(pPS, family%in%"Heteroxynematidae")
-#PSstr <- subset_taxa(PS, family%in%"Strongyloididae")
+PSstr <- subset_taxa(PS, family%in%"Strongyloididae")
 PSasc <- subset_taxa(pPS, family%in%"Ascaridiidae")
 PSspi <- subset_taxa(pPS, family%in%"Spirocercidae")
 PShek <- subset_taxa(pPS, family%in%"Heterakidae")
 # for platyhelminth
 PShym <- subset_taxa(pPS, family%in%"Hymenolepididae")
-#PSano <- subset_taxa(PS, family%in%"Anoplocephalidae")
+PSano <- subset_taxa(PS, family%in%"Anoplocephalidae")
 
 TruthN <- sample_sums(PSnem)>=1
 TruthA <- sample_sums(PSapi)>=1
@@ -166,12 +106,13 @@ Truthcri <- sample_sums(PScri)>=1 # 54 samples
 Truthoxy <- sample_sums(PSoxy)>=1 # 352 samples
 Truthtri <- sample_sums(PStri)>=1 # 241 samples
 Truthhex <- sample_sums(PShex)>=1 # 356 samples
-#Truthstr <- sample_sums(PSstr)>=1 # 2 samples
+Truthstr <- sample_sums(PSstr)>=1 # 2 samples
 Truthasc <- sample_sums(PSasc)>=1 # 23
-#Truthspi <- sample_sums(PSspi)>=1 #12 samples
+Truthspi <- sample_sums(PSspi)>=1 #12 samples
 Truthhek <- sample_sums(PShek)>=1 #24 samples
 Truthhym <- sample_sums(PShym)>=1 #8 samples
-#Truthano <- sample_sums(PSano)>=1 1 sample
+Truthano <- sample_sums(PSano)>=1 #1 sample
+
 
 # make a new variable called parasite (yes/no) if nematode or apicomplexa are present
 for (i in 1:nsamples(pPS))
