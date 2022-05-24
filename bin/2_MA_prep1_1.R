@@ -18,7 +18,7 @@ devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 
 ## re-run or use pre-computed results for different parts of the pipeline:
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
-doFilter <- TRUE
+doFilter <- FALSE
 doMultiAmp <- TRUE    
 doTax <- TRUE
 
@@ -83,6 +83,7 @@ primer <- PrimerPairsSet(primerF, primerR)
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
 
 if(doMultiAmp){
+
     MA <- MultiAmplicon(primer, files)
     filedir <- "tmp/interData/stratified_files_1_1"
     if(dir.exists(filedir)) unlink(filedir, recursive=TRUE)
@@ -100,7 +101,26 @@ if(doMultiAmp){
     table(propMerged<0.8)
     MA <- mergeMulti(MA, justConcatenate=propMerged<0.8, mc.cores=90) 
     MA <- makeSequenceTableMulti(MA, mc.cores=90)
+
+# annoying error: subscript out of bound with isBimeraDenovoTable()
+    ## fill it, bind it, coerce it to integer
+#    STF <- getSequenceTable(MA, dropEmpty=FALSE)
+#    STFU <- do.call(cbind, STF)
+#    mode(STFU) <- "integer"
+#    USTFU <- getUniques(STFU)
+#      isCruelBimera <- dada2::isBimeraDenovoTable(USTFU,
+#        multithread=TRUE,
+#        minSampleFraction=0.9,
+#        allowOneOff=TRUE,
+#        maxShift = 32,
+#        ignoreNNegatives=4)
+#    
+#    isPooledBimera <- dada2::isBimeraDenovo(STFU,
+#                                            multithread=TRUE,
+#                                            allowOneOff=TRUE,
+#                                            maxShift = 32)   
     MA <- removeChimeraMulti(MA, mc.cores=90)
+
     saveRDS(MA, "tmp/interData/MA1_1.RDS")
 } else{
     MA <- readRDS("tmp/interData/MA1_1.RDS")
