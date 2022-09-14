@@ -72,11 +72,13 @@ setkey(mdt, SampleID)
 mdt <- sdt[mdt]
 }
 # Summarize
-summarydt = mdt[, list(meanRA = mean(RelativeAbundance),
+
+Nsamples = nsamples(physeq)
+summarydt = mdt[, list(meanRA = sum(RelativeAbundance)/Nsamples,
 			      sdRA = sd(RelativeAbundance),
 			      minRA = min(RelativeAbundance),
 			      maxRA = max(RelativeAbundance)),
-		      by = c(Rank, GroupBy)]
+                by = c(Rank, GroupBy)]
 return(summarydt)
 }
 

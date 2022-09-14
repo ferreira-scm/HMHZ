@@ -20,39 +20,171 @@ library(ggpubr)
 devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 
 PS <- readRDS(file = "tmp/interData/PhyloSeqCombi_HMHZ_All.Rds")
+PS.l <- readRDS(file = "tmp/interData/PhyloSeqList_HMHZ_All.Rds")
 
+## filtering MA by amplicon
+fPS.l <- list()
+for (i in 1:48) {
+    try(fPS.l[[i]] <- fil(PS.l[[i]]), silent=TRUE)
+}
+
+fPS <- fPS.l[[1]]
+for (i in 2:44){
+    fPS <- try(merge_phyloseq(fPS,fPS.l[[i]]))
+#    print(fPS)
+    }
+
+# filter pooled for comparison
+fPS.pool <- fil(PS)
 
 ##Eliminate Unassigned to superkingdom level
-PS <- subset_taxa(PS, !is.na(superkingdom) & !superkingdom %in% c("", "uncharacterized"))
+#PS <- subset_taxa(PS, !is.na(superkingdom) & !superkingdom %in% c("", "uncharacterized"))
 
 # subset samples based on total read count (1000 reads)
 median(phyloseq::sample_sums(PS))
 
-PS <- phyloseq::subset_samples(PS, phyloseq::sample_sums(PS) > 1000)
+#hist(phyloseq::sample_sums(PS))
+
+#PS <- phyloseq::subset_samples(PS, phyloseq::sample_sums(PS) > 1000)
 
 # prevalence filtering at 5%
 #pPPS=phyloseq_filter_prevalence(pPS, prev.trh=0.05)
 
 ###A lot of Mus :(
 ## Host read numbers
-sum(otu_table(subset_taxa(PS, genus%in%"Mus")))/sum(otu_table(PS))
+#sum(otu_table(subset_taxa(PS, genus%in%"Mus")))/sum(otu_table(PS))
 ###Eliminate reads assigned as "Mus"
-PS <- subset_taxa(PS, !genus %in% "Mus") ##Eliminate reads :S
+#PS <- subset_taxa(PS, !genus %in% "Mus") ##Eliminate reads :S
 
 # Eliminate samples with no reads
-PS <- prune_samples(sample_sums(PS)>0, PS)
+#PS <- prune_samples(sample_sums(PS)>0, PS)
 
 # abundance filtering to 0.01%? Or keep prevalence filtering?
-x = taxa_sums(PS)
-keepTaxa = (x / sum(x) > 0.0001)
-summary(keepTaxa)
-pPS = prune_taxa(keepTaxa, PS)
+#x = taxa_sums(PS)
+#keepTaxa = (x / sum(x) > 0.0001)
+#summary(keepTaxa)
+#pPS = prune_taxa(keepTaxa, PS)
 
 # Eliminate samples with no reads
-pPS <- prune_samples(sample_sums(pPS)>0, pPS)
+#pPS <- prune_samples(sample_sums(pPS)>0, pPS)
+
+# How many Eimeria asv's do we have?
+subset_taxa(PS, genus%in%"Eimeria") # 218 before filtering
+
+PSeim <- subset_taxa(fPS, genus%in%"Eimeria")
+
+PSeim
+
+PSeim@tax_table[,6]
+
+PS.l
+
+fPS.l
+
+#how many primers amplify Apicomplexa and which families?
+for (i in 1:44) {
+#    print(names(all.PS.l)[[i]])
+    try(p <- subset_taxa(fPS.l[[i]],phylum=="Apicomplexa"), silent=TRUE)
+#    try(get_taxa_unique(p, "family"), silent=TRUE)
+    if (exists("p")) {
+        a <- get_taxa_unique(p, "family")
+        print(paste(i, "- ", names(fPS.l[i]), ": ", length(a), sep=""))
+        print(a)
+}
+    rm(p)
+}
+
+##### and how many amplicons have eimeria?
+for (i in 1:48) {
+#    print(names(all.PS.l)[i])
+    try(p <- subset_taxa(PS.l[[i]],genus=="Eimeria"), silent=TRUE)
+#    try(get_taxa_unique(p, "genus"), silent=TRUE)
+    if (exists("p")) {
+        a <- get_taxa_unique(p, "genus")
+        print(paste(i, "- ", names(PS.l[i]), ": ", nrow(p@tax_table), sep=""))
+        print(a)
+}
+    rm(p)
+}
 
 
-PSeim <- subset_taxa(PS, family%in%"Eimeriidae")
+####
+fPS.l <- list()
+for (i in 1:48) {
+    try(fPS.l[[i]] <- fil(PS.l[[i]]), silent=TRUE)
+}
+
+names(fPS.l) <- names(PS.l)
+
+### and what happens when we filter?
+nmEim <- list()
+names18S <- list()
+
+for (i in 1:48) {
+#    print(names(all.PS.l)[i])
+    try(p <- subset_taxa(fPS.l[[i]],genus=="Eimeria"), silent=TRUE)
+#    try(get_taxa_unique(p, "genus"), silent=TRUE)
+    if (exists("p")) {
+        a <- get_taxa_unique(p, "genus")
+        print(paste(i, "- ", names(fPS.l[i]), ": ", nrow(p@tax_table), sep=""))
+                                        #        print(a)
+        nmEim[i] <- names(fPS.l[i])
+        names18S[[i]] <- paste(rep(names(fPS.l[i]), nrow(p@tax_table)), "ASV", seq(1, nrow(p@tax_table), 1), sep="_") 
+}
+    rm(p)
+}
+
+nmEim <- unlist(nmEim)
+names18S <- unlist(names18S)
+
+names18S
+
+## 19 amplicons have 59 EImeira ASV's
+# save ASV's from 18S amplicons
+
+# first we need to know which genes are we targeting
+primerL <- read.csv("/SAN/Susanas_den/HMHZ/data/primerInputUnique.csv")
+#quick fix here
+primerL$Primer_name[122] <- "27M_F_98_F.Klin0341_CR_18_R"
+
+
+#targets
+primerL$Gen[which(primerL$Primer_name%in%nmEim)]
+primerL$Primer_name[which(primerL$Primer_name%in%nmEim)]
+
+# these amplicons are not in the list but they target 18S, 18S and 28S
+nmEim[which(!nmEim%in%primerL$Primer_name)]
+
+# amplicons targeting 28S: "D3A_5Mod_46_F.D3B_5Mod_46_R" and "NLF184cw_74_F.NL818cw_74_R"
+# we need to ignore the 28S Eimeria ASV's
+#Eim.28S <- merge_phyloseq(subset_taxa(fPS.l[[12]], genus%in%"Eimeria"), subset_taxa(fPS.l[[28]], genus%in%"Eimeria"))
+#ASV.28S <- rownames(Eim.28S@tax_table)
+Eim <- subset_taxa(fPS, genus%in%"Eimeria")
+#Eim <- prune_taxa(!rownames(Eim@tax_table)%in%ASV.28S, Eim)
+
+Eim
+
+library(ShortRead)
+## I also want to store the amplicon info to know which ASV's came from where
+EimASV <- DNAStringSet(rownames(Eim@tax_table))
+
+names(EimASV) <- names18S
+
+writeFasta(EimASV, "tmp/EimeriaASV.fasta")
+
+EimASV <- EimASV[which(!grepl("D3A", names(EimASV)))]
+EimASV <- EimASV[which(!grepl("NLF", names(EimASV)))]
+
+writeFasta(EimASV, "tmp/Eimeria18S.fasta")
+
+EimASV
+
+#PS <- subset_taxa(PS, !genus %in% "Mus") ##Eliminate reads :S
+
+#names(fPS.l)[which(!names(fPS.l)%in%primerL$Primer_name)]
+
+
+
 PScri <- subset_taxa(PS, family%in%"Cryptosporidiidae")
 #PSsar <- subset_taxa(PS, family%in%"Sarcocystidae")
 # for nematoda

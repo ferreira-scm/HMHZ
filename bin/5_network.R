@@ -17,11 +17,19 @@ library(taxonomizr)
 library(RColorBrewer)
 library(ggpubr)
 
+library(metagMisc)
+
 PS=readRDS(file="tmp/PSpre.R")
 pPS=readRDS(file="tmp/pPSpre.R")
 
 pPSeim <- subset_taxa(pPS, family%in%"Eimeriidae")
 pPSpara <- subset_taxa(pPS, phylum%in%c("Apicomplexa", "Nematoda", "Platyhelminthes"))
+
+pPSnoP <- subset_taxa(pPS, !family%in%c("Eimeriidae", "Cryptosporidiidae", "Oxyuridae", "Trichuridae", "Heteroxynematidae", "Ascaridiidae", "Spirocercidae", "Heterakidae", "Hymenolepididae", "Sarcocystidae", "Strongyloididae"))
+
+pPSP <- subset_taxa(pPS, family%in%c("Eimeriidae", "Cryptosporidiidae", "Oxyuridae", "Trichuridae", "Heteroxynematidae", "Ascaridiidae", "Spirocercidae", "Heterakidae", "Hymenolepididae", "Sarcocystidae", "Strongyloididae"))
+
+
 pPSparagen <- tax_glom(pPSpara, taxrank="genus")
 pPSgen <- tax_glom(pPS, taxrank="genus")
 
@@ -99,7 +107,6 @@ dev.off()
 #t2 <- Sys.time()
 #t2-t1
 #saveRDS(se.mb.PS, file="tmp/se.mb.PS.rds")
-
 se.mb.PS <- readRDS(file="tmp/se.mb.PS.rds")
 betaMat=symBeta(getOptBeta(se.mb.PS), mode="maxabs")
 betaMat
@@ -272,8 +279,78 @@ plot(ps.ig.mb.neg, vertex.label=NA, vertex.size=5, vertex.color=mycolor, margin=
 legend(x=-1.6, y=-0.2, legend=levels(as.factor(V(ps.ig.mb.neg)$phyla)), col=coul, bty="n", pch=20, pt.cex=2)
 
 
-########## genus level
 
+#### network without parasite nodes
+para <- taxa_names(pPSP)
+ps.wpara <- igraph::delete_vertices(ps.ig.mb.b, para)
+
+#### netork with removed nodes
+# randomly select nodes x= number of total nodes, size=number of parasite nodes
+
+degree_calc_f <- function (orig_graph)
+{
+    degree_df <- as.data.frame(igraph::degree(orig_graph))
+    degree_df$names <- rownames(degree_df)
+    colnames(degree_df)[1] = "degree"
+    degree_df$bw <- as.vector(igraph::betweenness(orig_graph))
+    degree_df$closeness <- as.vector(igraph::closeness(orig_graph))
+#    print(head(degree_df))
+    return(degree_df)
+}
+
+alldeg <- degree_calc_f(ps.ig.mb.b)
+degree_df_wo_para <- degree_calc_f(ps.wpara)
+orig_vertices <- as.vector(names(V(ps.ig.mb.b)))
+
+setseed(44444)
+compDF <- do.call(rbind, parallel::mclapply(seq_along(ps.wpara), mc.cores = 10, function(i) {
+    num_nodes_to_remove <- length(V(ps.ig.mb.b)) - length(V(ps.wpara))
+    para_names <- setdiff(names(V(ps.ig.mb.b)), names(V(ps.wpara)))
+    orig_vertices_wo_para <- intersect(names(V(ps.ig.mb.b)), names(V(ps.wpara)))
+    measurements <-  c("degree", "bw", "closeness")
+    bstrap_net <- lapply(seq_len(100), function(i) {
+       vecnames <- sample(x = orig_vertices_wo_para, size = num_nodes_to_remove, replace = TRUE)
+       wo_para_graph <- igraph::delete_vertices(ps.ig.mb.b, which(names(V(ps.ig.mb.b)) %in% vecnames))
+       boot_degree_df <- degree_calc_f(wo_para_graph)
+       if (!identical(length(rownames(boot_degree_df)), length(rownames(degree_df_wo_para))))
+       {
+           boot_degree_df = boot_degree_df[seq_along(rownames(degree_df_wo_para)),]
+       }
+           boot_degree_df[, measurements]
+})
+    do.call(rbind, lapply(measurements, function(act_meas){
+    orig_meas <- alldeg[[act_meas]]
+    wo_para_meas <- degree_df_wo_para[[act_meas]]
+    bstrap_meas <- rowMeans(do.call(cbind, lapply(bstrap_net, function(x) x[,act_meas])))
+    data.frame(type = factor(c(rep("Original", length(orig_meas)),
+                               rep("Without_para", length(wo_para_meas)),
+                               rep("Bootstrap", length(bstrap_meas))),
+                               levels = c("Original", "Without_para", "Bootstrap")),
+               measure = act_meas, data = c(orig_meas, wo_para_meas, bstrap_meas))
+    }))
+}))
+
+
+
+compDF$measure <- as.factor(compDF$measure)
+
+comparisons <- list(c("Original", "Without_para"),
+                              c("Without_para", "Bootstrap"),
+                              c("Bootstrap","Original"))
+
+png(filename = "fig/Net_measures_comp.png",
+        width =7, height = 5, units = "in", res= 300)
+ggplot(all_net_tax_level_plot_l, aes(type, data))+
+    facet_grid(all_net_tax_level_plot_l$measure, scales = "free")+
+    geom_boxplot(outlier.shape = NA)+
+    ggpubr::stat_compare_means(label = c("p-signif", "p-format"),
+                                 size = 2,
+                                 comparisons = list(c("Original", "Without_para"),
+                                                    c("Without_para", "Bootstrap"),
+                                                    c("Bootstrap","Original")))
+dev.off()
+
+########## genus level
 # network
 #pargs <- list(rep.num=1000, seed=10010, ncores=20)
 #se.mb.PSgen <- spiec.easi(pPSgen, method="mb", pulsar.params=pargs)
@@ -324,10 +401,136 @@ legend(x=-1.6, y=-0.2, legend=levels(as.factor(V(gen.ig.mb.b)$family)), col=coul
 dev.off()
 
 ############################### network without parasite taxa
-pargs <- list(rep.num=1000, seed=10010, ncores=20)
+# prevalence filtering at 5%
+p5PPS=phyloseq_filter_prevalence(pPS, prev.trh=0.05)
 
-t1 <- Sys.time()
-se.pr.PS <- spiec.easi(pPS, method="mb", pulsar.params=pargs)
-t2 <- Sys.time()
-t2-t1
-saveRDS(se.pr.PS, file="tmp/se.pr.PS.rds")
+p10PPS=phyloseq_filter_prevalence(pPS, prev.trh=0.1)
+
+p5PPS
+
+p10PPS
+
+pPSnoP10 <- subset_taxa(p10PPS, !family%in%c("Eimeriidae", "Cryptosporidiidae", "Oxyuridae", "Trichuridae", "Heteroxynematidae", "Ascaridiidae", "Spirocercidae", "Heterakidae", "Hymenolepididae", "Sarcocystidae", "Strongyloididae"))
+
+
+pargs <- list(rep.num=1000, seed=10010, ncores=10)
+
+#t1 <- Sys.time()
+#se.pr.PS10 <- spiec.easi(pPSnoP10, method="mb", pulsar.params=pargs)
+#t2 <- Sys.time()
+#t2-t1
+#saveRDS(se.pr.PS10, file="tmp/se.pr.PS10.rds")
+
+#t1 <- Sys.time()
+#se.PS10 <- spiec.easi(p10PPS, method="mb", pulsar.params=pargs)
+#t2 <- Sys.time()
+#t2-t1
+#saveRDS(se.PS10, file="tmp/se.PS10.rds")
+
+se.pr.PS10 = readRDS(file="tmp/se.pr.PS10.rds")
+se.PS10 = readRDS(file="tmp/se.PS10.rds")
+
+betaMat=symBeta(getOptBeta(se.pr.PS10), mode="maxabs")
+
+weights <- Matrix::summary(t(betaMat))[,3]
+
+#weights that are not negative
+weights <- (1-Matrix::summary(t(betaMat))[,3])/2
+
+ps.pr.mb <- adj2igraph(getRefit(se.pr.PS10),
+                       diag=TRUE,
+                       edge.attr=list(weight=weights),
+                       vertex.attr=list(name=taxa_names(pPSnoP10)))
+
+betaMat=symBeta(getOptBeta(se.PS10), mode="maxabs")
+
+weights <- Matrix::summary(t(betaMat))[,3]
+
+#weights that are not negative
+weights <- (1-Matrix::summary(t(betaMat))[,3])/2
+
+ps.mb <- adj2igraph(getRefit(se.PS10),
+                       diag=TRUE,
+                       edge.attr=list(weight=weights),
+                       vertex.attr=list(name=taxa_names(p10PPS)))
+
+
+
+all_names <- taxa_names(p10PPS)
+
+all_names_wo_para <- taxa_names(pPSnoP10)
+
+num_nodes_to_remove <- length(all_names) - length(all_names_wo_para)
+
+flagNoPara <- sample(x=all_names_wo_para, size=num_nodes_to_remove)
+
+pop_taxa = function(physeq, badTaxa){
+    allTaxa = taxa_names(physeq)
+    allTaxa <- allTaxa[!(allTaxa %in% badTaxa)]
+    return(prune_taxa(allTaxa, physeq))
+    }
+
+
+PS1 <- pop_taxa(p10PPS, flagNoPara)
+
+randPS <- vector(mode="list", length=100)
+netPS <- vector(mode="list", length=100)
+
+
+for(i in 1:10) {
+    flagNoPara <- sample(x=all_names_wo_para, size=num_nodes_to_remove)
+    randPS[[i]] <- pop_taxa(p10PPS, flagNoPara)
+    netPS[[i]] <- spiec.easi(randPS[[i]], method="mb", pulsar.params=pargs)
+}
+    saveRDS(netPS, file="tmp/netPS")
+
+
+
+saveRDS(randPS, file="tmp/randPS")
+
+
+
+randPS2 <- vector(mode="list", length=100)
+netPS2 <- vector(mode="list", length=50)
+
+## 8 were save here
+for(i in 1:50) {
+    flagNoPara <- sample(x=all_names_wo_para, size=num_nodes_to_remove)
+    randPS2[[i]] <- pop_taxa(p10PPS, flagNoPara)
+    netPS2[[i]] <- spiec.easi(randPS2[[i]], method="mb", pulsar.params=pargs)
+}
+
+
+saveRDS(netPS2, file="tmp/netPS2")
+saveRDS(randPS2, file="tmp/randPS")
+
+
+#randPS2 <- vector(mode="list", length=100)
+#netPS2 <- vector(mode="list", length=50)
+
+
+for(i in 9:50) {
+    flagNoPara <- sample(x=all_names_wo_para, size=num_nodes_to_remove)
+    randPS2[[i]] <- pop_taxa(p10PPS, flagNoPara)
+    netPS2[[i]] <- spiec.easi(randPS2[[i]], method="mb", pulsar.params=pargs)
+}
+saveRDS(netPS2, file="tmp/netPS2")
+saveRDS(randPS2, file="tmp/randPS2")
+
+
+netPS2[[1]]
+
+
+
+name
+
+PS1
+
+setseed(44444)
+compDF <- do.call(rbind, parallel::mclapply(seq_along(ps.wpara), mc.cores = 10, function(i) {
+    num_nodes_to_remove <- length(V(ps.ig.mb.b)) - length(V(ps.wpara))
+    para_names <- setdiff(names(V(ps.ig.mb.b)), names(V(ps.wpara)))
+    orig_vertices_wo_para <- intersect(names(V(ps.ig.mb.b)), names(V(ps.wpara)))
+    measurements <-  c("degree", "bw", "closeness")
+    bstrap_net <- lapply(seq_len(100), function(i) {
+       vecnames <- sample(x = orig_vertices_wo_para, size = num_nodes_to_remove, replace = TRUE)

@@ -1,0 +1,79 @@
+# This script is similar to mvabund.R but with additive effect of HI
+
+
+library(phyloseq, lib="/usr/local/lib/R/site-library/")
+library(mvabund)
+library("iNEXT")
+library(metagMisc)
+
+### multivariate analyses
+## this takes WEEKS to run at the ASV level. I am starting at genus level
+pPS=readRDS(file="tmp/pPSpre.R")
+p10PPS=phyloseq_filter_prevalence(pPS, prev.trh=0.1)
+
+set.seed(1234)
+PSrare <- rarefy_even_depth(p10PPS, sample.size=5000, replace=F)
+
+PSrare <- subset_taxa(PSrare, !family %in% "Eimeriidae")
+PSrare <- subset_taxa(PSrare, !family %in% "Cryptosporidiidae")
+PSrare <- subset_taxa(PSrare, !family %in% "Oxyuridae")
+PSrare <- subset_taxa(PSrare, !family %in% "Trichuridae")
+PSrare <- subset_taxa(PSrare, !family %in% "Heteroxynematidae")
+PSrare <- subset_taxa(PSrare, !family %in% "Ascaridiidae")
+PSrare <- subset_taxa(PSrare, !family %in% "Heterakidae") 
+PSrare <- subset_taxa(PSrare, !family %in% "Hymenolepididae")
+PSrare <- subset_taxa(PSrare, !family %in% "Spirocercidae")
+
+
+#rPSgen=tax_glom(PSrare, taxrank="genus")
+
+#rPSgen
+
+#PSrare
+
+rOTUmv <- mvabund(otu_table(PSrare))
+
+#mean variance relationship
+meanvar.plot(rOTUmv)
+
+# multivariate model
+mod1 <- manyglm(rOTUmv ~sample_data(PSrare)$HI +
+                        sample_data(PSrare)$BMI +
+                        sample_data(PSrare)$Sex +
+                        sample_data(PSrare)$Transect +
+                        sample_data(PSrare)$Year +
+                        sample_data(PSrare)$eimASV +
+                        sample_data(PSrare)$criASV +
+                        sample_data(PSrare)$oxyASV +
+                        sample_data(PSrare)$hexASV +
+                        sample_data(PSrare)$hymASV +
+                        sample_data(PSrare)$triASV +
+                        sample_data(PSrare)$ascASV +
+                        sample_data(PSrare)$spiASV +
+                        sample_data(PSrare)$hekASV, family="negative_binomial")
+
+#plot(mod1)
+#table1 <- summary.manyglm(mod1)
+table4 <- anova.manyglm(mod1, p.uni = "adjusted", show.time="all")
+#table1 <- summary.manyglm(mod1)
+# this takes > 500h
+sink("tmp/mlm_ASV_para_rem.txt")
+table4
+sink()
+saveRDS(table4, file="tmp/manyanovatable4_para_rem.RDS")
+
+table4
+
+table1 <- summary.manyglm(mod1, test="LR")
+sink("tmp/mlm_ASV_para_rem_SUMMARY.txt")
+table1
+sink()
+saveRDS(table1, file="tmp/manyanovatable1_para_rem.RDS")
+
+table2 <- summary.manyglm(mod1, test="LR", p.uni="adjusted")
+sink("tmp/mlm_ASV_para_rem_SUMMARYLRTpAdj.txt")
+table2
+sink()
+saveRDS(table2, file="tmp/manyanovatable2_para_rem.RDS")
+
+table1

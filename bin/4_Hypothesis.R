@@ -19,6 +19,8 @@ PS=readRDS(file="tmp/PSpre.R")
 
 pPS=readRDS(file="tmp/pPSpre.R")
 
+pPS
+
 # let's include host and ecological variables
 pPS <- subset_samples(pPS, !Sex=="<NA>")
 sample_data(pPS)$Sex
@@ -162,9 +164,7 @@ permaPS=adonis2(vstdis~
             sdata$spiASV+
             sdata$hymASV,
         permutations = 10000, method = "bray")
-
 permaPS
-
 write.table(permaPS, "tmp/permapPS_vst_prem.txt")
 
 vvstdis=phyloseq::distance((ppPSvst), method="bray", type="samples")
@@ -485,6 +485,8 @@ permaPSrare=adonis2(PSraredis~
         permutations = 10000, method = "bray")
 permaPSrare
 
+write.table(permaPSrare, "tmp/permaPSrare.txt")
+
 PSraredisJAC=phyloseq::distance((PSrare), method="jaccard", type="samples")
 
 JpermaPSrare=adonis2(PSraredisJAC~
@@ -504,8 +506,54 @@ JpermaPSrare=adonis2(PSraredisJAC~
             sdata$hymASV,
         permutations = 10000, method = "jaccard")
 JpermaPSrare
-
 write.table(JpermaPSrare, "tmp/JpermaPSrare.txt")
+
+#for separate domains
+erPS <- subset_taxa(PSrare, superkingdom%in%"Eukaryota")
+brPS<- subset_taxa(PSrare, superkingdom%in%"Bacteria")
+
+ePSraredisJAC=phyloseq::distance((erPS), method="jaccard", type="samples") 
+bPSraredisJAC=phyloseq::distance((brPS), method="jaccard", type="samples") 
+sdata=sample_data(PSrare)
+
+eJpermaPSrare=adonis2(ePSraredisJAC~
+            sdata$Year+
+            sdata$Transect+
+            sdata$Sex+
+            sdata$BMI+
+            sdata$HI+
+            sdata$eimASV+
+            sdata$oxyASV +
+            sdata$triASV+
+            sdata$hexASV +
+            sdata$ascASV +
+            sdata$criASV +
+            sdata$hekASV +
+            sdata$spiASV +
+            sdata$hymASV,
+        permutations = 10000, method = "jaccard")
+eJpermaPSrare
+write.table(eJpermaPSrare, "tmp/EUK_Jac_permaPSrare.txt")
+bJpermaPSrare=adonis2(bPSraredisJAC~
+            sdata$Year+
+            sdata$Transect+
+            sdata$Sex+
+            sdata$BMI+
+            sdata$HI+
+            sdata$eimASV+
+            sdata$oxyASV +
+            sdata$triASV+
+            sdata$hexASV +
+            sdata$ascASV +
+            sdata$criASV +
+            sdata$hekASV +
+            sdata$spiASV +
+            sdata$hymASV,
+        permutations = 10000, method = "jaccard")
+bJpermaPSrare
+write.table(bJpermaPSrare, "tmp/BAC_Jac_permaPSrare.txt")
+
+
 
 library(breakaway)
 library(DivNet)
@@ -683,19 +731,19 @@ sink()
 library(ggeffects)
 
 png(filename = "fig/RichOBS_eim.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =4, height = 3, units = "in", res= 300)
 plot(ggpredict(obsLM, terms = "eimASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Eimeriidae reads", y="ASV richness")
 dev.off()
 
 png(filename = "fig/RichOBS_tri.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =4, height = 3, units = "in", res= 300)
 plot(ggpredict(obsLM, terms = "triASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Trichuriidae reads", y="ASV richness")
 dev.off()
 
 png(filename = "fig/RichOBS_hek.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =4, height = 3, units = "in", res= 300)
 plot(ggpredict(obsLM, terms = "hekASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Heterakidae reads", y="ASV richness")
 dev.off()
@@ -705,8 +753,6 @@ dev.off()
 erich = estimate_richness(ePS)
 brich = estimate_richness(bPS)
 
-sample_data(PS)$richShan <- rich$Shannon
-
 Richdf <- data.frame(
             erichChao=erich$Observed,
             erichShan=erich$Shannon,
@@ -715,6 +761,7 @@ Richdf <- data.frame(
             brichShan=brich$Shannon,
             brichObs=brich$Chao1,
             Year=sample_data(PS)$Year,
+            HI=sample_data(PS)$HI,
             Transect=sample_data(PS)$Transect,
             Sex=sample_data(PS)$Sex,
             BMI=sample_data(PS)$BMI,
@@ -825,50 +872,107 @@ bChaoLM <- lm(brichChao~
             hymASV +
             LibSize, data=Richdf)
 
+sink("tmp/bObsLM_LRT.txt")
 drop1(bObsLM, test="Chisq")
+sink()
+
+sink("tmp/bObsLM.txt")
+summary(bObsLM)
+sink()
+
+sink("tmp/eObsLM_LRT.txt")
 drop1(eObsLM, test="Chisq")
+sink()
 
-drop1(bShanLM, test="Chisq")
-drop1(eShanLM, test="Chisq")
+sink("tmp/eObsLM.txt")
+summary(eObsLM)
+sink()
 
-drop1(bChaoLM, test="Chisq")
+sink("tmp/eChaoLM.txt")
+summary(eChaoLM)
+sink()
 
+sink("tmp/eChaoLM_LRT.txt")
 drop1(eChaoLM, test="Chisq")
+sink()
+
+sink("tmp/bChaoLM.txt")
+summary(bChaoLM)
+sink()
+
+sink("tmp/bChaoLM_LRT.txt")
+drop1(bChaoLM, test="Chisq")
+sink()
+
+sink("tmp/eShanLM.txt")
+summary(eShanLM)
+sink()
+
+sink("tmp/eShanLM_LRT.txt")
+drop1(eShanLM, test="Chisq")
+sink()
+
+sink("tmp/bShanLM.txt")
+summary(bShanLM)
+sink()
+
+sink("tmp/bShanLM_LRT.txt")
+drop1(bShanLM, test="Chisq")
+sink()
+
+
+calc.relimp(eChaoLM)
+
+calc.relimp(bChaoLM)
+
+summary(bChaoLM)
 
 
 ##Obs
-png(filename = "fig/EukRichOBS_eim.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/EukRichOBS_year.pdf",
+        width =3, height = 5)
+plot(ggpredict(eObsLM, terms = "Year"), add.data = TRUE, show.title=FALSE)+
+labs(x="Year of sampling", y="ASV richness")
+dev.off()
+
+pdf("fig/figures4man/BacRichOBS_transect.pdf",
+        width =3, height = 5)
+plot(ggpredict(bObsLM, terms = "Transect"), add.data = TRUE, show.title=FALSE)+
+labs(x="Transect", y="ASV richness")
+dev.off()
+
+pdf("fig/figures4man/EukRichOBS_eim.pdf",
+        width =3, height = 5)
 plot(ggpredict(eObsLM, terms = "eimASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Eimeriidae reads", y="ASV richness")
 dev.off()
 
-png(filename = "fig/EukRichOBS_oxy.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/EukRichOBS_oxy.pdf",
+        width =3, height = 5)
 plot(ggpredict(eObsLM, terms = "oxyASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Oxyuridae reads", y="ASV richness")
 dev.off()
 
-png(filename = "fig/EukRichOBS_tri.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/EukRichOBS_tri.pdf",
+        width =3, height = 5)
 plot(ggpredict(eObsLM, terms = "triASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Trichuridae reads", y="ASV richness")
 dev.off()
 
-png(filename = "fig/EukRichOBS_hex.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/EukRichOBS_hex.pdf",
+        width =3, height = 5)
 plot(ggpredict(eObsLM, terms = "hexASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Heteroxynematidae reads", y="ASV richness")
 dev.off()
 
-png(filename = "fig/BacRichOBS_eim.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/BacRichOBS_eim.pdf",
+        width =3, height = 5)
 plot(ggpredict(bObsLM, terms = "eimASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Eimeriidae reads", y="ASV richness")
 dev.off()
 
-png(filename = "fig/BacRichOBS_tri.png",
-        width =3, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/BacRichOBS_tri.pdf",
+        width =3, height = 5)
 plot(ggpredict(bObsLM, terms = "triASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Trichuriidae reads", y="ASV richness")
 dev.off()
@@ -900,21 +1004,21 @@ dev.off()
 
                                         #Chao
 png(filename = "fig/BacRichChao_eim.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =3, height = 3, units = "in", res= 300)
 plot(ggpredict(bChaoLM, terms = "eimASV"), add.data = TRUE, show.title=FALSE)+
-labs(x="Eimeridae reads", y="ASV richness")
+    labs(x="Eimeridae reads", y="ASV richness")+ ggtitle("Bacterial community")
 dev.off()
 
 png(filename = "fig/BacRichChao_tri.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =3, height = 3, units = "in", res= 300)
 plot(ggpredict(bChaoLM, terms = "triASV"), add.data = TRUE, show.title=FALSE)+
 labs(x="Trichuridae reads", y="ASV richness")
 dev.off()
 
 png(filename = "fig/EukRichChao_eim.png",
-        width =3, height = 5, units = "in", res= 300)
+        width =3, height = 3, units = "in", res= 300)
 plot(ggpredict(eChaoLM, terms = "eimASV"), add.data = TRUE, show.title=FALSE)+
-labs(x="Eimeriidae reads", y="ASV richness")
+    labs(x="Eimeriidae reads", y="ASV richness")+ ggtitle("Eukaryotic community")
 dev.off()
 
 png(filename = "fig/EukRichChao_tri.png",

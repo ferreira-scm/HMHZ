@@ -59,7 +59,6 @@ if(doFilter){
 }
 
 names(filtFs) <- names(filtRs) <- samples
-
 files <- PairedReadFileSet(filtFs, filtRs)
 
 #Preparation of primer file ### Here stats the Multiamplicon pipeline from Emanuel
@@ -93,7 +92,7 @@ if(doMultiAmp){
     propMerged <- MultiAmplicon::calcPropMerged(MA)
     summary(propMerged)
     table(propMerged<0.8)
-    MA <- mergeMulti(MA, justConcatenate=propMerged<0.8, mc.cores=90) 
+    MA <- mergeMulti(MA, mc.cores=90) 
     MA <- makeSequenceTableMulti(MA, mc.cores=90)
     MA <- removeChimeraMulti(MA, mc.cores=90)
     saveRDS(MA, "tmp/interData/MA1_2.RDS")

@@ -17,11 +17,14 @@ library(tidyverse)
 #library(geosphere)
 library(ggpubr)
 
+library(RColorBrewer)
 library(metagMisc)
 
 PS=readRDS(file="tmp/PSpre.R")
 pPS=readRDS(file="tmp/pPSpre.R")
 get_taxa_unique(pPS, "superkingdom")
+
+source("bin/Functions.R")
 
 ## prevalence plotting
 prevdf = apply(X = otu_table(pPS),
@@ -52,7 +55,7 @@ dev.off()
 
 # Abundance plotting at phylum level
 ## Phylum
-relphy=summarize_taxa(pPS, "phylum", "Mouse_ID")
+relphy=summarize_taxa(PS, "phylum", "Mouse_ID")
 phylnames=unique(relphy$phylum) #36 phyla
 phylnames
 relphySorted <- relphy %>%
@@ -114,7 +117,9 @@ dev.off()
 ## Phylum
 relphy=summarize_taxa(bPS, "phylum", "Mouse_ID")
 phylnames=unique(relphy$phylum) #36 phyla
+
 phylnames
+
 relphySorted <- relphy %>%
     mutate(phylum = fct_reorder(phylum, meanRA))
 relphySorted %>%
@@ -150,19 +155,74 @@ dev.off()
 get_taxa_unique(PS, "family")
 PSTSS1@sam_data$Status
 
-PSnem <- subset_taxa(pPS, phylum%in%"Nematoda")
-PSapi <- subset_taxa(pPS, phylum%in%"Apicomplexa")
-PSpla <- subset_taxa(pPS, phylum%in%"Platyhelminthes")
+
+### Parasite plotting
+##########################################################
+##########################################################
+euPS <- subset_taxa(PS, superkingdom%in%"Eukaryota")
+baPS<- subset_taxa(PS, superkingdom%in%"Bacteria")
+
+PSnem <- subset_taxa(euPS, phylum%in%"Nematoda")
+PSapi <- subset_taxa(euPS, phylum%in%"Apicomplexa")
+PSpla <- subset_taxa(euPS, phylum%in%"Platyhelminthes")
+
+sample_data(PSnem)$all <- "one"
+sample_data(PSapi)$all <- "one"
+sample_data(PSpla)$all <- "one"
+sample_data(euPS)$all <- "one"
+sample_data(baPS)$all <- "one"
+
+EUKrelF <- summarize_taxa(euPS, "family", "all")
+BACrelF <- summarize_taxa(baPS, "family", "all")
+
+write.csv(BACrelF, "tmp/BACrelF.csv")
+write.csv(EUKrelF, "tmp/EUKrelF.csv")
+
 
 # 7 families within phylum Nematoda (+1 NA)
-relNem <- summarize_taxa(PSnem, "family", "Mouse_ID")
-unique(relNem$family)
+relNem <- summarize_taxa(PSnem, "family", "all")
+
+### tax_glom removes NA's :(
+### To add the relative abundance, I need to modify the function summarize_taxa()
+Nemphy <- tax_glom(PSnem, "family")
+x = taxa_sums(Nemphy)
+keepTaxa = (x / sum(x))
+names(keepTaxa) == taxa_names(Nemphy)
+kt <- data.frame(relA=keepTaxa, taxa=tax_table(Nemphy)[,5])
+rownames(kt) <- NULL
+kt$percentageA <- kt$relA*100
+
+relNem$percentage <- relNem$meanRA*100
+relNem <- relNem[order(relNem$meanRA),]
+relNem$sdRA <- NULL
+relNem$maxRA <- NULL
+sink("tmp/relNem.txt")
+relNem
+sink()
+
+sum(relApi$percentage)
+sum(relpla$percentage)
+
 # 5 families within phyla Apicomplexa (+1 NA)
-relApi <- summarize_taxa(PSapi, "family", "Mouse_ID")
-unique(relApi$family)
+relApi <- summarize_taxa(PSapi, "family", "all")
+relApi$percentage <- relApi$meanRA*100
+relApi <- relApi[order(relApi$meanRA),]
+relApi$sdRA <- NULL
+relApi$maxRA <- NULL
+sink("tmp/relApi.txt")
+relApi
+sink()
+
 # 1 families within phyla Apicomplexa
-relpla <- summarize_taxa(PSpla, "family", "Mouse_ID")
-unique(relpla$family)
+relpla <- summarize_taxa(PSpla, "family", "all")
+relpla$percentage <- relpla$meanRA*100
+relpla <- relpla[order(relpla$meanRA),]
+relpla$sdRA <- NULL
+relpla$minRA <- NULL
+
+sink("tmp/relpla.txt")
+relpla
+sink()
 
 ## ploting parasite abundace at family level
 relNemSorted <- relNem %>%
@@ -184,9 +244,12 @@ relNemSorted %>%
     stat_summary(fun = mean, geom = "point", size = 1, color= "black")+
     theme_minimal()+
     theme(legend.position="none")-> NemAb
+
 png(filename = "fig/Nematoda_ab.png",
         width =4, height = 5, units = "in", res= 400)
+
 NemAb
+
 dev.off()
 
 relApiSorted <- relApi %>%
@@ -210,7 +273,9 @@ relApiSorted %>%
 
 png(filename = "fig/Apicomplexa_ab.png",
         width =4, height = 5, units = "in", res= 400)
+
 ApiAb
+
 dev.off()
 
 relplaSorted <- relpla %>%
@@ -252,87 +317,42 @@ ggplot(PSrare@sam_data, aes(x=PSrare@sam_data$OPG_Eimeria)) +
 
 dev.off()
 
-
-### Average relative OTU abundances per domain
+#####################################################
+################# Abundances per domain
 euPS <- subset_taxa(PS, superkingdom%in%"Eukaryota")
 baPS<- subset_taxa(PS, superkingdom%in%"Bacteria")
 ePSphy <- tax_glom(euPS, "phylum")
+bPSphy <- tax_glom(baPS, "phylum")
 
-# abundance filtering to 1%? Or keep prevalence filtering?
-x = taxa_sums(euPSphy)
-keepTaxa = (x / sum(x) > 0.01)
-
-KT <- which(keepTaxa==FALSE)
-
-KT
-
-euPS0 = merge_taxa(ePSphy, KT, 1)
-
-
-
-euPS1 = prune_taxa(keepTaxa, euPS)
-
-ePSphy <- tax_glom(euPS, "phylum")
-
-ePSphy1 <- tax_glom(euPS1, "phylum")
-
-get_taxa_unique(ePSphy, "phylum")
-
-get_taxa_unique(ePSphy1, "phylum")
-
-sample_data(ePSphy)$all <- "one"
-
-ePS1 <- merge_samples(ePSphy, "all")
-
-ePS0 <- transform_sample_counts(ePS1, function(x) x / sum(x))
-
-head(otu_table(ePS0))
-
-plot_bar(ePS0, fill="phylum")
-
-##start remove
-sample_data(ePSphy1)$all <- "one"
-
-ePS11 <- merge_samples(ePSphy1, "all")
-
-ePS01 <- transform_sample_counts(ePS11, function(x) x / sum(x))
-
-head(otu_table(ePS01))
-
-plot_bar(ePS01, fill="phylum")
-
-##### end
-ps2 <- transform <- sample <- counts(ps1, function(x) x / sum(x))
-plot <- bar(ps2, fill="Phylum")
-
-ePS <- subset_taxa(pPS, superkingdom%in%"Eukaryota")
-bPS<- subset_taxa(pPS, superkingdom%in%"Bacteria")
-
-nb.cols <- length(get_taxa_unique(ePS, "phylum"))
-coul <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
-ePS1 <- ePS %>%
+########################
+# Abundance plotting for eukarya
+#########################
+ePS1 <- euPS %>%
         aggregate_taxa(level = "phylum") %>%
                       microbiome::transform(transform = "compositional")
+nb.cols <- length(get_taxa_unique(ePS1, "phylum"))
+coul <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
+
 ePS1 %>%
     plot_composition(sample.sort ="neatmap", otu.sort = "abundance") +
     scale_fill_manual(values = coul) +
     labs(fill="Phyla")+
     scale_y_continuous(label = scales::percent)+
     theme_classic()+
-    theme(axis.text.x=element_blank()) -> eukaryaComp
+    theme(axis.text.x=element_blank(),
+          legend.position = "none") -> eukaryaComp
 
-png(filename = "fig/EukAbundance_phyla.png",
-        width =7, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/EukAbundance_phylaNL.pdf",
+        width =5, height = 5)
 eukaryaComp
 dev.off()
 
-eukaryaComp
-
-nb.cols <- length(get_taxa_unique(bPS, "phylum"))
-coul <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
-bPS1 <- bPS %>%
+bPS1 <- baPS %>%
         aggregate_taxa(level = "phylum") %>%
                       microbiome::transform(transform = "compositional")
+nb.cols <- length(get_taxa_unique(baPS, "phylum"))
+coul <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
+
 bPS1 %>%
     plot_composition(sample.sort ="neatmap", otu.sort = "abundance") +
     scale_fill_manual(values = coul) +
@@ -341,12 +361,104 @@ bPS1 %>%
     theme_classic()+
     theme(axis.text.x=element_blank()) -> bacComp
 
-png(filename = "fig/BacAbundance_phyla.png",
-        width =7, height = 5, units = "in", res= 300)
+pdf("fig/figures4man/BacAbundance_phyla.pdf",
+        width =5, height = 5)
 bacComp
 dev.off()
 
+######################### average relative abundance plotting
+sample_data(euPS)$all <- "one"
+sample_data(baPS)$all <- "one"
+
+erelphy=summarize_taxa(euPS, "phylum", "all")
+brelphy=summarize_taxa(baPS, "phylum", "all")
+
+# for eukarya
+erelphy$percentage <-  erelphy$meanRA*100
+erelphy2 <- erelphy[erelphy$percentage>1,]
+erelphy3 <- erelphy[erelphy$percentage<1,]
+df <- data.frame(phylum="Phyla < 1%",
+                 all="one",
+                 meanRA=sum(erelphy3$meanRA),
+                 sdRA=sum(erelphy3$sdRA),
+                 minRA=sum(erelphy3$minRA),
+                 maxRA=sum(erelphy3$maxRA),
+                 percentage=sum(erelphy3$percentage))
+erelphy <- rbind(erelphy2, df)
+erelphy <- erelphy[order(erelphy$meanRA),]
+erelphy$phylum[8] <- "Unknown"
+## prevalence plotting
+pdf("fig/figures4man/EukRELabundance_phyla.pdf",
+        width =4, height =5)
+ggplot(erelphy, aes(y=percentage, x=all, fill=factor(phylum, levels=erelphy$phylum)))+
+    geom_col(position="stack", colour = "black", width = 0.3)+
+#    coord_flip()+
+    scale_fill_brewer(palette="Dark2")+
+    labs(y="Average relative abundance", fill="")+
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          panel.background = element_blank(),
+          text = element_text(size=10),
+          legend.text = element_text(size = 9))
+#          legend.position = "none")
+dev.off()
+
+# for bacteria
+brelphy$percentage <-  brelphy$meanRA*100
+brelphy2 <- brelphy[brelphy$percentage>1,]
+brelphy3 <- brelphy[brelphy$percentage<1,]
+
+brelphy3
+
+df <- data.frame(phylum="Phyla < 1%",
+                 all="one",
+                 meanRA=sum(brelphy3$meanRA),
+                 sdRA=sum(brelphy3$sdRA),
+                 minRA=sum(brelphy3$minRA),
+                 maxRA=sum(brelphy3$maxRA),
+                 percentage=sum(brelphy3$percentage))
+
+brelphy <- rbind(brelphy2, df)
+brelphy <- brelphy[order(brelphy$meanRA),]
+
+brelphy
+
+erelphy
+
+brelphy$phylum[4] <- "Unknown"
+
+## prevalence plotting
+pdf("fig/figures4man/BacRELabundance_phyla.pdf",
+        width =4, height =5)
+ggplot(brelphy, aes(y=percentage, x=all, fill=factor(phylum, levels=brelphy$phylum)))+
+    geom_col(position="stack", colour = "black", width = 0.3)+
+#    coord_flip()+
+    scale_fill_brewer(palette="Dark2")+
+    labs(y="Average relative abundance", fill="")+
+    theme(axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank(),
+          panel.background = element_blank(),
+          text = element_text(size=10),
+          legend.text = element_text(size = 9))
+#          legend.position = "none")
+dev.off()
+
+### to erase
+
+cryp <- ("GTGAAGATTTTGATAACAGACTCGTAGAATTCTGTGTACAAGATTTCAAGAGAAAGAATAGAGGTATGGATTTAACTACAAATGCTAGAGCTTTAAGAAGACTCAGAACTCAATGTGAGCGTGCAAAGAGAACTTTGTCATCTTCTACTCAAGCTACAATTGAGTTAGATTCACTCTATGAAGGTATTGATTATTCAGTTGCCATCAGTAGAGCTAGATTCGAAGAACTCTGCGCTGATTACTTCCGTGCAACTTTAGCTCCAGTTGAGAAAGTACTCAAG")
+
+eim <- ("ATACGGAGGATGCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGTGCGTAGGCGGTCCGTTAAGTCAGCGGTAAAATTGCGGGGCTCAACCCCGTCGAGCCGTTGAAACTGGCAGACTTGAGTTGGCGAGAAGTACGCGGAATGCGCGGTGTAGCGGTGAAATGCATAGATATCGCGCAGAACTCCGATTGCGAAGGCAGCGTACCGGCGCCAGACTGACGCTGAGGCACGAAAGCGTGGGGATCGAACAGGA")
+
+eim2 <- ("ATACGTAGGGTGCGAGCGTTAATCGGAATTACTGGGCGTAAAGGGTGTGCAGGCGGCTGAGTAAGACAGATGTGAAATCCCCGGGCTTAACCTGGGAACCGCATATGTGACTGCTTGGCTAGAGTGCGTCAGAGGGAGGTGGAATTCCACGTGTAGCAGTGAAATGCGTAGATATGTGGAAGAACACCGATGGCGAAGGCAGCCTCCTGGGACGCAACTGACGCTCATACACGAAAGCGTGGGGAGCAAACAGGA")
+
+tax_table(PS)[eim2, 6]
+
+subset_taxa(PS, )
 
 
-eukaryaComp
+p10PPS=phyloseq_filter_prevalence(pPS, prev.trh=0.1)
 
+tax_table(p10PPS)[eim2, 6]
+tax_table(p10PPS)[eim, 6]

@@ -1,0 +1,60 @@
+library(phyloseq, lib="/usr/local/lib/R/site-library/")
+library(mvabund)
+library("iNEXT")
+
+### multivariate analyses
+## this takes WEEKS to run at the ASV level. I am starting at genus level
+pPS=readRDS(file="tmp/pPSpre.R")
+
+ppPS <- pPS
+ppPS <- subset_taxa(ppPS, !family %in% "Eimeriidae")
+ppPS <- subset_taxa(ppPS, !family %in% "Cryptosporidiidae")
+ppPS <- subset_taxa(ppPS, !family %in% "Oxyuridae")
+ppPS <- subset_taxa(ppPS, !family %in% "Trichuridae")
+ppPS <- subset_taxa(ppPS, !family %in% "Heteroxynematidae")
+ppPS <- subset_taxa(ppPS, !family %in% "Ascaridiidae")
+ppPS <- subset_taxa(ppPS, !family %in% "Heterakidae") 
+ppPS <- subset_taxa(ppPS, !family %in% "Hymenolepididae")
+ppPS <- subset_taxa(ppPS, !family %in% "Spirocercidae")
+
+
+set.seed(1234)
+ppPSrare <- rarefy_even_depth(ppPS, sample.size=5000, replace=F)
+
+prPSgen=tax_glom(ppPSrare, taxrank="genus")
+
+prPSgen
+
+rOTUmv <- mvabund(otu_table(prPSgen))
+
+#boxplot(otu_table(prPSgen), horizontal=TRUE, las=2)
+
+#mean variance relationship
+#meanvar.plot(rOTUmv)
+
+# multivariate model
+mod1 <- manyglm(rOTUmv ~sample_data(prPSgen)$HI +
+                        sample_data(prPSgen)$BMI +
+                        sample_data(prPSgen)$Sex +
+                        sample_data(prPSgen)$Transect +
+                        sample_data(prPSgen)$Year +
+                        sample_data(prPSgen)$eimASV +
+                        sample_data(prPSgen)$criASV +
+                        sample_data(prPSgen)$oxyASV +
+                        sample_data(prPSgen)$hexASV +
+                        sample_data(prPSgen)$hymASV +
+                        sample_data(prPSgen)$triASV +
+                        sample_data(prPSgen)$ascASV +
+                        sample_data(prPSgen)$spiASV +
+                        sample_data(prPSgen)$hekASV, family="negative_binomial")
+
+#plot(mod1)
+
+#table1 <- summary.manyglm(mod1)
+table4 <- anova.manyglm(mod1, p.uni = "adjusted", show.time="all")
+#table1 <- summary.manyglm(mod1)
+# this takes > 500h
+sink("tmp/mlm_prel_rPSgenPARArem.txt")
+table4
+sink()
+saveRDS(table4, file="tmp/manyanovatable4.RDS")

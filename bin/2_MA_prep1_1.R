@@ -18,7 +18,7 @@ devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 
 ## re-run or use pre-computed results for different parts of the pipeline:
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
-doFilter <- FALSE
+doFilter <- TRUE
 doMultiAmp <- TRUE    
 doTax <- TRUE
 
@@ -83,7 +83,6 @@ primer <- PrimerPairsSet(primerF, primerR)
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
 
 if(doMultiAmp){
-
     MA <- MultiAmplicon(primer, files)
     filedir <- "tmp/interData/stratified_files_1_1"
     if(dir.exists(filedir)) unlink(filedir, recursive=TRUE)
@@ -99,10 +98,10 @@ if(doMultiAmp){
     propMerged <- MultiAmplicon::calcPropMerged(MA)
     summary(propMerged)
     table(propMerged<0.8)
-    MA <- mergeMulti(MA, justConcatenate=propMerged<0.8, mc.cores=90) 
+    MA <- mergeMulti(MA, mc.cores=90) 
+#    MA <- mergeMulti(MA, justConcatenate=propMerged<0.8, mc.cores=90) 
     MA <- makeSequenceTableMulti(MA, mc.cores=90)
-
-# annoying error: subscript out of bound with isBimeraDenovoTable()
+# annoying error: subscript out of bound with isBimera
     ## fill it, bind it, coerce it to integer
 #    STF <- getSequenceTable(MA, dropEmpty=FALSE)
 #    STFU <- do.call(cbind, STF)
@@ -120,17 +119,15 @@ if(doMultiAmp){
 #                                            allowOneOff=TRUE,
 #                                            maxShift = 32)   
     MA <- removeChimeraMulti(MA, mc.cores=90)
-
     saveRDS(MA, "tmp/interData/MA1_1.RDS")
 } else{
     MA <- readRDS("tmp/interData/MA1_1.RDS")
 }
 
-trackingF <- getPipelineSummary(MA)
-
-PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
-
-ggsave("Sequencing_summary_HMHZ_1_1.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
+# breaking in devel branch
+#trackingF <-getPipelineSummary(MA)
+#PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
+#ggsave("Sequencing_summary_HMHZ_1_1.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
 
 
 # save fasta file with all sequences for taxonomic analyses
@@ -181,7 +178,10 @@ if(!exists("sample.data")){
 }
 
 ##To phyloseq
-PS <- toPhyloseq(MA, colnames(MA)) ##Now it work
+#PS <- toPhyloseq(MA, colnames(MA)) ##it's broken
+source("bin/toPhyloseq.R")
+PS <- TMPtoPhyloseq(MA, colnames(MA))
+
 ##Sample data
 PS@sam_data <- sample_data(sample.data)
 
@@ -190,9 +190,9 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ
 sum(otu_table(PS)) ##Total denoised reads
 
 ##Primer data
-#PS.l <- toPhyloseq(MA, colnames(MAsample),  multi2Single=FALSE) ##It work
+PS.l <- TMPtoPhyloseq(MA, colnames(MA),  multi2Single=FALSE) ##It work
 ###For primer analysis (Victor)
-#saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_1_1.Rds") ###Full run Pool 1
+saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_1_1.Rds") ###Full run Pool 1
 
 ###
 #lapply(getTaxonTable(MAsample), function (x) table(as.vector(x[, "phylum"])))
