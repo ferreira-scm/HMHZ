@@ -1,0 +1,38 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: I(Falciformis > 0) ~ I(Vermiformis > 0) * I(Ferrisi > 0) + (1 |  
+    Locality)
+   Data: Eimdf
+
+     AIC      BIC   logLik deviance df.resid 
+   491.1    513.3   -240.5    481.1      627 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.4352 -0.3451 -0.3155 -0.2877  3.5575 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Locality (Intercept) 0.3917   0.6259  
+Number of obs: 632, groups:  Locality, 177
+
+Fixed effects:
+                                          Estimate Std. Error z value Pr(>|z|)
+(Intercept)                               -2.25720    0.21292 -10.601  < 2e-16
+I(Vermiformis > 0)TRUE                     2.53781    0.47289   5.367 8.02e-08
+I(Ferrisi > 0)TRUE                         0.20546    0.28364   0.724    0.469
+I(Vermiformis > 0)TRUE:I(Ferrisi > 0)TRUE  0.08933    0.62803   0.142    0.887
+                                             
+(Intercept)                               ***
+I(Vermiformis > 0)TRUE                    ***
+I(Ferrisi > 0)TRUE                           
+I(Vermiformis > 0)TRUE:I(Ferrisi > 0)TRUE    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) I(V>0) I(F>0)
+I(Vr>0)TRUE -0.442              
+I(Fr>0)TRUE -0.558  0.258       
+I(V>0)TRU>0  0.249 -0.700 -0.449

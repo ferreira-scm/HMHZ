@@ -18,6 +18,13 @@ library(tidyverse)
 library(ggpubr)
 ## using the devel
 devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
+library("ape")
+library(magrittr)
+library(Biostrings)
+library(DECIPHER)
+library(ShortRead)
+
+library(RColorBrewer)
 
 source("bin/Pre_Functions.R")
 
@@ -118,15 +125,63 @@ nmEim[which(!nmEim%in%primerL$Primer_name)]
 #ASV.28S <- rownames(Eim.28S@tax_table)
 
 fPS.TSS <- transform_sample_counts(fPS, function(x) x / sum(x)) 
-
 Eim <- subset_taxa(fPS, genus%in%"Eimeria")
-
-
-
+Eim.TSS <- subset_taxa(fPS.TSS, genus%in%"Eimeria")
 #Eim <- prune_taxa(!rownames(Eim@tax_table)%in%ASV.28S, Eim)
 
+##########################################
+### composition plots
+tPS <- subset_taxa(fPS, !phylum%in%NA)
+tPSTSS <- transform_sample_counts(tPS, function(x) x / sum(x)) 
+tps <- psmelt(tPSTSS)
+
+mycolor=colorRampPalette(brewer.pal(8, "Paired"))(22)
+
+comp <- ggplot(tps, aes(x=Sample, y=Abundance, fill=fct_reorder(phylum, Abundance)))+
+    geom_bar(position="stack", stat="identity")+
+#    scale_x_discrete(labels=tps$EH_ID, breaks=tps$Sample)+
+    scale_fill_manual("genus", values=mycolor)+
+#    facet_grid(~dpi, scales="free")+
+    labs(fill="Phylum", y="Proportion within total sequence")+
+    theme_bw(base_size=14)+
+    guides(fill=guide_legend(ncol=4))+
+    theme(axis.text.y = element_text(colour = 'black', size = 14),
+         axis.title.x=element_blank(),
+         axis.text.x=element_blank(),
+         axis.ticks.x=element_blank(),
+         legend.key = element_blank(),
+#        strip.background = element_rect(colour="black", fill="white"),
+         legend.text = element_text(colour = 'black', size = 12),
+         legend.position="bottom") 
+
+## making other tables for plotting
+tPS@sam_data$one <- "one"
+ave.ps <- merge_samples(tPS, "one")
+ave.tss <- transform_sample_counts(ave.ps, function(x) x / sum(x)) 
+ave.tss <- psmelt(ave.tss)
+
+comp.ave <- ggplot(ave.tss, aes(x=Sample, y=Abundance, fill=phylum))+
+    geom_bar(position="stack", stat="identity")+
+#    scale_x_discrete(labels=tps$EH_ID, breaks=tps$Sample)+
+    scale_fill_manual("genus", values=mycolor)+
+#    facet_grid(~dpi, scales="free")+
+    labs(y="Proportion within total sequence")+
+    theme_bw(base_size=14)+
+    theme(axis.text.y = element_text(colour = 'black', size = 14),
+         axis.title.x=element_blank(),
+         axis.text.x=element_blank(),
+         axis.ticks.x=element_blank(),
+         legend.key = element_blank(),
+         strip.background = element_rect(colour="black", fill="white"),
+#        legend.text = element_text(colour = 'black', size = 12, face = 'italic'),
+         legend.position="none") 
+
+com_g <- plot_grid(comp.ave, comp, ncol=2, align="h", axis="b", rel_widths=c(1, 5))
+ggsave("fig/Composition_barplot.pdf", com_g, height=7, width=10, dpi=400)
+ggsave("fig/Composition_barplot.png", com_g, height=7, width=10, dpi=400)
+
+#####################################################################
 ## Now the alignment
-library(ShortRead)
 ## I also want to store the amplicon info to know which ASV's came from where
 EimASV <- DNAStringSet(rownames(Eim@tax_table))
 names(EimASV) <- names18S
@@ -135,7 +190,6 @@ EimASV <- EimASV[which(!grepl("D3A", names(EimASV)))]
 EimASV <- EimASV[which(!grepl("NLF", names(EimASV)))]
 writeFasta(EimASV, "tmp/Eimeria18S.fasta")
 
-library(DECIPHER)
 EimSeqs <- readFasta("../LabMicrobiome/tmp/Eimeria_seqs.fa")
 name_seqs <- EimSeqs@id
 EimSeqs <- sread(EimSeqs)
@@ -145,187 +199,466 @@ Eim.align <- AlignSeqs(allEim, anchor=NA, iterations=10, refinements=10, process
 Eim.align <-AdjustAlignment(Eim.align)
 #names(Eim.align)[c(1:205)] <- name_seqs
 
+# I want to align only with wild Eimeiras
+refEim <- readDNAStringSet("/SAN/Susanas_den/AmpMarkers/wildEimeria18S/Eim_ref.fa")  
+names(refEim) <- gsub("(\\s)", "_", names(refEim))
+WildEim <- c(EimASV, refEim)
+
+# ops forgout the outgroup
+T.out <- c("JQ993669", "JQ993670", "JQ993671")
+T.out <- read.GenBank(T.out)
+T.out.ID <- paste(names(T.out), attr(T.out, "species"), sep="_") 
+T.O <- T.out %>% as.character %>% lapply(.,paste0,collapse="") %>% unlist %>% DNAStringSet
+names(T.O) <- T.out.ID
+
+# and I want the lab EImerias too
+LabASV <- readFasta("../LabMicrobiome/tmp/Eimeria_lab_ASV.fa")
+#Lab <- LabASV@sread
+WildEim <- c(WildEim, T.O, LabASV)
+Wild.align <- AlignSeqs(WildEim, anchor=NA, iterations=10, refinements=10, processors=90)
+Wild.align <- AdjustAlignment(Wild.align)
+names(Wild.align) <- names(WildEim)
 writeFasta(Eim.align, "tmp/Eimeria18S_wild_lab_ref.fasta")
 writeFasta(allEim, "tmp/Eimeria18S_wild_lab_ref_notAligned.fasta")
+writeFasta(Wild.align, "tmp/Eimeria18S_wild.fasta")
 
 # and this is how I did the tree outside R
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s tmp/Eimeria18S_wild_lab_ref.fasta -m MFP
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -redo 
 
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild.fasta -m TN+F+R2 -B 5000 -redo 
 ### Now we need  to analyse which ASV's are likely from the same Eimeira.
 ## ASV's within the same sample from different amplicons that correlate well.
 
-# let's start by selecting a few samples with lots of Eimeria
 
-histogram(phyloseq::sample_sums(Eim)) 
-
+####################################################################
+# let's do some co-infection analyses. First we need to do some preparations
 Eim@tax_table[,6] <- names18S
-
-Eim.lots <- prune_samples(phyloseq::sample_sums(Eim)>0.2, Eim)
-# removing empty ASV's
-
-
-
-eim <- psmelt(Eim.lots)
-
-for (i in rownames(Eim.lots@otu_table)){
-eim %>%
-    filter(Sample==i) %>%
-    select(Abundance, species) %>%
-    filter(Abundance>0) -> x
-print(i)
-print(x)
-}
-
 amplicon <- data.frame(names18S)
 
-names18S
+# sanity check
+rownames(Eim@tax_table)==rownames(Eim.TSS@tax_table)
+Eim.TSS@tax_table[,6] <- names18S
 
 ### manual labeling based on phylogenetic tree
-amp.8 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi", "na_vermiformis", "na_vermiformis", "vermiformis", "vermiformis")
-amp.12 <- c("chimera", "chimera", "chimera", "chimera")
+amp.8 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi", "vermiformis", "falciformis", "falciformis", "falciformis")
+amp.12 <- c("ferrisi", "falciformis", "ferrisi", "ferrisi")
 amp.22 <- rep("28S", 10)
-amp.25 <- c("ferrisi", "na_vermiformis", "vermiformis")
+amp.25 <- c("ferrisi", "vermiformis", "falciformis")
 amp.27 <- c("ferrisi", "falciformis")
-amp.33 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi", "na_vermiformis", "ferrisi")
+amp.33 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi", "falciformis", "vermiformis")
 amp.35 <- c("ferrisi", "ferrisi")
-amp.41 <- c("ferrisi", "ferrisi", "na_vermiformis", "ferrisi", "ferrisi", "ferrisi")
+amp.41 <- c("ferrisi", "ferrisi", "falciformis", "ferrisi", "ferrisi", "vermiformis")
 amp.43 <- c("falciformis", "ferrisi")
-amp.45 <- c("chimera", "chimera")
+amp.45 <- c("ferrisi", "falciformis")
 amp.47 <- c("28S", "28S")
 amp.50 <- c("ferrisi", "falciformis", "ferrisi")
 amp.52 <- c("ferrisi", "falciformis")
-amp.55 <- c("ferrisi", "vermiformis", "vermiformis")
+amp.55 <- c("ferrisi", "falciformis", "falciformis")
 amp.59 <- c("ferrisi", "falciformis", "ferrisi", "falciformis")
-
-
 amplicon$spec <- c(amp.8,amp.12, amp.22, amp.25, amp.27, amp.33, amp.35, amp.41, amp.43, amp.45, amp.47, amp.50, amp.52, amp.55, amp.59)
 
 #sanity check
 Eim@tax_table[,6]==amplicon$names18S
+Eim.TSS@tax_table[,6]==amplicon$names18S
 
 Eim@tax_table[,5] <- amplicon$spec
+Eim.TSS@tax_table[,5] <- amplicon$spec
 
 # removing empty samples
 Eim <- phyloseq::prune_samples(sample_sums(Eim)>0, Eim)
 
-eim.TSS <- transform_sample_counts(Eim, function(x) x / sum(x)) 
+# removing 28S
+Eim18 <- Eim
+Eim.TSS18 <- Eim.TSS
+Eim18 <- subset_taxa(Eim18, !genus=="28S")
+Eim.TSS18 <- subset_taxa(Eim.TSS18, !genus=="28S")
 
-Eim_sp <- tax_glom(eim.TSS, "genus")
-
-colnames(Eim_sp@otu_table)==rownames(Eim_sp@tax_table)
-colnames(Eim_sp@otu_table) <- Eim_sp@tax_table[,5]
-
-eim_sp <- psmelt(Eim_sp)
-eim <- psmelt(eim.TSS)
-eim2 <- psmelt(Eim)
+# now this is for plotting co-infections
+Eim18 <- phyloseq::prune_samples(sample_sums(Eim18)>0, Eim18)
+eim18.TSS <- transform_sample_counts(Eim18, function(x) x / sum(x)) 
+Eim18_sp <- tax_glom(eim18.TSS, "genus")
+#sanity check
+colnames(Eim18_sp@otu_table)==rownames(Eim18_sp@tax_table)
+#colnames(Eim18_sp@otu_table) <- Eim18_sp@tax_table[,5]
+eim_sp <- psmelt(Eim18_sp)
+eim <- psmelt(eim18.TSS)
+eim2 <- psmelt(Eim18)
 
 eim$genus <- as.factor(eim$genus)
-                                        # relevel
+# relevel
 dist_bc <- (vegdist(Eim.TSS@otu_table, method="bray"))
-
 dist_bc2 <- (vegdist(Eim_sp@otu_table, method="bray"))
 res2 <- pcoa(dist_bc2)
 res <- pcoa(dist_bc)
 
+dist_bc18 <- (vegdist(eim18.TSS@otu_table, method="bray"))
+dist_bc182 <- (vegdist(Eim18_sp@otu_table, method="bray"))
+res18 <- pcoa(dist_bc18)
+res18.2 <- pcoa(dist_bc182)
+
 EH_sort <- names(sort(res$vectors[,1]))
-
 EH_sort2 <- names(sort(res2$vectors[,1]))
+EH_sort182 <- names(sort(res18.2$vectors[,1]))
+EH_sort18 <- names(sort(res18$vectors[,1]))
 
-eim$Sample <- factor(eim$Sample, levels= EH_sort2)
-#eim_sp$Sample <- factor(eim_sp$Sample, levels=EH_sort2)
+eim$Sample <- factor(eim$Sample, levels= EH_sort182)
+eim_sp$Sample <- factor(eim_sp$Sample, levels=EH_sort182)
 
-EH_sort2==levels(eim$Sample)
+EH_sort182==levels(eim$Sample)
+EH_sort182==levels(eim_sp$Sample)
 
 com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
     geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=c("#999999", "lightgray", "forestgreen", "dodgerblue4", "darksalmon", "darkred"))+
-    labs(fill="Eimeria ASV species", x="Sample", y="Eimeria relative abundance")+
-    theme()+
-    theme(axis.text.y = element_text(colour = 'black', size = 10, face = 'italic'),
+    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
+    labs(fill="Eimeria ASV species", x="Sample", y="Proportion within Eimeria ASVs")+
+    theme_bw(base_size=14)+
+    theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
       axis.text.x=element_blank(),
       axis.ticks.x=element_blank(),
       legend.key = element_blank(),
-      strip.background = element_rect(colour="black", fill="white"))
+#      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      strip.background = element_rect(colour="black", fill="white"),
+      legend.text = element_text(colour = 'black', size = 14, face = 'italic'),
+      legend.position="bottom")
 #    coord_flip()
+
+com_plot
 
 library(viridis)
 library(wesanderson)
 pal <- wes_palette("Zissou1", 100, type = "continuous")
-
 Eim_heat <- ggplot(eim_sp, aes(Sample, genus, fill=Abundance))+
     geom_tile()+
-      labs(y="Eimeria ASV species", x="Sample", fill="Eimeria relative abundance")+
+      labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
     scale_fill_gradientn(colours = pal)+
-    theme()+
-        theme(axis.text.y = element_text(colour = 'black', size = 10, face = 'italic'),
+    theme_bw(base_size=14)+
+      theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
       axis.text.x=element_blank(),
       axis.ticks.x=element_blank(),
       legend.key = element_blank(),
-      strip.background = element_rect(colour="black", fill="white"))
+      strip.background = element_rect(colour="black", fill="white"),
+      legend.text=element_text(size=10),
+#      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      legend.position="bottom")
 #    scale_fill_distiller(palette = "RdPu")
 #    scale_fill_gradient2(low="#00AFBB", mid="#E7B800", high="#FC4E07", midpoint=0.5)
 #    scale_fill_viridis(discrete=FALSE)
 
+Eim_heat
+
+EimRA <- subset_taxa(fPS.TSS, genus%in%"Eimeria")
+
+EimRA <- subset_samples(EimRA, Mouse_ID%in%EH_sort182)
+
+EimRA <- tax_glom(EimRA, "genus")
+
+# sanity check
+levels(as.factor(eimRA$Mouse_ID))==EH_sort182 # ups, we need to reorder
+eimRA <- psmelt(EimRA)
+
+eimRA$Mouse_ID <- factor(eimRA$Mouse_ID, levels=EH_sort182)
+
+RA_EIM <- ggplot(eimRA, aes(x=Mouse_ID, y=Abundance))+
+    geom_point(shape=21, colour="gray", fill="#c51b8a", size=3, alpha=0.8)+
+    geom_bar(position="stack", stat="identity", fill="#dd1c77", alpha=0.2)+
+#    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
+    labs(x="Sample", y="Proportion within total ASVs")+
+    scale_y_continuous(limits=c(0,0.3))+
+    theme_bw(base_size=14)+
+    theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      legend.key = element_blank(),
+#      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      strip.background = element_rect(colour="black", fill="white"))
+
+RA_EIM
+
 library(cowplot)
 
-Eim_species_comp <- plot_grid(com_plot, Eim_heat, ncol=1, align="v", labels="auto")
+Eim_species_comp <- plot_grid(com_plot, Eim_heat, RA_EIM, ncol=1, align="v", rel_heights=c(0.9,0.6,0.6))
 
-ggsave("fig/Eimeria_heat_composition.pdf", Eim_species_comp, height=5, width=10, dpi=600)
+Eim_species_comp
+
+Eim_species_comp23 <- plot_grid(Eim_heat, RA_EIM, ncol=1, align="v", rel_heights=c(1, 1))
+
+Eim_species_comp23
+
+ggsave("fig/Eimeria_heat_composition.pdf", Eim_species_comp, height=9, width=10, dpi=400)
+ggsave("fig/Eimeria_heat_composition.png", Eim_species_comp, height=9, width=10, dpi=400)
+
+ggsave("fig/Eimeria_heat_composition23.pdf", Eim_species_comp23, height=6, width=8, dpi=600)
+ggsave("fig/Eimeria_heat_composition23.png", Eim_species_comp23, height=6, width=8, dpi=600)
+
+ggsave("fig/Eimeria_heat_composition1.png", com_plot, height=4, width=8, dpi=600)
+ggsave("fig/Eimeria_heat_composition2.png", Eim_heat, height=4, width=8, dpi=600)
+ggsave("fig/Eimeria_heat_composition3.png", RA_EIM, height=4, width=8, dpi=600)
+
+
+ggsave("fig/Eimeria_heat_composition1.pdf", com_plot, height=4, width=8, dpi=600)
+ggsave("fig/Eimeria_heat_composition2.pdf", Eim_heat, height=4, width=8, dpi=600)
+ggsave("fig/Eimeria_heat_composition3.pdf", RA_EIM, height=4, width=8, dpi=600)
+
+ggsave("fig/Eimeria_heat_composition_species.pdf", Eim_heat_sp, height=6, width=10, dpi=600)
 
 phyloseq::plot_bar(eim.TSS, fill="genus")+
     geom_bar(stat="identity", position="stack")+
     scale_fill_manual(values=c("white", "darkgray", "forestgreen", "dodgerblue4", "deepskyblue", "darksalmon", "darkred"))
 
-### calculate dissimilarity distances
-library(vegan)
 
+#sample_data(Eim.TSS18)$Mouse_ID <- factor(sample_data(Eim.TSS18)$Mouse_ID, levels=EH_sort182)
+#levels(as.factor(sample_data(Eim.TSS18)$Mouse_ID))==EH_sort182
+#####################################################################
+# Ok, let's try and figure it out what is happening with these co-infections
+# removing empty samples
+
+Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim.TSS18)>0, Eim.TSS18)
+
+Eim.ra0 <- tax_glom(Eim.TSS18, "genus")
+
+
+Fer <- subset_taxa(Eim.ra0, genus %in% "ferrisi")
+sample_data(Eim.ra0)$Ferrisi <- sample_sums(Fer)
+
+Fal <- subset_taxa(Eim.ra0, genus %in% "falciformis")
+sample_data(Eim.ra0)$Falciformis <- sample_sums(Fal)
+
+Ver <- subset_taxa(Eim.ra0, genus %in% "vermiformis")
+sample_data(Eim.ra0)$Vermiformis <- sample_sums(Ver)
+
+#Eimra0 <- subset_samples(Eim.ra0, !BMI=="NA")
+
+sdata=sample_data(Eim.ra0)
+dis=phyloseq::distance((Eim.ra0), method="bray", type="samples")
+
+permaPS=adonis2(dis~
+            sdata$HI+
+            sdata$Locality+
+            sdata$Year+
+        permutations = 1000, method = "bray")
+
+permaPS
+
+
+Eimdf <- (sample_data(Eim.ra0))
+
+
+
+chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0))
+
+chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0))
+
+chisq.test(table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0))
+
+table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0)
+
+table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0)
+
+table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0)
+
+Eimdf$Locality <- as.factor(Eimdf$Locality)
+
+Eimdf <- as.data.frame(Eimdf)
+
+class(Eimdf) <- "data.frame"
+
+library(lme4)
+
+FalModel <- glmer(I(Falciformis>0)~I(Vermiformis>0)*I(Ferrisi>0) + (1|Locality), family=binomial(), data=Eimdf)
+
+FerModel <- glmer(I(Ferrisi>0)~I(Vermiformis>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+
+VerModel <- glmer(I(Vermiformis>0)~I(Ferrisi>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+
+sink("fig/Falciformis_infection.txt")
+summary(FalModel)
+sink()
+
+summary(FerModel)
+
+summary(VerModel)
+
+anova(FalModel)
+
+
+#### quantit
+
+
+
+FalModel <- lmer(log(1+Falciformis)~Vermiformis*Ferrisi + (1|Locality), data=Eimdf)
+
+FalModelI <- lmer(log(1+Falciformis)~Vermiformis+Ferrisi + (1|Locality), data=Eimdf)
+FalModelV <- lmer(log(1+Falciformis)~Ferrisi + (1|Locality), data=Eimdf)
+FalModelF <- lmer(log(1+Falciformis)~Vermiformis + (1|Locality), data=Eimdf)
+
+summary(FalModel)
+
+anova(FalModel, FalModelI)
+
+anova(FalModel, FalModelF)
+
+
+
+FerModel <- glmer(I(Ferrisi>0)~I(Vermiformis>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+
+VerModel <- glmer(I(Vermiformis>0)~I(Ferrisi>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+
+
+
+
+
+
+
+
+
+
+Eim.ra0
+
+eim.rao <- psmelt(Eim.ra0)
+
+head(eim.rao)
+
+eim.rao$fer[eim.rao$Ferrisi>0] <- 1
+eim.rao$fer[eim.rao$Ferrisi==0] <- 0
+eim.rao$fer
+
+eim.rao$fal[eim.rao$Falciformis>0] <- 1
+eim.rao$fal[eim.rao$Falciformis==0] <- 0
+eim.rao$fal
+
+eim.rao$ver[eim.rao$Vermiformis>0] <- 1
+eim.rao$ver[eim.rao$Vermiformis==0] <- 0
+eim.rao$ver
+
+eim.rao$EimRich <- eim.rao$fer+eim.rao$ver + eim.rao$fal
+
+eim.rao$EimRich
+
+eim.rao$Falciformis
+
+richModel <- glm(Falciformis~Year + Vermiformis*Ferrisi, data=eim.rao)
+
+summary(richModel)
+
+library(parasiteLoad)
+
+### Functions
+source("bin/TestDistributions.R")
+
+source("bin/bananaplotNoCI.R")
+
+library("fitdistrplus")
+library("optimx")
+library(FSA)
+
+#devtools::install_github("alicebalard/parasiteLoad@v2.0")
+
+library(parasiteLoad)
+
+findGoodDist(eimraoo$Abundance,
+             distribs = c("normal", "negative binomial", "poisson"),
+                          distribs2 = c("norm", "nbinom", "pois"))
+
+
+# for eimeria (test)
+eimraoo <-eim.rao[eim.rao$Abundance>0,]
+
+eimraoo <- eimraoo[!is.na(eimraoo$Sex),]
+
+# gotta round this
+eimraoo$Abundance <- round(eimraoo$Abundance*100000)
+
+fitp <- parasiteLoad::analyse(data = eimraoo, response = "Abundance", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+fitp$H3
+
+
+Eimp <- parasiteLoad::bananaPlot(mod = fitp$H1,
+                                 data = eimraoo,
+                                 response = "Abundance",
+                                 hybridIndex=seq(0,1,0.005),
+                                 islog10 = F,
+                                 group = "Sex",
+                                 cols = c("#006A4E", "#E69F00"))
+
+
+
+
+Reads.plot <- bananaplotNoCI(mod = fitp$H3,
+                                       data = eimraoo,
+                                       response = "Abundance",
+                                       islog10 = F,
+                                       group = "Sex",
+                                       cols = c("#006A4E", "#006A4E"))+
+    labs(tag = "A)")+
+    xlab("Mouse genotype (Hybrid Index)")+
+    ylab("Total read counts")+
+      theme(legend.position ="none")
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################
+### calculate dissimilarity distancelibrary(vegan)
 library(ape)
 
-Eim.TSS <- eim.TSS
-
-
+Eim18.TSS <- eim18.TSS
 # sanity check
-colnames(eim.TSS@otu_table)==rownames(Eim.TSS@tax_table)
+colnames(eim18.TSS@otu_table)==rownames(Eim18.TSS@tax_table)
 
-asvN <- seq(1,59,1)
+plot_ordination(eim18.TSS, res18)
+
+asvN <- seq(1,47,1)
 asvN <- paste("ASV", asvN, sep="")
-colnames(Eim.TSS@otu_table) <- paste(asvN, Eim.TSS@tax_table[,5], sep="_")
-colnames(Eim.TSS@otu_table)
+colnames(Eim18.TSS@otu_table) <- paste(asvN, Eim18.TSS@tax_table[,5], sep="_")
 
+colnames(Eim18.TSS@otu_table)
 
-biplot(res2, Eim_sp@otu_table)
+Eim18_sp@otu_table
 
+biplot(res18.2, Eim18_sp@otu_table)
 
-otu.st <- apply(Eim.TSS@otu_table, 2, scale, center=TRUE, scale=TRUE)
-otu.st2 <- apply(Eim_sp@otu_table, 2, scale, center=TRUE, scale=TRUE)
+biplot(res18, Eim18.TSS@otu_table)
 
-biplot(res2, otu.st2,
+otu.st <- apply(Eim18.TSS@otu_table, 2, scale, center=TRUE, scale=TRUE)
+otu.st2 <- apply(Eim18_sp@otu_table, 2, scale, center=TRUE, scale=TRUE)
+
+biplot(res18.2, otu.st2,
        xlabs=rep("o", 362)
        )
 
-biplot(res, otu.st,
+biplot(res18, otu.st,
        xlabs=rep("o", 362),
        cex=c(0.7, 0.8))
 
 
-sample_sums(Eim)
-
-fPS
-
 #phyloseq::plot_heatmap(fPS)
 
-plot_net(Eim, "bray")
 
-phyloseq::plot_richness(Eim)
+plot_net(Eim18, "bray")
+
+phyloseq::plot_richness(Eim18)
 
 
 
-pcoa_bc <- ordinate(eim.TSS, "PCoA", "bray")
+pcoa_bc <- ordinate(eim18.TSS, "PCoA", "bray")
 
-pcoa.p <- plot_ordination(eim.TSS, pcoa_bc)
+pcoa.p <- plot_ordination(eim18.TSS, pcoa_bc)
 
 pcoa.p
 
@@ -335,13 +668,10 @@ pcoa.p$data[,2]
 # correlation matrix
 library(Hmisc)
 library(Matrix)
-
 library(SpiecEasi)
-
 library(igraph)
 
 # change species name to track amplicon
-
 Eim@tax_table[,6] <- names18S
 
 eim <- (Eim@otu_table)
