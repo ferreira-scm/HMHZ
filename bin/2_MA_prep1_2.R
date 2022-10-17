@@ -60,22 +60,16 @@ if(doFilter){
 
 names(filtFs) <- names(filtRs) <- samples
 files <- PairedReadFileSet(filtFs, filtRs)
-
 #Preparation of primer file ### Here stats the Multiamplicon pipeline from Emanuel
 #Primers used in the arrays
-
 ptable <- read.csv(file = "/SAN/Susanas_den/HMHZ/data/primer_list.csv", sep=",", header=TRUE, stringsAsFactors=FALSE)
 primerF <- ptable[, "Seq_F"]
 primerR <- ptable[, "Seq_R"]
 names(primerF) <- as.character(ptable[, "Name_F"])
 names(primerR) <- as.character(ptable[, "Name_R"])
-
 primer <- PrimerPairsSet(primerF, primerR)
-
-
 ##Multi amplicon pipeline
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
-
 if(doMultiAmp){
     MA <- MultiAmplicon(primer, files)
     filedir <- "tmp/interData/stratified_files_1_2"
@@ -99,40 +93,33 @@ if(doMultiAmp){
 } else{
     MA <- readRDS("tmp/interData/MA1_2.RDS")
 }
-
-trackingF <- getPipelineSummary(MA)
-PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
-ggsave("Sequencing_summary_HMHZ_1_2.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
-
+#trackingF <- getPipelineSummary(MA)
+#PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
+#ggsave("Sequencing_summary_HMHZ_1_2.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
 # save fasta file with all sequences for taxonomic analyses
 #MA1 <- getSequenceTableNoChime(MA)
 #all.dada.seq <- DNAStringSet(unlist(lapply(MA1, colnames)))
 #head(all.dada.seq)
 #writeFasta(all.dada.seq, "/SAN/Susanas_den/HMHZ/results/2020May/HMHZ1_1.fasta")
-
 err_F <- plotErrors(errF, nominalQ=TRUE)
 pdf("fig/quality/Estimeted_error_ratesF_1_2.pdf",
     height = 7, width = 7)
 err_F
 dev.off()
-
 err_R <- plotErrors(errR, nominalQ=TRUE)
 pdf("fig/quality/Estimeted_error_ratesR_1_2.pdf",
     height = 7, width = 7)
 err_R
 dev.off()
-
 Heatmap <- plotAmpliconNumbers(MA)
 pdf("fig/quality/heat_Sequencing_summary_HMHZ_1_2.pdf",
     height = 15, width = 15)
 Heatmap
 dev.off()
-
 ###New taxonomic assignment
 #Sys.setenv("BLASTDB" = "/SAN/db/blastdb/") #To make the annotation work, boss will fix this in the package
 #library("vctrs", lib.loc="/usr/local/lib/R/site-library")
 #MA <- blastTaxAnnot(MA,  dataBaseDir = Sys.getenv("BLASTDB"), negative_gilist = "/SAN/db/blastdb/uncultured.gi", num_threads = 20)
-
 MA <- blastTaxAnnot(MA,
                     db = "/SAN/db/blastdb/nt/nt",
                     negative_gilist = "/SAN/db/blastdb/uncultured.gi",
@@ -140,30 +127,95 @@ MA <- blastTaxAnnot(MA,
                     outblast = "tmp/interData/blast1_2_out.fasta",
                     taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
                     num_threads = 90)
-
 saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ##Just Test run HMHZ 1
 
 ##Start from here after the taxonomic annotation
 MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ###Test run
 
-###Load sample information
-if(!exists("sample.data")){
-    source("bin/1_data_prep.R")
-}
-
 ##To phyloseq
-PS <- toPhyloseq(MA, colnames(MA)) ##Now it work
-##Sample data
-PS@sam_data <- sample_data(sample.data)
-
+PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
+#
+############# add metadata
+###Load sample information
+source("bin/1_LoadingSOTA.R")
+#
+meta <- sota[match(rownames(PS@sam_data), sota$Mouse_ID),] 
+#
+nrow(meta)
+#
+#sanity checks
+rownames(PS@otu_table)[!rownames(PS@otu_table)==rownames(meta)]
+#
+PS@sam_data <- sample_data(meta)
+#
+#sanity check
+#PS@sam_data[which(!rownames(PS@sam_data)==rownames(PS@otu_table))]
+#
+rownames(PS@sam_data) <- rownames(PS@otu_table)
+#
+# another sanity check
+sample_names(PS)==rownames(PS@sam_data)
+#
+PS_neg <- subset_samples(PS, grepl("NE",rownames(PS@otu_table)))   
+#
+PS@sam_data$Control <- FALSE
+PS@sam_data$Control[which(sample_names(PS)%in%sample_names(PS_neg))] <- TRUE
+# sanity check
+PS@sam_data$Mouse_ID[PS@sam_data$Control==FALSE]
+rownames(PS@sam_data)[PS@sam_data$Control==TRUE]
+#
+library("decontam")
+#
+###### removing contaminants
+#
+## assuming that negative controls have 0 DNA
+PS@sam_data$Concentration[PS@sam_data$Control==TRUE] <- 0.0001
+#
+#
+## ----see-depths---------------------------------------------------------------
+#df <- as.data.frame(sample_data(PS)) # Put sample_data into a ggplot-friendly data.frame
+#df$LibrarySize <- sample_sums(PS)
+#df <- df[order(df$LibrarySize),]
+#df$Index <- seq(nrow(df))
+#ggplot(data=df, aes(x=Index, y=LibrarySize, color=Control)) + geom_point()
+ps <- phyloseq::prune_samples(sample_sums(PS)>0, PS)
+#
+contamdf.freq <- isContaminant(ps, method="either", conc="Concentration", neg="Control", threshold=c(0.1,0.5), normalize=TRUE)
+#
+table(contamdf.freq$contaminant)
+#
+### taxa to remove
+ps@tax_table[rownames(contamdf.freq[contamdf.freq$contaminant==TRUE,]),5]
+#
+## quick plotting for contaminant prevalence
+#ps.pa <- transform_sample_counts(ps, function(abund) 1*(abund>0))
+#ps.pa.neg <- prune_samples(sample_data(ps.pa)$Control == TRUE, ps.pa)
+#ps.pa.pos <- prune_samples(sample_data(ps.pa)$Control == FALSE, ps.pa)
+# Make data.frame of prevalence in positive and negative samples
+#df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
+#                    contaminant=contamdf.prev$contaminant)
+#ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
+#      xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
+#
+## let's remove them now and negative controls
+Keep <- rownames(contamdf.freq[contamdf.freq$contaminant==FALSE,])
+PS <- prune_samples(sample_data(PS)$Control == FALSE, PS)
+PS <- prune_taxa(Keep, PS)
+#
 saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_1_2.Rds") ###Results from preliminary analysis (Sample data)
-
+#
 sum(otu_table(PS)) ##Total denoised reads
-
+#
 ##Primer data
-#PS.l <- toPhyloseq(MA, colnames(MAsample),  multi2Single=FALSE) ##It work
+PS.l <- TMPtoPhyloseq(MA, colnames(MA),  multi2Single=FALSE) ##It work
+## adding metadata, removing contaminants and controls
+neg <- sample_names(subset_samples(PS.l[[1]], grepl("NE",rownames(PS.l[[1]]@otu_table))))
+for (i in 1:48) {
+    try(PS.l[[i]] <- prune_taxa(Keep, PS.l[[i]]), silent=TRUE)
+    try(PS.l[[i]] <- prune_samples(neg, PS.l[[i]]), silent=TRUE)
+}
+for (i in 1:48) {
+    try(PS.l[[i]]@sam_data <- PS@sam_data, silent=TRUE)
+}
 ###For primer analysis (Victor)
-#saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_1_1.Rds") ###Full run Pool 1
-
-###
-#lapply(getTaxonTable(MAsample), function (x) table(as.vector(x[, "phylum"])))
+saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_1_2.Rds") ###Full run Pool 1

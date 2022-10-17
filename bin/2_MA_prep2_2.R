@@ -132,22 +132,73 @@ MA <- blastTaxAnnot(MA,
                     taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
                     num_threads = 90)
 saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ##Just Test run HMHZ 1
+
 ##Start from here after the taxonomic annotation
 MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ###Test run
-###Load sample information
-if(!exists("sample.data")){
-    source("bin/1_data_prep.R")
-}
 ##To phyloseq
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
-##Sample data
-PS@sam_data <- sample_data(sample.data)
+meta <- sota[match(rownames(PS@sam_data), sota$Mouse_ID),] 
+nrow(meta)
+#sanity checks
+rownames(PS@otu_table)==rownames(meta)
+PS@sam_data <- sample_data(meta)
+#sanity check
+#PS@sam_data[which(!rownames(PS@sam_data)==rownames(PS@otu_table))]
+rownames(PS@sam_data) <- rownames(PS@otu_table)
+# another sanity check
+sample_names(PS)==rownames(PS@sam_data)
+PS_neg <- subset_samples(PS, grepl("NE",rownames(PS@otu_table)))   
+PS@sam_data$Control <- FALSE
+PS@sam_data$Control[which(sample_names(PS)%in%sample_names(PS_neg))] <- TRUE
+# sanity check
+PS@sam_data$Mouse_ID[PS@sam_data$Control==FALSE]
+rownames(PS@sam_data)[PS@sam_data$Control==TRUE]
+library("decontam")
+###### removing contaminants
+## assuming that negative controls have 0 DNA
+PS@sam_data$Concentration[PS@sam_data$Control==TRUE] <- 0.0001
+## ----see-depths---------------------------------------------------------------
+#df <- as.data.frame(sample_data(PS)) # Put sample_data into a ggplot-friendly data.frame
+#df$LibrarySize <- sample_sums(PS)
+#df <- df[order(df$LibrarySize),]
+#df$Index <- seq(nrow(df))
+#ggplot(data=df, aes(x=Index, y=LibrarySize, color=Control)) + geom_point()
+ps <- phyloseq::prune_samples(sample_sums(PS)>0, PS)
+contamdf.freq <- isContaminant(ps, method="either", conc="Concentration", neg="Control", threshold=c(0.1,0.5), normalize=TRUE)
+table(contamdf.freq$contaminant)
+### taxa to remove
+ps@tax_table[rownames(contamdf.freq[contamdf.freq$contaminant==TRUE,]),5]
+## quick plotting for contaminant prevalence
+#ps.pa <- transform_sample_counts(ps, function(abund) 1*(abund>0))
+#ps.pa.neg <- prune_samples(sample_data(ps.pa)$Control == TRUE, ps.pa)
+#ps.pa.pos <- prune_samples(sample_data(ps.pa)$Control == FALSE, ps.pa)
+# Make data.frame of prevalence in positive and negative samples
+#df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
+#                    contaminant=contamdf.prev$contaminant)
+#ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
+#      xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
+#
+## let's remove them now and negative controls
+Keep <- rownames(contamdf.freq[contamdf.freq$contaminant==FALSE,])
+PS <- prune_samples(sample_data(PS)$Control == FALSE, PS)
+PS <- prune_taxa(Keep, PS)
+#
 saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_2_2.Rds") ###Results from preliminary analysis (Sample data)
+#
 sum(otu_table(PS)) ##Total denoised reads
+#
 ##Primer data
-PS.l <- TMPtoPhyloseq(MA, colnames(MAsample),  multi2Single=FALSE) ##It work
+PS.l <- TMPtoPhyloseq(MA, colnames(MA),  multi2Single=FALSE) ##It work
+## adding metadata, removing contaminants and controls
+neg <- sample_names(subset_samples(PS.l[[1]], grepl("NE",rownames(PS.l[[1]]@otu_table))))
+for (i in 1:48) {
+    try(PS.l[[i]] <- prune_taxa(Keep, PS.l[[i]]), silent=TRUE)
+    try(PS.l[[i]] <- prune_samples(neg, PS.l[[i]]), silent=TRUE)
+}
+for (i in 1:48) {
+    try(PS.l[[i]]@sam_data <- PS@sam_data, silent=TRUE)
+}
 ###For primer analysis (Victor)
 saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_2_2.Rds") ###Full run Pool 1
-
 ###
 #lapply(getTaxonTable(MAsample), function (x) table(as.vector(x[, "phylum"])))

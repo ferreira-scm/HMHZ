@@ -471,39 +471,107 @@ class(Eimdf) <- "data.frame"
 
 library(lme4)
 
-FalModel <- glmer(I(Falciformis>0)~I(Vermiformis>0)*I(Ferrisi>0) + (1|Locality), family=binomial(), data=Eimdf)
+Eimdf$fal[Eimdf$Falciformis>0] <- 1
+Eimdf$fal[Eimdf$Falciformis==0] <- 0
 
-FerModel <- glmer(I(Ferrisi>0)~I(Vermiformis>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+Eimdf$fer[Eimdf$Ferrisi>0] <- 1
+Eimdf$fer[Eimdf$Ferrisi==0] <- 0
 
-VerModel <- glmer(I(Vermiformis>0)~I(Ferrisi>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
+Eimdf$ver[Eimdf$Vermiformis>0] <- 1
+Eimdf$ver[Eimdf$Vermiformis==0] <- 0
+
+### new variable with amplicon
+
+FalModel <- glmer(fal~ver*fer + qPCRsummary+(1|Locality), family=binomial(), data=Eimdf)
+
+FerModel <- glmer(fer~ver*fal + (1|Locality), family=binomial(), data=Eimdf)
+
+VerModel <- glmer(ver~fer*fal + (1|Locality), family=binomial(), data=Eimdf)
 
 sink("fig/Falciformis_infection.txt")
 summary(FalModel)
 sink()
 
+levels(as.factor(Eimdf$qPCRsummary))
+
 summary(FerModel)
+
+summary(FalModel)
+
+library("effects")
+
+V.plot <- plot(effect("ver", FalModel),
+     ylab="Probability of E. falciformis",
+     xlab="E. vermiformis infection",
+     main="")
+
+V.plot
+
+png("fig/Vermiformis_effect.png", height=4, width=4, units="in", res=400)
+V.plot
+dev.off()
+
+plot(effect("ver:fer", FalModel, xlevels=list(fer=0:1)),
+     ylab="Probability E. falciformis +",
+     multiline=TRUE,
+     main="E.falciformis* E.ferrisi")
+
 
 summary(VerModel)
 
 anova(FalModel)
 
+library(lmerTest)
+
+ranova(FalModel)
 
 #### quantit
 
+Eimdf$EimeriaTotal <- Eimdf$Falciformis+Eimdf$Vermiformis+Eimdf$Ferrisi
+
+Eimdfq <- Eimdf[Eimdf$EimeriaTotal>0,]
+
+nrow(Eimdfq)
 
 
-FalModel <- lmer(log(1+Falciformis)~Vermiformis*Ferrisi + (1|Locality), data=Eimdf)
 
-FalModelI <- lmer(log(1+Falciformis)~Vermiformis+Ferrisi + (1|Locality), data=Eimdf)
-FalModelV <- lmer(log(1+Falciformis)~Ferrisi + (1|Locality), data=Eimdf)
-FalModelF <- lmer(log(1+Falciformis)~Vermiformis + (1|Locality), data=Eimdf)
+FalModel <- glmer(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi) + (1|Locality), data=Eimdfq)
+
+ranova(FalModel) # not signigicant
+
+FalModel <- glm(Falciformis~Vermiformis*Ferrisi, data=Eimdfq)
+
+FalModelI <- glm(log(1+Falciformis)~log(1+Vermiformis)+log(1+Ferrisi), data=Eimdfq)
+FalModelV <- glm(log(1+Falciformis)~log(1+Ferrisi), data=Eimdfq)
+FalModelF <- glm(log(1+Falciformis)~log(1+Vermiformis), data=Eimdfq)
 
 summary(FalModel)
 
+plot(FalModel) # baaaad, let's try something else
+
+FalModel <- glm(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi), data=Eimdfq)
+plot(FalModel) # also not good. different distribution?
+
+FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi, data=Eimdfq)
+summary(FalModel) # bad deviance too
+plot(FalModel) # ugly! More variables?
+
+FalModel <- glm(log(1+Falciformis)~Vermiformis*Ferrisi, data=Eimdfq)
+
+summary(FalModel) # bad deviance too
+
+plot(FalModel) # ugly! More variables?
+
+names(Eimdf)
+
+table(Eimdfq$qPCRsummary)
+
+Eimdf$qPCRsummary
+
+anova(FalModel)
+
 anova(FalModel, FalModelI)
-
 anova(FalModel, FalModelF)
-
 
 
 FerModel <- glmer(I(Ferrisi>0)~I(Vermiformis>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)

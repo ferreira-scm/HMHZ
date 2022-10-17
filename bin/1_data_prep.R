@@ -1,5 +1,5 @@
 ###Load sample information
-
+## from 
 sample.data <- read.csv("/SAN/Susanas_den/gitProj/HMHZ/data/Sample_selection_Metabarcoding_Complete.csv", dec=",", stringsAsFactors=FALSE)
 
 summary(sample.data)

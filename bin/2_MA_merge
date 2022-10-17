@@ -1,18 +1,16 @@
 #!/usr/bin/Rscript
-
 library(phyloseq)
 
 ####Merge phyloseq objects
 PS1 <-  readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_1_1.Rds")
 PS2 <-  readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_1_2.Rds")    
 PSa <- merge_phyloseq(PS1, PS2)
-
 PS3 <-  readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_2_1.Rds")
 PS4 <-  readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_2_2.Rds")
 PSb <- merge_phyloseq(PS3, PS4)
-
 PS <- merge_phyloseq(PSa, PSb)
 saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_All.Rds") ###Results from full + test run pool 1
+#sample_names(PS)
 
 rm(PS1)
 rm(PS2)
@@ -68,3 +66,23 @@ rm(PS.l.2.1)
 rm(PS.l.2.2)
 rm(along)
 
+
+########################################### New taxonomic annotation, outside MA
+
+ptable <- read.csv(file = "/SAN/Susanas_den/HMHZ/data/primer_list.csv", sep=",", header=TRUE, stringsAsFactors=FALSE)
+primerL <- read.csv("/SAN/Susanas_den/HMHZ/data/primerInputUnique.csv") 
+# small adjstments
+primerL$Primer_name[120] <- "Bgf_132_F.Bgr_132_R"
+primerL$Primer_name[6] <- "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R" 
+primerL$Primer_name[7] <- "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R"
+primerL$Primer_name[86] <- "NLF184cw_74_F.NL818cw_74_R" 
+
+pName <- paste(ptable$Name_F, ptable$Name_R, sep=".")
+
+pName
+
+Gen <- primerL$Gen[primerL$Primer_name%in%pName] 
+
+Gen
+
+PS.l
