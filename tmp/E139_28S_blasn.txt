@@ -1,0 +1,329 @@
+BLASTN 2.13.0+
+
+
+Reference: Zheng Zhang, Scott Schwartz, Lukas Wagner, and Webb
+Miller (2000), "A greedy algorithm for aligning DNA sequences", J
+Comput Biol 2000; 7(1-2):203-14.
+
+
+
+Database: /SAN/Eimeria_Wild_Genomes/Assembly_Masurca/E139.final.genome.scf.fas
+ta
+           16,443 sequences; 64,984,693 total letters
+
+
+
+Query= 1
+
+Length=286
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16922595982
+
+
+Query= 2
+
+Length=287
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16987186043
+
+
+Query= 3
+
+Length=288
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 17051776104
+
+
+Query= 4
+
+Length=288
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 17051776104
+
+
+Query= 5
+
+Length=288
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 17051776104
+
+
+Query= 6
+
+Length=287
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16987186043
+
+
+Query= 7
+
+Length=287
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16987186043
+
+
+Query= 8
+
+Length=286
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16922595982
+
+
+Query= 9
+
+Length=286
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 16922595982
+
+
+Query= 10
+
+Length=288
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 17051776104
+
+
+Query= 11
+
+Length=422
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+scf7180000052690                                                      259     2e-68
+scf7180000052710                                                      124     7e-28
+
+
+>scf7180000052690
+Length=573
+
+ Score = 259 bits (140),  Expect = 2e-68
+ Identities = 140/140 (100%), Gaps = 0/140 (0%)
+ Strand=Plus/Plus
+
+Query  90   CTTTGTTCCCTCGAATTGTAGCCTCTAGAGGCGTTACCAGTGGAGGAGCAGGTCCAAGTT  149
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  1    CTTTGTTCCCTCGAATTGTAGCCTCTAGAGGCGTTACCAGTGGAGGAGCAGGTCCAAGTT  60
+
+Query  150  TCTTGGAACAGAACTTCAGAGAGGGTGACAGTCCCGTCCTTTGTCCTGCTTCTTGTTTCC  209
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  61   TCTTGGAACAGAACTTCAGAGAGGGTGACAGTCCCGTCCTTTGTCCTGCTTCTTGTTTCC  120
+
+Query  210  ACGTACGGTGCGCTTTTATT  229
+            ||||||||||||||||||||
+Sbjct  121  ACGTACGGTGCGCTTTTATT  140
+
+
+>scf7180000052710
+Length=47013
+
+ Score = 124 bits (67),  Expect = 7e-28
+ Identities = 67/67 (100%), Gaps = 0/67 (0%)
+ Strand=Plus/Minus
+
+Query  1   TTATTAAGCGGTGGAAAAGAAAATAACTATGATTCCCCTAGTAACGGCGAGTGAAGCGGG  60
+           ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  67  TTATTAAGCGGTGGAAAAGAAAATAACTATGATTCCCCTAGTAACGGCGAGTGAAGCGGG  8
+
+Query  61  ATCAGCT  67
+           |||||||
+Sbjct  7   ATCAGCT  1
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 25635726346
+
+
+Query= 12
+
+Length=422
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+scf7180000052690                                                      259     2e-68
+scf7180000052710                                                      124     7e-28
+
+
+>scf7180000052690
+Length=573
+
+ Score = 259 bits (140),  Expect = 2e-68
+ Identities = 140/140 (100%), Gaps = 0/140 (0%)
+ Strand=Plus/Plus
+
+Query  90   CTTTGTTCCCTCGAATTGTAGCCTCTAGAGGCGTTACCAGTGGAGGAGCAGGTCCAAGTT  149
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  1    CTTTGTTCCCTCGAATTGTAGCCTCTAGAGGCGTTACCAGTGGAGGAGCAGGTCCAAGTT  60
+
+Query  150  TCTTGGAACAGAACTTCAGAGAGGGTGACAGTCCCGTCCTTTGTCCTGCTTCTTGTTTCC  209
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  61   TCTTGGAACAGAACTTCAGAGAGGGTGACAGTCCCGTCCTTTGTCCTGCTTCTTGTTTCC  120
+
+Query  210  ACGTACGGTGCGCTTTTATT  229
+            ||||||||||||||||||||
+Sbjct  121  ACGTACGGTGCGCTTTTATT  140
+
+
+>scf7180000052710
+Length=47013
+
+ Score = 124 bits (67),  Expect = 7e-28
+ Identities = 67/67 (100%), Gaps = 0/67 (0%)
+ Strand=Plus/Minus
+
+Query  1   TTATTAAGCGGTGGAAAAGAAAATAACTATGATTCCCCTAGTAACGGCGAGTGAAGCGGG  60
+           ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  67  TTATTAAGCGGTGGAAAAGAAAATAACTATGATTCCCCTAGTAACGGCGAGTGAAGCGGG  8
+
+Query  61  ATCAGCT  67
+           |||||||
+Sbjct  7   ATCAGCT  1
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 25635726346
+
+
+  Database: /SAN/Eimeria_Wild_Genomes/Assembly_Masurca/E139.final.genome.scf.fas
+ta
+    Posted date:  Oct 24, 2022  9:10 AM
+  Number of letters in database: 64,984,693
+  Number of sequences in database:  16,443
+
+
+
+Matrix: blastn matrix 1 -2
+Gap Penalties: Existence: 0, Extension: 2.5
