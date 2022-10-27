@@ -124,6 +124,26 @@ dev.off()
 #Sys.setenv("BLASTDB" = "/SAN/db/blastdb/") #To make the annotation work, boss will fix this in the package
 #library("vctrs", lib.loc="/usr/local/lib/R/site-library")
 #MA <- blastTaxAnnot(MA,  dataBaseDir = Sys.getenv("BLASTDB"), negative_gilist = "/SAN/db/blastdb/uncultured.gi", num_threads = 20)
+
+# amplicon targets
+primerL <- read.table("data/primerInputUnique.csv", head=T, sep=",")
+ptable$Primer_name <- paste(ptable$Name_F, ptable$Name_R, sep=".")
+which(!ptable$Primer_name %in% primerL$Primer_name)
+# manual correction
+primerL$Primer_name[6] <- "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R"
+primerL$Primer_name[7] <-  "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R" 
+primerL$Primer_name[120] <- "Bgf_132_F.Bgr_132_R"
+primerL$Primer_name[86] <- "NLF184cw_74_F.NL818cw_74_R"
+p.df <- primerL[which(primerL$Primer_name%in%ptable$Primer_name),]
+
+table(p.df$Gen, p.df$Target)
+
+p.df$Gen[p.df$Target=="Metazoa"&p.df$Gen=="16S"] <- "MT-RNR2"
+
+p.df$Gen[p.df$Target=="Cestodes"&p.df$Gen=="16S"] <- "MT-RNR2"
+
+head(p.df)
+
 MA <- blastTaxAnnot(MA,
                     db = "/SAN/db/blastdb/nt/nt",
                     negative_gilist = "/SAN/db/blastdb/uncultured.gi",
@@ -202,3 +222,5 @@ for (i in 1:48) {
 saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_2_2.Rds") ###Full run Pool 1
 ###
 #lapply(getTaxonTable(MAsample), function (x) table(as.vector(x[, "phylum"])))
+
+

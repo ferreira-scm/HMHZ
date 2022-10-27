@@ -8,6 +8,10 @@ primer2$seq <- paste(primer2$Seq_F, primer2$Seq_R)
 
 primer2$seq
 
+head(primer1)
+
+primer1$Primer_name
+
 primer <- merge(primer1, primer2, by="seq")
 
 primer <- unique(primer)
