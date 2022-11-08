@@ -1,0 +1,263 @@
+IQ-TREE multicore version 2.2.0 COVID-edition for Linux 64-bit built Jun  1 2022
+Developed by Bui Quang Minh, James Barbetti, Nguyen Lam Tung,
+Olga Chernomor, Heiko Schmidt, Dominik Schrempf, Michael Woodhams, Ly Trong Nhan.
+
+Host:    harriet (AVX, 503 GB RAM)
+Command: /home/susana/iqtree-2.2.0-Linux/bin/iqtree2 -t tmp/Eimeria18S_wild_lab_ref.fasta.contree -s tmp/Eimeria18S_wild_lab_ref.fasta --scf 100 --prefix siteCF -T 80
+Seed:    583935 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Tue Nov  8 09:48:34 2022
+Kernel:  AVX - 80 threads (96 CPU cores detected)
+
+Reading alignment file tmp/Eimeria18S_wild_lab_ref.fasta ... Fasta format detected
+Reading fasta file: done in 0.01221 secs using 74.94% CPU
+Alignment most likely contains DNA/RNA sequences
+Constructing alignment: done in 0.0149043 secs using 1101% CPU
+WARNING: 2 sites contain only gaps or ambiguous characters.
+Alignment has 233 sequences with 1879 columns, 821 distinct patterns
+101 parsimony-informative, 201 singleton sites, 1577 constant sites
+                                                 Gap/Ambiguity  Composition  p-value
+Analyzing sequences: done in 0.000211798 secs using 3360% CPU
+   1  JQ993669_Isospora_sp._ex_Talpa_europaea           34.65%    passed     94.45%
+   2  JQ993670_Isospora_sp._ex_Talpa_europaea           52.00%    passed     66.28%
+   3  JQ993671_Isospora_sp._ex_Talpa_europaea           23.04%    passed     99.95%
+   4  JQ993665_Eimeria_nafuko                           26.82%    passed     98.83%
+   5  JQ993659_Eimeria_alorani                          26.88%    passed     69.14%
+   6  KU174470_Eimeria_apionodes                        25.92%    passed     99.18%
+   7  KU174461_Eimeria_apionodes                        26.02%    passed     99.08%
+   8  KU174464_Eimeria_apionodes                        55.72%    passed     94.78%
+   9  KU174480_Eimeria_apionodes                        49.76%    passed     78.50%
+  10  KU174483_Eimeria_apionodes                        50.45%    passed     77.35%
+  11  KU174462_Eimeria_apionodes                        25.81%    passed     98.68%
+  12  KU174463_Eimeria_apionodes                        57.16%    passed     70.61%
+  13  KU174468_Eimeria_apionodes                        27.41%    passed     97.95%
+  14  KU174479_Eimeria_apionodes                        46.78%    passed     88.96%
+  15  KU174449_Eimeria_apionodes                        26.50%    passed     98.52%
+  16  KU174450_Eimeria_apionodes                        25.39%    passed     99.47%
+  17  KU174465_Eimeria_apionodes                        54.39%    passed     98.62%
+  18  KU174467_Eimeria_apionodes                        25.92%    passed     98.55%
+  19  KU174474_Eimeria_apionodes                        26.08%    passed     98.97%
+  20  KU174451_Eimeria_apionodes                        25.86%    passed     98.65%
+  21  KU174459_Eimeria_apionodes                        26.34%    passed     96.30%
+  22  KU174485_Eimeria_apionodes                        38.90%    passed     97.89%
+  23  KU174487_Eimeria_apionodes                        59.71%    passed     76.39%
+  24  KU174472_Eimeria_apionodes                        25.86%    passed     99.28%
+  25  JQ993666_Eimeria_burdai                           24.64%    passed     99.96%
+  26  JQ993649_Eimeria_caviae                           24.22%    passed     99.96%
+  27  JQ993650_Eimeria_chinchillae                      19.32%    passed     98.17%
+  28  AF080614_Eimeria_falciformis                       4.84%    passed     94.73%
+  29  MH751998_Eimeria_falciformis                      41.35%    passed     95.88%
+  30  KT360995_Eimeria_ferrisi                          29.27%    passed     99.49%
+  31  JF304148_Eimeria_myoxi                            22.88%    passed     99.34%
+  32  U40263_Eimeria_nieschulzi                          4.42%    passed     91.49%
+  33  JQ993651_Eimeria_nkaka                            26.88%    passed     90.30%
+  34  AF311643_Eimeria_separata                         18.04%    passed     81.29%
+  35  AF311644_Eimeria_sevilletensis                    17.24%    passed     62.21%
+  36  JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013        19.37%    passed     97.36%
+  37  JQ993655_Eimeria_sp._ex_Apodemus_agrarius         24.59%    passed     93.68%
+  38  JQ993656_Eimeria_sp._ex_Apodemus_agrarius         24.69%    passed     85.93%
+  39  JQ993657_Eimeria_sp._ex_Apodemus_agrarius         24.64%    passed     99.51%
+  40  JQ993658_Eimeria_sp._ex_Apodemus_agrarius         26.34%    passed     97.22%
+  41  JQ993660_Eimeria_sp._ex_Apodemus_agrarius         24.69%    passed     98.84%
+  42  KU174475_Eimeria_apionodes                        25.92%    passed     81.37%
+  43  JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus       25.71%    passed     81.55%
+  44  JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus       25.60%    passed     97.24%
+  45  JQ993663_Eimeria_sp._ex_Cricetus_cricetus         24.59%    passed     98.00%
+  46  JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus        19.37%    passed     99.85%
+  47  JQ993652_Eimeria_sp._2_JK-2013                    24.16%    passed     91.31%
+  48  JQ993667_Eimeria_sp._ex_Mastomys_natalensis       19.27%    passed     97.61%
+  49  KU174454_Eimeria_sp._ex_Microtus_agrestis         26.72%    passed     99.01%
+  50  KU174469_Eimeria_sp._ex_Microtus_agrestis         28.95%    passed     99.20%
+  51  KU174481_Eimeria_sp._ex_Microtus_agrestis         48.06%    passed     81.66%
+  52  KU174456_Eimeria_sp._ex_Microtus_arvalis          25.92%    passed     98.98%
+  53  KU174484_Eimeria_sp._ex_Microtus_arvalis          49.39%    passed     82.12%
+  54  KU174478_Eimeria_sp._ex_Microtus_arvalis          58.28%    passed     77.71%
+  55  KU174473_Eimeria_sp._ex_Microtus_arvalis          26.02%    passed     99.08%
+  56  KU174471_Eimeria_sp._ex_Microtus_levis            25.81%    passed     99.09%
+  57  KU174455_Eimeria_sp._ex_Microtus_subterraneus     25.55%    passed     99.83%
+  58  KU174457_Eimeria_sp._ex_Clethrionomys_glareolus   28.05%    passed     98.19%
+  59  KU174476_Eimeria_sp._ex_Clethrionomys_glareolus   36.88%    passed     96.02%
+  60  KU174466_Eimeria_sp._ex_Clethrionomys_glareolus   28.31%    passed     98.66%
+  61  KU174486_Eimeria_sp._ex_Clethrionomys_glareolus   56.20%    passed     95.54%
+  62  KU174453_Eimeria_sp._ex_Clethrionomys_glareolus   28.95%    passed     98.42%
+  63  KU174458_Eimeria_sp._ex_Clethrionomys_glareolus   28.85%    passed     98.74%
+  64  KU174460_Eimeria_sp._ex_Clethrionomys_glareolus   25.92%    passed     98.63%
+  65  KU174452_Eimeria_sp._ex_Clethrionomys_glareolus   26.24%    passed     99.11%
+  66  KU174482_Eimeria_sp._ex_Clethrionomys_glareolus   57.32%    passed     85.76%
+  67  AF246717_Eimeria_telekii                          16.98%    passed     93.75%
+  68  KT184355_Eimeria_vermiformis                      39.33%    passed     87.59%
+  69  JQ993653_Eimeria_vilasi                           23.42%    passed     95.71%
+  70  AF307880_Eimeria_albigulae                        17.51%    passed     93.88%
+  71  AF339489_Eimeria_chaetodipi                       16.55%    passed     92.62%
+  72  AF307878_Eimeria_arizonensis                      16.82%    passed     94.13%
+  73  AF307876_Eimeria_antrozoi                         17.03%    passed     97.83%
+  74  AF324214_Eimeria_chobotari                        17.19%    passed     92.50%
+  75  AF339490_Eimeria_dipodomysis                      18.47%    passed     69.42%
+  76  AF339491_Eimeria_leucopi                          18.68%    passed     92.55%
+  77  AF307879_Eimeria_onychomysis                      18.68%    passed     90.30%
+  78  AF339492_Eimeria_peromysci                        16.34%    passed     87.44%
+  79  AF307877_Eimeria_rioarribaensis                   17.56%    passed     97.31%
+  80  AF311642_Eimeria_reedi                            17.83%    passed     95.17%
+  81  KU192965_Eimeria_alorani                          40.45%    passed     93.23%
+  82  KU192958_Eimeria_alorani                          31.72%    passed     97.34%
+  83  KU192936_Eimeria_apionodes                        25.86%    passed     98.90%
+  84  KU192961_Eimeria_alorani                          26.50%    passed     97.06%
+  85  KU192956_Eimeria_apionodes                        59.18%    passed     69.76%
+  86  KU192931_Eimeria_apionodes                        25.71%    passed     98.47%
+  87  KU192938_Eimeria_apionodes                        72.96%    passed     79.48%
+  88  KU192916_Eimeria_apionodes                        28.37%    passed     95.61%
+  89  KT184339.1_Eimeria_falciformis                     4.68%    passed     90.06%
+  90  MH751925.1_Eimeria_ferrisi                        30.02%    passed     99.25%
+  91  MH751926.1_Eimeria_vermiformis                    43.27%    passed     89.33%
+  92  MH751927.1_Eimeria_ferrisi                        49.60%    passed     91.32%
+  93  MH751928.1_Eimeria_ferrisi                        43.27%    passed     94.28%
+  94  MH751929.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+  95  MH751930.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+  96  MH751931.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+  97  MH751932.1_Eimeria_ferrisi                        44.01%    passed     86.68%
+  98  MH751933.1_Eimeria_ferrisi                        43.27%    passed     94.42%
+  99  MH751934.1_Eimeria_falciformis                    44.17%    passed     84.30%
+ 100  MH751935.1_Eimeria_ferrisi                        43.21%    passed     92.37%
+ 101  MH751936.1_Eimeria_ferrisi                        43.37%    passed     94.76%
+ 102  MH751937.1_Eimeria_falciformis                    43.37%    passed     89.31%
+ 103  MH751938.1_Eimeria_ferrisi                        28.79%    passed     99.58%
+ 104  MH751939.1_Eimeria_ferrisi                        43.64%    passed     95.09%
+ 105  MH751940.1_Eimeria_vermiformis                    39.06%    passed     95.57%
+ 106  MH751941.1_Eimeria_falciformis                    43.32%    passed     90.35%
+ 107  MH751942.1_Eimeria_falciformis                    28.47%    passed     94.18%
+ 108  MH751943.1_Eimeria_falciformis                    43.43%    passed     92.07%
+ 109  MH751944.1_Eimeria_ferrisi                        43.16%    passed     93.96%
+ 110  MH751945.1_Eimeria_ferrisi                        31.08%    passed     99.91%
+ 111  MH751946.1_Eimeria_ferrisi                        42.42%    passed     91.87%
+ 112  MH751947.1_Eimeria_ferrisi                        28.63%    passed     98.90%
+ 113  MH751948.1_Eimeria_vermiformis                    29.27%    passed     97.51%
+ 114  MH751949.1_Eimeria_ferrisi                        28.85%    passed     99.41%
+ 115  MH751950.1_Eimeria_ferrisi                        37.15%    passed     96.46%
+ 116  MH751951.1_Eimeria_vermiformis                    43.59%    passed     90.40%
+ 117  MH751952.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 118  MH751953.1_Eimeria_ferrisi                        43.21%    passed     94.47%
+ 119  MH751954.1_Eimeria_ferrisi                        40.61%    passed     96.91%
+ 120  MH751955.1_Eimeria_ferrisi                        29.96%    passed     98.49%
+ 121  MH751956.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 122  MH751957.1_Eimeria_vermiformis                    27.78%    passed     95.31%
+ 123  MH751958.1_Eimeria_ferrisi                        50.19%    passed     93.11%
+ 124  MH751959.1_Eimeria_ferrisi                        29.11%    passed     99.73%
+ 125  MH751960.1_Eimeria_falciformis                    28.21%    passed     99.73%
+ 126  MH751961.1_Eimeria_ferrisi                        43.16%    passed     92.47%
+ 127  MH751962.1_Eimeria_ferrisi                        30.65%    passed     99.78%
+ 128  MH751963.1_Eimeria_ferrisi                        27.14%    passed     99.34%
+ 129  MH751964.1_Eimeria_falciformis                    47.10%    passed     74.64%
+ 130  MH751965.1_Eimeria_ferrisi                        32.09%    passed     99.61%
+ 131  MH751966.1_Eimeria_ferrisi                        28.58%    passed     99.81%
+ 132  MH751967.1_Eimeria_ferrisi                        46.94%    passed     84.49%
+ 133  MH751968.1_Eimeria_ferrisi                        43.27%    passed     92.95%
+ 134  MH751969.1_Eimeria_ferrisi                        43.75%    passed     86.12%
+ 135  MH751970.1_Eimeria_ferrisi                        27.94%    passed     98.55%
+ 136  MH751971.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 137  MH751972.1_Eimeria_ferrisi                        37.57%    passed     97.74%
+ 138  MH751973.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 139  MH751974.1_Eimeria_vermiformis                    43.21%    passed     90.45%
+ 140  MH751975.1_Eimeria_falciformis                    48.54%    passed     91.28%
+ 141  MH751976.1_Eimeria_falciformis                    55.46%    passed     93.10%
+ 142  MH751977.1_Eimeria_vermiformis                    31.56%    passed     98.61%
+ 143  MH751978.1_Eimeria_falciformis                    27.78%    passed     97.89%
+ 144  MH751979.1_Eimeria_ferrisi                        26.13%    passed     99.14%
+ 145  MH751980.1_Eimeria_falciformis                    28.15%    passed     98.29%
+ 146  MH751981.1_Eimeria_falciformis                    30.60%    passed     96.01%
+ 147  MH751982.1_Eimeria_ferrisi                        28.85%    passed     99.41%
+ 148  MH751983.1_Eimeria_ferrisi                        46.83%    passed     77.11%
+ 149  MH751984.1_Eimeria_ferrisi                        28.37%    passed     98.64%
+ 150  MH751985.1_Eimeria_ferrisi                        27.89%    passed     99.22%
+ 151  MH751986.1_Eimeria_ferrisi                        29.22%    passed     99.46%
+ 152  MH751987.1_Eimeria_ferrisi                        30.07%    passed     99.95%
+ 153  MH751988.1_Eimeria_ferrisi                        30.55%    passed     99.41%
+ 154  MH751989.1_Eimeria_ferrisi                        28.05%    passed     98.29%
+ 155  MH751990.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 156  MH751991.1_Eimeria_ferrisi                        29.11%    passed     99.54%
+ 157  MH751992.1_Eimeria_ferrisi                        43.16%    passed     93.96%
+ 158  MH751993.1_Eimeria_ferrisi                        29.27%    passed     99.22%
+ 159  MH751994.1_Eimeria_ferrisi                        36.08%    passed     99.97%
+ 160  MH751995.1_Eimeria_ferrisi                        29.27%    passed     99.22%
+ 161  MH751996.1_Eimeria_ferrisi                        28.85%    passed     99.57%
+ 162  MH751997.1_Eimeria_ferrisi                        36.56%    passed     98.77%
+ 163  MH751998.1_Eimeria_falciformis                    41.35%    passed     95.88%
+ 164  MH751999.1_Eimeria_ferrisi                        47.42%    passed     76.19%
+ 165  MH752000.1_Eimeria_ferrisi                        26.24%    passed     98.45%
+ 166  MH752001.1_Eimeria_ferrisi                        43.21%    passed     93.00%
+ 167  MH752002.1_Eimeria_ferrisi                        59.66%    passed     90.09%
+ 168  MH752003.1_Eimeria_vermiformis                    28.95%    passed     99.03%
+ 169  MH752004.1_Eimeria_ferrisi                        26.61%    passed     99.44%
+ 170  MH752005.1_Eimeria_ferrisi                        25.92%    passed     98.93%
+ 171  MH752006.1_Eimeria_ferrisi                        26.18%    passed     99.04%
+ 172  MH752007.1_Eimeria_ferrisi                        46.94%    passed     86.40%
+ 173  MH752008.1_Eimeria_ferrisi                        27.04%    passed     99.28%
+ 174  MH752009.1_Eimeria_ferrisi                        25.81%    passed     98.99%
+ 175  MH752010.1_Eimeria_ferrisi                        39.70%    passed     96.02%
+ 176  MH752011.1_Eimeria_falciformis                    25.71%    passed     99.38%
+ 177  MH752012.1_Eimeria_falciformis                    25.60%    passed     99.71%
+ 178  MH752013.1_Eimeria_ferrisi                        25.23%    passed     99.56%
+ 179  MH752014.1_Eimeria_ferrisi                        25.23%    passed     99.56%
+ 180  MH752015.1_Eimeria_ferrisi                        25.49%    passed     99.11%
+ 181  MH752016.1_Eimeria_falciformis                    31.56%    passed     99.01%
+ 182  MH752017.1_Eimeria_falciformis                    28.53%    passed     99.57%
+ 183  MH752018.1_Eimeria_falciformis                    28.63%    passed     99.25%
+ 184  MH752019.1_Eimeria_falciformis                    28.15%    passed     99.33%
+ 185  MH752020.1_Eimeria_ferrisi                        71.26%    passed     98.97%
+ 186  MH752021.1_Eimeria_ferrisi                        55.30%    passed     61.19%
+ 187  MH752022.1_Eimeria_ferrisi                        29.00%    passed     92.43%
+ 188  MH752023.1_Eimeria_ferrisi                        60.99%    passed     53.12%
+ 189  MH752024.1_Eimeria_ferrisi                        35.39%    passed     98.36%
+ 190  MH752025.1_Eimeria_ferrisi                        27.14%    passed     92.24%
+ 191  MH752026.1_Eimeria_ferrisi                        52.69%    passed     68.66%
+ 192  MH752027.1_Eimeria_ferrisi                        28.10%    passed     92.38%
+ 193  MH752028.1_Eimeria_ferrisi                        60.67%    passed     63.19%
+ 194  MH752029.1_Eimeria_ferrisi                        43.37%    passed     92.01%
+ 195  MH752030.1_Eimeria_vermiformis                    32.46%    passed     98.29%
+ 196  MH752031.1_Eimeria_ferrisi                        50.40%    passed     68.95%
+ 197  MH752032.1_Eimeria_ferrisi                        42.68%    passed     97.14%
+ 198  MH752033.1_Eimeria_ferrisi                        33.10%    passed     98.23%
+ 199  MH752034.1_Eimeria_ferrisi                        31.72%    passed     99.90%
+ 200  MH752035.1_Eimeria_ferrisi                        37.36%    passed     99.41%
+ 201  MH752036.1_Eimeria_ferrisi                        45.13%    passed     96.69%
+ 202  Lab_single-multi-amplicon_ASV1                    85.95%    passed     91.55%
+ 203  Lab_single-multi-amplicon_ASV2                    85.95%    passed     95.54%
+ 204  Lab_single-multi-amplicon_ASV3                    85.95%    passed     97.19%
+ 205  Lab_single-amplicon_ASV4                          85.95%    passed     96.01%
+ 206  Lab_single-amplicon_ASV5                          86.80%    passed     90.97%
+ 207  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_1    83.18%    passed     70.17%
+ 208  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_2    83.18%    passed     64.79%
+ 209  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_3    83.18%    passed     76.24%
+ 210  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_4    83.18%    passed     71.42%
+ 211  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_5    83.18%    passed     71.40%
+ 212  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_1    83.34%    passed     66.59%
+ 213  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_2    83.34%    passed     72.38%
+ 214  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_3    83.34%    passed     73.91%
+ 215  MarkN_10_F.Euk360_CR_21_R_ASV_1                   82.38%    passed     55.84%
+ 216  MarkN_10_F.Euk360_CR_21_R_ASV_2                   82.38%    passed     63.92%
+ 217  MarkN_10_F.Euk360_CR_21_R_ASV_3                   82.38%    passed     63.92%
+ 218  MarkN_10_F.Euk360_CR_21_R_ASV_4                   82.38%    passed     57.65%
+ 219  MarkN_10_F.Euk360_CR_21_R_ASV_5                   82.38%    passed     61.15%
+ 220  MarkN_10_F.Euk360_CR_21_R_ASV_6                   82.38%    passed     69.34%
+ 221  MarkN_10_F.Euk360_CR_21_R_ASV_7                   82.38%    passed     61.32%
+ 222  MarkN_10_F.Proti440R_28_R_ASV_1                   82.49%    passed     63.60%
+ 223  MarkN_10_F.Proti440R_28_R_ASV_2                   82.49%    passed     61.31%
+ 224  MarkN_10_F.Proti440R_28_R_ASV_3                   82.49%    passed     70.55%
+ 225  MarkN_10_F.Proti440R_28_R_ASV_4                   82.49%    passed     58.11%
+ 226  MarkN_10_F.Proti440R_28_R_ASV_5                   82.49%    passed     66.45%
+ 227  Prot1702_32_F.wang1624CR6S_16_R_ASV_1             81.69%    passed     83.13%
+ 228  Prot1702_32_F.wang1624CR6S_16_R_ASV_2             81.69%    passed     82.28%
+ 229  wang1141_13_F.Nem_0425_6_3_R_ASV_1                85.95%    passed     91.55%
+ 230  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_1              82.49%    passed     34.73%
+ 231  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_2              82.49%    passed     37.27%
+ 232  Proti15_25_F.Proti440R_28_R_ASV_1                 81.75%    passed     61.30%
+ 233  Proti15_25_F.Proti440R_28_R_ASV_2                 81.75%    passed     66.59%
+WARNING: 52 sequences contain more than 50% gaps/ambiguity
+****  TOTAL                                             40.55%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+Reading tree tmp/Eimeria18S_wild_lab_ref.fasta.contree ...
+un-rooted tree with 233 taxa and 460 branches
+Computing site concordance factor...
+0.007 sec
+Tree with concordance factors written to siteCF.cf.tree
+Annotated tree (best viewed in FigTree) written to siteCF.cf.tree.nex
+Tree with branch IDs written to siteCF.cf.branch
+Concordance factors per branch printed to siteCF.cf.stat
+Date and Time: Tue Nov  8 09:48:34 2022
