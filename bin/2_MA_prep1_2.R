@@ -131,7 +131,7 @@ saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ##J
 
 ##Start from here after the taxonomic annotation
 MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ###Test run
-
+#
 ##To phyloseq
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
 #
@@ -205,11 +205,11 @@ PS <- prune_taxa(Keep, PS)
 saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ_1_2.Rds") ###Results from preliminary analysis (Sample data)
 #
 sum(otu_table(PS)) ##Total denoised reads
-#
+
 ##Primer data
 PS.l <- TMPtoPhyloseq(MA, colnames(MA),  multi2Single=FALSE) ##It work
 ## adding metadata, removing contaminants and controls
-neg <- sample_names(subset_samples(PS.l[[1]], grepl("NE",rownames(PS.l[[1]]@otu_table))))
+neg <- sample_names(subset_samples(PS.l[[1]], !grepl("NE",rownames(PS.l[[1]]@otu_table))))
 for (i in 1:48) {
     try(PS.l[[i]] <- prune_taxa(Keep, PS.l[[i]]), silent=TRUE)
     try(PS.l[[i]] <- prune_samples(neg, PS.l[[i]]), silent=TRUE)
@@ -218,4 +218,6 @@ for (i in 1:48) {
     try(PS.l[[i]]@sam_data <- PS@sam_data, silent=TRUE)
 }
 ###For primer analysis (Victor)
-saveRDS(PS.l, file="/SAN/Susanas_den/HMHZ/results/2020Aug/PhyloSeqList_HMHZ_1_2.Rds") ###Full run Pool 1
+saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_1_2.Rds") ###Full run Pool 2
+
+rownames(PS.l[[1]]@otu_table)

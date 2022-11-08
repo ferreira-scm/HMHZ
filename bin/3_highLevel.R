@@ -80,61 +80,93 @@ ggsave("fig/Composition_barplot.png", com_g, height=7, width=10, dpi=400)
 
 #####################################################################
 ## Now the alignment
-## I also want to store the amplicon info to know which ASV's came from where
-EimASV <- DNAStringSet(rownames(Eim@tax_table))
-
-names(EimASV) <- names18S
-writeFasta(EimASV, "tmp/EimeriaASV.fasta")
-EimASV <- EimASV[which(!grepl("D3A", names(EimASV)))]
-EimASV <- EimASV[which(!grepl("NLF", names(EimASV)))]
-writeFasta(EimASV, "tmp/Eimeria18S.fasta")
+## Eimeria from 18S
+EimASV <- readFasta("tmp/Eimeria18S.fasta")
+name_EimASV <- EimASV@id
+EimASV <- sread(EimASV)
+names(EimASV) <- name_EimASV
 
 EimSeqs <- readFasta("../LabMicrobiome/tmp/Eimeria_seqs.fa")
-
 name_seqs <- EimSeqs@id
 EimSeqs <- sread(EimSeqs)
 names(EimSeqs) <- name_seqs
 allEim <- c(EimSeqs, EimASV)
 
+names(EimSeqs)
 
-# I want to align only with wild Eimeiras
+allEim
+
+Eim.fg <- readFasta("../LabMicrobiome/tmp/Eimeria_falciformis_NODE_3780_18S.fa")
+Eimfg <- sread(Eim.fg)
+names(Eimfg)  <- "Eimeira_falciformis_NODE3780"
+Eimfg
+
+Eim.vg <- readFasta("../LabMicrobiome/tmp/Eimeria_vermiformis_NODE_17893_18S_plus.fa")
+Eimvg <- sread(Eim.vg)
+names(Eimvg)  <- "Eimeira_vermiformis_NODE17893"
+Eimvg
+
+FinalEimeria <- c(Eimfg, Eimvg, EimSeqs, EimASV)
+
+#### I want to align only with wild Eimeiras
 refEim <- readDNAStringSet("/SAN/Susanas_den/AmpMarkers/wildEimeria18S/Eim_ref.fa")  
 names(refEim) <- gsub("(\\s)", "_", names(refEim))
 Wild.Eim <- c(EimASV, refEim)
-
 # ops forgout the outgroup
 T.out <- c("JQ993669", "JQ993670", "JQ993671")
 T.out <- read.GenBank(T.out)
 T.out.ID <- paste(names(T.out), attr(T.out, "species"), sep="_") 
 T.O <- T.out %>% as.character %>% lapply(.,paste0,collapse="") %>% unlist %>% DNAStringSet
 names(T.O) <- T.out.ID
-
 # and I want the lab EImerias too
 LabASV <- readFasta("../LabMicrobiome/tmp/Eimeria_lab_ASV.fa")
 nmLab <- LabASV@id
+nmLab
 LabASV <- sread(LabASV)
 names(LabASV) <- nmLab
-
 #Lab <- LabASV@sread
 WildEim <- c(Wild.Eim, T.O, LabASV)
-Wild.align <- AlignSeqs(WildEim, anchor=NA, iterations=20, refinements=20, processors=90)
-Wild.align <- AdjustAlignment(Wild.align)
-
+#Wild.align <- AlignSeqs(WildEim, anchor=NA, iterations=20, refinements=20, processors=90)
+#Wild.align <- AdjustAlignment(Wild.align)
 names(allEim[c("ASV1", "ASV2", "ASV3", "ASV4", "ASV5")]) <- nmLab
+########################################################################
 
+library(DECIPHER)
+allEim <- OrientNucleotides(allEim)
+
+set.seed(12345)
 Eim.align <- AlignSeqs(allEim, anchor=NA, iterations=20, refinements=20, processors=90)
-Eim.align <-AdjustAlignment(Eim.align)
-#names(Eim.align)[c(1:205)] <- name_seqs
+
+Eim.align <- AdjustAlignment(Eim.align)
 
 writeFasta(Eim.align, "tmp/Eimeria18S_wild_lab_ref.fasta")
-writeFasta(allEim, "tmp/Eimeria18S_wild_lab_ref_notAligned.fasta")
-writeFasta(Wild.align, "tmp/Eimeria18S_wild.fasta")
+#writeFasta(allEim, "tmp/Eimeria18S_wild_lab_ref_notAligned.fasta")
+#writeFasta(Wild.align, "tmp/Eimeria18S_wild.fasta")
+writeFasta(allEim, "tmp/Eimeria18S.fasta")
+
+## removing long branches
+#run_treeshrink.py -t tmp/Eimeria18S_wild_lab_ref.fasta.contree -m per-gene --force
+
+#longB <- read.table("tmp/Eimeria18S_wild_lab_ref.fasta_treeshrink/output.txt", header=TRUE, sep="\t")
+
+#longB <- names(longB)[1:6] 
+
+#FinalEimeria.lb <- FinalEimeria[-which(names(FinalEimeria)%in%longB)]
+
+#Eim.alignlb <- AlignSeqs(FinalEimeria.lb, anchor=NA, iterations=20, refinements=20, processors=90)
+
+#Eim.alignlb <- AdjustAlignment(Eim.alignlb)
+
+#writeFasta(Eim.align, "tmp/Eimeria18S_lb.fasta")
 
 # and this is how I did the tree outside R
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s tmp/Eimeria18S_wild_lab_ref.fasta -m MFP
-#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -redo 
 
-#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild.fasta -m TN+F+R2 -B 5000 -redo 
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -redo
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild.fasta -m TN+F+R2 -B 5000 -redo
+
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_lb.fasta -m TN+F+R2 -B 5000
+
 ### Now we need  to analyse which ASV's are likely from the same Eimeira.
 ## ASV's within the same sample from different amplicons that correlate well.
 

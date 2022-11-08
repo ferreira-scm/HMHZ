@@ -15,7 +15,6 @@ saveRDS(PS, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqCombi_HMHZ
 rm(PS1)
 rm(PS2)
 rm(MA)
-rm(MAsample)
 rm(PS.l)
 rm(PS3)
 rm(PS4)
@@ -23,11 +22,10 @@ rm(PSa)
 rm(PSb)
 
 ##Merge PS.list
-
-PS.l.1.1<- readRDS(file="/SAN/Susanas_den/HMHZ/results/2020May/PhyloSeqList_HMHZ_1_1.Rds")
-PS.l.1.2<- readRDS(file="/SAN/Susanas_den/HMHZ/results/2020May/PhyloSeqList_HMHZ_1_2.Rds")
-PS.l.2.1<- readRDS(file="/SAN/Susanas_den/HMHZ/results/2020May/PhyloSeqList_HMHZ_2_1.Rds")
-PS.l.2.2<- readRDS(file="/SAN/Susanas_den/HMHZ/results/2020May/PhyloSeqList_HMHZ_2_2.Rds")
+PS.l.1.1<- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_1_1.Rds")
+PS.l.1.2<- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_1_2.Rds")
+PS.l.2.1<- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_2_1.Rds")
+PS.l.2.2<- readRDS(file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_2_2.Rds")
 
 ###Eliminate the empty primers first and then merge the phyloseq lists... empty list make the next function bug
 PS.l.1.1[sapply(PS.l.1.1, is.null)]<- NULL
@@ -66,6 +64,7 @@ rm(PS.l.2.1)
 rm(PS.l.2.2)
 rm(along)
 
+PS.l[[1]]@sam_data$Sex[PS.l[[1]]@sam_data$Mouse_ID%in%c("AA_0462", "AA_0447")]
 
 ########################################### New taxonomic annotation, outside MA
 

@@ -41,3 +41,5 @@ ma.meta <- ma.meta[,tokeep]
 
 sota <- merge(sota, ma.meta, by="Mouse_ID", all=TRUE)
 rownames(sota) <- make.unique(sota$Mouse_ID) ##Works when MA contains single run data
+
+rownames(sota)

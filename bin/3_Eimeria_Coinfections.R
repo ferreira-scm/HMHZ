@@ -1,7 +1,6 @@
-# high level analysis of the "wild microbiome"
+# Eimeria species
 
 source("bin/Pre_Functions.R")
-# high level analysis of the "wild microbiome"
 
 eim_sp <- psmelt(Eim18_sp)
 eim <- psmelt(Eim.TSS18)
@@ -10,8 +9,9 @@ eim2 <- psmelt(Eim18)
 Eim.m_sp
 
 Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
-
-Eim.m0.sp <- tax_glom(Eim.m0, "genus")
+Eim.m0@tax_table[,6] <- Eim.m0@tax_table[,7]
+Eim.m0.sp <- tax_glom(Eim.m0, "species")
+Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
 
 Eim.m1 <- phyloseq::prune_samples(sample_sums(Eim.m)>0, Eim.m)
 Eim.m1 <- tax_glom(Eim.m1, "genus")
@@ -48,17 +48,17 @@ EH_sort18==levels(eim$Sample)
 EH_sort182==levels(eim_sp$Sample)
 EH_sort==levels(eim.m$Sample)
 
-nb.cols <- 19
+nb.cols <- 9
 mycolors <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
 
-eim$species <- as.factor(eim$species)
+eim$genus <- as.factor(eim$genus)
+eim.m$genus <- as.factor(eim.m$genus)
 
-eim.m$species <- as.factor(eim.m$species)
+mycolors2 <- mycolors[c(1, 2, 4:9)]
 
-mycolors2 <- mycolors[c(1, 2, 4:9, 11:19)]
 mycolors2
 
-com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
+com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors2)+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
@@ -72,10 +72,12 @@ com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
       panel.grid.minor = element_blank(),
       strip.background = element_rect(colour="black", fill="white"),
       legend.text = element_text(colour = 'black', size = 14, face = 'italic'),
-      legend.position="none")
+      legend.position="top")
 #    coord_flip()
 
-com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
+com_plot_Amp
+
+com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=c("forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
     labs(fill="Eimeria ASV species", x="Sample", y="Proportion within all ASVs")+
@@ -95,7 +97,28 @@ com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
 
 com_plot
 
+levels(eim$species)
+
 Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=species))+
+    geom_bar(position="stack", stat="identity")+
+    scale_fill_manual(values=c("pink", "forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
+    labs(fill="Eimeria", x="Sample", y="Proportion within all ASVs")+
+    theme_bw(base_size=14)+
+    theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      legend.key = element_blank(),
+#      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      strip.background = element_rect(colour="black", fill="white"),
+      legend.text = element_text(colour = 'black', size = 14, face = 'italic'),
+      legend.position="top")
+#    coord_flip()
+
+Com.m.all
+
+Com.m.all_amp <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors)+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
@@ -109,25 +132,26 @@ Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=species))+
       panel.grid.minor = element_blank(),
       strip.background = element_rect(colour="black", fill="white"),
       legend.text = element_text(colour = 'black', size = 14, face = 'italic'),
-      legend.position="none")
+      legend.position="top")
 #    coord_flip()
 
-Com.m.all
+
+Com.m.all_amp
 
 library(cowplot)
 
 Comp_amplicon <- plot_grid(com_plot, com_plot_Amp, ncol=1, align="v", rel_heights=c(1, 1))
-ggsave("fig/Eimeria_Amplicon_composition.pdf", Comp_amplicon, height=12, width=10, dpi=400)
-ggsave("fig/Eimeria_Amplicon_composition.png", Comp_amplicon, height=12, width=10, dpi=400)
 
+ggsave("fig/Eimeria_Amplicon_composition.pdf", Comp_amplicon, height=9, width=14, dpi=400)
 
+ggsave("fig/Eimeria_Amplicon_composition.png", Comp_amplicon, height=9, width=14, dpi=200)
 
 library(viridis)
 library(wesanderson)
 library(scales)
 
 pal <- wes_palette("Zissou1", 500, type = "continuous")
-Eim_heat <-ggplot(eim_sp, aes(Sample, genus, fill=Abundance))+
+Eim_heat <-ggplot(eim_sp, aes(Sample, species, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within all ASVs")+
     scale_fill_gradientn(colours = pal, values=rescale(c(0, 0.25, 1)))+
@@ -146,10 +170,14 @@ Eim_heat <-ggplot(eim_sp, aes(Sample, genus, fill=Abundance))+
 #    scale_fill_gradient2(low="#00AFBB", mid="#E7B800", high="#FC4E07", midpoint=0.5)
 #    scale_fill_viridis(discrete=FALSE)
 
-Eim_heat_all <- ggplot(eim.m1, aes(Sample, genus, fill=Abundance))+
+Eim_heat
+
+eim.m0
+
+Eim_heat_all <- ggplot(eim.m0, aes(Sample, species, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
-    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.5,1)),)+
+    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.25,1)),)+
     theme_bw(base_size=14)+
       theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -162,7 +190,9 @@ Eim_heat_all <- ggplot(eim.m1, aes(Sample, genus, fill=Abundance))+
       panel.grid.minor = element_blank(),
       legend.position="bottom")
 
-ggplot(eim.m0, aes(Sample, genus, fill=Abundance))+
+Eim_heat_all
+
+ggplot(eim.m1, aes(Sample, genus, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
     scale_fill_gradientn(colours = pal, values=rescale(c(0,0.05,1)),)+
@@ -182,19 +212,14 @@ ggplot(eim.m0, aes(Sample, genus, fill=Abundance))+
 #    scale_fill_gradient2(low="#00AFBB", mid="#E7B800", high="#FC4E07", midpoint=0.5)
 #    scale_fill_viridis(discrete=FALSE)
 
-eim.m$Abundance[eim.m$genus=="28S"]
-
-Eim_heat
-
-Eim_heat_all
-
-summary(eim.m$Abundance)
+levels(as.factor(eim.m$species))
 
 Sp.m <- ggplot(eim.m, aes(x=genus, y=Abundance, fill=species))+
     geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=mycolors)+
+    scale_fill_manual(values=c("pink","forestgreen", "dodgerblue4", "darkgray", "darkred"))+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
     theme_bw(base_size=14)+
+    guides(fill=guide_legend(ncol=4))+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
 #      axis.text.x=element_blank(),
@@ -203,141 +228,67 @@ Sp.m <- ggplot(eim.m, aes(x=genus, y=Abundance, fill=species))+
 #      panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       strip.background = element_rect(colour="black", fill="white"),
-      legend.text = element_text(colour = 'black', size = 14, face = 'italic'),
-      legend.position="bottom")+
+      legend.text = element_text(colour = 'black', size = 10, face = 'italic'),
+      legend.position="none")+
     coord_flip()
 
-M.dis <- plot_grid(plot_grid(Com.m.all, Eim_heat_all, ncol=1, align="v", rel_heights=c(1, 1)), Sp.m, ncol=1)
+Sp.m
 
-ggsave("fig/Eimeria_18S_28S_amplicons.pdf", M.dis, height=10, width=12, dpi=400)
-ggsave("fig/Eimeria_18S_28S_amplicons.png", M.dis, height=10, width=12, dpi=400)
+M.dis <- plot_grid(plot_grid(Com.m.all, Eim_heat_all, ncol=1, align="v", rel_heights=c(1, 1)), Sp.m, ncol=1, rel_heights=c(1, 0.6))
 
+M.dis
 
-#####
-EimRA <- subset_taxa(fPS.TSS, genus%in%"Eimeria")
-
-EimRA <- subset_samples(EimRA, Mouse_ID%in%EH_sort182)
-
-EimRA <- tax_glom(EimRA, "genus")
-
-# sanity check
-levels(as.factor(eimRA$Mouse_ID))==EH_sort182 # ups, we need to reorder
-eimRA <- psmelt(EimRA)
-
-eimRA$Mouse_ID <- factor(eimRA$Mouse_ID, levels=EH_sort182)
-
-RA_EIM <- ggplot(eimRA, aes(x=Mouse_ID, y=Abundance))+
-    geom_point(shape=21, colour="gray", fill="#c51b8a", size=3, alpha=0.8)+
-    geom_bar(position="stack", stat="identity", fill="#dd1c77", alpha=0.2)+
-#    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
-    labs(x="Sample", y="Proportion within total ASVs")+
-    scale_y_continuous(limits=c(0,0.3))+
-    theme_bw(base_size=14)+
-    theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
-      axis.title.x=element_blank(),
-      axis.text.x=element_blank(),
-      axis.ticks.x=element_blank(),
-      legend.key = element_blank(),
-#      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      strip.background = element_rect(colour="black", fill="white"))
-
-RA_EIM
-
-library(cowplot)
-
-Eim_species_comp <- plot_grid(com_plot, Eim_heat, RA_EIM, ncol=1, align="v", rel_heights=c(0.9,0.6,0.6))
-
-Eim_species_comp
-
-Eim_species_comp23 <- plot_grid(Eim_heat, RA_EIM, ncol=1, align="v", rel_heights=c(1, 1))
-
-Eim_species_comp23
-
-ggsave("fig/Eimeria_heat_composition.pdf", Eim_species_comp, height=9, width=10, dpi=400)
-ggsave("fig/Eimeria_heat_composition.png", Eim_species_comp, height=9, width=10, dpi=400)
-
-ggsave("fig/Eimeria_heat_composition23.pdf", Eim_species_comp23, height=6, width=8, dpi=600)
-ggsave("fig/Eimeria_heat_composition23.png", Eim_species_comp23, height=6, width=8, dpi=600)
-
-ggsave("fig/Eimeria_heat_composition1.png", com_plot, height=4, width=8, dpi=600)
-ggsave("fig/Eimeria_heat_composition2.png", Eim_heat, height=4, width=8, dpi=600)
-ggsave("fig/Eimeria_heat_composition3.png", RA_EIM, height=4, width=8, dpi=600)
+ggsave("fig/Eimeria_18S_28S_amplicons.pdf", M.dis, height=9, width=14, dpi=400)
+ggsave("fig/Eimeria_18S_28S_amplicons.png", M.dis, height=9, width=14, dpi=400)
 
 
-ggsave("fig/Eimeria_heat_composition1.pdf", com_plot, height=4, width=8, dpi=600)
-ggsave("fig/Eimeria_heat_composition2.pdf", Eim_heat, height=4, width=8, dpi=600)
-ggsave("fig/Eimeria_heat_composition3.pdf", RA_EIM, height=4, width=8, dpi=600)
-
-ggsave("fig/Eimeria_heat_composition_species.pdf", Eim_heat_sp, height=6, width=10, dpi=600)
-
-phyloseq::plot_bar(eim.TSS, fill="genus")+
-    geom_bar(stat="identity", position="stack")+
-    scale_fill_manual(values=c("white", "darkgray", "forestgreen", "dodgerblue4", "deepskyblue", "darksalmon", "darkred"))
-
-
-#sample_data(Eim.TSS18)$Mouse_ID <- factor(sample_data(Eim.TSS18)$Mouse_ID, levels=EH_sort182)
-#levels(as.factor(sample_data(Eim.TSS18)$Mouse_ID))==EH_sort182
 #####################################################################
 # Ok, let's try and figure it out what is happening with these co-infections
 # removing empty samples
 
-Eim.TSS18
+Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim18_sp)>0, Eim18_sp)
 
-Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim.TSS18)>0, Eim.TSS18)
-
-Eim.ra0 <- tax_glom(Eim.TSS18, "genus")
-
-
-Fer <- subset_taxa(Eim.ra0, genus %in% "ferrisi")
+Fer <- subset_taxa(Eim.ra0, species %in% "ferrisi")
 sample_data(Eim.ra0)$Ferrisi <- sample_sums(Fer)
 
-Fal <- subset_taxa(Eim.ra0, genus %in% "falciformis")
+Fal <- subset_taxa(Eim.ra0, species %in% "falciformis")
 sample_data(Eim.ra0)$Falciformis <- sample_sums(Fal)
 
-Ver <- subset_taxa(Eim.ra0, genus %in% "vermiformis")
+Ver <- subset_taxa(Eim.ra0, species %in% "vermiformis")
 sample_data(Eim.ra0)$Vermiformis <- sample_sums(Ver)
 
-Sp <- subset_taxa(Eim.ra0, genus %in% "sp.")
+Sp <- subset_taxa(Eim.ra0, species %in% "Sp")
 sample_data(Eim.ra0)$Sp <- sample_sums(Sp)
 
 sample_data(Eim.ra0)$Sp
 
 #Eimra0 <- subset_samples(Eim.ra0, !BMI=="NA")
 
-sdata=sample_data(Eim.ra0)
-dis=phyloseq::distance((Eim.ra0), method="bray", type="samples")
+Eimdf <- sample_data(Eim.ra0)
+Eimdf$Locality <- as.factor(Eimdf$Locality)
+Eimdf <- as.data.frame(Eimdf)
+class(Eimdf) <- "data.frame"
 
-permaPS=adonis2(dis~
-            sdata$HI+
-            sdata$Locality+
-            sdata$Year,
-        permutations = 1000, method = "bray")
+dis=phyloseq::distance(Eim.ra0, method="bray", type="samples")
+
+dis
+
+#permaPS=adonis2(dis~
+#            Eimdf$HI+
+#            Eimdf$Locality+
+#            Eimdf$Year,
+#            permutations = 1000, method = "bray")
 
 permaPS
 
+#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0))
+#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0))
+#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Sp>0))
+#chisq.test(table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0))
 
-Eimdf <- (sample_data(Eim.ra0))
-
-chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0))
-
-chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0))
-
-chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Sp>0))
-
-chisq.test(table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0))
-
-table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0)
-
-table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0)
-
-table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0)
-
-Eimdf$Locality <- as.factor(Eimdf$Locality)
-
-Eimdf <- as.data.frame(Eimdf)
-
-class(Eimdf) <- "data.frame"
+#table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0)
+#table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0)
+#table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0)
 
 library(lme4)
 
@@ -350,167 +301,130 @@ Eimdf$fer[Eimdf$Ferrisi==0] <- 0
 Eimdf$ver[Eimdf$Vermiformis>0] <- 1
 Eimdf$ver[Eimdf$Vermiformis==0] <- 0
 
+Eimdf$sp[Eimdf$Sp>0] <- 1
+Eimdf$sp[Eimdf$Sp==0] <- 0
+
+
 ### new variable with amplicon
+falModel <- glmer(fal~ver*fer*sp + (1|Locality), family=binomial(), data=Eimdf)
 
-Eimdf$qPCRsummary
+ferModel <- glmer(fer~ver*fal*sp + (1|Locality), family=binomial(), data=Eimdf)
 
-FalModel <- glmer(fal~ver*fer + (1|Locality), family=binomial(), data=Eimdf)
+spModel <- glmer(sp~fer*fal*ver + (1|Locality), family=binomial(), data=Eimdf)
 
-summary(FalModel)
+verModel <- glmer(ver~fer*fal*sp + (1|Locality), family=binomial(), data=Eimdf)
 
-summary(FerModel)
-
-summary(VerModel)
-
-FerModel <- glmer(fer~ver*fal*Sp + (1|Locality), family=binomial(), data=Eimdf)
-
-Eimdf$Sp
-
-SpModel <- glmer(Sp~fer*fal*ver + (1|Locality), family=binomial(), data=Eimdf)
-
-summary(SpModel)
-
-VerModel <- glmer(ver~fer*fal + (1|Locality), family=binomial(), data=Eimdf)
-
-sink("fig/Falciformis_infection.txt")
-summary(FalModel)
-sink()
+summary(falModel)
+summary(ferModel)
+summary(verModel)
+summary(spModel)
 
 library("effects")
 
-V.plot <- plot(effect("ver", FalModel),
-     ylab="Probability of E. falciformis",
-     xlab="E. vermiformis infection",
-     main="")
+#F.plot <- plot(effect("ver", ferModel),
+#     ylab="Probability of E. falciformis",
+#     xlab="E. vermiformis infection",
+#     main="")
 
-F.plot <- plot(effect("ver", FerModel),
-     ylab="Probability of E. falciformis",
-     xlab="E. vermiformis infection",
-     main="")
+#png("fig/Vermiformis_effect.png", height=4, width=4, units="in", res=400)
+#V.plot
+#dev.off()
 
+#png("fig/Falciformis_effect.png", height=4, width=4, units="in", res=400)
+#Int
+#dev.off()
 
-F.plot <- plot(effect("ver", FerModel),
-     ylab="Probability of E. falciformis",
-     xlab="E. vermiformis infection",
-     main="")
-
-
-V.plot
-
-F.plot
-
-png("fig/Vermiformis_effect.png", height=4, width=4, units="in", res=400)
-V.plot
-dev.off()
-
-png("fig/Falciformis_effect.png", height=4, width=4, units="in", res=400)
-Int
-dev.off()
-
-
-Int <- plot(effect("ver:fer", FalModel, xlevels=list(fer=0:1)),
-     ylab="Probability E. falciformis +",
-     multiline=TRUE,
-     main="E.falciformis* E.ferrisi")
-
-
-summary(VerModel)
-
-anova(FalModel)
+#Int <- plot(effect("ver:fer", falModel, xlevels=list(fer=0:1)),
+#     ylab="Probability E. falciformis +",
+#     multiline=TRUE,
+#     main="E.falciformis* E.ferrisi")
 
 library(lmerTest)
-
-ranova(FalModel)
+ranova(falModel)
 
 #### quantit
 
 Eimdf$EimeriaTotal <- Eimdf$Falciformis+Eimdf$Vermiformis+Eimdf$Ferrisi + Eimdf$Sp
 
-Eimdfq <- Eimdf[Eimdf$EimeriaTotal>0,]
+Eimdf$EimeriaTotal
 
-nrow(Eimdfq)
+#FalQ <- lmer(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi)*log(1+Sp) + (1|Locality), data=Eimdf)
+
+FalQ <- lmer(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdf)
+
+summary(FalQ)
+
+FerQ <- lmer(Ferrisi~Vermiformis*Falciformis*Sp + (1|Locality), data=Eimdf)
+
+summary(FerQ)
+
+VerQ <- lmer(Vermiformis~Ferrisi*Falciformis*Sp + (1|Locality), data=Eimdf)
+
+SpQ <- lmer(Sp~Ferrisi*Falciformis*Vermiformis + (1|Locality), data=Eimdf)
+
+summary(VerQ)
+
+summary(SpQ)
+
+library(randomForest)
+
+Fal.fit <- randomForest(Falciformis ~ Ferrisi + Vermiformis + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Fal.fit
+varImpPlot(Fal.fit)
+
+
+ImpData <- as.data.frame(importance(Fal.fit))
+ImpData$Var.Names <- row.names(ImpData)
+
+ggplot(ImpData, aes(x=Var.Names, y=`%IncMSE`))+
+    geom_segment(aes(x=Var.Names, xend=Var.Names, y=0, yend=`%IncMSE`), color="skyblue") +
+    geom_point(aes(size = IncNodePurity), color="blue", alpha=0.6) +
+    theme_light() +
+    coord_flip() +
+    theme(
+        legend.position="bottom",
+        panel.grid.major.y = element_blank(),
+        panel.border = element_blank(),
+        axis.ticks.y = element_blank()
+                      )
+
+
+Fer.fit <- randomForest(Ferrisi ~ Falciformis + Vermiformis + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Fer.fit
+varImpPlot(Fer.fit)
+
+Ver.fit <- randomForest(Vermiformis ~ Falciformis + Ferrisi + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Ver.fit
+varImpPlot(Ver.fit)
+
+Sp.fit <- randomForest(Sp ~ Vermiformis+Falciformis + Ferrisi, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Sp.fit
+varImpPlot(Sp.fit)
 
 
 
-FalModel <- glmer(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi) + (1|Locality), data=Eimdfq)
+#FalQ <- glmer.nb(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
+#FalQ <- lmer(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
 
-ranova(FalModel) # not signigicant
+summary(FalQ)
 
-FalModel <- glm(Falciformis~Vermiformis*Ferrisi, data=Eimdfq)
+## terrible, even after transforming or using a NB
+plot(FalQ)
+qqnorm(residuals(FalQ))
+qqline(residuals(FalQ))
 
-FalModelI <- glm(log(1+Falciformis)~log(1+Vermiformis)+log(1+Ferrisi), data=Eimdfq)
-FalModelV <- glm(log(1+Falciformis)~log(1+Ferrisi), data=Eimdfq)
-FalModelF <- glm(log(1+Falciformis)~log(1+Vermiformis), data=Eimdfq)
+library(lmerTest)
+ranova(FalQ) # not signigicant
 
-summary(FalModel)
+FalModel <- glm(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdf)
 
-plot(FalModel) # baaaad, let's try something else
+plot(FalModel) # not too terrible
 
-FalModel <- glm(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi), data=Eimdfq)
-plot(FalModel) # also not good. different distribution?
-
-FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi, data=Eimdfq)
+FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdfq)
 summary(FalModel) # bad deviance too
-plot(FalModel) # ugly! More variables?
-
-FalModel <- glm(log(1+Falciformis)~Vermiformis*Ferrisi, data=Eimdfq)
-
-summary(FalModel) # bad deviance too
-
-plot(FalModel) # ugly! More variables?
-
-names(Eimdf)
-
-table(Eimdfq$qPCRsummary)
-
-Eimdf$qPCRsummary
-
-anova(FalModel)
-
-anova(FalModel, FalModelI)
-anova(FalModel, FalModelF)
-
-
-FerModel <- glmer(I(Ferrisi>0)~I(Vermiformis>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
-
-VerModel <- glmer(I(Vermiformis>0)~I(Ferrisi>0)*I(Falciformis>0) + (1|Locality), family=binomial(), data=Eimdf)
-
-
-
-
-
-
-
-
-
-
-Eim.ra0
+#plot(FalModel) # ugly! More variables?
 
 eim.rao <- psmelt(Eim.ra0)
-
-head(eim.rao)
-
-eim.rao$fer[eim.rao$Ferrisi>0] <- 1
-eim.rao$fer[eim.rao$Ferrisi==0] <- 0
-eim.rao$fer
-
-eim.rao$fal[eim.rao$Falciformis>0] <- 1
-eim.rao$fal[eim.rao$Falciformis==0] <- 0
-eim.rao$fal
-
-eim.rao$ver[eim.rao$Vermiformis>0] <- 1
-eim.rao$ver[eim.rao$Vermiformis==0] <- 0
-eim.rao$ver
-
-eim.rao$EimRich <- eim.rao$fer+eim.rao$ver + eim.rao$fal
-
-eim.rao$EimRich
-
-eim.rao$Falciformis
-
-richModel <- glm(Falciformis~Year + Vermiformis*Ferrisi, data=eim.rao)
-
-summary(richModel)
 
 library(parasiteLoad)
 
@@ -523,46 +437,319 @@ library("fitdistrplus")
 library("optimx")
 library(FSA)
 
+PS.E <- subset_taxa(fPS, genus%in%"Eimeria")
+
+PS.E@sam_data$EimeriaCounts <- sample_sums(PS.E)
+
+cor.test(PS.E@sam_data$EimeriaCounts, PS.E@sam_data$OPG)
+
+plot(PS.E@sam_data$EimeriaCounts, PS.E@sam_data$OPG)
+
+table(PS.E@sam_data$OPG>0, PS.E@sam_data$EimeriaCounts>0)
+
+summary(PS.E@sam_data$OPG>0)
+
+PS.E@sam_data$EimeriaCounts
+
+fPS
+
 #devtools::install_github("alicebalard/parasiteLoad@v2.0")
 
 library(parasiteLoad)
 
-findGoodDist(eimraoo$Abundance,
+findGoodDist(round(Eimdf$EimeriaTotal*10000),
              distribs = c("normal", "negative binomial", "poisson"),
                           distribs2 = c("norm", "nbinom", "pois"))
 
+Eimdf$EimeriaTotalT <- round(Eimdf$EimeriaTotal*10000)
+
+Eimdf$FerrisiT <- round(Eimdf$Ferrisi*10000)
+
+Eimdf$FalciformisT <- round(Eimdf$Falciformis*10000)
+
+Eimdf$VermiformisT <- round(Eimdf$Vermiformis*10000)
+
+Eimdf$SpT <- round(Eimdf$Sp*10000)
 
 # for eimeria (test)
-eimraoo <-eim.rao[eim.rao$Abundance>0,]
 
-eimraoo <- eimraoo[!is.na(eimraoo$Sex),]
+Eimdf$EimeriaTotalT
 
-# gotta round this
-eimraoo$Abundance <- round(eimraoo$Abundance*100000)
+#eimraoo <- eimraoo[!is.na(eimraoo$Sex),]
 
-fitp <- parasiteLoad::analyse(data = eimraoo, response = "Abundance", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+Eimdf[is.na(Eimdf$Sex),]
 
-fitp$H3
+fitp <- parasiteLoad::analyse(data = Eimdf, response = "EimeriaTotalT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+fitp
+
+Eimp <- parasiteLoad::bananaPlot(mod = fitp$H0,
+                                 data = Eimdf,
+                                 response = "EimeriaTotalT",
+                                 hybridIndex=seq(0,1,0.005),
+                                 islog10 = F,
+                                 group = "Sex",
+                                 cols = c("#E69F00","#006A4E"))
 
 
-Eimp <- parasiteLoad::bananaPlot(mod = fitp$H1,
-                                 data = eimraoo,
-                                 response = "Abundance",
+Eimp
+
+Eimdff <-Eimdf.s[which(Eimdf.s$fer==1),]
+
+
+fit.fer <- parasiteLoad::analyse(data = Eimdff, response = "FerrisiT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+Eim.fer <- parasiteLoad::bananaPlot(mod = fit.fer$H0,
+                                 data = Eimdff,
+                                 response = "FerrisiT",
+                                 hybridIndex=seq(0,1,0.005),
+                                 islog10 = F,
+                                 group = "Sex",
+                                 cols = c("#E69F00","#006A4E"))
+
+
+Eim.fer
+
+Eimdffa <-Eimdf.s[which(Eimdf.s$fal==1),]
+fit.fal <- parasiteLoad::analyse(data = Eimdffa, response = "FalciformisT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+Eim.fal <- parasiteLoad::bananaPlot(mod = fit.fal$H1,
+                                 data = Eimdffa,
+                                 response = "FalciformisT",
                                  hybridIndex=seq(0,1,0.005),
                                  islog10 = F,
                                  group = "Sex",
                                  cols = c("#006A4E", "#E69F00"))
 
+Eim.fal
+
+Eimdfv <-Eimdf[which(Eimdf.s$ver==1),]
+
+Eimdfv
+
+fit.ver <- parasiteLoad::analyse(data = Eimdfv, response = "VermiformisT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+Eim.ver <- parasiteLoad::bananaPlot(mod = fit.ver$H1,
+                                 data = Eimdfv,
+                                 response = "VermiformisT",
+                                 hybridIndex=seq(0,1,0.005),
+                                 islog10 = F,
+                                 group = "Sex",
+                                 cols = c("#006A4E", "#E69F00"))
+
+Eim.ver
+
+Eimdfs <-Eimdf[which(Eimdf.s$sp==1),]
+
+fit.sp <- parasiteLoad::analyse(data = Eimdfs, response = "SpT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+
+Eim.sp <- parasiteLoad::bananaPlot(mod = fit.sp$H0,
+                                 data = Eimdfs,
+                                 response = "SpT",
+                                 hybridIndex=seq(0,1,0.005),
+                                 islog10 = F,
+                                 group = "Sex",
+                                 cols = c("#006A4E", "#E69F00"))
+
+Eim.sp
 
 
 
-Reads.plot <- bananaplotNoCI(mod = fitp$H3,
-                                       data = eimraoo,
-                                       response = "Abundance",
-                                       islog10 = F,
-                                       group = "Sex",
-                                       cols = c("#006A4E", "#006A4E"))+
-    labs(tag = "A)")+
-    xlab("Mouse genotype (Hybrid Index)")+
-    ylab("Total read counts")+
-      theme(legend.position ="none")
+library(SpiecEasi)
+library(igraph)
+
+# parallel multicores
+pargs <- list(rep.num=1000, seed=10010, ncores=90, thresh=0.05)
+## mb
+t1 <- Sys.time()
+netEim <- spiec.easi(Eim18, method="mb", pulsar.params=pargs)
+t2 <- Sys.time()
+t2-t1
+
+
+#t1 <- Sys.time()
+#netEimgl <- spiec.easi(Eim18, method="glasso", pulsar.params=pargs)
+#t2 <- Sys.time()
+#t2-t1
+
+saveRDS(netEim, "tmp/netEim.RDS")
+#saveRDS(netEimgl, "tmp/netEimgl.RDS")
+                                        #saveRDS(se.gl10net, "tmp/se.gl10net.RDS")
+
+netEim <- readRDS("tmp/netEim.RDS")
+#netEimgl <- readRDS("tmp/netEimgl.RDS")
+
+
+                                        # looking at lambda path
+netEim$select$stars$summary
+
+# coding nodes
+eim.id=Eim.m18@tax_table[,5]
+
+#### now we improve our visualization
+## I want weighted edges
+
+bm=symBeta(getOptBeta(netEim), mode="maxabs")
+diag(bm) <- 0
+                                        #weights <- Matrix::summary(t(bm))[,3] # includes negative weights
+weights <- (1-Matrix::summary(t(bm))[,3])/2 # or
+
+bm
+
+weights
+
+netE <- adj2igraph(Matrix::drop0(getRefit(netEim)),
+                    edge.attr=list(weight=weights),
+                    vertex.attr = list(name=eim.id))
+
+betaMat=as.matrix(symBeta(getOptBeta(netEim)))
+
+# we want positive edges to be green and negative to be red
+edges <- E(netE)
+edge.colors=c()
+
+for (e.index in 1:length(edges)){
+    adj.nodes=ends(netE, edges[e.index])
+    xindex=which(eim.id==adj.nodes[1])
+    yindex=which(eim.id==adj.nodes[2])
+    beta=betaMat[xindex, yindex]
+    if (beta>0){
+        edge.colors=append(edge.colors, "#1B7837")
+    }else if(beta<0){
+        edge.colors=append(edge.colors, "#762A83")
+    }
+}
+
+E(netE)$color=edge.colors 
+
+V(netE)$species=Eim18@tax_table[,7]
+V(netE)$amplicon<- Eim.m18@tax_table[,6]
+
+E(netE)$weight
+
+# we also want the node color to code for family
+nb.col <- length(levels(as.factor(V(netE)$amplicon)))
+coul <- colorRampPalette(brewer.pal(8, "Accent"))(nb.col)
+
+coul
+
+plot(netE,
+#     layout=layout <- with <- fr(net10b),
+     vertex.label=V(netE)$species,
+#     vertex.size=as.integer(cut(hub.sb, breaks=10))+2,
+     vertex.color=adjustcolor(coul,0.8),
+     edge.width=as.integer(cut(E(netE)$weight, breaks=6))/3,
+     margin=c(0,1,0,0))
+legend(x=-2, y=1, legend=levels(as.factor(V(netE)$amplicon)), col=coul, bty="n",x.intersp=0.25,text.width=0.045, pch=20, pt.cex=1.5)
+
+###### with spring
+
+devtools::install_github("stefpeschel/NetCoMi",
+            dependencies = c("Depends", "Imports", "LinkingTo"),
+            repos = c("https://cloud.r-project.org/",
+            BiocManager::repositories()))
+
+library(NetCoMi)
+library(mixedCCA)
+
+net.s <- netConstruct(Eim18@otu_table,
+                              measure = "spring",
+                              measurePar = list(nlambda=10,
+                                                rep.num=10),
+                              normMethod = "none",
+                              zeroMethod = "none",
+                              sparsMethod = "none",
+                              dissFunc = "signed",
+                              verbose = 3,
+                              seed = 123456)
+
+net.s
+
+net.is <- igraph::graph_from_adjacency_matrix(net.s$adjaMat1, weighted = TRUE, diag=FALSE)
+
+#net.is <- adj2igraph(net.s$adjaMat1, diag=FALSE)
+
+net.is
+
+E(net.is)$weight
+
+net.s$adjaMat[(net.s$adjaMat1>0&net.s$adjaMat1<1)]
+
+net.s$adjaMat1
+
+E(net.is)$weight==net.s$adjaMat[(net.s$adjaMat1>0&net.s$adjaMat1<1)]
+
+e.col <- NULL
+assM <- net.s$assoMat1[(net.s$adjaMat1>0&net.s$adjaMat1<1)]
+
+
+net.s$assoMat1[(net.s$adjaMat1>0&net.s$adjaMat1<1)]
+
+net.s$assoMat1[which(net.s$adjaMat1%in%E(net.is)$weight)]
+
+(net.s$adjaMat1%in%E(net.is)$weight)
+
+net.s$adjaMat1 %in% E(net.is)$weight
+
+
+for (i in seq(length(assM))){
+    if (net.s$assoMat1[(net.s$adjaMat1>0)][i]>0){
+        e.col[i] <-  "#1B7837"}
+    else if (net.s$assoMat1[(net.s$adjaMat1>0)][i]<0){
+        e.col[i] <-   "#762A83"}
+}
+
+
+V(net.is)
+
+E(net.is)$color=e.col 
+
+e.col
+
+
+net.is <- as.undirected(net.is)
+
+V(net.is)$species=Eim18@tax_table[,5]
+V(net.is)$amplicon<- Eim.m18@tax_table[,6]
+
+# we also want the node color to code for family
+nb <- length(levels(as.factor(V(net.is)$amplicon)))
+col <- colorRampPalette(brewer.pal(8, "Accent"))(nb.col)
+
+col
+
+E(net.is)$color
+
+plot(net.is,
+#     layout=layout <- with <- fr(net10b),
+     vertex.label=V(net.is)$species,
+#     vertex.size=as.integer(cut(hub.sb, breaks=10))+2,
+     vertex.color=adjustcolor(col,0.8),
+#     edge.width=as.integer(cut(E(net.is)$weight, breaks=6)),
+     margin=c(0,1,0,0))
+legend(x=-2, y=1, legend=levels(as.factor(V(net.is)$amplicon)), col=col, bty="n",x.intersp=0.25,text.width=0.045, pch=20, pt.cex=1.5)
+
+
+
+
+
+props <- netAnalyze(net.s,
+                              centrLCC = TRUE,
+                              clustMethod = "cluster_fast_greedy",
+                              hubPar = "eigenvector",
+                                                         weightDeg = FALSE, normDeg = FALSE)
+
+
+
+p <- plot(props,
+          nodeColor = "cluster",
+          nodeSize = "eigenvector",
+          title1 = "Network on OTU level with SPRING associations",
+          showTitle = TRUE,
+          cexTitle = 2.3)
+
+legend(0.7, 1.1, cex = 2.2, title = "estimated association:",
+       legend = c("+","-"), lty = 1, lwd = 3, col = c("#009900","red"),
+              bty = "n", horiz = TRUE)
+
+
