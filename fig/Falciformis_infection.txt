@@ -1,32 +1,30 @@
-Generalized linear mixed model fit by maximum likelihood (Laplace
-  Approximation) [glmerMod]
- Family: binomial  ( logit )
-Formula: fal ~ ver * fer + (1 | Locality)
-   Data: Eimdf
 
-     AIC      BIC   logLik deviance df.resid 
-   491.1    513.3   -240.5    481.1      627 
+Call:
+glm(formula = log(1 + Falciformis) ~ Vermiformis * Ferrisi * 
+    Sp, data = Eimdfq)
 
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--1.4352 -0.3451 -0.3155 -0.2877  3.5575 
+Deviance Residuals: 
+       Min          1Q      Median          3Q         Max  
+-0.0045324  -0.0005246  -0.0005057  -0.0003467   0.0190713  
 
-Random effects:
- Groups   Name        Variance Std.Dev.
- Locality (Intercept) 0.3917   0.6259  
-Number of obs: 632, groups:  Locality, 177
-
-Fixed effects:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept) -2.25720    0.21292 -10.601  < 2e-16 ***
-ver          2.53781    0.47289   5.367 8.02e-08 ***
-fer          0.20546    0.28364   0.724    0.469    
-ver:fer      0.08933    0.62803   0.142    0.887    
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+(Intercept)             5.260e-04  1.457e-04   3.610 0.000359 ***
+Vermiformis             2.490e-03  4.060e-02   0.061 0.951136    
+Ferrisi                -3.795e-03  5.389e-03  -0.704 0.481815    
+Sp                      9.038e-02  1.840e-02   4.913 1.49e-06 ***
+Vermiformis:Ferrisi     4.502e+01  2.466e+01   1.826 0.068918 .  
+Vermiformis:Sp         -1.260e+01  5.739e+00  -2.196 0.028855 *  
+Ferrisi:Sp             -2.214e+00  1.523e+00  -1.453 0.147247    
+Vermiformis:Ferrisi:Sp  1.715e+03  2.336e+03   0.734 0.463482    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Correlation of Fixed Effects:
-        (Intr) ver    fer   
-ver     -0.442              
-fer     -0.558  0.258       
-ver:fer  0.249 -0.700 -0.449
+(Dispersion parameter for gaussian family taken to be 4.169359e-06)
+
+    Null deviance: 0.0013779  on 303  degrees of freedom
+Residual deviance: 0.0012341  on 296  degrees of freedom
+AIC: -2893.3
+
+Number of Fisher Scoring iterations: 2
+
