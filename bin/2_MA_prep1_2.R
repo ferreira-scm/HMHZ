@@ -19,7 +19,7 @@ devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
 doFilter <- TRUE
 doMultiAmp <- TRUE    
-doTax <- TRUE
+doTax <- FALSE
 
 ###################Full run Microbiome#######################
 #Preparation of files
@@ -33,12 +33,12 @@ samples<- gsub("s\\d+-", "\\1", basename(samples)) ##For Pool 1
 samples<- gsub("-", "_", basename(samples))
 
                                         #Quality plots of the reads
-pdf("fig/quality/qualityProfileF1_1_2.pdf", height = 7, width = 7)
-plotQualityProfile(fastqF[[1]])
-dev.off()
-pdf("fig/quality/qualityProfileR1_1_2.pdf", height = 7, width = 7)
-plotQualityProfile(fastqR[[1]])
-dev.off()
+#pdf("fig/quality/qualityProfileF1_1_2.pdf", height = 7, width = 7)
+#plotQualityProfile(fastqF[[1]])
+#dev.off()
+#pdf("fig/quality/qualityProfileR1_1_2.pdf", height = 7, width = 7)
+#plotQualityProfile(fastqR[[1]])
+#dev.off()
 #Creation of a folder for filtrated reads
 filt_path <- "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/filtered1_2"
 
@@ -52,7 +52,7 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(200,200),
+                      truncLen=c(260,230),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -60,6 +60,7 @@ if(doFilter){
 
 names(filtFs) <- names(filtRs) <- samples
 files <- PairedReadFileSet(filtFs, filtRs)
+
 #Preparation of primer file ### Here stats the Multiamplicon pipeline from Emanuel
 #Primers used in the arrays
 ptable <- read.csv(file = "/SAN/Susanas_den/HMHZ/data/primer_list.csv", sep=",", header=TRUE, stringsAsFactors=FALSE)
@@ -68,6 +69,7 @@ primerR <- ptable[, "Seq_R"]
 names(primerF) <- as.character(ptable[, "Name_F"])
 names(primerR) <- as.character(ptable[, "Name_R"])
 primer <- PrimerPairsSet(primerF, primerR)
+
 ##Multi amplicon pipeline
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
 if(doMultiAmp){
@@ -79,14 +81,12 @@ if(doMultiAmp){
                          verbose=0, multithread = 90)
     errR <- learnErrors(unlist(getStratifiedFilesR(MA)), nbase=1e8,
                         verbose=0, multithread = 90)
-#    MA <- derepMulti(MA, mc.cores=90) deprecated, no longer needed
     MA <- dadaMulti(MA, Ferr=errF, Rerr=errR,  pool=FALSE,
                     verbose=0, mc.cores=90)
     MA <- mergeMulti(MA, mc.cores=90)
     propMerged <- MultiAmplicon::calcPropMerged(MA)
     summary(propMerged)
     table(propMerged<0.8)
-    MA <- mergeMulti(MA, mc.cores=90) 
     MA <- makeSequenceTableMulti(MA, mc.cores=90)
     MA <- removeChimeraMulti(MA, mc.cores=90)
     saveRDS(MA, "tmp/interData/MA1_2.RDS")
@@ -101,36 +101,81 @@ if(doMultiAmp){
 #all.dada.seq <- DNAStringSet(unlist(lapply(MA1, colnames)))
 #head(all.dada.seq)
 #writeFasta(all.dada.seq, "/SAN/Susanas_den/HMHZ/results/2020May/HMHZ1_1.fasta")
-err_F <- plotErrors(errF, nominalQ=TRUE)
-pdf("fig/quality/Estimeted_error_ratesF_1_2.pdf",
-    height = 7, width = 7)
-err_F
-dev.off()
-err_R <- plotErrors(errR, nominalQ=TRUE)
-pdf("fig/quality/Estimeted_error_ratesR_1_2.pdf",
-    height = 7, width = 7)
-err_R
-dev.off()
-Heatmap <- plotAmpliconNumbers(MA)
-pdf("fig/quality/heat_Sequencing_summary_HMHZ_1_2.pdf",
-    height = 15, width = 15)
-Heatmap
-dev.off()
+#err_F <- plotErrors(errF, nominalQ=TRUE)
+#pdf("fig/quality/Estimeted_error_ratesF_1_2.pdf",
+#    height = 7, width = 7)
+#err_F
+#dev.off()
+#err_R <- plotErrors(errR, nominalQ=TRUE)
+#pdf("fig/quality/Estimeted_error_ratesR_1_2.pdf",
+#    height = 7, width = 7)
+#err_R
+#dev.off()
+#Heatmap <- plotAmpliconNumbers(MA)
+#pdf("fig/quality/heat_Sequencing_summary_HMHZ_1_2.pdf",
+#    height = 15, width = 15)
+#Heatmap
+#dev.off()
 ###New taxonomic assignment
-#Sys.setenv("BLASTDB" = "/SAN/db/blastdb/") #To make the annotation work, boss will fix this in the package
-#library("vctrs", lib.loc="/usr/local/lib/R/site-library")
-#MA <- blastTaxAnnot(MA,  dataBaseDir = Sys.getenv("BLASTDB"), negative_gilist = "/SAN/db/blastdb/uncultured.gi", num_threads = 20)
-MA <- blastTaxAnnot(MA,
-                    db = "/SAN/db/blastdb/nt/nt",
-                    negative_gilist = "/SAN/db/blastdb/uncultured.gi",
-                    infasta = "tmp/interData/HMHZ1_2.fasta",
-                    outblast = "tmp/interData/blast1_2_out.fasta",
-                    taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
-                    num_threads = 90)
-saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ##Just Test run HMHZ 1
+#MA <- blastTaxAnnot(MA,
+#                    db = "/SAN/db/blastdb/nt/nt",
+#                    negative_gilist = "/SAN/db/blastdb/uncultured.gi",
+#                    infasta = "tmp/interData/HMHZ1_2.fasta",
+#                    outblast = "tmp/interData/blast1_2_out.fasta",
+#                    taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
+#                    num_threads = 90)
+#saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ##Just Test run HMHZ 1
 
+source("bin/Primer_target.R")
+p.df <- p.df[match(primer@names, p.df$Primer_name),]
+primer@names==p.df$Primer_name
+
+taxT1 <- list()
+seqs <- getSequencesFromTable(MA)
+seqs <- lapply(seqs, DNAStringSet)
+for (i in 1:48){
+    if (p.df$Gen[i]=="16S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+          "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
+          multithread=90,
+                                    tryRC = TRUE,
+                                   verbose=TRUE))
+    }
+    else if (p.df$Gen[i]=="18S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                 "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }
+    else if (p.df$Gen[i]=="28S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                      "/SAN/Susanas_den/AmpMarkers/RESCRIPt/LSURef_NR99/Fastas/Slv138LSU.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }   
+    else if (p.df$Gen[i]=="ITS"){
+     try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                                      "/SAN/Susanas_den/AmpMarkers/UNITE/sh_general_release_s_all_10.05.2021/sh_general_release_dynamic_s_all_10.05.2021.fasta",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }
+    else {
+     try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+           "/SAN/Susanas_den/AmpMarkers/RESCRIPt/other/Fastas/other.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }   
+}
+
+MA@taxonTable <- taxT1
+
+saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds")
 ##Start from here after the taxonomic annotation
-MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ###Test run
+#MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ###Test run
 #
 ##To phyloseq
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work

@@ -102,18 +102,6 @@ for (i in 1:48) {
 }
 
 
-names(fPS.l[[1]]) <- names(PS.l[1])
-
-fPS.l
-
-names(fPS.l[[1]])
-
-PS.l[[1]]
-
-names(PS.l[1])
-
-list(NULL)%in%fPS.l
-
 ### and what happens when we filter?
 nmEim <- list()
 names18S <- list()
@@ -165,40 +153,66 @@ Eim.TSS <- subset_taxa(fPS.TSS, genus%in%"Eimeria")
 
 # let's do some co-infection analyses. First we need to do some preparations
 amplicon <- data.frame(names18S)
+amplicon$species <- "sp"
 
 # sanity check
 rownames(Eim@tax_table)==rownames(Eim.TSS@tax_table)
-
 Eim.TSS@tax_table[,6] <- names18S
 Eim@tax_table[,6] <- names18S
-
 names18S
 
+## import tree
+library(ape)
+library(ggtree)
+
+# I need set 3 groups of reference sequences (ferrisi, vermiformis, falciformis)
+fer <- phyloT$tip.label[grep("ferrisi",phyloT$tip.label)]
+fal <- c(phyloT$tip.label[grep("falciformis",phyloT$tip.label)], "KU174464_Eimeria_apionodes", "AF311644_Eimeria_sevilletensis", "JQ993657_Eimeria_sp._ex_Apodemus_agrarius")
+ver <- c(phyloT$tip.label[grep("vermiformis",phyloT$tip.label)], "KU174465_Eimeria_apionodes", "KU174467_Eimeria_apionodes")
+
+species_ASV <- function(fer, name) {
+    phyloT <- ape::read.tree("tmp/siteCF.cf.tree")
+    clade.nr <- MRCA(phyloT, fer)
+    ferT <- extract.clade(phyloT, clade.nr)
+    ferrisiASV <- which(names18S%in%ferT$tip.label)
+    amplicon$species[ferrisiASV] <- name
+    amplicon$species
+}
+
+amplicon$species <- species_ASV(fer, "ferrisi")
+
+amplicon$species <- species_ASV(ver, "vermiformis")
+
+amplicon$species <- species_ASV(fal, "falciformis")
+
+amplicon$species[grep("D3A", amplicon$names18S)] <- "28S"
+                 
+amplicon
 
 ### manual labeling based on phylogenetic tree
-amp5 <- c("ferrisi", "ferrisi", "Sp", "falciformis", "vermiformis")
-amp13 <- c("28S", "28S", "28S", "28S", "28S", "28S", "28S", "28S")
-amp16 <- c("ferrisi", "falciformis", "vermiformis")
-amp23 <- c("ferrisi", "Sp", "ferrisi", "ferrisi", "ferrisi", "Sp", "Sp")
-amp28 <- c("ferrisi", "ferrisi", "Sp", "ferrisi", "ferrisi")
-amp30 <- c("ferrisi", "falciformis")
-amp31 <- "ferrisi"
-amp33 <- c("ferrisi", "falciformis")
-amp35 <- c("ferrisi", "falciformis")
+#amp5 <- c("ferrisi", "ferrisi", "Sp", "falciformis", "vermiformis")
+#amp13 <- c("28S", "28S", "28S", "28S", "28S", "28S", "28S", "28S")
+#amp16 <- c("ferrisi", "falciformis", "vermiformis")
+#amp23 <- c("ferrisi", "Sp", "ferrisi", "ferrisi", "ferrisi", "Sp", "Sp")
+#amp28 <- c("ferrisi", "ferrisi", "Sp", "ferrisi", "ferrisi")
+#amp30 <- c("ferrisi", "falciformis")
+#amp31 <- "ferrisi"
+#amp33 <- c("ferrisi", "falciformis")
+#amp35 <- c("ferrisi", "falciformis")
 
 #falciformis
-which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_4", "Prot1702_32_F.wang1624CR6S_16_R_ASV_2", "Proti15_25_F.Proti440R_28_R_ASV_2", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_2", "Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_2"))
+#which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_4", "Prot1702_32_F.wang1624CR6S_16_R_ASV_2", "Proti15_25_F.Proti440R_28_R_ASV_2", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_2", "Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_2"))
 
 #vermiformis
-which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_5", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_3"))
+#which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_5", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_3"))
 
 #sp
-which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_3", "MarkN_10_F.Euk360_CR_21_R_ASV_7", "MarkN_10_F.Euk360_CR_21_R_ASV_2", "MarkN_10_F.Euk360_CR_21_R_ASV_6", "MarkN_10_F.Proti440R_28_R_ASV_3"))
+#which(names18S%in%c("18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_3", "MarkN_10_F.Euk360_CR_21_R_ASV_7", "MarkN_10_F.Euk360_CR_21_R_ASV_2", "MarkN_10_F.Euk360_CR_21_R_ASV_6", "MarkN_10_F.Proti440R_28_R_ASV_3"))
 
 #ferrisi
-which(names18S%in%c("Proti15_25_F.Proti440R_28_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_1", "MarkN_10_F.Euk360_CR_21_R_ASV_5", "wang1141_13_F.Nem_0425_6_3_R_ASV_1", "Prot1702_32_F.wang1624CR6S_16_R_ASV_1", "Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_1", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_1", "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_5", "MarkN_10_F.Euk360_CR_21_R_ASV_3", "MarkN_10_F.Proti440R_28_R_ASV_4", "MarkN_10_F.Euk360_CR_21_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_2", "MarkN_10_F.Euk360_CR_21_R_ASV_4", "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_2"))
+#which(names18S%in%c("Proti15_25_F.Proti440R_28_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_1", "MarkN_10_F.Euk360_CR_21_R_ASV_5", "wang1141_13_F.Nem_0425_6_3_R_ASV_1", "Prot1702_32_F.wang1624CR6S_16_R_ASV_1", "Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_1", "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_1", "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_5", "MarkN_10_F.Euk360_CR_21_R_ASV_3", "MarkN_10_F.Proti440R_28_R_ASV_4", "MarkN_10_F.Euk360_CR_21_R_ASV_1", "MarkN_10_F.Proti440R_28_R_ASV_2", "MarkN_10_F.Euk360_CR_21_R_ASV_4", "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_2"))
 
-amplicon$spec <- c(amp5, amp13, amp16, amp23, amp28, amp30, amp31, amp33, amp35)
+#amplicon$spec <- c(amp5, amp13, amp16, amp23, amp28, amp30, amp31, amp33, amp35)
 
 #amp.8 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi", "sp.", "sp.", "vermiformis", "vermiformis")
 #amp.12 <- c("ferrisi", "ferrisi", "ferrisi", "ferrisi")
@@ -227,7 +241,7 @@ amplicon$names18S[amplicon$spec=="ferrisi"]
 
 amplicon$names18S[amplicon$spec=="falciformis"]
 
-amplicon$names18S[amplicon$spec=="Sp"]
+amplicon$names18S[amplicon$spec=="sp"]
 
 amplicon$names18S[amplicon$spec=="vermiformis"]
 
@@ -268,6 +282,7 @@ writeFasta(Eim.ASV, "tmp/EimeriaASV.fasta")
 writeFasta(Seq18, "tmp/Eimeria18S.fasta")
 writeFasta(Seq28, "tmp/Eimeria28S.fasta")
 
+
 Eim18 <- Eim
 Eim.TSS18 <- Eim.TSS
 Eim28 <- Eim
@@ -296,11 +311,6 @@ Eim18_sp
 #sanity check
 colnames(Eim18_sp@otu_table)==rownames(Eim18_sp@tax_table)
 #colnames(Eim18_sp@otu_table) <- Eim18_sp@tax_table[,5]
-
-
-
-
-
 
 
 

@@ -6,8 +6,6 @@ eim_sp <- psmelt(Eim18_sp)
 eim <- psmelt(Eim.TSS18)
 eim2 <- psmelt(Eim18)
 
-Eim.m_sp
-
 Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
 Eim.m0@tax_table[,6] <- Eim.m0@tax_table[,7]
 Eim.m0.sp <- tax_glom(Eim.m0, "species")
@@ -97,7 +95,7 @@ com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
 
 com_plot
 
-levels(eim$species)
+levels(as.factor(eim$species))
 
 Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=species))+
     geom_bar(position="stack", stat="identity")+
@@ -257,7 +255,7 @@ sample_data(Eim.ra0)$Falciformis <- sample_sums(Fal)
 Ver <- subset_taxa(Eim.ra0, species %in% "vermiformis")
 sample_data(Eim.ra0)$Vermiformis <- sample_sums(Ver)
 
-Sp <- subset_taxa(Eim.ra0, species %in% "Sp")
+Sp <- subset_taxa(Eim.ra0, species %in% "sp")
 sample_data(Eim.ra0)$Sp <- sample_sums(Sp)
 
 sample_data(Eim.ra0)$Sp
@@ -426,6 +424,16 @@ summary(FalModel) # bad deviance too
 
 eim.rao <- psmelt(Eim.ra0)
 
+summary(as.factor(Eimdf$Concatenated))
+
+head(eim_sp)
+
+eim_sp$Concatenated <- as.factor(eim_sp$Concatenated)
+
+ggplot(eim_sp, aes(x=Concatenated, y=Abundance, fill=species))+
+    geom_bar(position="dodge", stat="identity")
+
+
 library(parasiteLoad)
 
 ### Functions
@@ -449,7 +457,9 @@ table(PS.E@sam_data$OPG>0, PS.E@sam_data$EimeriaCounts>0)
 
 summary(PS.E@sam_data$OPG>0)
 
-PS.E@sam_data$EimeriaCounts
+head(PS.E@sam_data)
+
+PS.E@sam_data$eimeriaSpecies
 
 fPS
 

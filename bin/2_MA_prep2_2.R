@@ -12,6 +12,7 @@ library(data.table, lib.loc="/usr/local/lib/R/site-library/")
 library(taxonomizr)
 library(taxize)
 library(parallel)
+library(Biostrings)
 ## using the devel
 devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 
@@ -34,13 +35,13 @@ samples<- gsub("s\\d+-", "\\1", basename(samples)) ##For Pool 1
 samples<- gsub("-", "_", basename(samples))
 
 #Quality plots of the reads
-pdf("fig/quality/qualityProfileF1_2_2.pdf", height = 7, width = 7)
-plotQualityProfile(fastqF[[1]])
-dev.off()
+#pdf("fig/quality/qualityProfileF1_2_2.pdf", height = 7, width = 7)
+#plotQualityProfile(fastqF[[1]])
+#dev.off()
 
-pdf("fig/quality/qualityProfileR1_2_2.pdf", height = 7, width = 7)
-plotQualityProfile(fastqR[[1]])
-dev.off()
+#pdf("fig/quality/qualityProfileR1_2_2.pdf", height = 7, width = 7)
+#plotQualityProfile(fastqR[[1]])
+#dev.off()
 
 #Creation of a folder for filtrated reads
 filt_path <- "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/filtered2_2"
@@ -55,7 +56,7 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(200,200),
+                      truncLen=c(260,230),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -95,7 +96,9 @@ if(doMultiAmp){
     MA <- removeChimeraMulti(MA, mc.cores=90)
     saveRDS(MA, "tmp/interData/MA2_2.RDS")
 } else{
+
     MA <- readRDS("tmp/interData/MA2_2.RDS")
+
 }
 #trackingF <- getPipelineSummary(MA)
 #PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
@@ -105,56 +108,102 @@ if(doMultiAmp){
 #all.dada.seq <- DNAStringSet(unlist(lapply(MA1, colnames)))
 #head(all.dada.seq)
 #writeFasta(all.dada.seq, "/SAN/Susanas_den/HMHZ/results/2020May/HMHZ1_1.fasta")
-err_F <- plotErrors(errF, nominalQ=TRUE)
-pdf("fig/quality/Estimeted_error_ratesF_2_2.pdf",
-    height = 7, width = 7)
-err_F
-dev.off()
-err_R <- plotErrors(errR, nominalQ=TRUE)
-pdf("fig/quality/Estimeted_error_ratesR_2_2.pdf",
-    height = 7, width = 7)
-err_R
-dev.off()
-Heatmap <- plotAmpliconNumbers(MA)
-pdf("fig/quality/heat_Sequencing_summary_HMHZ_2_2.pdf",
-    height = 15, width = 15)
-Heatmap
-dev.off()
+#err_F <- plotErrors(errF, nominalQ=TRUE)
+#pdf("fig/quality/Estimeted_error_ratesF_2_2.pdf",
+#    height = 7, width = 7)
+#err_F
+#dev.off()
+#err_R <- plotErrors(errR, nominalQ=TRUE)
+#pdf("fig/quality/Estimeted_error_ratesR_2_2.pdf",
+#    height = 7, width = 7)
+#err_R
+#dev.off()
+#Heatmap <- plotAmpliconNumbers(MA)
+#pdf("fig/quality/heat_Sequencing_summary_HMHZ_2_2.pdf",
+#    height = 15, width = 15)
+#Heatmap
+#dev.off()
 ###New taxonomic assignment
-#Sys.setenv("BLASTDB" = "/SAN/db/blastdb/") #To make the annotation work, boss will fix this in the package
-#library("vctrs", lib.loc="/usr/local/lib/R/site-library")
-#MA <- blastTaxAnnot(MA,  dataBaseDir = Sys.getenv("BLASTDB"), negative_gilist = "/SAN/db/blastdb/uncultured.gi", num_threads = 20)
+
+source("bin/Primer_target.R")
+p.df <- p.df[match(primer@names, p.df$Primer_name),]
+primer@names==p.df$Primer_name
+
+taxT1 <- list()
+seqs <- getSequencesFromTable(MA)
+seqs <- lapply(seqs, DNAStringSet)
+
+for (i in 1:48){
+    if (p.df$Gen[i]=="16S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+          "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
+          multithread=90,
+                                    tryRC = TRUE,
+                                   verbose=TRUE))
+    }
+    else if (p.df$Gen[i]=="18S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                 "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }
+    else if (p.df$Gen[i]=="28S"){
+        try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                      "/SAN/Susanas_den/AmpMarkers/RESCRIPt/LSURef_NR99/Fastas/Slv138LSU.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }   
+    else if (p.df$Gen[i]=="ITS"){
+     try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+                                      "/SAN/Susanas_den/AmpMarkers/UNITE/sh_general_release_s_all_10.05.2021/sh_general_release_dynamic_s_all_10.05.2021.fasta",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }
+    else {
+     try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
+           "/SAN/Susanas_den/AmpMarkers/RESCRIPt/other/Fastas/other.dada2.fa",
+                                     multithread=90,
+                                    tryRC = TRUE,
+                                    verbose=TRUE))
+    }   
+}
+
+MA@taxonTable <- taxT1
+
+saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") #
+
 
 # amplicon targets
-primerL <- read.table("data/primerInputUnique.csv", head=T, sep=",")
-ptable$Primer_name <- paste(ptable$Name_F, ptable$Name_R, sep=".")
-which(!ptable$Primer_name %in% primerL$Primer_name)
+#primerL <- read.table("data/primerInputUnique.csv", head=T, sep=",")
+#ptable$Primer_name <- paste(ptable$Name_F, ptable$Name_R, sep=".")
+#which(!ptable$Primer_name %in% primerL$Primer_name)
 # manual correction
-primerL$Primer_name[6] <- "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R"
-primerL$Primer_name[7] <-  "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R" 
-primerL$Primer_name[120] <- "Bgf_132_F.Bgr_132_R"
-primerL$Primer_name[86] <- "NLF184cw_74_F.NL818cw_74_R"
-p.df <- primerL[which(primerL$Primer_name%in%ptable$Primer_name),]
+#primerL$Primer_name[6] <- "18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R"
+#primerL$Primer_name[7] <-  "18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R" 
+#primerL$Primer_name[120] <- "Bgf_132_F.Bgr_132_R"
+#primerL$Primer_name[86] <- "NLF184cw_74_F.NL818cw_74_R"
+#p.df <- primerL[which(primerL$Primer_name%in%ptable$Primer_name),]
+#table(p.df$Gen, p.df$Target)
+#p.df$Gen[p.df$Target=="Metazoa"&p.df$Gen=="16S"] <- "MT-RNR2"
 
-table(p.df$Gen, p.df$Target)
+#p.df$Gen[p.df$Target=="Cestodes"&p.df$Gen=="16S"] <- "MT-RNR2"
 
-p.df$Gen[p.df$Target=="Metazoa"&p.df$Gen=="16S"] <- "MT-RNR2"
+#head(p.df)
 
-p.df$Gen[p.df$Target=="Cestodes"&p.df$Gen=="16S"] <- "MT-RNR2"
-
-head(p.df)
-
-MA <- blastTaxAnnot(MA,
-                    db = "/SAN/db/blastdb/nt/nt",
-                    negative_gilist = "/SAN/db/blastdb/uncultured.gi",
-                    infasta = "tmp/interData/HMHZ2_2.fasta",
-                    outblast = "tmp/interData/blast2_2_out.fasta",
-                    taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
-                    num_threads = 90)
-saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ##Just Test run HMHZ 1
+#MA <- blastTaxAnnot(MA,
+#                    db = "/SAN/db/blastdb/nt/nt",
+#                    negative_gilist = "/SAN/db/blastdb/uncultured.gi",
+#                    infasta = "tmp/interData/HMHZ2_2.fasta",
+#                    outblast = "tmp/interData/blast2_2_out.fasta",
+#                    taxonSQL = "/SAN/db/taxonomy/taxonomizr.sql",
+#                    num_threads = 90)
+#saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ##Just Test run HMHZ 1
 
 ##Start from here after the taxonomic annotation
-MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ###Test run
+#MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ###Test run
 ##To phyloseq
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
 meta <- sota[match(rownames(PS@sam_data), sota$Mouse_ID),] 

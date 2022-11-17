@@ -159,17 +159,33 @@ writeFasta(allEim, "tmp/Eimeria18S.fasta")
 
 #writeFasta(Eim.align, "tmp/Eimeria18S_lb.fasta")
 
+### for 28S ASV alone, they seem aligned, but just in case there are gaps...
+
+ASV28 <- readFasta("tmp/Eimeria28S.fasta")
+nameASV28 <- ASV28@id
+ASV28 <- sread(ASV28)
+names(ASV28) <- nameASV28
+ASV28.align <- AlignSeqs(ASV28, anchor=NA, iterations=10, refinements=10, processors=10)
+
+writeFasta(ASV28.align, "tmp/Eimeira_ASV28S_aligned.fasta")
+
+
 # and this is how I did the tree outside R
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s tmp/Eimeria18S_wild_lab_ref.fasta -m MFP
 
-#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -redo
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -T AUTO -redo
+
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -t tmp/Eimeria18S_wild_lab_ref.fasta.contree -s tmp/Eimeria18S_wild_lab_ref.fasta --scf 100 --prefix siteCF
+
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_wild.fasta -m TN+F+R2 -B 5000 -redo
 
 #~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeria18S_lb.fasta -m TN+F+R2 -B 5000
 
+#~/iqtree-2.2.0-Linux/bin/iqtree2 -s  tmp/Eimeira28S_aligned.fasta -m MFP -B 1000 -T AUTO
+
+
 ### Now we need  to analyse which ASV's are likely from the same Eimeira.
 ## ASV's within the same sample from different amplicons that correlate well.
-
 
 ####################################################################
 ############################################################################
