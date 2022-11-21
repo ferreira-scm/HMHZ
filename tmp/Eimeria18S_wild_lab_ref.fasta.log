@@ -3,255 +3,255 @@ Developed by Bui Quang Minh, James Barbetti, Nguyen Lam Tung,
 Olga Chernomor, Heiko Schmidt, Dominik Schrempf, Michael Woodhams, Ly Trong Nhan.
 
 Host:    harriet (AVX, 503 GB RAM)
-Command: /home/susana/iqtree-2.2.0-Linux/bin/iqtree2 -s tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -redo -T AUTO
-Seed:    803517 (Using SPRNG - Scalable Parallel Random Number Generator)
-Time:    Mon Nov  7 14:20:32 2022
+Command: /home/susana/iqtree-2.2.0-Linux/bin/iqtree2 -s tmp/Eimeria18S_wild_lab_ref.fasta -m TN+F+R2 -B 5000 -T AUTO -redo
+Seed:    429961 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Mon Nov 21 09:09:59 2022
 Kernel:  AVX - auto-detect threads (96 CPU cores detected)
 
 Reading alignment file tmp/Eimeria18S_wild_lab_ref.fasta ... Fasta format detected
-Reading fasta file: done in 0.0120601 secs using 68.7% CPU
+Reading fasta file: done in 0.0127289 secs using 72.11% CPU
 Alignment most likely contains DNA/RNA sequences
-Constructing alignment: done in 0.0165752 secs using 698.9% CPU
-WARNING: 2 sites contain only gaps or ambiguous characters.
-Alignment has 233 sequences with 1879 columns, 821 distinct patterns
-101 parsimony-informative, 201 singleton sites, 1577 constant sites
+Constructing alignment: done in 0.0153411 secs using 969.8% CPU
+WARNING: 3 sites contain only gaps or ambiguous characters.
+Alignment has 233 sequences with 1876 columns, 816 distinct patterns
+106 parsimony-informative, 195 singleton sites, 1575 constant sites
                                                  Gap/Ambiguity  Composition  p-value
-Analyzing sequences: done in 0.00538324 secs using 5945% CPU
-   1  JQ993669_Isospora_sp._ex_Talpa_europaea           34.65%    passed     94.45%
-   2  JQ993670_Isospora_sp._ex_Talpa_europaea           52.00%    passed     66.28%
-   3  JQ993671_Isospora_sp._ex_Talpa_europaea           23.04%    passed     99.95%
-   4  JQ993665_Eimeria_nafuko                           26.82%    passed     98.83%
-   5  JQ993659_Eimeria_alorani                          26.88%    passed     69.14%
-   6  KU174470_Eimeria_apionodes                        25.92%    passed     99.18%
-   7  KU174461_Eimeria_apionodes                        26.02%    passed     99.08%
-   8  KU174464_Eimeria_apionodes                        55.72%    passed     94.78%
-   9  KU174480_Eimeria_apionodes                        49.76%    passed     78.50%
-  10  KU174483_Eimeria_apionodes                        50.45%    passed     77.35%
-  11  KU174462_Eimeria_apionodes                        25.81%    passed     98.68%
-  12  KU174463_Eimeria_apionodes                        57.16%    passed     70.61%
-  13  KU174468_Eimeria_apionodes                        27.41%    passed     97.95%
-  14  KU174479_Eimeria_apionodes                        46.78%    passed     88.96%
-  15  KU174449_Eimeria_apionodes                        26.50%    passed     98.52%
-  16  KU174450_Eimeria_apionodes                        25.39%    passed     99.47%
-  17  KU174465_Eimeria_apionodes                        54.39%    passed     98.62%
-  18  KU174467_Eimeria_apionodes                        25.92%    passed     98.55%
-  19  KU174474_Eimeria_apionodes                        26.08%    passed     98.97%
-  20  KU174451_Eimeria_apionodes                        25.86%    passed     98.65%
-  21  KU174459_Eimeria_apionodes                        26.34%    passed     96.30%
-  22  KU174485_Eimeria_apionodes                        38.90%    passed     97.89%
-  23  KU174487_Eimeria_apionodes                        59.71%    passed     76.39%
-  24  KU174472_Eimeria_apionodes                        25.86%    passed     99.28%
-  25  JQ993666_Eimeria_burdai                           24.64%    passed     99.96%
-  26  JQ993649_Eimeria_caviae                           24.22%    passed     99.96%
-  27  JQ993650_Eimeria_chinchillae                      19.32%    passed     98.17%
-  28  AF080614_Eimeria_falciformis                       4.84%    passed     94.73%
-  29  MH751998_Eimeria_falciformis                      41.35%    passed     95.88%
-  30  KT360995_Eimeria_ferrisi                          29.27%    passed     99.49%
-  31  JF304148_Eimeria_myoxi                            22.88%    passed     99.34%
-  32  U40263_Eimeria_nieschulzi                          4.42%    passed     91.49%
-  33  JQ993651_Eimeria_nkaka                            26.88%    passed     90.30%
-  34  AF311643_Eimeria_separata                         18.04%    passed     81.29%
-  35  AF311644_Eimeria_sevilletensis                    17.24%    passed     62.21%
-  36  JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013        19.37%    passed     97.36%
-  37  JQ993655_Eimeria_sp._ex_Apodemus_agrarius         24.59%    passed     93.68%
-  38  JQ993656_Eimeria_sp._ex_Apodemus_agrarius         24.69%    passed     85.93%
-  39  JQ993657_Eimeria_sp._ex_Apodemus_agrarius         24.64%    passed     99.51%
-  40  JQ993658_Eimeria_sp._ex_Apodemus_agrarius         26.34%    passed     97.22%
-  41  JQ993660_Eimeria_sp._ex_Apodemus_agrarius         24.69%    passed     98.84%
-  42  KU174475_Eimeria_apionodes                        25.92%    passed     81.37%
-  43  JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus       25.71%    passed     81.55%
-  44  JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus       25.60%    passed     97.24%
-  45  JQ993663_Eimeria_sp._ex_Cricetus_cricetus         24.59%    passed     98.00%
-  46  JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus        19.37%    passed     99.85%
-  47  JQ993652_Eimeria_sp._2_JK-2013                    24.16%    passed     91.31%
-  48  JQ993667_Eimeria_sp._ex_Mastomys_natalensis       19.27%    passed     97.61%
-  49  KU174454_Eimeria_sp._ex_Microtus_agrestis         26.72%    passed     99.01%
-  50  KU174469_Eimeria_sp._ex_Microtus_agrestis         28.95%    passed     99.20%
-  51  KU174481_Eimeria_sp._ex_Microtus_agrestis         48.06%    passed     81.66%
-  52  KU174456_Eimeria_sp._ex_Microtus_arvalis          25.92%    passed     98.98%
-  53  KU174484_Eimeria_sp._ex_Microtus_arvalis          49.39%    passed     82.12%
-  54  KU174478_Eimeria_sp._ex_Microtus_arvalis          58.28%    passed     77.71%
-  55  KU174473_Eimeria_sp._ex_Microtus_arvalis          26.02%    passed     99.08%
-  56  KU174471_Eimeria_sp._ex_Microtus_levis            25.81%    passed     99.09%
-  57  KU174455_Eimeria_sp._ex_Microtus_subterraneus     25.55%    passed     99.83%
-  58  KU174457_Eimeria_sp._ex_Clethrionomys_glareolus   28.05%    passed     98.19%
-  59  KU174476_Eimeria_sp._ex_Clethrionomys_glareolus   36.88%    passed     96.02%
-  60  KU174466_Eimeria_sp._ex_Clethrionomys_glareolus   28.31%    passed     98.66%
-  61  KU174486_Eimeria_sp._ex_Clethrionomys_glareolus   56.20%    passed     95.54%
-  62  KU174453_Eimeria_sp._ex_Clethrionomys_glareolus   28.95%    passed     98.42%
-  63  KU174458_Eimeria_sp._ex_Clethrionomys_glareolus   28.85%    passed     98.74%
-  64  KU174460_Eimeria_sp._ex_Clethrionomys_glareolus   25.92%    passed     98.63%
-  65  KU174452_Eimeria_sp._ex_Clethrionomys_glareolus   26.24%    passed     99.11%
-  66  KU174482_Eimeria_sp._ex_Clethrionomys_glareolus   57.32%    passed     85.76%
-  67  AF246717_Eimeria_telekii                          16.98%    passed     93.75%
-  68  KT184355_Eimeria_vermiformis                      39.33%    passed     87.59%
-  69  JQ993653_Eimeria_vilasi                           23.42%    passed     95.71%
-  70  AF307880_Eimeria_albigulae                        17.51%    passed     93.88%
-  71  AF339489_Eimeria_chaetodipi                       16.55%    passed     92.62%
-  72  AF307878_Eimeria_arizonensis                      16.82%    passed     94.13%
-  73  AF307876_Eimeria_antrozoi                         17.03%    passed     97.83%
-  74  AF324214_Eimeria_chobotari                        17.19%    passed     92.50%
-  75  AF339490_Eimeria_dipodomysis                      18.47%    passed     69.42%
-  76  AF339491_Eimeria_leucopi                          18.68%    passed     92.55%
-  77  AF307879_Eimeria_onychomysis                      18.68%    passed     90.30%
-  78  AF339492_Eimeria_peromysci                        16.34%    passed     87.44%
-  79  AF307877_Eimeria_rioarribaensis                   17.56%    passed     97.31%
-  80  AF311642_Eimeria_reedi                            17.83%    passed     95.17%
-  81  KU192965_Eimeria_alorani                          40.45%    passed     93.23%
-  82  KU192958_Eimeria_alorani                          31.72%    passed     97.34%
-  83  KU192936_Eimeria_apionodes                        25.86%    passed     98.90%
-  84  KU192961_Eimeria_alorani                          26.50%    passed     97.06%
-  85  KU192956_Eimeria_apionodes                        59.18%    passed     69.76%
-  86  KU192931_Eimeria_apionodes                        25.71%    passed     98.47%
-  87  KU192938_Eimeria_apionodes                        72.96%    passed     79.48%
-  88  KU192916_Eimeria_apionodes                        28.37%    passed     95.61%
-  89  KT184339.1_Eimeria_falciformis                     4.68%    passed     90.06%
-  90  MH751925.1_Eimeria_ferrisi                        30.02%    passed     99.25%
-  91  MH751926.1_Eimeria_vermiformis                    43.27%    passed     89.33%
-  92  MH751927.1_Eimeria_ferrisi                        49.60%    passed     91.32%
-  93  MH751928.1_Eimeria_ferrisi                        43.27%    passed     94.28%
-  94  MH751929.1_Eimeria_ferrisi                        43.21%    passed     93.00%
-  95  MH751930.1_Eimeria_ferrisi                        43.21%    passed     93.00%
-  96  MH751931.1_Eimeria_ferrisi                        43.21%    passed     93.00%
-  97  MH751932.1_Eimeria_ferrisi                        44.01%    passed     86.68%
-  98  MH751933.1_Eimeria_ferrisi                        43.27%    passed     94.42%
-  99  MH751934.1_Eimeria_falciformis                    44.17%    passed     84.30%
- 100  MH751935.1_Eimeria_ferrisi                        43.21%    passed     92.37%
- 101  MH751936.1_Eimeria_ferrisi                        43.37%    passed     94.76%
- 102  MH751937.1_Eimeria_falciformis                    43.37%    passed     89.31%
- 103  MH751938.1_Eimeria_ferrisi                        28.79%    passed     99.58%
- 104  MH751939.1_Eimeria_ferrisi                        43.64%    passed     95.09%
- 105  MH751940.1_Eimeria_vermiformis                    39.06%    passed     95.57%
- 106  MH751941.1_Eimeria_falciformis                    43.32%    passed     90.35%
- 107  MH751942.1_Eimeria_falciformis                    28.47%    passed     94.18%
- 108  MH751943.1_Eimeria_falciformis                    43.43%    passed     92.07%
- 109  MH751944.1_Eimeria_ferrisi                        43.16%    passed     93.96%
- 110  MH751945.1_Eimeria_ferrisi                        31.08%    passed     99.91%
- 111  MH751946.1_Eimeria_ferrisi                        42.42%    passed     91.87%
- 112  MH751947.1_Eimeria_ferrisi                        28.63%    passed     98.90%
- 113  MH751948.1_Eimeria_vermiformis                    29.27%    passed     97.51%
- 114  MH751949.1_Eimeria_ferrisi                        28.85%    passed     99.41%
- 115  MH751950.1_Eimeria_ferrisi                        37.15%    passed     96.46%
- 116  MH751951.1_Eimeria_vermiformis                    43.59%    passed     90.40%
- 117  MH751952.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 118  MH751953.1_Eimeria_ferrisi                        43.21%    passed     94.47%
- 119  MH751954.1_Eimeria_ferrisi                        40.61%    passed     96.91%
- 120  MH751955.1_Eimeria_ferrisi                        29.96%    passed     98.49%
- 121  MH751956.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 122  MH751957.1_Eimeria_vermiformis                    27.78%    passed     95.31%
- 123  MH751958.1_Eimeria_ferrisi                        50.19%    passed     93.11%
- 124  MH751959.1_Eimeria_ferrisi                        29.11%    passed     99.73%
- 125  MH751960.1_Eimeria_falciformis                    28.21%    passed     99.73%
- 126  MH751961.1_Eimeria_ferrisi                        43.16%    passed     92.47%
- 127  MH751962.1_Eimeria_ferrisi                        30.65%    passed     99.78%
- 128  MH751963.1_Eimeria_ferrisi                        27.14%    passed     99.34%
- 129  MH751964.1_Eimeria_falciformis                    47.10%    passed     74.64%
- 130  MH751965.1_Eimeria_ferrisi                        32.09%    passed     99.61%
- 131  MH751966.1_Eimeria_ferrisi                        28.58%    passed     99.81%
- 132  MH751967.1_Eimeria_ferrisi                        46.94%    passed     84.49%
- 133  MH751968.1_Eimeria_ferrisi                        43.27%    passed     92.95%
- 134  MH751969.1_Eimeria_ferrisi                        43.75%    passed     86.12%
- 135  MH751970.1_Eimeria_ferrisi                        27.94%    passed     98.55%
- 136  MH751971.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 137  MH751972.1_Eimeria_ferrisi                        37.57%    passed     97.74%
- 138  MH751973.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 139  MH751974.1_Eimeria_vermiformis                    43.21%    passed     90.45%
- 140  MH751975.1_Eimeria_falciformis                    48.54%    passed     91.28%
- 141  MH751976.1_Eimeria_falciformis                    55.46%    passed     93.10%
- 142  MH751977.1_Eimeria_vermiformis                    31.56%    passed     98.61%
- 143  MH751978.1_Eimeria_falciformis                    27.78%    passed     97.89%
- 144  MH751979.1_Eimeria_ferrisi                        26.13%    passed     99.14%
- 145  MH751980.1_Eimeria_falciformis                    28.15%    passed     98.29%
- 146  MH751981.1_Eimeria_falciformis                    30.60%    passed     96.01%
- 147  MH751982.1_Eimeria_ferrisi                        28.85%    passed     99.41%
- 148  MH751983.1_Eimeria_ferrisi                        46.83%    passed     77.11%
- 149  MH751984.1_Eimeria_ferrisi                        28.37%    passed     98.64%
- 150  MH751985.1_Eimeria_ferrisi                        27.89%    passed     99.22%
- 151  MH751986.1_Eimeria_ferrisi                        29.22%    passed     99.46%
- 152  MH751987.1_Eimeria_ferrisi                        30.07%    passed     99.95%
- 153  MH751988.1_Eimeria_ferrisi                        30.55%    passed     99.41%
- 154  MH751989.1_Eimeria_ferrisi                        28.05%    passed     98.29%
- 155  MH751990.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 156  MH751991.1_Eimeria_ferrisi                        29.11%    passed     99.54%
- 157  MH751992.1_Eimeria_ferrisi                        43.16%    passed     93.96%
- 158  MH751993.1_Eimeria_ferrisi                        29.27%    passed     99.22%
- 159  MH751994.1_Eimeria_ferrisi                        36.08%    passed     99.97%
- 160  MH751995.1_Eimeria_ferrisi                        29.27%    passed     99.22%
- 161  MH751996.1_Eimeria_ferrisi                        28.85%    passed     99.57%
- 162  MH751997.1_Eimeria_ferrisi                        36.56%    passed     98.77%
- 163  MH751998.1_Eimeria_falciformis                    41.35%    passed     95.88%
- 164  MH751999.1_Eimeria_ferrisi                        47.42%    passed     76.19%
- 165  MH752000.1_Eimeria_ferrisi                        26.24%    passed     98.45%
- 166  MH752001.1_Eimeria_ferrisi                        43.21%    passed     93.00%
- 167  MH752002.1_Eimeria_ferrisi                        59.66%    passed     90.09%
- 168  MH752003.1_Eimeria_vermiformis                    28.95%    passed     99.03%
- 169  MH752004.1_Eimeria_ferrisi                        26.61%    passed     99.44%
- 170  MH752005.1_Eimeria_ferrisi                        25.92%    passed     98.93%
- 171  MH752006.1_Eimeria_ferrisi                        26.18%    passed     99.04%
- 172  MH752007.1_Eimeria_ferrisi                        46.94%    passed     86.40%
- 173  MH752008.1_Eimeria_ferrisi                        27.04%    passed     99.28%
- 174  MH752009.1_Eimeria_ferrisi                        25.81%    passed     98.99%
- 175  MH752010.1_Eimeria_ferrisi                        39.70%    passed     96.02%
- 176  MH752011.1_Eimeria_falciformis                    25.71%    passed     99.38%
- 177  MH752012.1_Eimeria_falciformis                    25.60%    passed     99.71%
- 178  MH752013.1_Eimeria_ferrisi                        25.23%    passed     99.56%
- 179  MH752014.1_Eimeria_ferrisi                        25.23%    passed     99.56%
- 180  MH752015.1_Eimeria_ferrisi                        25.49%    passed     99.11%
- 181  MH752016.1_Eimeria_falciformis                    31.56%    passed     99.01%
- 182  MH752017.1_Eimeria_falciformis                    28.53%    passed     99.57%
- 183  MH752018.1_Eimeria_falciformis                    28.63%    passed     99.25%
- 184  MH752019.1_Eimeria_falciformis                    28.15%    passed     99.33%
- 185  MH752020.1_Eimeria_ferrisi                        71.26%    passed     98.97%
- 186  MH752021.1_Eimeria_ferrisi                        55.30%    passed     61.19%
- 187  MH752022.1_Eimeria_ferrisi                        29.00%    passed     92.43%
- 188  MH752023.1_Eimeria_ferrisi                        60.99%    passed     53.12%
- 189  MH752024.1_Eimeria_ferrisi                        35.39%    passed     98.36%
- 190  MH752025.1_Eimeria_ferrisi                        27.14%    passed     92.24%
- 191  MH752026.1_Eimeria_ferrisi                        52.69%    passed     68.66%
- 192  MH752027.1_Eimeria_ferrisi                        28.10%    passed     92.38%
- 193  MH752028.1_Eimeria_ferrisi                        60.67%    passed     63.19%
- 194  MH752029.1_Eimeria_ferrisi                        43.37%    passed     92.01%
- 195  MH752030.1_Eimeria_vermiformis                    32.46%    passed     98.29%
- 196  MH752031.1_Eimeria_ferrisi                        50.40%    passed     68.95%
- 197  MH752032.1_Eimeria_ferrisi                        42.68%    passed     97.14%
- 198  MH752033.1_Eimeria_ferrisi                        33.10%    passed     98.23%
- 199  MH752034.1_Eimeria_ferrisi                        31.72%    passed     99.90%
- 200  MH752035.1_Eimeria_ferrisi                        37.36%    passed     99.41%
- 201  MH752036.1_Eimeria_ferrisi                        45.13%    passed     96.69%
- 202  Lab_single-multi-amplicon_ASV1                    85.95%    passed     91.55%
- 203  Lab_single-multi-amplicon_ASV2                    85.95%    passed     95.54%
- 204  Lab_single-multi-amplicon_ASV3                    85.95%    passed     97.19%
- 205  Lab_single-amplicon_ASV4                          85.95%    passed     96.01%
- 206  Lab_single-amplicon_ASV5                          86.80%    passed     90.97%
- 207  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_1    83.18%    passed     70.17%
- 208  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_2    83.18%    passed     64.79%
- 209  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_3    83.18%    passed     76.24%
- 210  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_4    83.18%    passed     71.42%
- 211  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_5    83.18%    passed     71.40%
- 212  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_1    83.34%    passed     66.59%
- 213  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_2    83.34%    passed     72.38%
- 214  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_3    83.34%    passed     73.91%
- 215  MarkN_10_F.Euk360_CR_21_R_ASV_1                   82.38%    passed     55.84%
- 216  MarkN_10_F.Euk360_CR_21_R_ASV_2                   82.38%    passed     63.92%
- 217  MarkN_10_F.Euk360_CR_21_R_ASV_3                   82.38%    passed     63.92%
- 218  MarkN_10_F.Euk360_CR_21_R_ASV_4                   82.38%    passed     57.65%
- 219  MarkN_10_F.Euk360_CR_21_R_ASV_5                   82.38%    passed     61.15%
- 220  MarkN_10_F.Euk360_CR_21_R_ASV_6                   82.38%    passed     69.34%
- 221  MarkN_10_F.Euk360_CR_21_R_ASV_7                   82.38%    passed     61.32%
- 222  MarkN_10_F.Proti440R_28_R_ASV_1                   82.49%    passed     63.60%
- 223  MarkN_10_F.Proti440R_28_R_ASV_2                   82.49%    passed     61.31%
- 224  MarkN_10_F.Proti440R_28_R_ASV_3                   82.49%    passed     70.55%
- 225  MarkN_10_F.Proti440R_28_R_ASV_4                   82.49%    passed     58.11%
- 226  MarkN_10_F.Proti440R_28_R_ASV_5                   82.49%    passed     66.45%
- 227  Prot1702_32_F.wang1624CR6S_16_R_ASV_1             81.69%    passed     83.13%
- 228  Prot1702_32_F.wang1624CR6S_16_R_ASV_2             81.69%    passed     82.28%
- 229  wang1141_13_F.Nem_0425_6_3_R_ASV_1                85.95%    passed     91.55%
- 230  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_1              82.49%    passed     34.73%
- 231  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_2              82.49%    passed     37.27%
- 232  Proti15_25_F.Proti440R_28_R_ASV_1                 81.75%    passed     61.30%
- 233  Proti15_25_F.Proti440R_28_R_ASV_2                 81.75%    passed     66.59%
+Analyzing sequences: done in 0.000277339 secs using 1.197e+04% CPU
+   1  JQ993669_Isospora_sp._ex_Talpa_europaea           34.54%    passed     94.42%
+   2  JQ993670_Isospora_sp._ex_Talpa_europaea           51.92%    passed     67.05%
+   3  JQ993671_Isospora_sp._ex_Talpa_europaea           22.92%    passed     99.96%
+   4  JQ993665_Eimeria_nafuko                           26.71%    passed     98.88%
+   5  JQ993659_Eimeria_alorani                          26.76%    passed     68.48%
+   6  KU174470_Eimeria_apionodes                        25.80%    passed     99.17%
+   7  KU174461_Eimeria_apionodes                        25.91%    passed     99.07%
+   8  KU174464_Eimeria_apionodes                        55.65%    passed     95.04%
+   9  KU174480_Eimeria_apionodes                        49.68%    passed     79.42%
+  10  KU174483_Eimeria_apionodes                        50.37%    passed     78.15%
+  11  KU174462_Eimeria_apionodes                        25.69%    passed     98.68%
+  12  KU174463_Eimeria_apionodes                        57.09%    passed     70.30%
+  13  KU174468_Eimeria_apionodes                        27.29%    passed     97.96%
+  14  KU174479_Eimeria_apionodes                        46.70%    passed     89.54%
+  15  KU174449_Eimeria_apionodes                        26.39%    passed     98.38%
+  16  KU174450_Eimeria_apionodes                        25.27%    passed     99.41%
+  17  KU174465_Eimeria_apionodes                        54.32%    passed     98.60%
+  18  KU174467_Eimeria_apionodes                        25.80%    passed     98.53%
+  19  KU174474_Eimeria_apionodes                        25.96%    passed     98.94%
+  20  KU174451_Eimeria_apionodes                        25.75%    passed     98.58%
+  21  KU174459_Eimeria_apionodes                        26.23%    passed     96.05%
+  22  KU174485_Eimeria_apionodes                        38.81%    passed     97.92%
+  23  KU174487_Eimeria_apionodes                        59.65%    passed     76.20%
+  24  KU174472_Eimeria_apionodes                        25.75%    passed     99.28%
+  25  JQ993666_Eimeria_burdai                           24.52%    passed     99.98%
+  26  JQ993649_Eimeria_caviae                           24.09%    passed     99.96%
+  27  JQ993650_Eimeria_chinchillae                      19.19%    passed     98.12%
+  28  AF080614_Eimeria_falciformis                       4.69%    passed     94.43%
+  29  MH751998_Eimeria_falciformis                      41.26%    passed     95.78%
+  30  KT360995_Eimeria_ferrisi                          29.16%    passed     99.53%
+  31  JF304148_Eimeria_myoxi                            22.76%    passed     99.29%
+  32  U40263_Eimeria_nieschulzi                          4.26%    passed     90.78%
+  33  JQ993651_Eimeria_nkaka                            26.76%    passed     89.70%
+  34  AF311643_Eimeria_separata                         17.91%    passed     81.04%
+  35  AF311644_Eimeria_sevilletensis                    17.11%    passed     61.91%
+  36  JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013        19.24%    passed     96.98%
+  37  JQ993655_Eimeria_sp._ex_Apodemus_agrarius         24.47%    passed     93.47%
+  38  JQ993656_Eimeria_sp._ex_Apodemus_agrarius         24.57%    passed     85.52%
+  39  JQ993657_Eimeria_sp._ex_Apodemus_agrarius         24.52%    passed     99.61%
+  40  JQ993658_Eimeria_sp._ex_Apodemus_agrarius         26.23%    passed     97.04%
+  41  JQ993660_Eimeria_sp._ex_Apodemus_agrarius         24.57%    passed     98.89%
+  42  KU174475_Eimeria_apionodes                        25.80%    passed     80.91%
+  43  JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus       25.59%    passed     81.13%
+  44  JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus       25.48%    passed     97.13%
+  45  JQ993663_Eimeria_sp._ex_Cricetus_cricetus         24.47%    passed     98.23%
+  46  JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus        19.24%    passed     99.81%
+  47  JQ993652_Eimeria_sp._2_JK-2013                    24.04%    passed     90.68%
+  48  JQ993667_Eimeria_sp._ex_Mastomys_natalensis       19.14%    passed     97.34%
+  49  KU174454_Eimeria_sp._ex_Microtus_agrestis         26.60%    passed     98.98%
+  50  KU174469_Eimeria_sp._ex_Microtus_agrestis         28.84%    passed     99.11%
+  51  KU174481_Eimeria_sp._ex_Microtus_agrestis         47.97%    passed     82.36%
+  52  KU174456_Eimeria_sp._ex_Microtus_arvalis          25.80%    passed     98.99%
+  53  KU174484_Eimeria_sp._ex_Microtus_arvalis          49.31%    passed     82.96%
+  54  KU174478_Eimeria_sp._ex_Microtus_arvalis          58.21%    passed     78.60%
+  55  KU174473_Eimeria_sp._ex_Microtus_arvalis          25.91%    passed     99.07%
+  56  KU174471_Eimeria_sp._ex_Microtus_levis            25.69%    passed     99.10%
+  57  KU174455_Eimeria_sp._ex_Microtus_subterraneus     25.43%    passed     99.85%
+  58  KU174457_Eimeria_sp._ex_Clethrionomys_glareolus   27.93%    passed     98.23%
+  59  KU174476_Eimeria_sp._ex_Clethrionomys_glareolus   36.78%    passed     95.97%
+  60  KU174466_Eimeria_sp._ex_Clethrionomys_glareolus   28.20%    passed     98.69%
+  61  KU174486_Eimeria_sp._ex_Clethrionomys_glareolus   56.13%    passed     95.72%
+  62  KU174453_Eimeria_sp._ex_Clethrionomys_glareolus   28.84%    passed     98.43%
+  63  KU174458_Eimeria_sp._ex_Clethrionomys_glareolus   28.73%    passed     98.56%
+  64  KU174460_Eimeria_sp._ex_Clethrionomys_glareolus   25.80%    passed     98.64%
+  65  KU174452_Eimeria_sp._ex_Clethrionomys_glareolus   26.12%    passed     99.05%
+  66  KU174482_Eimeria_sp._ex_Clethrionomys_glareolus   57.25%    passed     85.77%
+  67  AF246717_Eimeria_telekii                          16.84%    passed     93.99%
+  68  KT184355_Eimeria_vermiformis                      39.23%    passed     87.19%
+  69  JQ993653_Eimeria_vilasi                           23.29%    passed     95.30%
+  70  AF307880_Eimeria_albigulae                        17.38%    passed     93.20%
+  71  AF339489_Eimeria_chaetodipi                       16.42%    passed     92.18%
+  72  AF307878_Eimeria_arizonensis                      16.68%    passed     93.58%
+  73  AF307876_Eimeria_antrozoi                         16.90%    passed     97.49%
+  74  AF324214_Eimeria_chobotari                        17.06%    passed     91.77%
+  75  AF339490_Eimeria_dipodomysis                      18.34%    passed     68.05%
+  76  AF339491_Eimeria_leucopi                          18.55%    passed     91.81%
+  77  AF307879_Eimeria_onychomysis                      18.55%    passed     89.48%
+  78  AF339492_Eimeria_peromysci                        16.20%    passed     86.48%
+  79  AF307877_Eimeria_rioarribaensis                   17.43%    passed     96.99%
+  80  AF311642_Eimeria_reedi                            17.70%    passed     94.57%
+  81  KU192965_Eimeria_alorani                          40.35%    passed     93.32%
+  82  KU192958_Eimeria_alorani                          31.61%    passed     97.16%
+  83  KU192936_Eimeria_apionodes                        25.75%    passed     98.86%
+  84  KU192961_Eimeria_alorani                          26.39%    passed     97.18%
+  85  KU192956_Eimeria_apionodes                        59.12%    passed     69.51%
+  86  KU192931_Eimeria_apionodes                        25.59%    passed     98.44%
+  87  KU192938_Eimeria_apionodes                        72.92%    passed     79.99%
+  88  KU192916_Eimeria_apionodes                        28.25%    passed     95.39%
+  89  KT184339.1_Eimeria_falciformis                     4.53%    passed     89.41%
+  90  MH751925.1_Eimeria_ferrisi                        29.90%    passed     99.22%
+  91  MH751926.1_Eimeria_vermiformis                    43.18%    passed     89.18%
+  92  MH751927.1_Eimeria_ferrisi                        49.52%    passed     91.54%
+  93  MH751928.1_Eimeria_ferrisi                        43.18%    passed     94.34%
+  94  MH751929.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+  95  MH751930.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+  96  MH751931.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+  97  MH751932.1_Eimeria_ferrisi                        43.92%    passed     86.63%
+  98  MH751933.1_Eimeria_ferrisi                        43.18%    passed     94.52%
+  99  MH751934.1_Eimeria_falciformis                    44.08%    passed     84.13%
+ 100  MH751935.1_Eimeria_ferrisi                        43.12%    passed     92.51%
+ 101  MH751936.1_Eimeria_ferrisi                        43.28%    passed     94.81%
+ 102  MH751937.1_Eimeria_falciformis                    43.28%    passed     89.17%
+ 103  MH751938.1_Eimeria_ferrisi                        28.68%    passed     99.48%
+ 104  MH751939.1_Eimeria_ferrisi                        43.55%    passed     95.18%
+ 105  MH751940.1_Eimeria_vermiformis                    38.97%    passed     95.62%
+ 106  MH751941.1_Eimeria_falciformis                    43.23%    passed     90.25%
+ 107  MH751942.1_Eimeria_falciformis                    28.36%    passed     93.89%
+ 108  MH751943.1_Eimeria_falciformis                    43.34%    passed     91.86%
+ 109  MH751944.1_Eimeria_ferrisi                        43.07%    passed     94.06%
+ 110  MH751945.1_Eimeria_ferrisi                        30.97%    passed     99.90%
+ 111  MH751946.1_Eimeria_ferrisi                        42.32%    passed     91.78%
+ 112  MH751947.1_Eimeria_ferrisi                        28.52%    passed     98.73%
+ 113  MH751948.1_Eimeria_vermiformis                    29.16%    passed     97.37%
+ 114  MH751949.1_Eimeria_ferrisi                        28.73%    passed     99.39%
+ 115  MH751950.1_Eimeria_ferrisi                        37.05%    passed     96.56%
+ 116  MH751951.1_Eimeria_vermiformis                    43.50%    passed     90.25%
+ 117  MH751952.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 118  MH751953.1_Eimeria_ferrisi                        43.12%    passed     94.56%
+ 119  MH751954.1_Eimeria_ferrisi                        40.51%    passed     97.00%
+ 120  MH751955.1_Eimeria_ferrisi                        29.85%    passed     98.46%
+ 121  MH751956.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 122  MH751957.1_Eimeria_vermiformis                    27.67%    passed     95.05%
+ 123  MH751958.1_Eimeria_ferrisi                        50.11%    passed     93.08%
+ 124  MH751959.1_Eimeria_ferrisi                        29.00%    passed     99.72%
+ 125  MH751960.1_Eimeria_falciformis                    28.09%    passed     99.68%
+ 126  MH751961.1_Eimeria_ferrisi                        43.07%    passed     92.65%
+ 127  MH751962.1_Eimeria_ferrisi                        30.54%    passed     99.76%
+ 128  MH751963.1_Eimeria_ferrisi                        27.03%    passed     99.35%
+ 129  MH751964.1_Eimeria_falciformis                    47.01%    passed     74.45%
+ 130  MH751965.1_Eimeria_ferrisi                        31.98%    passed     99.69%
+ 131  MH751966.1_Eimeria_ferrisi                        28.46%    passed     99.78%
+ 132  MH751967.1_Eimeria_ferrisi                        46.86%    passed     84.54%
+ 133  MH751968.1_Eimeria_ferrisi                        43.18%    passed     93.08%
+ 134  MH751969.1_Eimeria_ferrisi                        43.66%    passed     86.31%
+ 135  MH751970.1_Eimeria_ferrisi                        27.83%    passed     98.56%
+ 136  MH751971.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 137  MH751972.1_Eimeria_ferrisi                        37.47%    passed     97.90%
+ 138  MH751973.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 139  MH751974.1_Eimeria_vermiformis                    43.12%    passed     90.33%
+ 140  MH751975.1_Eimeria_falciformis                    48.45%    passed     91.27%
+ 141  MH751976.1_Eimeria_falciformis                    55.38%    passed     93.40%
+ 142  MH751977.1_Eimeria_vermiformis                    31.45%    passed     98.45%
+ 143  MH751978.1_Eimeria_falciformis                    27.67%    passed     97.71%
+ 144  MH751979.1_Eimeria_ferrisi                        26.01%    passed     99.22%
+ 145  MH751980.1_Eimeria_falciformis                    28.04%    passed     98.02%
+ 146  MH751981.1_Eimeria_falciformis                    30.49%    passed     95.82%
+ 147  MH751982.1_Eimeria_ferrisi                        28.73%    passed     99.39%
+ 148  MH751983.1_Eimeria_ferrisi                        46.75%    passed     78.03%
+ 149  MH751984.1_Eimeria_ferrisi                        28.25%    passed     98.59%
+ 150  MH751985.1_Eimeria_ferrisi                        27.77%    passed     99.19%
+ 151  MH751986.1_Eimeria_ferrisi                        29.10%    passed     99.46%
+ 152  MH751987.1_Eimeria_ferrisi                        29.96%    passed     99.95%
+ 153  MH751988.1_Eimeria_ferrisi                        30.44%    passed     99.43%
+ 154  MH751989.1_Eimeria_ferrisi                        27.93%    passed     98.27%
+ 155  MH751990.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 156  MH751991.1_Eimeria_ferrisi                        29.00%    passed     99.49%
+ 157  MH751992.1_Eimeria_ferrisi                        43.07%    passed     94.06%
+ 158  MH751993.1_Eimeria_ferrisi                        29.16%    passed     99.24%
+ 159  MH751994.1_Eimeria_ferrisi                        35.98%    passed     99.95%
+ 160  MH751995.1_Eimeria_ferrisi                        29.16%    passed     99.24%
+ 161  MH751996.1_Eimeria_ferrisi                        28.73%    passed     99.52%
+ 162  MH751997.1_Eimeria_ferrisi                        36.46%    passed     98.88%
+ 163  MH751998.1_Eimeria_falciformis                    41.26%    passed     95.78%
+ 164  MH751999.1_Eimeria_ferrisi                        47.33%    passed     75.91%
+ 165  MH752000.1_Eimeria_ferrisi                        26.12%    passed     98.60%
+ 166  MH752001.1_Eimeria_ferrisi                        43.12%    passed     93.16%
+ 167  MH752002.1_Eimeria_ferrisi                        59.59%    passed     90.34%
+ 168  MH752003.1_Eimeria_vermiformis                    28.84%    passed     98.95%
+ 169  MH752004.1_Eimeria_ferrisi                        26.49%    passed     99.49%
+ 170  MH752005.1_Eimeria_ferrisi                        25.80%    passed     99.04%
+ 171  MH752006.1_Eimeria_ferrisi                        26.07%    passed     99.17%
+ 172  MH752007.1_Eimeria_ferrisi                        46.86%    passed     86.40%
+ 173  MH752008.1_Eimeria_ferrisi                        26.92%    passed     99.24%
+ 174  MH752009.1_Eimeria_ferrisi                        25.69%    passed     99.10%
+ 175  MH752010.1_Eimeria_ferrisi                        39.61%    passed     95.63%
+ 176  MH752011.1_Eimeria_falciformis                    25.59%    passed     99.26%
+ 177  MH752012.1_Eimeria_falciformis                    25.48%    passed     99.68%
+ 178  MH752013.1_Eimeria_ferrisi                        25.11%    passed     99.62%
+ 179  MH752014.1_Eimeria_ferrisi                        25.11%    passed     99.62%
+ 180  MH752015.1_Eimeria_ferrisi                        25.37%    passed     99.17%
+ 181  MH752016.1_Eimeria_falciformis                    31.45%    passed     98.81%
+ 182  MH752017.1_Eimeria_falciformis                    28.41%    passed     99.59%
+ 183  MH752018.1_Eimeria_falciformis                    28.52%    passed     99.24%
+ 184  MH752019.1_Eimeria_falciformis                    28.04%    passed     99.32%
+ 185  MH752020.1_Eimeria_ferrisi                        71.22%    passed     98.96%
+ 186  MH752021.1_Eimeria_ferrisi                        55.22%    passed     62.10%
+ 187  MH752022.1_Eimeria_ferrisi                        28.89%    passed     92.42%
+ 188  MH752023.1_Eimeria_ferrisi                        60.93%    passed     53.71%
+ 189  MH752024.1_Eimeria_ferrisi                        35.29%    passed     98.53%
+ 190  MH752025.1_Eimeria_ferrisi                        27.03%    passed     92.29%
+ 191  MH752026.1_Eimeria_ferrisi                        52.61%    passed     69.45%
+ 192  MH752027.1_Eimeria_ferrisi                        27.99%    passed     92.68%
+ 193  MH752028.1_Eimeria_ferrisi                        60.61%    passed     63.42%
+ 194  MH752029.1_Eimeria_ferrisi                        43.28%    passed     92.20%
+ 195  MH752030.1_Eimeria_vermiformis                    32.36%    passed     98.13%
+ 196  MH752031.1_Eimeria_ferrisi                        50.32%    passed     69.80%
+ 197  MH752032.1_Eimeria_ferrisi                        42.59%    passed     97.30%
+ 198  MH752033.1_Eimeria_ferrisi                        33.00%    passed     98.33%
+ 199  MH752034.1_Eimeria_ferrisi                        31.61%    passed     99.90%
+ 200  MH752035.1_Eimeria_ferrisi                        37.26%    passed     99.41%
+ 201  MH752036.1_Eimeria_ferrisi                        45.04%    passed     96.46%
+ 202  Lab_single-multi-amplicon_ASV1                    85.93%    passed     91.74%
+ 203  Lab_single-multi-amplicon_ASV2                    85.93%    passed     95.61%
+ 204  Lab_single-multi-amplicon_ASV3                    85.93%    passed     97.31%
+ 205  Lab_single-amplicon_ASV4                          85.93%    passed     96.13%
+ 206  Lab_single-amplicon_ASV5                          86.78%    passed     90.95%
+ 207  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_1    83.16%    passed     70.28%
+ 208  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_2    83.16%    passed     64.89%
+ 209  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_3    83.16%    passed     76.40%
+ 210  18S_0067a_deg_3Mod_53_F.NSR399_3Mod_53_R_ASV_4    83.16%    passed     71.57%
+ 211  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_1    83.32%    passed     66.75%
+ 212  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_2    83.32%    passed     72.60%
+ 213  18S_0067a_deg_5Mod_52_F.NSR399_5Mod_52_R_ASV_3    83.32%    passed     74.05%
+ 214  MarkN_10_F.Euk360_CR_21_R_ASV_1                   82.36%    passed     57.77%
+ 215  MarkN_10_F.Euk360_CR_21_R_ASV_2                   82.36%    passed     61.29%
+ 216  MarkN_10_F.Euk360_CR_21_R_ASV_3                   82.36%    passed     64.11%
+ 217  MarkN_10_F.Euk360_CR_21_R_ASV_4                   82.36%    passed     56.03%
+ 218  MarkN_10_F.Euk360_CR_21_R_ASV_5                   82.36%    passed     61.57%
+ 219  Hadz_566_6_F.Nem_0425_4_2_R_ASV_1                 80.81%    failed      3.32%
+ 220  MarkN_10_F.Proti440R_28_R_ASV_1                   82.46%    passed     63.81%
+ 221  MarkN_10_F.Proti440R_28_R_ASV_2                   82.46%    passed     58.38%
+ 222  MarkN_10_F.Proti440R_28_R_ASV_3                   82.46%    passed     66.71%
+ 223  MarkN_10_F.Proti440R_28_R_ASV_4                   82.46%    passed     61.51%
+ 224  MarkN_10_F.Proti440R_28_R_ASV_5                   82.46%    passed     70.87%
+ 225  Gen_600_7_F.Nem_0425_4_2_R_ASV_1                  81.02%    failed      2.18%
+ 226  Gen_600_7_F.Nem_0425_4_2_R_ASV_2                  81.02%    failed      3.04%
+ 227  Gen_600_7_F.Nem_0425_4_2_R_ASV_3                  81.08%    passed      7.96%
+ 228  Prot1702_32_F.wang1624CR6S_16_R_ASV_1             81.66%    passed     83.35%
+ 229  Prot1702_32_F.wang1624CR6S_16_R_ASV_2             81.66%    passed     82.32%
+ 230  wang1141_13_F.Nem_0425_6_3_R_ASV_1                85.93%    passed     91.74%
+ 231  wang1141_13_F.Nem_0425_6_3_R_ASV_2                85.93%    passed     84.57%
+ 232  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_1              82.46%    passed     34.52%
+ 233  Nem_0425_6CR_14_F.EukB_MH_24_R_ASV_2              82.46%    passed     37.02%
 WARNING: 52 sequences contain more than 50% gaps/ambiguity
-****  TOTAL                                             40.55%  0 sequences failed composition chi2 test (p-value<5%; df=3)
+****  TOTAL                                             40.45%  3 sequences failed composition chi2 test (p-value<5%; df=3)
 NOTE: KU174473_Eimeria_sp._ex_Microtus_arvalis is identical to KU174461_Eimeria_apionodes but kept for subsequent analysis
 NOTE: MH751998.1_Eimeria_falciformis is identical to MH751998_Eimeria_falciformis but kept for subsequent analysis
 NOTE: MH751930.1_Eimeria_ferrisi is identical to MH751929.1_Eimeria_ferrisi but kept for subsequent analysis
@@ -260,8 +260,8 @@ NOTE: MH751982.1_Eimeria_ferrisi is identical to MH751949.1_Eimeria_ferrisi but 
 NOTE: MH751995.1_Eimeria_ferrisi is identical to MH751993.1_Eimeria_ferrisi but kept for subsequent analysis
 NOTE: MH752014.1_Eimeria_ferrisi is identical to MH752013.1_Eimeria_ferrisi but kept for subsequent analysis
 NOTE: wang1141_13_F.Nem_0425_6_3_R_ASV_1 is identical to Lab_single-multi-amplicon_ASV1 but kept for subsequent analysis
-Checking for duplicate sequences: done in 0.00456703 secs using 4676% CPU
-Identifying sites to remove: done in 0.00651566 secs using 4403% CPU
+Checking for duplicate sequences: done in 0.00385632 secs using 7517% CPU
+Identifying sites to remove: done in 0.00632653 secs using 3159% CPU
 NOTE: 7 identical sequences (see below) will be ignored for subsequent analysis
 NOTE: MH751931.1_Eimeria_ferrisi (identical to MH751929.1_Eimeria_ferrisi) is ignored but added at the end
 NOTE: MH751952.1_Eimeria_ferrisi (identical to MH751929.1_Eimeria_ferrisi) is ignored but added at the end
@@ -275,1318 +275,1292 @@ Alignment was printed to tmp/Eimeria18S_wild_lab_ref.fasta.uniqueseq.phy
 For your convenience alignment with unique sequences printed to tmp/Eimeria18S_wild_lab_ref.fasta.uniqueseq.phy
 
 Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.022 seconds
-Generating 5000 samples for ultrafast bootstrap (seed: 803517)...
+Generating 5000 samples for ultrafast bootstrap (seed: 429961)...
 
 NOTE: 27 MB RAM (0 GB) is required!
 Measuring multi-threading efficiency up to 96 CPU cores
 Increase to 10 rounds for branch lengths
-256 trees examined
-Threads: 1 / Time: 96.182 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -12186
-Threads: 2 / Time: 69.669 sec / Speedup: 1.381 / Efficiency: 69% / LogL: -12186
-Threads: 3 / Time: 80.498 sec / Speedup: 1.195 / Efficiency: 40% / LogL: -12186
-Determining AUTO threadcount: done in 246.35 secs using 191.2% CPU
+257 trees examined
+Threads: 1 / Time: 96.361 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -12199
+Threads: 2 / Time: 80.754 sec / Speedup: 1.193 / Efficiency: 60% / LogL: -12199
+Threads: 3 / Time: 83.701 sec / Speedup: 1.151 / Efficiency: 38% / LogL: -12199
+Determining AUTO threadcount: done in 260.817 secs using 192.5% CPU
 BEST NUMBER OF THREADS: 2
 
 Estimate model parameters (epsilon = 0.100)
-1. Initial log-likelihood: -5802.589
-2. Current log-likelihood: -5713.524
-3. Current log-likelihood: -5707.789
-4. Current log-likelihood: -5701.759
-5. Current log-likelihood: -5695.537
-6. Current log-likelihood: -5689.309
-7. Current log-likelihood: -5683.307
-8. Current log-likelihood: -5677.839
-9. Current log-likelihood: -5673.147
-10. Current log-likelihood: -5669.373
-11. Current log-likelihood: -5666.547
-12. Current log-likelihood: -5664.510
-13. Current log-likelihood: -5663.071
-14. Current log-likelihood: -5662.056
-15. Current log-likelihood: -5661.215
-16. Current log-likelihood: -5660.468
-17. Current log-likelihood: -5659.831
-18. Current log-likelihood: -5659.257
-19. Current log-likelihood: -5658.758
-20. Current log-likelihood: -5658.336
-21. Current log-likelihood: -5657.987
-22. Current log-likelihood: -5657.708
-23. Current log-likelihood: -5657.489
-24. Current log-likelihood: -5657.322
-25. Current log-likelihood: -5657.197
-Optimal log-likelihood: -5657.093
-Rate parameters:  A-C: 1.00000  A-G: 1.22387  A-T: 1.00000  C-G: 1.00000  C-T: 3.05131  G-T: 1.00000
+1. Initial log-likelihood: -5764.255
+2. Current log-likelihood: -5671.105
+3. Current log-likelihood: -5666.107
+4. Current log-likelihood: -5660.927
+5. Current log-likelihood: -5655.597
+6. Current log-likelihood: -5650.267
+7. Current log-likelihood: -5645.122
+8. Current log-likelihood: -5640.533
+9. Current log-likelihood: -5636.449
+10. Current log-likelihood: -5632.978
+11. Current log-likelihood: -5630.261
+12. Current log-likelihood: -5628.269
+13. Current log-likelihood: -5626.857
+14. Current log-likelihood: -5625.890
+15. Current log-likelihood: -5625.228
+16. Current log-likelihood: -5624.751
+17. Current log-likelihood: -5624.347
+18. Current log-likelihood: -5623.981
+19. Current log-likelihood: -5623.647
+20. Current log-likelihood: -5623.345
+21. Current log-likelihood: -5623.077
+22. Current log-likelihood: -5622.843
+23. Current log-likelihood: -5622.642
+24. Current log-likelihood: -5622.473
+25. Current log-likelihood: -5622.332
+26. Current log-likelihood: -5622.217
+Optimal log-likelihood: -5622.110
+Rate parameters:  A-C: 1.00000  A-G: 1.19881  A-T: 1.00000  C-G: 1.00000  C-T: 3.07876  G-T: 1.00000
 Base frequencies:  A: 0.251  C: 0.197  G: 0.269  T: 0.283
-Site proportion and rates:  (0.899,0.400) (0.101,6.357)
-Parameters optimization took 25 rounds (2.895 sec)
+Site proportion and rates:  (0.878,0.362) (0.122,5.591)
+Parameters optimization took 26 rounds (3.445 sec)
 Wrote distance file to... 
 Computing ML distances based on estimated model parameters...
-Calculating distance matrix: done in 0.13643 secs using 198% CPU
-Computing ML distances took 0.137287 sec (of wall-clock time) 0.270164 sec (of CPU time)
-Setting up auxiliary I and S matrices: done in 0.00115892 secs using 187.8% CPU
-Constructing RapidNJ tree: done in 0.0387372 secs using 99.9% CPU
-Computing RapidNJ tree took 0.039985 sec (of wall-clock time) 0.041000 sec (of CPU time)
-Log-likelihood of RapidNJ tree: -5788.369
+Calculating distance matrix: done in 0.138002 secs using 200% CPU
+Computing ML distances took 0.139618 sec (of wall-clock time) 0.278952 sec (of CPU time)
+Setting up auxiliary I and S matrices: done in 0.00111421 secs using 191.6% CPU
+Constructing RapidNJ tree: done in 0.0375363 secs using 112.5% CPU
+Computing RapidNJ tree took 0.038753 sec (of wall-clock time) 0.044510 sec (of CPU time)
+Log-likelihood of RapidNJ tree: -5777.928
 --------------------------------------------------------------------
 |             INITIALIZING CANDIDATE TREE SET                      |
 --------------------------------------------------------------------
-Generating 98 parsimony trees... 2.541 second
-Computing log-likelihood of 98 initial trees ... 2.827 seconds
-Current best score: -5604.315
+Generating 98 parsimony trees... 2.676 second
+Computing log-likelihood of 98 initial trees ... 2.841 seconds
+Current best score: -5588.388
 
 Do NNI search on 20 best initial trees
-Optimizing NNI: done in 3.75367 secs using 199.4% CPU
+Optimizing NNI: done in 8.02045 secs using 199.4% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 1: -5594.479
-Optimizing NNI: done in 5.54016 secs using 199% CPU
-Optimizing NNI: done in 9.36026 secs using 199% CPU
+BETTER TREE FOUND at iteration 1: -5568.519
+Optimizing NNI: done in 9.12656 secs using 198.8% CPU
+Optimizing NNI: done in 7.11103 secs using 199.2% CPU
+Optimizing NNI: done in 9.33791 secs using 199% CPU
+Optimizing NNI: done in 9.48799 secs using 199.4% CPU
+Optimizing NNI: done in 7.26015 secs using 199.3% CPU
+Optimizing NNI: done in 6.45906 secs using 199.2% CPU
+Optimizing NNI: done in 8.84284 secs using 199.2% CPU
+Optimizing NNI: done in 3.58957 secs using 199.2% CPU
+Optimizing NNI: done in 7.92485 secs using 199.1% CPU
+Iteration 10 / LogL: -5575.063 / Time: 0h:5m:48s
+Optimizing NNI: done in 12.2648 secs using 199.1% CPU
+Optimizing NNI: done in 6.47845 secs using 198.1% CPU
+Optimizing NNI: done in 9.00414 secs using 199.1% CPU
+Optimizing NNI: done in 12.0304 secs using 199.2% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 3: -5586.089
-Optimizing NNI: done in 8.52176 secs using 199.2% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 4: -5585.719
-Optimizing NNI: done in 4.69864 secs using 199.8% CPU
-Optimizing NNI: done in 10.638 secs using 199.1% CPU
-Optimizing NNI: done in 5.90766 secs using 199% CPU
-Optimizing NNI: done in 5.7668 secs using 199% CPU
-Optimizing NNI: done in 11.7007 secs using 198.8% CPU
-Optimizing NNI: done in 7.0158 secs using 199% CPU
-Iteration 10 / LogL: -5589.394 / Time: 0h:5m:29s
-Optimizing NNI: done in 9.9325 secs using 199.1% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 11: -5584.854
-Optimizing NNI: done in 8.13867 secs using 198.9% CPU
-Optimizing NNI: done in 11.476 secs using 199.3% CPU
-Optimizing NNI: done in 11.3066 secs using 199.1% CPU
-Optimizing NNI: done in 8.6597 secs using 199.1% CPU
-Optimizing NNI: done in 6.51726 secs using 198.5% CPU
-Optimizing NNI: done in 4.37529 secs using 198.8% CPU
-Optimizing NNI: done in 7.36361 secs using 199.2% CPU
-Optimizing NNI: done in 6.74329 secs using 199.5% CPU
-Optimizing NNI: done in 3.81957 secs using 198.9% CPU
-Iteration 20 / LogL: -5603.668 / Time: 0h:6m:47s
+BETTER TREE FOUND at iteration 14: -5565.399
+Optimizing NNI: done in 3.1907 secs using 197.4% CPU
+Optimizing NNI: done in 3.66641 secs using 198.9% CPU
+Optimizing NNI: done in 6.17953 secs using 199.4% CPU
+Optimizing NNI: done in 6.88188 secs using 198.6% CPU
+Optimizing NNI: done in 8.25065 secs using 198.9% CPU
+Optimizing NNI: done in 7.49032 secs using 199.3% CPU
+Iteration 20 / LogL: -5581.637 / Time: 0h:7m:4s
 Finish initializing candidate tree set (20)
-Current best tree score: -5584.854 / CPU time: 157.500
+Current best tree score: -5565.399 / CPU time: 159.252
 Number of iterations: 20
 --------------------------------------------------------------------
 |               OPTIMIZING CANDIDATE TREE SET                      |
 --------------------------------------------------------------------
-Optimizing NNI: done in 2.32492 secs using 198.7% CPU
-Optimizing NNI: done in 3.91513 secs using 198.7% CPU
-Optimizing NNI: done in 2.89271 secs using 198.7% CPU
-Optimizing NNI: done in 2.65142 secs using 198.5% CPU
+Optimizing NNI: done in 6.04261 secs using 198.7% CPU
+Optimizing NNI: done in 1.32307 secs using 199.4% CPU
+Optimizing NNI: done in 2.83392 secs using 198.1% CPU
+Optimizing NNI: done in 1.53564 secs using 198.7% CPU
+Optimizing NNI: done in 2.63023 secs using 199.4% CPU
+Optimizing NNI: done in 2.29389 secs using 198.5% CPU
+Optimizing NNI: done in 2.74641 secs using 198.3% CPU
+Optimizing NNI: done in 2.66387 secs using 198.6% CPU
+Optimizing NNI: done in 6.06379 secs using 199.1% CPU
+Optimizing NNI: done in 3.4788 secs using 198.5% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 24: -5584.479
-Optimizing NNI: done in 3.63336 secs using 199.2% CPU
-Optimizing NNI: done in 3.4762 secs using 199.9% CPU
-Optimizing NNI: done in 2.93616 secs using 199% CPU
-Optimizing NNI: done in 3.92222 secs using 198.6% CPU
-Optimizing NNI: done in 2.01183 secs using 198% CPU
-Optimizing NNI: done in 5.19648 secs using 198.8% CPU
-Iteration 30 / LogL: -5588.539 / Time: 0h:7m:21s (0h:23m:51s left)
-Optimizing NNI: done in 4.08708 secs using 199.4% CPU
-Optimizing NNI: done in 2.86263 secs using 198.9% CPU
-Optimizing NNI: done in 1.9705 secs using 198.8% CPU
-Optimizing NNI: done in 3.38487 secs using 198.5% CPU
-Optimizing NNI: done in 3.83465 secs using 199.4% CPU
-Optimizing NNI: done in 1.95527 secs using 199.4% CPU
-Optimizing NNI: done in 4.58861 secs using 199.4% CPU
-Optimizing NNI: done in 2.87663 secs using 198.6% CPU
-Optimizing NNI: done in 2.00449 secs using 198.2% CPU
-Optimizing NNI: done in 3.10679 secs using 198.4% CPU
-Iteration 40 / LogL: -5584.518 / Time: 0h:7m:52s (0h:16m:58s left)
-Optimizing NNI: done in 2.3809 secs using 198.8% CPU
-Optimizing NNI: done in 3.65788 secs using 198.9% CPU
-Optimizing NNI: done in 2.44003 secs using 198.8% CPU
-Optimizing NNI: done in 2.35807 secs using 198.7% CPU
-Optimizing NNI: done in 1.79613 secs using 197.1% CPU
-Optimizing NNI: done in 3.19867 secs using 199% CPU
-Optimizing NNI: done in 3.77524 secs using 199.2% CPU
-BETTER TREE FOUND at iteration 47: -5584.474
-Optimizing NNI: done in 1.03549 secs using 198.1% CPU
-Optimizing NNI: done in 2.43708 secs using 198.6% CPU
-Optimizing NNI: done in 3.32986 secs using 198.7% CPU
-Iteration 50 / LogL: -5584.491 / Time: 0h:8m:19s (0h:16m:28s left)
-Log-likelihood cutoff on original alignment: -5629.771
-Optimizing NNI: done in 4.76339 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 30: -5564.174
+Iteration 30 / LogL: -5564.174 / Time: 0h:7m:36s (0h:26m:13s left)
+Optimizing NNI: done in 5.62823 secs using 198.8% CPU
+Optimizing NNI: done in 3.65661 secs using 198.3% CPU
+Optimizing NNI: done in 3.21043 secs using 198.5% CPU
+Optimizing NNI: done in 2.87785 secs using 198.5% CPU
+Optimizing NNI: done in 4.08016 secs using 199.1% CPU
+Optimizing NNI: done in 1.52809 secs using 198.9% CPU
+Optimizing NNI: done in 3.56157 secs using 198.8% CPU
+Optimizing NNI: done in 2.13033 secs using 198.2% CPU
+Optimizing NNI: done in 4.38983 secs using 199.2% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 51: -5583.736
-Optimizing NNI: done in 3.50416 secs using 198.5% CPU
-Optimizing NNI: done in 3.36289 secs using 199.4% CPU
+BETTER TREE FOUND at iteration 39: -5564.119
+Optimizing NNI: done in 4.00236 secs using 198.1% CPU
+Iteration 40 / LogL: -5565.072 / Time: 0h:8m:12s (0h:20m:49s left)
+Optimizing NNI: done in 2.25933 secs using 199.8% CPU
+Optimizing NNI: done in 3.04158 secs using 198.9% CPU
+Optimizing NNI: done in 2.03218 secs using 199.6% CPU
+Optimizing NNI: done in 3.15698 secs using 198.9% CPU
+Optimizing NNI: done in 3.24805 secs using 199% CPU
+Optimizing NNI: done in 3.00117 secs using 198.9% CPU
+Optimizing NNI: done in 2.44245 secs using 199.2% CPU
+Optimizing NNI: done in 2.98097 secs using 198.2% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 53: -5583.569
-Optimizing NNI: done in 4.85776 secs using 198.5% CPU
-Optimizing NNI: done in 4.41859 secs using 199.4% CPU
-Optimizing NNI: done in 2.44906 secs using 198.9% CPU
-Optimizing NNI: done in 1.75984 secs using 199.3% CPU
-Optimizing NNI: done in 3.07508 secs using 199% CPU
+BETTER TREE FOUND at iteration 48: -5563.422
+Optimizing NNI: done in 6.57529 secs using 199% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 58: -5582.756
-Optimizing NNI: done in 2.80771 secs using 198.8% CPU
-BETTER TREE FOUND at iteration 59: -5582.751
-Optimizing NNI: done in 4.13394 secs using 198.9% CPU
-Iteration 60 / LogL: -5584.461 / Time: 0h:9m:1s (0h:15m:8s left)
-Optimizing NNI: done in 2.29399 secs using 198.5% CPU
-Optimizing NNI: done in 1.46545 secs using 197.7% CPU
-Optimizing NNI: done in 2.23483 secs using 198.8% CPU
-Optimizing NNI: done in 1.5192 secs using 198.4% CPU
-Optimizing NNI: done in 2.37464 secs using 198.5% CPU
-Optimizing NNI: done in 1.48383 secs using 198.9% CPU
-Optimizing NNI: done in 4.68329 secs using 199.5% CPU
-Optimizing NNI: done in 2.39865 secs using 198.5% CPU
-Optimizing NNI: done in 4.23159 secs using 199.2% CPU
-Optimizing NNI: done in 3.08521 secs using 199% CPU
+BETTER TREE FOUND at iteration 49: -5563.156
+Optimizing NNI: done in 7.21629 secs using 198.6% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 70: -5582.262
-Iteration 70 / LogL: -5582.262 / Time: 0h:9m:28s (0h:13m:43s left)
-Optimizing NNI: done in 2.61906 secs using 199.2% CPU
-Optimizing NNI: done in 3.81575 secs using 199.4% CPU
-Optimizing NNI: done in 2.68377 secs using 199.1% CPU
-Optimizing NNI: done in 4.46887 secs using 198.7% CPU
-Optimizing NNI: done in 2.47314 secs using 199.5% CPU
-Optimizing NNI: done in 3.93717 secs using 198.7% CPU
-Optimizing NNI: done in 1.97767 secs using 198.3% CPU
-Optimizing NNI: done in 2.89082 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 50: -5562.335
+Iteration 50 / LogL: -5562.335 / Time: 0h:8m:48s (0h:17m:59s left)
+Log-likelihood cutoff on original alignment: -5614.659
+Optimizing NNI: done in 1.88928 secs using 198% CPU
+Optimizing NNI: done in 3.63347 secs using 199.2% CPU
+Optimizing NNI: done in 3.06106 secs using 199% CPU
+Optimizing NNI: done in 5.02917 secs using 198.8% CPU
+Optimizing NNI: done in 4.22736 secs using 198.8% CPU
+Optimizing NNI: done in 3.43724 secs using 198.9% CPU
+Optimizing NNI: done in 3.10835 secs using 199.2% CPU
+Optimizing NNI: done in 2.87407 secs using 198.9% CPU
+Optimizing NNI: done in 1.87373 secs using 197.5% CPU
+Optimizing NNI: done in 4.24918 secs using 199.2% CPU
+Iteration 60 / LogL: -5581.151 / Time: 0h:9m:28s (0h:14m:26s left)
+Optimizing NNI: done in 5.8811 secs using 199.3% CPU
+Optimizing NNI: done in 1.95964 secs using 199.2% CPU
+Optimizing NNI: done in 3.86659 secs using 199.2% CPU
+Optimizing NNI: done in 3.36876 secs using 198.7% CPU
+Optimizing NNI: done in 3.68757 secs using 199.1% CPU
+Optimizing NNI: done in 2.95334 secs using 198.5% CPU
+Optimizing NNI: done in 4.29174 secs using 198.6% CPU
+Optimizing NNI: done in 2.35923 secs using 198.3% CPU
+Optimizing NNI: done in 3.32085 secs using 198.9% CPU
+Optimizing NNI: done in 1.08729 secs using 198.9% CPU
+Iteration 70 / LogL: -5582.671 / Time: 0h:10m:2s (0h:11m:38s left)
+Optimizing NNI: done in 2.53271 secs using 199.3% CPU
+Optimizing NNI: done in 2.10662 secs using 199.1% CPU
+Optimizing NNI: done in 3.55266 secs using 198.8% CPU
+Optimizing NNI: done in 2.51363 secs using 199.3% CPU
+Optimizing NNI: done in 2.11643 secs using 197.9% CPU
+Optimizing NNI: done in 1.22939 secs using 198.6% CPU
+Optimizing NNI: done in 2.82249 secs using 198.9% CPU
+Optimizing NNI: done in 3.4477 secs using 199.1% CPU
+Optimizing NNI: done in 1.81352 secs using 199% CPU
+Optimizing NNI: done in 5.27223 secs using 198.7% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 78: -5581.347
-Optimizing NNI: done in 3.4348 secs using 199.2% CPU
-Optimizing NNI: done in 2.17974 secs using 199.3% CPU
-Iteration 80 / LogL: -5593.266 / Time: 0h:9m:59s (0h:12m:23s left)
-Optimizing NNI: done in 3.73063 secs using 198.8% CPU
-Optimizing NNI: done in 2.39002 secs using 198.9% CPU
-Optimizing NNI: done in 4.02895 secs using 198.9% CPU
-Optimizing NNI: done in 2.83084 secs using 199% CPU
-Optimizing NNI: done in 1.40026 secs using 199.4% CPU
-Optimizing NNI: done in 3.37404 secs using 198.7% CPU
-Optimizing NNI: done in 3.15655 secs using 199.3% CPU
-Optimizing NNI: done in 1.17175 secs using 199.3% CPU
-Optimizing NNI: done in 1.8585 secs using 199% CPU
-Optimizing NNI: done in 4.80819 secs using 198.7% CPU
-Iteration 90 / LogL: -5582.523 / Time: 0h:10m:29s (0h:10m:22s left)
-Optimizing NNI: done in 2.85342 secs using 198.1% CPU
-Optimizing NNI: done in 3.05318 secs using 199% CPU
-Optimizing NNI: done in 2.65049 secs using 197.8% CPU
-Optimizing NNI: done in 1.2669 secs using 197.9% CPU
-Optimizing NNI: done in 1.19395 secs using 198.5% CPU
-Optimizing NNI: done in 2.66108 secs using 198.9% CPU
+BETTER TREE FOUND at iteration 80: -5562.308
+Iteration 80 / LogL: -5562.308 / Time: 0h:10m:30s (0h:13m:18s left)
+Optimizing NNI: done in 3.58684 secs using 199.1% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 96: -5581.334
-Optimizing NNI: done in 3.02299 secs using 198.6% CPU
-Optimizing NNI: done in 1.24481 secs using 199% CPU
-Optimizing NNI: done in 3.28742 secs using 198.4% CPU
-Optimizing NNI: done in 1.7217 secs using 198.5% CPU
-Iteration 100 / LogL: -5610.445 / Time: 0h:10m:53s (0h:10m:33s left)
-Log-likelihood cutoff on original alignment: -5629.771
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.935
+BETTER TREE FOUND at iteration 81: -5562.272
+Optimizing NNI: done in 3.54614 secs using 198.6% CPU
+Optimizing NNI: done in 0.919713 secs using 196.5% CPU
+Optimizing NNI: done in 2.02398 secs using 198.2% CPU
+Optimizing NNI: done in 3.35968 secs using 198.9% CPU
+Optimizing NNI: done in 2.40455 secs using 198.3% CPU
+Optimizing NNI: done in 2.77156 secs using 199.3% CPU
+Optimizing NNI: done in 3.08739 secs using 197.9% CPU
+Optimizing NNI: done in 3.6182 secs using 198.8% CPU
+Optimizing NNI: done in 2.12815 secs using 198.8% CPU
+Iteration 90 / LogL: -5572.162 / Time: 0h:10m:59s (0h:11m:14s left)
+Optimizing NNI: done in 2.05216 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 91: -5562.264
+Optimizing NNI: done in 3.56216 secs using 198.9% CPU
+Optimizing NNI: done in 1.78198 secs using 199% CPU
+Optimizing NNI: done in 2.49521 secs using 197.8% CPU
+Optimizing NNI: done in 2.59795 secs using 198.5% CPU
+BETTER TREE FOUND at iteration 95: -5562.254
+Optimizing NNI: done in 4.38329 secs using 198.3% CPU
+Optimizing NNI: done in 5.20893 secs using 199% CPU
+Optimizing NNI: done in 2.23246 secs using 199.4% CPU
+Optimizing NNI: done in 5.36397 secs using 198.6% CPU
+Optimizing NNI: done in 3.21502 secs using 198.4% CPU
+Iteration 100 / LogL: -5562.346 / Time: 0h:11m:33s (0h:11m:5s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.938
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 2.62542 secs using 198.6% CPU
-Optimizing NNI: done in 1.79056 secs using 198.7% CPU
-Optimizing NNI: done in 2.14324 secs using 198.6% CPU
+Optimizing NNI: done in 5.2086 secs using 198.7% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 103: -5581.269
-Optimizing NNI: done in 3.85779 secs using 199% CPU
+BETTER TREE FOUND at iteration 101: -5562.229
+Optimizing NNI: done in 3.35339 secs using 199.3% CPU
+Optimizing NNI: done in 3.17937 secs using 199.3% CPU
+Optimizing NNI: done in 2.99076 secs using 199% CPU
+Optimizing NNI: done in 4.98066 secs using 198.9% CPU
+BETTER TREE FOUND at iteration 105: -5562.226
+Optimizing NNI: done in 4.13349 secs using 198.8% CPU
+Optimizing NNI: done in 4.55201 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 107: -5562.225
+Optimizing NNI: done in 1.93735 secs using 197.6% CPU
+Optimizing NNI: done in 3.65184 secs using 198.8% CPU
+Optimizing NNI: done in 2.36893 secs using 198.3% CPU
+Iteration 110 / LogL: -5562.496 / Time: 0h:12m:16s (0h:10m:55s left)
+Optimizing NNI: done in 3.01208 secs using 198.3% CPU
+Optimizing NNI: done in 2.43973 secs using 199.2% CPU
+Optimizing NNI: done in 4.56233 secs using 198.7% CPU
+Optimizing NNI: done in 2.98596 secs using 199.3% CPU
+Optimizing NNI: done in 2.70646 secs using 199% CPU
+Optimizing NNI: done in 2.5832 secs using 198.3% CPU
+Optimizing NNI: done in 1.00974 secs using 198.2% CPU
+Optimizing NNI: done in 1.43355 secs using 198.5% CPU
+Optimizing NNI: done in 2.01467 secs using 198.7% CPU
+Optimizing NNI: done in 1.94893 secs using 198.9% CPU
+Iteration 120 / LogL: -5563.829 / Time: 0h:12m:42s (0h:9m:17s left)
+Optimizing NNI: done in 3.09817 secs using 198.5% CPU
+Optimizing NNI: done in 3.05795 secs using 199.5% CPU
+Optimizing NNI: done in 2.44315 secs using 197.6% CPU
+BETTER TREE FOUND at iteration 123: -5562.224
+Optimizing NNI: done in 5.59803 secs using 198.9% CPU
+Optimizing NNI: done in 5.68955 secs using 199% CPU
+Optimizing NNI: done in 4.76419 secs using 198.4% CPU
+Optimizing NNI: done in 2.47067 secs using 198.9% CPU
+Optimizing NNI: done in 2.89033 secs using 198.7% CPU
+Optimizing NNI: done in 4.41106 secs using 199% CPU
+Optimizing NNI: done in 3.4681 secs using 198.5% CPU
+Iteration 130 / LogL: -5563.039 / Time: 0h:13m:21s (0h:9m:38s left)
+Optimizing NNI: done in 3.42571 secs using 198.3% CPU
+Optimizing NNI: done in 2.86692 secs using 198.8% CPU
+Optimizing NNI: done in 3.40329 secs using 198.9% CPU
+Optimizing NNI: done in 3.77925 secs using 199.3% CPU
+Optimizing NNI: done in 6.27062 secs using 198.7% CPU
+Optimizing NNI: done in 3.81878 secs using 199% CPU
+Optimizing NNI: done in 2.70779 secs using 197.9% CPU
+Optimizing NNI: done in 2.96472 secs using 198.9% CPU
+Optimizing NNI: done in 2.92973 secs using 198.6% CPU
+Optimizing NNI: done in 4.02464 secs using 198.9% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 104: -5581.196
-Optimizing NNI: done in 2.60234 secs using 198.8% CPU
-Optimizing NNI: done in 5.31376 secs using 199.1% CPU
-Optimizing NNI: done in 3.97518 secs using 198.4% CPU
-Optimizing NNI: done in 4.62382 secs using 198.8% CPU
-Optimizing NNI: done in 3.11008 secs using 199% CPU
-Optimizing NNI: done in 5.62374 secs using 199.1% CPU
-Iteration 110 / LogL: -5582.118 / Time: 0h:11m:36s (0h:10m:0s left)
-Optimizing NNI: done in 2.90203 secs using 199.1% CPU
+BETTER TREE FOUND at iteration 140: -5562.211
+Iteration 140 / LogL: -5562.211 / Time: 0h:13m:59s (0h:10m:4s left)
+Optimizing NNI: done in 3.96858 secs using 199.4% CPU
+Optimizing NNI: done in 2.34169 secs using 198.7% CPU
+Optimizing NNI: done in 3.3335 secs using 198.4% CPU
+Optimizing NNI: done in 0.904784 secs using 199% CPU
+Optimizing NNI: done in 2.32205 secs using 198.2% CPU
+Optimizing NNI: done in 1.17127 secs using 198.7% CPU
+Optimizing NNI: done in 4.07513 secs using 199.2% CPU
+Optimizing NNI: done in 3.95032 secs using 198.1% CPU
+Optimizing NNI: done in 1.9796 secs using 198.6% CPU
+Optimizing NNI: done in 5.0923 secs using 199% CPU
+Iteration 150 / LogL: -5571.285 / Time: 0h:14m:30s (0h:8m:45s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 2.637 secs using 199% CPU
+Optimizing NNI: done in 4.32677 secs using 199.1% CPU
+BETTER TREE FOUND at iteration 152: -5562.203
+Optimizing NNI: done in 4.22726 secs using 198.3% CPU
+Optimizing NNI: done in 3.17776 secs using 198.7% CPU
+Optimizing NNI: done in 2.92948 secs using 198.8% CPU
+Optimizing NNI: done in 5.40603 secs using 197.8% CPU
+Optimizing NNI: done in 3.17349 secs using 198.3% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 111: -5581.067
-Optimizing NNI: done in 1.94197 secs using 198.2% CPU
-Optimizing NNI: done in 4.16791 secs using 198.8% CPU
-Optimizing NNI: done in 2.01157 secs using 198.8% CPU
-Optimizing NNI: done in 2.87719 secs using 199.4% CPU
-Optimizing NNI: done in 2.11117 secs using 198.7% CPU
-Optimizing NNI: done in 2.53106 secs using 198.6% CPU
-Optimizing NNI: done in 2.55461 secs using 198.6% CPU
+BETTER TREE FOUND at iteration 157: -5562.050
+Optimizing NNI: done in 6.98529 secs using 198.8% CPU
+Optimizing NNI: done in 4.02054 secs using 198.7% CPU
+Optimizing NNI: done in 3.17863 secs using 198.4% CPU
+Iteration 160 / LogL: -5566.991 / Time: 0h:15m:17s (0h:9m:19s left)
+Optimizing NNI: done in 2.51403 secs using 199.4% CPU
+Optimizing NNI: done in 3.11371 secs using 199.4% CPU
+Optimizing NNI: done in 3.38574 secs using 198.3% CPU
+Optimizing NNI: done in 2.49848 secs using 199.1% CPU
+Optimizing NNI: done in 2.65579 secs using 198.8% CPU
+Optimizing NNI: done in 2.41823 secs using 199.2% CPU
+Optimizing NNI: done in 3.59692 secs using 198.8% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 118: -5580.405
-Optimizing NNI: done in 2.08876 secs using 199.6% CPU
-Optimizing NNI: done in 2.18063 secs using 198.5% CPU
-Iteration 120 / LogL: -5605.585 / Time: 0h:12m:3s (0h:9m:55s left)
-Optimizing NNI: done in 5.24179 secs using 198.8% CPU
-Optimizing NNI: done in 3.1636 secs using 199% CPU
-Optimizing NNI: done in 2.0272 secs using 198.8% CPU
-Optimizing NNI: done in 2.28767 secs using 199.5% CPU
-Optimizing NNI: done in 2.7614 secs using 198.8% CPU
-Optimizing NNI: done in 2.74706 secs using 198.3% CPU
-Optimizing NNI: done in 1.99191 secs using 198.4% CPU
-Optimizing NNI: done in 3.58332 secs using 198% CPU
-Optimizing NNI: done in 3.22203 secs using 198.8% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 129: -5580.389
-Optimizing NNI: done in 1.88309 secs using 199% CPU
-Iteration 130 / LogL: -5604.803 / Time: 0h:12m:34s (0h:9m:38s left)
-Optimizing NNI: done in 3.69293 secs using 198.9% CPU
-Optimizing NNI: done in 1.86316 secs using 198.1% CPU
-Optimizing NNI: done in 1.83418 secs using 198.6% CPU
-Optimizing NNI: done in 4.42341 secs using 198.8% CPU
-Optimizing NNI: done in 2.14125 secs using 199.6% CPU
-Optimizing NNI: done in 4.23324 secs using 199.5% CPU
-Optimizing NNI: done in 2.85686 secs using 198.8% CPU
-Optimizing NNI: done in 3.70113 secs using 199% CPU
-Optimizing NNI: done in 3.62329 secs using 198.9% CPU
-Optimizing NNI: done in 3.61843 secs using 198.6% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 140: -5580.131
-Iteration 140 / LogL: -5580.131 / Time: 0h:13m:7s (0h:9m:26s left)
-Optimizing NNI: done in 2.04157 secs using 198.3% CPU
-Optimizing NNI: done in 2.75985 secs using 198.3% CPU
-Optimizing NNI: done in 2.65991 secs using 198.9% CPU
-Optimizing NNI: done in 4.01064 secs using 199.2% CPU
-Optimizing NNI: done in 3.36233 secs using 198.4% CPU
-Optimizing NNI: done in 4.55044 secs using 198.5% CPU
-Optimizing NNI: done in 3.39712 secs using 199.1% CPU
-Optimizing NNI: done in 2.96413 secs using 199% CPU
-Optimizing NNI: done in 3.57411 secs using 198.5% CPU
-Optimizing NNI: done in 2.11822 secs using 198.9% CPU
-Iteration 150 / LogL: -5580.424 / Time: 0h:13m:40s (0h:8m:15s left)
-Log-likelihood cutoff on original alignment: -5629.524
-Optimizing NNI: done in 3.83788 secs using 198.5% CPU
-Optimizing NNI: done in 2.87812 secs using 198.4% CPU
-Optimizing NNI: done in 4.69129 secs using 198.6% CPU
-Optimizing NNI: done in 3.38236 secs using 199.2% CPU
-Optimizing NNI: done in 4.66092 secs using 199% CPU
-Optimizing NNI: done in 4.74047 secs using 199% CPU
-Optimizing NNI: done in 2.6488 secs using 198.9% CPU
-Optimizing NNI: done in 2.44173 secs using 199.1% CPU
-BETTER TREE FOUND at iteration 158: -5580.127
-Optimizing NNI: done in 4.5956 secs using 199.4% CPU
-Optimizing NNI: done in 5.23778 secs using 198.8% CPU
-Iteration 160 / LogL: -5581.113 / Time: 0h:14m:26s (0h:8m:54s left)
-Optimizing NNI: done in 4.38881 secs using 198.9% CPU
-Optimizing NNI: done in 4.18608 secs using 198.6% CPU
-Optimizing NNI: done in 5.5694 secs using 198.6% CPU
-BETTER TREE FOUND at iteration 163: -5580.126
-Optimizing NNI: done in 2.95445 secs using 199.6% CPU
-Optimizing NNI: done in 4.89634 secs using 198.7% CPU
-BETTER TREE FOUND at iteration 165: -5580.125
-Optimizing NNI: done in 2.68024 secs using 198.3% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 166: -5579.808
-Optimizing NNI: done in 2.3988 secs using 199% CPU
-Optimizing NNI: done in 1.53953 secs using 197.9% CPU
-Optimizing NNI: done in 6.99357 secs using 199.5% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 169: -5579.593
-Optimizing NNI: done in 3.33565 secs using 199.3% CPU
-Iteration 170 / LogL: -5596.516 / Time: 0h:15m:8s (0h:8m:52s left)
-Optimizing NNI: done in 3.26373 secs using 199.5% CPU
-Optimizing NNI: done in 2.42185 secs using 199.6% CPU
-Optimizing NNI: done in 2.72378 secs using 198.5% CPU
-BETTER TREE FOUND at iteration 173: -5579.584
-Optimizing NNI: done in 2.5851 secs using 198.9% CPU
-Optimizing NNI: done in 5.34387 secs using 198.9% CPU
-Optimizing NNI: done in 3.54447 secs using 198.8% CPU
-Optimizing NNI: done in 2.75034 secs using 198.4% CPU
-Optimizing NNI: done in 2.6105 secs using 199.6% CPU
-Optimizing NNI: done in 2.65529 secs using 198.7% CPU
-Optimizing NNI: done in 3.05828 secs using 198.7% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 180: -5579.380
-Iteration 180 / LogL: -5579.380 / Time: 0h:15m:41s (0h:8m:46s left)
-Optimizing NNI: done in 2.39545 secs using 198.8% CPU
-Optimizing NNI: done in 4.2346 secs using 199.1% CPU
-Optimizing NNI: done in 2.81987 secs using 199% CPU
-Optimizing NNI: done in 2.49589 secs using 199.8% CPU
-Optimizing NNI: done in 2.66254 secs using 198.8% CPU
-Optimizing NNI: done in 7.76989 secs using 199% CPU
-Optimizing NNI: done in 2.60721 secs using 199.7% CPU
-Optimizing NNI: done in 2.40432 secs using 198.8% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 188: -5579.199
-Optimizing NNI: done in 5.3356 secs using 199% CPU
-Optimizing NNI: done in 2.45889 secs using 199.4% CPU
-Iteration 190 / LogL: -5604.904 / Time: 0h:16m:19s (0h:8m:27s left)
-Optimizing NNI: done in 3.32202 secs using 199% CPU
-Optimizing NNI: done in 4.1317 secs using 199% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 192: -5579.145
-Optimizing NNI: done in 3.40371 secs using 198.5% CPU
-Optimizing NNI: done in 3.04284 secs using 198.8% CPU
-Optimizing NNI: done in 3.80912 secs using 199.3% CPU
-Optimizing NNI: done in 2.39986 secs using 198.2% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 196: -5579.014
-Optimizing NNI: done in 5.5899 secs using 199.2% CPU
-BETTER TREE FOUND at iteration 197: -5579.005
-Optimizing NNI: done in 4.23787 secs using 199.3% CPU
-Optimizing NNI: done in 5.36134 secs using 199.7% CPU
-Optimizing NNI: done in 2.22298 secs using 199.5% CPU
-Iteration 200 / LogL: -5581.013 / Time: 0h:16m:59s (0h:8m:16s left)
-Log-likelihood cutoff on original alignment: -5629.315
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.860
+BETTER TREE FOUND at iteration 167: -5561.948
+Optimizing NNI: done in 2.79473 secs using 198.6% CPU
+Optimizing NNI: done in 3.6838 secs using 198.7% CPU
+Optimizing NNI: done in 2.94543 secs using 199.5% CPU
+Iteration 170 / LogL: -5562.191 / Time: 0h:15m:49s (0h:9m:5s left)
+Optimizing NNI: done in 0.964643 secs using 197.8% CPU
+Optimizing NNI: done in 3.18747 secs using 198.7% CPU
+Optimizing NNI: done in 1.1657 secs using 198.1% CPU
+Optimizing NNI: done in 3.97036 secs using 198.7% CPU
+Optimizing NNI: done in 1.94029 secs using 199.1% CPU
+Optimizing NNI: done in 2.08537 secs using 198.8% CPU
+Optimizing NNI: done in 3.61865 secs using 198.8% CPU
+Optimizing NNI: done in 2.91191 secs using 199.2% CPU
+Optimizing NNI: done in 3.34201 secs using 198.1% CPU
+Optimizing NNI: done in 7.67143 secs using 199.2% CPU
+Iteration 180 / LogL: -5568.282 / Time: 0h:16m:23s (0h:7m:57s left)
+Optimizing NNI: done in 2.98132 secs using 198.9% CPU
+Optimizing NNI: done in 1.25942 secs using 196.9% CPU
+Optimizing NNI: done in 0.949011 secs using 197.3% CPU
+Optimizing NNI: done in 3.22654 secs using 198.7% CPU
+Optimizing NNI: done in 2.48526 secs using 198.6% CPU
+Optimizing NNI: done in 2.69823 secs using 198.9% CPU
+Optimizing NNI: done in 2.4524 secs using 199% CPU
+Optimizing NNI: done in 3.07609 secs using 198.8% CPU
+Optimizing NNI: done in 2.21537 secs using 199.3% CPU
+Optimizing NNI: done in 3.88744 secs using 198.6% CPU
+Iteration 190 / LogL: -5562.624 / Time: 0h:16m:50s (0h:6m:51s left)
+Optimizing NNI: done in 2.77352 secs using 198.5% CPU
+Optimizing NNI: done in 2.31017 secs using 199.4% CPU
+Optimizing NNI: done in 1.71805 secs using 198.2% CPU
+Optimizing NNI: done in 3.22967 secs using 198.9% CPU
+Optimizing NNI: done in 2.58544 secs using 198.4% CPU
+Optimizing NNI: done in 2.64461 secs using 198.9% CPU
+Optimizing NNI: done in 1.24907 secs using 198.9% CPU
+Optimizing NNI: done in 6.04291 secs using 198.7% CPU
+Optimizing NNI: done in 2.30217 secs using 199% CPU
+Optimizing NNI: done in 4.28685 secs using 199.1% CPU
+Iteration 200 / LogL: -5562.063 / Time: 0h:17m:21s (0h:5m:50s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.955
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 4.1622 secs using 198.5% CPU
+Optimizing NNI: done in 2.63642 secs using 199.5% CPU
+BETTER TREE FOUND at iteration 201: -5561.945
+Optimizing NNI: done in 2.67101 secs using 198.6% CPU
+Optimizing NNI: done in 2.68058 secs using 199.8% CPU
+Optimizing NNI: done in 2.13456 secs using 198.4% CPU
+Optimizing NNI: done in 4.27829 secs using 198.9% CPU
+Optimizing NNI: done in 2.88084 secs using 199.1% CPU
+Optimizing NNI: done in 1.83122 secs using 197.5% CPU
+Optimizing NNI: done in 0.612011 secs using 197.4% CPU
+Optimizing NNI: done in 3.85001 secs using 199.2% CPU
+Optimizing NNI: done in 2.53883 secs using 198.9% CPU
+Iteration 210 / LogL: -5562.221 / Time: 0h:17m:55s (0h:7m:48s left)
+Optimizing NNI: done in 2.7528 secs using 198.5% CPU
+Optimizing NNI: done in 5.52825 secs using 198.5% CPU
+Optimizing NNI: done in 2.77582 secs using 199.1% CPU
+Optimizing NNI: done in 2.28243 secs using 198.6% CPU
+Optimizing NNI: done in 3.74124 secs using 198.6% CPU
+Optimizing NNI: done in 1.78468 secs using 197.9% CPU
+Optimizing NNI: done in 5.95211 secs using 198.6% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 201: -5578.977
-Optimizing NNI: done in 7.62166 secs using 198.9% CPU
-Optimizing NNI: done in 2.60873 secs using 198.9% CPU
-Optimizing NNI: done in 2.30736 secs using 199.1% CPU
-Optimizing NNI: done in 4.59874 secs using 199.4% CPU
-Optimizing NNI: done in 1.69534 secs using 198.8% CPU
-Optimizing NNI: done in 4.58955 secs using 198.7% CPU
-Optimizing NNI: done in 4.00996 secs using 199.3% CPU
-Optimizing NNI: done in 3.36101 secs using 199% CPU
+BETTER TREE FOUND at iteration 217: -5561.036
+Optimizing NNI: done in 3.68192 secs using 198.3% CPU
+Optimizing NNI: done in 2.48564 secs using 199.1% CPU
+Optimizing NNI: done in 2.02594 secs using 199.3% CPU
+Iteration 220 / LogL: -5562.782 / Time: 0h:18m:32s (0h:8m:12s left)
+Optimizing NNI: done in 3.5811 secs using 198.7% CPU
+Optimizing NNI: done in 1.74047 secs using 199.5% CPU
+Optimizing NNI: done in 2.57723 secs using 199.5% CPU
+Optimizing NNI: done in 5.21676 secs using 199% CPU
+BETTER TREE FOUND at iteration 224: -5561.034
+Optimizing NNI: done in 6.99244 secs using 199% CPU
+Optimizing NNI: done in 3.35141 secs using 198.9% CPU
+Optimizing NNI: done in 2.06612 secs using 198.7% CPU
+Optimizing NNI: done in 2.99869 secs using 199% CPU
+Optimizing NNI: done in 1.58198 secs using 198.3% CPU
+Optimizing NNI: done in 2.29301 secs using 198.7% CPU
+Iteration 230 / LogL: -5561.942 / Time: 0h:19m:7s (0h:7m:50s left)
+Optimizing NNI: done in 2.82088 secs using 199.4% CPU
+Optimizing NNI: done in 4.74317 secs using 198.9% CPU
+Optimizing NNI: done in 5.96697 secs using 198.5% CPU
+Optimizing NNI: done in 2.74549 secs using 199% CPU
+BETTER TREE FOUND at iteration 234: -5561.034
+Optimizing NNI: done in 4.22764 secs using 198.9% CPU
+Optimizing NNI: done in 6.21681 secs using 199.3% CPU
+Optimizing NNI: done in 2.26337 secs using 199.5% CPU
+Optimizing NNI: done in 3.39138 secs using 199.2% CPU
+BETTER TREE FOUND at iteration 238: -5561.033
+Optimizing NNI: done in 2.84441 secs using 199% CPU
+Optimizing NNI: done in 2.1105 secs using 198.3% CPU
+Iteration 240 / LogL: -5562.073 / Time: 0h:19m:47s (0h:8m:6s left)
+Optimizing NNI: done in 3.22251 secs using 199.4% CPU
+Optimizing NNI: done in 6.80892 secs using 199% CPU
+Optimizing NNI: done in 3.22736 secs using 198.6% CPU
+Optimizing NNI: done in 1.46989 secs using 198.5% CPU
+Optimizing NNI: done in 2.62087 secs using 198.6% CPU
+BETTER TREE FOUND at iteration 245: -5561.027
+Optimizing NNI: done in 1.19017 secs using 195.4% CPU
+Optimizing NNI: done in 3.26468 secs using 199% CPU
+Optimizing NNI: done in 1.72451 secs using 198.8% CPU
+Optimizing NNI: done in 2.56815 secs using 198.6% CPU
+Optimizing NNI: done in 2.91026 secs using 198.7% CPU
+Iteration 250 / LogL: -5565.603 / Time: 0h:20m:19s (0h:7m:45s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 3.85069 secs using 199.4% CPU
+Optimizing NNI: done in 2.87676 secs using 198.8% CPU
+Optimizing NNI: done in 3.04575 secs using 198.7% CPU
+Optimizing NNI: done in 3.80905 secs using 198.9% CPU
+Optimizing NNI: done in 4.06804 secs using 199% CPU
+Optimizing NNI: done in 4.84066 secs using 199% CPU
+Optimizing NNI: done in 2.7668 secs using 199.3% CPU
+Optimizing NNI: done in 1.60235 secs using 199.1% CPU
+Optimizing NNI: done in 2.40154 secs using 198.6% CPU
+Optimizing NNI: done in 2.44476 secs using 198.1% CPU
+Iteration 260 / LogL: -5561.030 / Time: 0h:20m:59s (0h:6m:53s left)
+Optimizing NNI: done in 2.89612 secs using 199.5% CPU
+Optimizing NNI: done in 4.83054 secs using 198.5% CPU
+Optimizing NNI: done in 3.02539 secs using 198.5% CPU
+Optimizing NNI: done in 2.9363 secs using 198.7% CPU
+Optimizing NNI: done in 2.4676 secs using 198.4% CPU
+Optimizing NNI: done in 5.08318 secs using 199.5% CPU
+Optimizing NNI: done in 5.34523 secs using 198.9% CPU
+Optimizing NNI: done in 2.73377 secs using 198.6% CPU
+Optimizing NNI: done in 1.76609 secs using 200.1% CPU
+Optimizing NNI: done in 3.28969 secs using 198.2% CPU
+Iteration 270 / LogL: -5565.791 / Time: 0h:21m:37s (0h:6m:1s left)
+Optimizing NNI: done in 1.74527 secs using 199.5% CPU
+Optimizing NNI: done in 2.54876 secs using 199.2% CPU
+Optimizing NNI: done in 3.52887 secs using 199.2% CPU
+Optimizing NNI: done in 2.71385 secs using 198% CPU
+Optimizing NNI: done in 3.00671 secs using 199% CPU
+Optimizing NNI: done in 3.21912 secs using 199.3% CPU
+Optimizing NNI: done in 4.20091 secs using 198.9% CPU
+Optimizing NNI: done in 3.45976 secs using 198.8% CPU
+Optimizing NNI: done in 3.43819 secs using 199.2% CPU
+Optimizing NNI: done in 3.89076 secs using 198.3% CPU
+Iteration 280 / LogL: -5561.033 / Time: 0h:22m:13s (0h:5m:10s left)
+Optimizing NNI: done in 4.43607 secs using 198.8% CPU
+Optimizing NNI: done in 2.17298 secs using 198.8% CPU
+Optimizing NNI: done in 0.900904 secs using 198.6% CPU
+Optimizing NNI: done in 3.59556 secs using 199.1% CPU
+Optimizing NNI: done in 5.64448 secs using 198.6% CPU
+Optimizing NNI: done in 2.13242 secs using 198.1% CPU
+Optimizing NNI: done in 3.63633 secs using 199% CPU
+Optimizing NNI: done in 0.97032 secs using 194% CPU
+Optimizing NNI: done in 2.84894 secs using 199.1% CPU
+Optimizing NNI: done in 2.18876 secs using 198.5% CPU
+Iteration 290 / LogL: -5561.550 / Time: 0h:22m:45s (0h:4m:19s left)
+Optimizing NNI: done in 2.16455 secs using 198.1% CPU
+Optimizing NNI: done in 4.177 secs using 198.6% CPU
+Optimizing NNI: done in 3.64337 secs using 199.5% CPU
+Optimizing NNI: done in 3.17334 secs using 198.2% CPU
+Optimizing NNI: done in 3.55529 secs using 198.7% CPU
+Optimizing NNI: done in 3.42588 secs using 199.2% CPU
+Optimizing NNI: done in 3.29172 secs using 199% CPU
+BETTER TREE FOUND at iteration 297: -5561.026
+Optimizing NNI: done in 1.59267 secs using 197.9% CPU
+Optimizing NNI: done in 1.8073 secs using 198% CPU
+Optimizing NNI: done in 1.7038 secs using 197.4% CPU
+Iteration 300 / LogL: -5602.960 / Time: 0h:23m:17s (0h:7m:33s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.873
+NOTE: UFBoot does not converge, continue at least 100 more iterations
+Optimizing NNI: done in 4.52556 secs using 199.5% CPU
+Optimizing NNI: done in 3.02815 secs using 199.3% CPU
+Optimizing NNI: done in 2.8446 secs using 199.2% CPU
+Optimizing NNI: done in 3.93486 secs using 198.8% CPU
+Optimizing NNI: done in 2.58707 secs using 198.9% CPU
+Optimizing NNI: done in 3.76153 secs using 198.8% CPU
+Optimizing NNI: done in 3.60362 secs using 198.6% CPU
+Optimizing NNI: done in 3.9514 secs using 199% CPU
+Optimizing NNI: done in 2.06399 secs using 199% CPU
+Optimizing NNI: done in 3.73305 secs using 198.5% CPU
+Iteration 310 / LogL: -5562.773 / Time: 0h:24m:0s (0h:6m:59s left)
+Optimizing NNI: done in 3.55556 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 311: -5561.018
+Optimizing NNI: done in 2.55231 secs using 199.3% CPU
+Optimizing NNI: done in 1.74632 secs using 198.9% CPU
+Optimizing NNI: done in 1.77083 secs using 198.7% CPU
+Optimizing NNI: done in 1.55686 secs using 197.6% CPU
+Optimizing NNI: done in 1.39322 secs using 197.6% CPU
+Optimizing NNI: done in 4.36052 secs using 199% CPU
+Optimizing NNI: done in 3.42973 secs using 198.9% CPU
+Optimizing NNI: done in 3.30841 secs using 198% CPU
+Optimizing NNI: done in 3.5517 secs using 198.5% CPU
+Iteration 320 / LogL: -5564.883 / Time: 0h:24m:31s (0h:6m:59s left)
+Optimizing NNI: done in 2.56591 secs using 198.8% CPU
+Optimizing NNI: done in 3.38461 secs using 199% CPU
+Optimizing NNI: done in 4.13887 secs using 199% CPU
+Optimizing NNI: done in 4.19135 secs using 198.9% CPU
+Optimizing NNI: done in 2.65337 secs using 198.6% CPU
+Optimizing NNI: done in 2.56418 secs using 197.6% CPU
+Optimizing NNI: done in 5.24055 secs using 199% CPU
+Optimizing NNI: done in 5.72652 secs using 199.1% CPU
+Optimizing NNI: done in 3.07371 secs using 199.3% CPU
+Optimizing NNI: done in 3.28727 secs using 199% CPU
+Iteration 330 / LogL: -5565.684 / Time: 0h:25m:13s (0h:6m:12s left)
+Optimizing NNI: done in 3.18752 secs using 199% CPU
+Optimizing NNI: done in 1.98958 secs using 198.3% CPU
+Optimizing NNI: done in 2.04829 secs using 198.6% CPU
+Optimizing NNI: done in 2.61679 secs using 198.3% CPU
+Optimizing NNI: done in 5.70841 secs using 198.9% CPU
+Optimizing NNI: done in 3.39986 secs using 199.3% CPU
+Optimizing NNI: done in 2.43355 secs using 198.6% CPU
+Optimizing NNI: done in 3.37591 secs using 199.2% CPU
+Optimizing NNI: done in 4.25429 secs using 199.1% CPU
+Optimizing NNI: done in 3.04889 secs using 199.3% CPU
+Iteration 340 / LogL: -5564.986 / Time: 0h:25m:49s (0h:5m:24s left)
+Optimizing NNI: done in 3.23097 secs using 199% CPU
+Optimizing NNI: done in 2.09611 secs using 197.9% CPU
+Optimizing NNI: done in 2.42047 secs using 199% CPU
+Optimizing NNI: done in 2.8887 secs using 199.3% CPU
+Optimizing NNI: done in 2.17042 secs using 198.4% CPU
+Optimizing NNI: done in 3.02093 secs using 198.6% CPU
+Optimizing NNI: done in 3.44319 secs using 198.6% CPU
+Optimizing NNI: done in 5.52719 secs using 198.3% CPU
+Optimizing NNI: done in 2.59588 secs using 198.7% CPU
+Optimizing NNI: done in 2.70087 secs using 198.6% CPU
+Iteration 350 / LogL: -5561.041 / Time: 0h:26m:23s (0h:4m:36s left)
+Log-likelihood cutoff on original alignment: -5616.194
+Optimizing NNI: done in 3.04461 secs using 197.7% CPU
+Optimizing NNI: done in 3.00691 secs using 197.8% CPU
+Optimizing NNI: done in 5.25512 secs using 198.4% CPU
+Optimizing NNI: done in 2.97914 secs using 199.1% CPU
+Optimizing NNI: done in 2.71753 secs using 199% CPU
+Optimizing NNI: done in 1.39619 secs using 198.8% CPU
+Optimizing NNI: done in 4.31852 secs using 198.7% CPU
+Optimizing NNI: done in 2.00879 secs using 198.9% CPU
+Optimizing NNI: done in 1.92856 secs using 198.7% CPU
+Optimizing NNI: done in 2.68177 secs using 198.7% CPU
+Iteration 360 / LogL: -5561.038 / Time: 0h:27m:2s (0h:3m:50s left)
+Optimizing NNI: done in 3.33662 secs using 199.6% CPU
+Optimizing NNI: done in 2.98116 secs using 199% CPU
 Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 209: -5578.159
-Optimizing NNI: done in 2.44848 secs using 198.7% CPU
-Iteration 210 / LogL: -5578.171 / Time: 0h:17m:44s (0h:8m:24s left)
-Optimizing NNI: done in 3.48283 secs using 198.5% CPU
-Optimizing NNI: done in 4.43312 secs using 199.3% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 212: -5578.137
-Optimizing NNI: done in 4.09187 secs using 199.1% CPU
-Optimizing NNI: done in 3.24845 secs using 199% CPU
-Optimizing NNI: done in 3.31043 secs using 198.7% CPU
-Optimizing NNI: done in 4.80284 secs using 198.7% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 216: -5578.108
-Optimizing NNI: done in 4.13229 secs using 198.9% CPU
-Optimizing NNI: done in 4.89586 secs using 199% CPU
-Optimizing NNI: done in 4.17105 secs using 198.7% CPU
-Optimizing NNI: done in 1.9158 secs using 198.3% CPU
-Iteration 220 / LogL: -5597.347 / Time: 0h:18m:26s (0h:8m:4s left)
-Optimizing NNI: done in 4.50017 secs using 198.3% CPU
-Optimizing NNI: done in 1.99848 secs using 198.7% CPU
-Optimizing NNI: done in 4.32089 secs using 198.9% CPU
-Optimizing NNI: done in 1.36361 secs using 199.4% CPU
-Optimizing NNI: done in 2.4106 secs using 198.7% CPU
-Optimizing NNI: done in 2.02994 secs using 198.9% CPU
-Optimizing NNI: done in 2.70204 secs using 199.3% CPU
-Optimizing NNI: done in 3.06097 secs using 198.6% CPU
-Optimizing NNI: done in 4.52743 secs using 199% CPU
-Optimizing NNI: done in 7.29666 secs using 199% CPU
-Iteration 230 / LogL: -5578.113 / Time: 0h:19m:3s (0h:7m:9s left)
-Optimizing NNI: done in 1.69831 secs using 198.9% CPU
-Optimizing NNI: done in 3.8212 secs using 199.2% CPU
-Optimizing NNI: done in 2.43139 secs using 198.2% CPU
-Optimizing NNI: done in 3.43798 secs using 198.4% CPU
-Optimizing NNI: done in 1.54876 secs using 198.9% CPU
-Optimizing NNI: done in 3.15046 secs using 199.3% CPU
-Optimizing NNI: done in 5.07373 secs using 198.9% CPU
-Optimizing NNI: done in 3.25867 secs using 198.3% CPU
-Optimizing NNI: done in 4.27297 secs using 198.2% CPU
-Optimizing NNI: done in 2.88215 secs using 198.2% CPU
-Iteration 240 / LogL: -5592.429 / Time: 0h:19m:37s (0h:6m:14s left)
-Optimizing NNI: done in 3.6881 secs using 198.5% CPU
-Optimizing NNI: done in 4.04743 secs using 198.4% CPU
-Optimizing NNI: done in 3.19057 secs using 199.5% CPU
-Optimizing NNI: done in 3.25893 secs using 199.1% CPU
-Optimizing NNI: done in 2.55523 secs using 199.1% CPU
-Optimizing NNI: done in 2.54085 secs using 198.5% CPU
-Optimizing NNI: done in 3.49725 secs using 199.3% CPU
-Optimizing NNI: done in 6.21823 secs using 198.8% CPU
-Optimizing NNI: done in 3.24447 secs using 198.4% CPU
-Optimizing NNI: done in 3.42277 secs using 199.1% CPU
-Iteration 250 / LogL: -5578.152 / Time: 0h:20m:16s (0h:5m:22s left)
-Log-likelihood cutoff on original alignment: -5629.315
-Optimizing NNI: done in 4.23443 secs using 198.9% CPU
-Optimizing NNI: done in 4.42711 secs using 199.3% CPU
-Optimizing NNI: done in 2.77383 secs using 198.2% CPU
-Optimizing NNI: done in 3.32863 secs using 198.4% CPU
-Optimizing NNI: done in 1.33555 secs using 198.2% CPU
-Optimizing NNI: done in 2.5992 secs using 198.6% CPU
-Optimizing NNI: done in 2.83722 secs using 198.8% CPU
-Optimizing NNI: done in 3.11131 secs using 198.5% CPU
-Optimizing NNI: done in 2.3868 secs using 197.4% CPU
-Optimizing NNI: done in 3.69758 secs using 199.2% CPU
-Iteration 260 / LogL: -5579.704 / Time: 0h:20m:55s (0h:4m:31s left)
-Optimizing NNI: done in 7.16275 secs using 199.1% CPU
-Optimizing NNI: done in 3.33723 secs using 198.9% CPU
-Optimizing NNI: done in 3.64948 secs using 199.3% CPU
-Optimizing NNI: done in 2.41943 secs using 198.5% CPU
-Optimizing NNI: done in 2.85131 secs using 198.5% CPU
-Optimizing NNI: done in 2.82409 secs using 198.8% CPU
-Optimizing NNI: done in 3.58302 secs using 199.1% CPU
-Optimizing NNI: done in 3.51922 secs using 198.8% CPU
-Optimizing NNI: done in 4.00404 secs using 199.3% CPU
-Optimizing NNI: done in 3.63407 secs using 199% CPU
-Iteration 270 / LogL: -5578.115 / Time: 0h:21m:36s (0h:3m:41s left)
-Optimizing NNI: done in 3.86022 secs using 198.7% CPU
-Optimizing NNI: done in 3.32149 secs using 199.3% CPU
-Optimizing NNI: done in 0.764044 secs using 198.9% CPU
-Optimizing NNI: done in 3.14748 secs using 198.9% CPU
-Optimizing NNI: done in 1.6241 secs using 198.7% CPU
-Optimizing NNI: done in 3.32264 secs using 198.8% CPU
-Optimizing NNI: done in 2.45089 secs using 198.7% CPU
-Optimizing NNI: done in 4.73735 secs using 198.7% CPU
-Optimizing NNI: done in 2.52879 secs using 199.2% CPU
-Optimizing NNI: done in 1.74815 secs using 198.8% CPU
-Iteration 280 / LogL: -5578.141 / Time: 0h:22m:7s (0h:2m:51s left)
-Optimizing NNI: done in 4.54965 secs using 199.1% CPU
-Optimizing NNI: done in 4.90288 secs using 198.6% CPU
-Optimizing NNI: done in 6.49907 secs using 198.9% CPU
-Optimizing NNI: done in 3.5961 secs using 199% CPU
-Optimizing NNI: done in 1.76573 secs using 197.8% CPU
-Optimizing NNI: done in 4.72655 secs using 198.8% CPU
-Optimizing NNI: done in 3.77004 secs using 199.4% CPU
-Optimizing NNI: done in 3.43536 secs using 198.9% CPU
-Optimizing NNI: done in 2.29891 secs using 197.9% CPU
-Optimizing NNI: done in 1.80958 secs using 199% CPU
-Iteration 290 / LogL: -5589.009 / Time: 0h:22m:48s (0h:2m:3s left)
-Optimizing NNI: done in 2.49581 secs using 198.7% CPU
-Optimizing NNI: done in 3.06583 secs using 198.9% CPU
-Optimizing NNI: done in 2.65173 secs using 199.2% CPU
-Optimizing NNI: done in 6.05102 secs using 198.9% CPU
-Optimizing NNI: done in 2.53603 secs using 199.2% CPU
-Optimizing NNI: done in 2.67637 secs using 199.5% CPU
-Optimizing NNI: done in 2.53852 secs using 199.3% CPU
-Optimizing NNI: done in 2.96617 secs using 199% CPU
-Optimizing NNI: done in 3.05187 secs using 199.3% CPU
-Optimizing NNI: done in 2.15171 secs using 199.1% CPU
-Iteration 300 / LogL: -5579.997 / Time: 0h:23m:22s (0h:1m:15s left)
-Log-likelihood cutoff on original alignment: -5629.315
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.863
+BETTER TREE FOUND at iteration 362: -5560.702
+Optimizing NNI: done in 3.46091 secs using 199.2% CPU
+Optimizing NNI: done in 2.46076 secs using 199% CPU
+Optimizing NNI: done in 3.2566 secs using 198.9% CPU
+Optimizing NNI: done in 1.73602 secs using 199.1% CPU
+Optimizing NNI: done in 3.39664 secs using 198.6% CPU
+Optimizing NNI: done in 2.43242 secs using 199% CPU
+Optimizing NNI: done in 6.12654 secs using 198.6% CPU
+Optimizing NNI: done in 2.15367 secs using 199.5% CPU
+Iteration 370 / LogL: -5580.140 / Time: 0h:27m:39s (0h:6m:53s left)
+Optimizing NNI: done in 5.51538 secs using 198.7% CPU
+Optimizing NNI: done in 3.18562 secs using 199.1% CPU
+Optimizing NNI: done in 1.69284 secs using 198.3% CPU
+Optimizing NNI: done in 3.65621 secs using 199.3% CPU
+Optimizing NNI: done in 4.17752 secs using 198.5% CPU
+Optimizing NNI: done in 4.33526 secs using 198.9% CPU
+Optimizing NNI: done in 5.78838 secs using 199.3% CPU
+Optimizing NNI: done in 3.23037 secs using 198.5% CPU
+Optimizing NNI: done in 3.70934 secs using 199% CPU
+Optimizing NNI: done in 2.10591 secs using 197.6% CPU
+Iteration 380 / LogL: -5561.645 / Time: 0h:28m:21s (0h:6m:8s left)
+Optimizing NNI: done in 3.87556 secs using 198.3% CPU
+Optimizing NNI: done in 7.75054 secs using 198.9% CPU
+Optimizing NNI: done in 3.28542 secs using 198.4% CPU
+Optimizing NNI: done in 3.73487 secs using 198.8% CPU
+Optimizing NNI: done in 3.85483 secs using 198.9% CPU
+Optimizing NNI: done in 1.5877 secs using 198.7% CPU
+Optimizing NNI: done in 5.09837 secs using 199% CPU
+Optimizing NNI: done in 3.28013 secs using 199.5% CPU
+Optimizing NNI: done in 6.32342 secs using 199% CPU
+Optimizing NNI: done in 2.59544 secs using 198.6% CPU
+Iteration 390 / LogL: -5560.805 / Time: 0h:29m:8s (0h:5m:23s left)
+Optimizing NNI: done in 1.29843 secs using 198.6% CPU
+Optimizing NNI: done in 5.32827 secs using 198.9% CPU
+Optimizing NNI: done in 3.0309 secs using 198.2% CPU
+Optimizing NNI: done in 3.18686 secs using 198.9% CPU
+Optimizing NNI: done in 2.75895 secs using 198.1% CPU
+Optimizing NNI: done in 3.51867 secs using 198.9% CPU
+Optimizing NNI: done in 3.06454 secs using 198.7% CPU
+Optimizing NNI: done in 3.2502 secs using 199.3% CPU
+Optimizing NNI: done in 5.13963 secs using 199.1% CPU
+BETTER TREE FOUND at iteration 399: -5560.701
+Optimizing NNI: done in 4.89938 secs using 199% CPU
+Iteration 400 / LogL: -5560.715 / Time: 0h:29m:48s (0h:7m:23s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.888
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 2.8489 secs using 199.1% CPU
-Optimizing NNI: done in 5.06138 secs using 198.8% CPU
-Optimizing NNI: done in 3.49426 secs using 198.8% CPU
-Optimizing NNI: done in 2.04088 secs using 198.8% CPU
-Optimizing NNI: done in 6.49203 secs using 199.2% CPU
-Optimizing NNI: done in 1.54389 secs using 196.9% CPU
-Optimizing NNI: done in 2.85063 secs using 198.5% CPU
-Optimizing NNI: done in 3.78988 secs using 199% CPU
-Optimizing NNI: done in 2.80281 secs using 198.7% CPU
-Optimizing NNI: done in 4.4096 secs using 198.7% CPU
-Iteration 310 / LogL: -5590.537 / Time: 0h:24m:6s (0h:7m:1s left)
-Optimizing NNI: done in 2.13578 secs using 199% CPU
-Optimizing NNI: done in 6.14111 secs using 199% CPU
-Optimizing NNI: done in 2.19025 secs using 198.4% CPU
-Optimizing NNI: done in 6.34615 secs using 199% CPU
-Optimizing NNI: done in 3.09543 secs using 199% CPU
-Optimizing NNI: done in 6.86068 secs using 198.9% CPU
-Optimizing NNI: done in 2.7599 secs using 198.4% CPU
-Optimizing NNI: done in 3.55179 secs using 198.5% CPU
-Optimizing NNI: done in 3.49789 secs using 199.5% CPU
-Optimizing NNI: done in 0.980878 secs using 197.8% CPU
-Iteration 320 / LogL: -5580.588 / Time: 0h:24m:48s (0h:6m:13s left)
-Optimizing NNI: done in 3.21696 secs using 199.3% CPU
-Optimizing NNI: done in 4.41658 secs using 198.3% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 322: -5578.024
-Optimizing NNI: done in 3.52986 secs using 198.2% CPU
-Optimizing NNI: done in 0.960345 secs using 197.4% CPU
-Optimizing NNI: done in 2.62736 secs using 198.9% CPU
-Optimizing NNI: done in 2.35379 secs using 198.3% CPU
-Optimizing NNI: done in 6.40413 secs using 198.9% CPU
-Optimizing NNI: done in 3.46414 secs using 198.7% CPU
-Optimizing NNI: done in 4.14876 secs using 199.1% CPU
-Optimizing NNI: done in 3.25944 secs using 199.3% CPU
-Iteration 330 / LogL: -5580.965 / Time: 0h:25m:27s (0h:7m:7s left)
-Optimizing NNI: done in 3.85826 secs using 199.1% CPU
-Optimizing NNI: done in 3.72085 secs using 198.8% CPU
-Optimizing NNI: done in 2.90727 secs using 199.2% CPU
-Optimizing NNI: done in 1.51819 secs using 198.2% CPU
-Optimizing NNI: done in 3.47146 secs using 198.3% CPU
-Optimizing NNI: done in 3.91841 secs using 198.4% CPU
-Optimizing NNI: done in 5.29146 secs using 198.8% CPU
-Optimizing NNI: done in 3.34313 secs using 199% CPU
-Optimizing NNI: done in 3.25153 secs using 199.3% CPU
-Optimizing NNI: done in 4.13291 secs using 198.6% CPU
-Iteration 340 / LogL: -5580.572 / Time: 0h:26m:6s (0h:6m:19s left)
-Optimizing NNI: done in 2.1752 secs using 198.7% CPU
-Optimizing NNI: done in 4.20133 secs using 199.1% CPU
-Optimizing NNI: done in 2.67552 secs using 199.1% CPU
-Optimizing NNI: done in 2.62852 secs using 199.5% CPU
-Optimizing NNI: done in 2.31107 secs using 199% CPU
-Optimizing NNI: done in 0.866419 secs using 197.8% CPU
-Optimizing NNI: done in 2.4473 secs using 198.4% CPU
-Optimizing NNI: done in 1.00398 secs using 197.6% CPU
-Optimizing NNI: done in 3.33288 secs using 198.4% CPU
-Optimizing NNI: done in 1.31755 secs using 199.2% CPU
-Iteration 350 / LogL: -5587.481 / Time: 0h:26m:34s (0h:5m:28s left)
-Log-likelihood cutoff on original alignment: -5629.315
-Optimizing NNI: done in 3.04824 secs using 199.3% CPU
-Optimizing NNI: done in 2.87742 secs using 199.2% CPU
-Optimizing NNI: done in 2.87714 secs using 199.4% CPU
-Optimizing NNI: done in 3.22259 secs using 198.6% CPU
-Optimizing NNI: done in 4.26228 secs using 199.1% CPU
-Optimizing NNI: done in 4.15954 secs using 198.5% CPU
-Optimizing NNI: done in 2.73231 secs using 198.6% CPU
-Optimizing NNI: done in 2.37444 secs using 199.2% CPU
-Optimizing NNI: done in 7.87312 secs using 199% CPU
-Optimizing NNI: done in 2.69417 secs using 199% CPU
-Iteration 360 / LogL: -5580.004 / Time: 0h:27m:20s (0h:4m:43s left)
-Optimizing NNI: done in 2.76894 secs using 198.1% CPU
-Optimizing NNI: done in 1.21631 secs using 198% CPU
-Optimizing NNI: done in 3.00559 secs using 199.1% CPU
-Optimizing NNI: done in 1.96708 secs using 198.8% CPU
-Optimizing NNI: done in 3.60538 secs using 199.1% CPU
-Optimizing NNI: done in 3.19974 secs using 198.9% CPU
-Optimizing NNI: done in 4.7491 secs using 198.6% CPU
-Optimizing NNI: done in 4.39432 secs using 199.1% CPU
-Optimizing NNI: done in 2.80436 secs using 198% CPU
-Optimizing NNI: done in 2.73816 secs using 199.8% CPU
-Iteration 370 / LogL: -5581.836 / Time: 0h:27m:55s (0h:3m:56s left)
-Optimizing NNI: done in 5.88012 secs using 198.6% CPU
-Optimizing NNI: done in 4.24746 secs using 198.9% CPU
-Optimizing NNI: done in 3.02869 secs using 199% CPU
-Optimizing NNI: done in 1.76749 secs using 199.1% CPU
-Optimizing NNI: done in 3.1949 secs using 198.6% CPU
-Optimizing NNI: done in 4.50136 secs using 199.2% CPU
-Optimizing NNI: done in 3.63887 secs using 198.5% CPU
-Optimizing NNI: done in 2.71661 secs using 199.1% CPU
-Optimizing NNI: done in 4.80855 secs using 198.9% CPU
-Optimizing NNI: done in 4.4077 secs using 199.2% CPU
-Iteration 380 / LogL: -5584.126 / Time: 0h:28m:39s (0h:3m:10s left)
-Optimizing NNI: done in 2.75444 secs using 199.1% CPU
-Optimizing NNI: done in 3.32685 secs using 199.3% CPU
-Optimizing NNI: done in 3.08869 secs using 198.8% CPU
-Optimizing NNI: done in 1.71888 secs using 198.9% CPU
-Optimizing NNI: done in 4.14145 secs using 199.2% CPU
-Optimizing NNI: done in 1.96867 secs using 198.3% CPU
-Optimizing NNI: done in 3.13547 secs using 198.5% CPU
-Optimizing NNI: done in 2.49665 secs using 199% CPU
-Optimizing NNI: done in 3.90243 secs using 198.5% CPU
-Optimizing NNI: done in 2.82043 secs using 199.4% CPU
-Iteration 390 / LogL: -5581.288 / Time: 0h:29m:13s (0h:2m:24s left)
-Optimizing NNI: done in 1.29579 secs using 199.7% CPU
-Optimizing NNI: done in 1.92831 secs using 198.7% CPU
-Optimizing NNI: done in 2.60736 secs using 198.6% CPU
-Optimizing NNI: done in 2.79201 secs using 199.5% CPU
-Optimizing NNI: done in 3.87842 secs using 198.7% CPU
-Optimizing NNI: done in 3.09807 secs using 199% CPU
-Optimizing NNI: done in 1.22971 secs using 198.2% CPU
-Optimizing NNI: done in 2.02838 secs using 198.4% CPU
-Optimizing NNI: done in 4.24646 secs using 199.4% CPU
-Optimizing NNI: done in 3.33266 secs using 198.8% CPU
-Iteration 400 / LogL: -5578.329 / Time: 0h:29m:45s (0h:1m:38s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.875
+Optimizing NNI: done in 2.22229 secs using 197.9% CPU
+Optimizing NNI: done in 2.87709 secs using 199% CPU
+Optimizing NNI: done in 3.93829 secs using 198.8% CPU
+Optimizing NNI: done in 3.92775 secs using 199.5% CPU
+Optimizing NNI: done in 3.11573 secs using 198.7% CPU
+Optimizing NNI: done in 3.84395 secs using 198.6% CPU
+Optimizing NNI: done in 2.89883 secs using 198.7% CPU
+Optimizing NNI: done in 4.0396 secs using 198.7% CPU
+Optimizing NNI: done in 3.45871 secs using 198.2% CPU
+Optimizing NNI: done in 3.31292 secs using 198.7% CPU
+BETTER TREE FOUND at iteration 410: -5560.699
+Iteration 410 / LogL: -5560.699 / Time: 0h:30m:32s (0h:7m:28s left)
+Optimizing NNI: done in 3.42228 secs using 198.5% CPU
+Optimizing NNI: done in 3.25903 secs using 199% CPU
+Optimizing NNI: done in 4.43957 secs using 199.3% CPU
+Optimizing NNI: done in 3.20771 secs using 199% CPU
+Optimizing NNI: done in 2.33483 secs using 199.2% CPU
+Optimizing NNI: done in 3.18785 secs using 198.9% CPU
+Optimizing NNI: done in 2.4766 secs using 198.8% CPU
+BETTER TREE FOUND at iteration 417: -5560.694
+Optimizing NNI: done in 2.20772 secs using 198.5% CPU
+Optimizing NNI: done in 4.26312 secs using 198.6% CPU
+Optimizing NNI: done in 4.1808 secs using 198.6% CPU
+Iteration 420 / LogL: -5567.428 / Time: 0h:31m:11s (0h:7m:13s left)
+Optimizing NNI: done in 5.00698 secs using 198.9% CPU
+Optimizing NNI: done in 1.57691 secs using 198.4% CPU
+Optimizing NNI: done in 4.10507 secs using 196.9% CPU
+Optimizing NNI: done in 3.28122 secs using 197.4% CPU
+Optimizing NNI: done in 3.80678 secs using 198.2% CPU
+Optimizing NNI: done in 4.38744 secs using 198.5% CPU
+Optimizing NNI: done in 3.21932 secs using 198.8% CPU
+Optimizing NNI: done in 7.75198 secs using 198.8% CPU
+Optimizing NNI: done in 1.44414 secs using 198.8% CPU
+Optimizing NNI: done in 2.74294 secs using 197.1% CPU
+Iteration 430 / LogL: -5560.717 / Time: 0h:31m:54s (0h:6m:28s left)
+Optimizing NNI: done in 2.67027 secs using 199% CPU
+Optimizing NNI: done in 2.87673 secs using 198.4% CPU
+Optimizing NNI: done in 2.60404 secs using 198.7% CPU
+Optimizing NNI: done in 3.79721 secs using 199.6% CPU
+Optimizing NNI: done in 2.93261 secs using 199.6% CPU
+Optimizing NNI: done in 1.2394 secs using 197.8% CPU
+Optimizing NNI: done in 3.10727 secs using 198.3% CPU
+Optimizing NNI: done in 4.03041 secs using 198.8% CPU
+Optimizing NNI: done in 5.98175 secs using 198.9% CPU
+Optimizing NNI: done in 3.01365 secs using 198.6% CPU
+Iteration 440 / LogL: -5561.529 / Time: 0h:32m:32s (0h:5m:42s left)
+Optimizing NNI: done in 3.08652 secs using 199.4% CPU
+Optimizing NNI: done in 2.34119 secs using 198.4% CPU
+Optimizing NNI: done in 9.79658 secs using 199.2% CPU
+Optimizing NNI: done in 3.75125 secs using 198.6% CPU
+Optimizing NNI: done in 2.56672 secs using 198.5% CPU
+Optimizing NNI: done in 2.87293 secs using 199% CPU
+Optimizing NNI: done in 3.22494 secs using 199% CPU
+Optimizing NNI: done in 3.16268 secs using 198.2% CPU
+Optimizing NNI: done in 2.80802 secs using 199% CPU
+Optimizing NNI: done in 3.36077 secs using 198.3% CPU
+Iteration 450 / LogL: -5566.533 / Time: 0h:33m:15s (0h:4m:57s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 6.01731 secs using 198.7% CPU
+Optimizing NNI: done in 3.95021 secs using 198% CPU
+Optimizing NNI: done in 3.40095 secs using 198.5% CPU
+Optimizing NNI: done in 2.60118 secs using 198.2% CPU
+Optimizing NNI: done in 3.77057 secs using 198.4% CPU
+Optimizing NNI: done in 2.88827 secs using 198.9% CPU
+Optimizing NNI: done in 3.08995 secs using 198% CPU
+Optimizing NNI: done in 2.30445 secs using 197.7% CPU
+Optimizing NNI: done in 2.68328 secs using 197.8% CPU
+Optimizing NNI: done in 2.83317 secs using 198.1% CPU
+Iteration 460 / LogL: -5562.191 / Time: 0h:34m:1s (0h:4m:13s left)
+Optimizing NNI: done in 1.12239 secs using 197.6% CPU
+Optimizing NNI: done in 2.04163 secs using 197.7% CPU
+Optimizing NNI: done in 2.44562 secs using 198.8% CPU
+Optimizing NNI: done in 3.43019 secs using 198.3% CPU
+Optimizing NNI: done in 4.01187 secs using 198.8% CPU
+Optimizing NNI: done in 1.31698 secs using 198.4% CPU
+Optimizing NNI: done in 4.19243 secs using 198.4% CPU
+Optimizing NNI: done in 2.68546 secs using 198.4% CPU
+Optimizing NNI: done in 5.33916 secs using 198.6% CPU
+Optimizing NNI: done in 3.15941 secs using 199.1% CPU
+Iteration 470 / LogL: -5563.828 / Time: 0h:34m:38s (0h:3m:28s left)
+Optimizing NNI: done in 3.63877 secs using 199.3% CPU
+Optimizing NNI: done in 3.26041 secs using 199.1% CPU
+Optimizing NNI: done in 4.12262 secs using 199.1% CPU
+Optimizing NNI: done in 4.40753 secs using 198.9% CPU
+Optimizing NNI: done in 2.32068 secs using 198.6% CPU
+Optimizing NNI: done in 2.59199 secs using 198.6% CPU
+Optimizing NNI: done in 3.29689 secs using 198.4% CPU
+Optimizing NNI: done in 7.14967 secs using 199.2% CPU
+Optimizing NNI: done in 3.05978 secs using 199.1% CPU
+Optimizing NNI: done in 2.83659 secs using 199.3% CPU
+Iteration 480 / LogL: -5561.534 / Time: 0h:35m:21s (0h:2m:43s left)
+Optimizing NNI: done in 4.62847 secs using 198.8% CPU
+Optimizing NNI: done in 2.33572 secs using 199.6% CPU
+Optimizing NNI: done in 3.61329 secs using 199% CPU
+Optimizing NNI: done in 2.10506 secs using 197.6% CPU
+Optimizing NNI: done in 4.5681 secs using 198.6% CPU
+Optimizing NNI: done in 2.70433 secs using 199.1% CPU
+Optimizing NNI: done in 3.50701 secs using 198.8% CPU
+Optimizing NNI: done in 3.17046 secs using 199.1% CPU
+Optimizing NNI: done in 1.99802 secs using 198.9% CPU
+Optimizing NNI: done in 2.83243 secs using 199% CPU
+Iteration 490 / LogL: -5560.717 / Time: 0h:35m:59s (0h:1m:59s left)
+Optimizing NNI: done in 2.70261 secs using 199.3% CPU
+Optimizing NNI: done in 2.13177 secs using 198.9% CPU
+Optimizing NNI: done in 3.58805 secs using 198.7% CPU
+Optimizing NNI: done in 4.99015 secs using 199% CPU
+Optimizing NNI: done in 7.45278 secs using 199.2% CPU
+Optimizing NNI: done in 3.37518 secs using 199.2% CPU
+Optimizing NNI: done in 2.8947 secs using 198.6% CPU
+Optimizing NNI: done in 1.15961 secs using 199% CPU
+Optimizing NNI: done in 2.47973 secs using 198.4% CPU
+Optimizing NNI: done in 4.4338 secs using 198.7% CPU
+Iteration 500 / LogL: -5560.711 / Time: 0h:36m:40s (0h:1m:14s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.924
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 5.33097 secs using 199% CPU
-Optimizing NNI: done in 2.6627 secs using 198.3% CPU
-Optimizing NNI: done in 3.70417 secs using 198.2% CPU
-Optimizing NNI: done in 4.82823 secs using 199% CPU
-Optimizing NNI: done in 3.82888 secs using 199% CPU
-Optimizing NNI: done in 4.50449 secs using 199.2% CPU
-Optimizing NNI: done in 3.49718 secs using 198.5% CPU
-Optimizing NNI: done in 3.95461 secs using 199.3% CPU
-Optimizing NNI: done in 5.00314 secs using 199.1% CPU
-Optimizing NNI: done in 5.54817 secs using 199.1% CPU
-Iteration 410 / LogL: -5588.622 / Time: 0h:30m:38s (0h:6m:44s left)
-Optimizing NNI: done in 6.61864 secs using 198.4% CPU
-Optimizing NNI: done in 2.44309 secs using 199.3% CPU
-Optimizing NNI: done in 2.47548 secs using 198.2% CPU
-Optimizing NNI: done in 3.88727 secs using 199.3% CPU
-Optimizing NNI: done in 2.25009 secs using 198.1% CPU
-Optimizing NNI: done in 3.76302 secs using 199.1% CPU
-Optimizing NNI: done in 4.48775 secs using 199% CPU
-Optimizing NNI: done in 3.04228 secs using 199.8% CPU
-Optimizing NNI: done in 3.06662 secs using 198.7% CPU
-Optimizing NNI: done in 2.36784 secs using 198.3% CPU
-Iteration 420 / LogL: -5580.773 / Time: 0h:31m:18s (0h:5m:58s left)
-Optimizing NNI: done in 4.6576 secs using 199.1% CPU
-Optimizing NNI: done in 2.63983 secs using 199.4% CPU
-Optimizing NNI: done in 2.54114 secs using 199.6% CPU
-Optimizing NNI: done in 3.25047 secs using 198.4% CPU
-Optimizing NNI: done in 2.72853 secs using 199.1% CPU
-Optimizing NNI: done in 2.52169 secs using 199.4% CPU
-Optimizing NNI: done in 2.06355 secs using 198.6% CPU
-Optimizing NNI: done in 1.67457 secs using 198.9% CPU
-Optimizing NNI: done in 2.49513 secs using 198.2% CPU
-Optimizing NNI: done in 3.28703 secs using 198.9% CPU
-Iteration 430 / LogL: -5579.903 / Time: 0h:31m:52s (0h:5m:12s left)
-Optimizing NNI: done in 2.60489 secs using 199% CPU
-Optimizing NNI: done in 4.13833 secs using 198.9% CPU
-Optimizing NNI: done in 1.23555 secs using 197.4% CPU
-Optimizing NNI: done in 1.85916 secs using 198.3% CPU
-Optimizing NNI: done in 2.8043 secs using 198.3% CPU
-Optimizing NNI: done in 2.86774 secs using 198.9% CPU
-Optimizing NNI: done in 2.34627 secs using 199.3% CPU
-Optimizing NNI: done in 3.62788 secs using 198.3% CPU
-Optimizing NNI: done in 1.80834 secs using 199.1% CPU
-Optimizing NNI: done in 4.03154 secs using 199% CPU
-Iteration 440 / LogL: -5578.916 / Time: 0h:32m:25s (0h:4m:25s left)
-Optimizing NNI: done in 5.3198 secs using 199.1% CPU
-Optimizing NNI: done in 1.82713 secs using 197.2% CPU
-Optimizing NNI: done in 3.24544 secs using 198.6% CPU
-Optimizing NNI: done in 3.64328 secs using 199.2% CPU
-Optimizing NNI: done in 3.2799 secs using 198.7% CPU
-Optimizing NNI: done in 2.19055 secs using 199.1% CPU
-Optimizing NNI: done in 2.73592 secs using 198.5% CPU
-Optimizing NNI: done in 2.54874 secs using 198.8% CPU
-Optimizing NNI: done in 4.2102 secs using 199.1% CPU
-Optimizing NNI: done in 2.97046 secs using 199.2% CPU
-Iteration 450 / LogL: -5579.189 / Time: 0h:33m:3s (0h:3m:40s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 3.2599 secs using 199% CPU
-Optimizing NNI: done in 2.54293 secs using 197.2% CPU
-Optimizing NNI: done in 3.78317 secs using 198.4% CPU
-Optimizing NNI: done in 5.34334 secs using 199.1% CPU
-Optimizing NNI: done in 3.15024 secs using 199.1% CPU
-Optimizing NNI: done in 1.98334 secs using 198.4% CPU
-Optimizing NNI: done in 2.81078 secs using 199.1% CPU
-Optimizing NNI: done in 2.80673 secs using 199.6% CPU
-Optimizing NNI: done in 4.54368 secs using 199.2% CPU
-Optimizing NNI: done in 3.74959 secs using 198.9% CPU
-Iteration 460 / LogL: -5592.071 / Time: 0h:33m:49s (0h:2m:56s left)
-Optimizing NNI: done in 2.78695 secs using 199.3% CPU
-Optimizing NNI: done in 2.23671 secs using 198.5% CPU
-Optimizing NNI: done in 3.60043 secs using 199.5% CPU
-Optimizing NNI: done in 3.26116 secs using 198% CPU
-BETTER TREE FOUND at iteration 464: -5578.024
-Optimizing NNI: done in 5.42789 secs using 198.9% CPU
-Optimizing NNI: done in 2.96954 secs using 198.8% CPU
-Optimizing NNI: done in 3.37268 secs using 199.1% CPU
-Optimizing NNI: done in 2.97422 secs using 198.3% CPU
-Optimizing NNI: done in 3.75084 secs using 199.1% CPU
-Optimizing NNI: done in 3.18723 secs using 198.6% CPU
-Iteration 470 / LogL: -5579.038 / Time: 0h:34m:29s (0h:6m:54s left)
-Optimizing NNI: done in 3.02996 secs using 199.1% CPU
-Optimizing NNI: done in 2.63806 secs using 199.4% CPU
-Optimizing NNI: done in 2.5011 secs using 198.5% CPU
-Optimizing NNI: done in 2.92752 secs using 199.6% CPU
-Optimizing NNI: done in 2.90554 secs using 198.5% CPU
-Optimizing NNI: done in 2.90064 secs using 199% CPU
-Optimizing NNI: done in 2.03924 secs using 198.8% CPU
-Optimizing NNI: done in 5.60342 secs using 198.9% CPU
-Optimizing NNI: done in 2.46548 secs using 198.9% CPU
-Optimizing NNI: done in 4.61005 secs using 198.7% CPU
-Iteration 480 / LogL: -5578.993 / Time: 0h:35m:8s (0h:6m:9s left)
-Optimizing NNI: done in 3.45839 secs using 199.1% CPU
-Optimizing NNI: done in 1.55018 secs using 199% CPU
-Optimizing NNI: done in 1.63733 secs using 198.4% CPU
-Optimizing NNI: done in 2.10695 secs using 198.9% CPU
-Optimizing NNI: done in 5.15885 secs using 198.9% CPU
-Optimizing NNI: done in 3.34022 secs using 198.8% CPU
-Optimizing NNI: done in 4.21627 secs using 199% CPU
-Optimizing NNI: done in 2.54217 secs using 198.5% CPU
-Optimizing NNI: done in 3.59455 secs using 198.1% CPU
-Optimizing NNI: done in 2.88234 secs using 198.5% CPU
-Iteration 490 / LogL: -5578.057 / Time: 0h:35m:45s (0h:5m:24s left)
-Optimizing NNI: done in 4.40829 secs using 199.1% CPU
-Optimizing NNI: done in 2.30293 secs using 197.9% CPU
-Optimizing NNI: done in 2.44381 secs using 198.7% CPU
-Optimizing NNI: done in 4.42326 secs using 199% CPU
-Optimizing NNI: done in 2.82771 secs using 199% CPU
-Optimizing NNI: done in 1.30695 secs using 199.4% CPU
-Optimizing NNI: done in 2.90087 secs using 199.1% CPU
-Optimizing NNI: done in 3.49787 secs using 199.5% CPU
-Optimizing NNI: done in 3.86756 secs using 198.9% CPU
-Optimizing NNI: done in 1.95298 secs using 197.9% CPU
-Iteration 500 / LogL: -5584.152 / Time: 0h:36m:21s (0h:4m:39s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.907
+Optimizing NNI: done in 3.58816 secs using 199.1% CPU
+Optimizing NNI: done in 3.45453 secs using 198.4% CPU
+Optimizing NNI: done in 1.99705 secs using 198% CPU
+Optimizing NNI: done in 3.14155 secs using 199.4% CPU
+Optimizing NNI: done in 1.56577 secs using 198.6% CPU
+Optimizing NNI: done in 3.16409 secs using 198.6% CPU
+Optimizing NNI: done in 3.38409 secs using 198.4% CPU
+Optimizing NNI: done in 3.05155 secs using 199.3% CPU
+Optimizing NNI: done in 4.21146 secs using 198.8% CPU
+Optimizing NNI: done in 4.17041 secs using 199.2% CPU
+Iteration 510 / LogL: -5573.892 / Time: 0h:37m:24s (0h:6m:36s left)
+Optimizing NNI: done in 3.17717 secs using 198% CPU
+Optimizing NNI: done in 2.28463 secs using 199.3% CPU
+Optimizing NNI: done in 2.60389 secs using 198% CPU
+Optimizing NNI: done in 1.69287 secs using 199% CPU
+Optimizing NNI: done in 3.67347 secs using 199.1% CPU
+Optimizing NNI: done in 5.20267 secs using 198.7% CPU
+Optimizing NNI: done in 3.43637 secs using 198.7% CPU
+Optimizing NNI: done in 1.90324 secs using 199% CPU
+Optimizing NNI: done in 4.49515 secs using 198.4% CPU
+Optimizing NNI: done in 3.17253 secs using 199.2% CPU
+Iteration 520 / LogL: -5560.791 / Time: 0h:38m:3s (0h:5m:51s left)
+Optimizing NNI: done in 2.50783 secs using 199.2% CPU
+Optimizing NNI: done in 2.80946 secs using 198.9% CPU
+Optimizing NNI: done in 4.75849 secs using 199.3% CPU
+Optimizing NNI: done in 2.28667 secs using 198.8% CPU
+Optimizing NNI: done in 4.15387 secs using 198% CPU
+Optimizing NNI: done in 2.71892 secs using 198.8% CPU
+Optimizing NNI: done in 6.98985 secs using 198.7% CPU
+Optimizing NNI: done in 2.93197 secs using 198.1% CPU
+Optimizing NNI: done in 1.37069 secs using 198.3% CPU
+Optimizing NNI: done in 3.77478 secs using 198.9% CPU
+Iteration 530 / LogL: -5580.371 / Time: 0h:38m:44s (0h:5m:7s left)
+Optimizing NNI: done in 7.36556 secs using 199.1% CPU
+Optimizing NNI: done in 2.47406 secs using 198.9% CPU
+Optimizing NNI: done in 2.23015 secs using 198.8% CPU
+Optimizing NNI: done in 4.80719 secs using 198.8% CPU
+Optimizing NNI: done in 4.45404 secs using 199% CPU
+Optimizing NNI: done in 2.85087 secs using 199.6% CPU
+Optimizing NNI: done in 1.34755 secs using 198.5% CPU
+Optimizing NNI: done in 2.53361 secs using 199% CPU
+Optimizing NNI: done in 1.75063 secs using 198.7% CPU
+Optimizing NNI: done in 1.13982 secs using 199.6% CPU
+Iteration 540 / LogL: -5561.534 / Time: 0h:39m:22s (0h:4m:23s left)
+Optimizing NNI: done in 2.36746 secs using 198% CPU
+Optimizing NNI: done in 2.51773 secs using 198.3% CPU
+Optimizing NNI: done in 3.68436 secs using 198.8% CPU
+Optimizing NNI: done in 3.29579 secs using 199% CPU
+Optimizing NNI: done in 3.68651 secs using 199% CPU
+Optimizing NNI: done in 3.65005 secs using 198.8% CPU
+Optimizing NNI: done in 3.96118 secs using 199.1% CPU
+Optimizing NNI: done in 3.16932 secs using 199.6% CPU
+Optimizing NNI: done in 5.79057 secs using 198.6% CPU
+Optimizing NNI: done in 1.72777 secs using 198.8% CPU
+Iteration 550 / LogL: -5560.982 / Time: 0h:40m:3s (0h:3m:38s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 6.11843 secs using 198.9% CPU
+Optimizing NNI: done in 1.7712 secs using 198.2% CPU
+Optimizing NNI: done in 5.55079 secs using 198.7% CPU
+Optimizing NNI: done in 1.72147 secs using 198.7% CPU
+Optimizing NNI: done in 2.17445 secs using 198.6% CPU
+Optimizing NNI: done in 2.99351 secs using 198.3% CPU
+Optimizing NNI: done in 2.47654 secs using 199.1% CPU
+Optimizing NNI: done in 4.08863 secs using 199.5% CPU
+Optimizing NNI: done in 3.24286 secs using 198.2% CPU
+Optimizing NNI: done in 2.9938 secs using 198.7% CPU
+Iteration 560 / LogL: -5560.805 / Time: 0h:40m:49s (0h:2m:55s left)
+Optimizing NNI: done in 2.59849 secs using 199.4% CPU
+Optimizing NNI: done in 2.18935 secs using 199% CPU
+Optimizing NNI: done in 2.57423 secs using 199.3% CPU
+Optimizing NNI: done in 1.68466 secs using 198.3% CPU
+Optimizing NNI: done in 1.47617 secs using 198.9% CPU
+Optimizing NNI: done in 2.46615 secs using 198.7% CPU
+Optimizing NNI: done in 3.05017 secs using 198.6% CPU
+Optimizing NNI: done in 2.29201 secs using 198.6% CPU
+Optimizing NNI: done in 4.6378 secs using 198.2% CPU
+Optimizing NNI: done in 3.94258 secs using 199.1% CPU
+Iteration 570 / LogL: -5567.642 / Time: 0h:41m:23s (0h:2m:10s left)
+Optimizing NNI: done in 3.94311 secs using 198.5% CPU
+Optimizing NNI: done in 2.07026 secs using 198.7% CPU
+Optimizing NNI: done in 2.77219 secs using 199.2% CPU
+Optimizing NNI: done in 3.31157 secs using 199.3% CPU
+Optimizing NNI: done in 2.87216 secs using 199.5% CPU
+Optimizing NNI: done in 2.23195 secs using 199.1% CPU
+Optimizing NNI: done in 3.04449 secs using 199.2% CPU
+Optimizing NNI: done in 7.03964 secs using 199.1% CPU
+Optimizing NNI: done in 2.94174 secs using 199.1% CPU
+Optimizing NNI: done in 2.62814 secs using 198.2% CPU
+Iteration 580 / LogL: -5561.043 / Time: 0h:42m:4s (0h:1m:27s left)
+Optimizing NNI: done in 2.94859 secs using 199% CPU
+Optimizing NNI: done in 4.74562 secs using 198.2% CPU
+Optimizing NNI: done in 2.94706 secs using 198.6% CPU
+Optimizing NNI: done in 2.50953 secs using 198.8% CPU
+Optimizing NNI: done in 2.46663 secs using 198.7% CPU
+Optimizing NNI: done in 0.907286 secs using 197.8% CPU
+Optimizing NNI: done in 5.76953 secs using 198.9% CPU
+Optimizing NNI: done in 2.68741 secs using 199% CPU
+Optimizing NNI: done in 3.50832 secs using 198.8% CPU
+Optimizing NNI: done in 2.18881 secs using 198.8% CPU
+Iteration 590 / LogL: -5563.326 / Time: 0h:42m:42s (0h:0m:43s left)
+Optimizing NNI: done in 3.29263 secs using 199% CPU
+Optimizing NNI: done in 1.81249 secs using 198.2% CPU
+Optimizing NNI: done in 5.13234 secs using 199.4% CPU
+Optimizing NNI: done in 1.35072 secs using 197.9% CPU
+Optimizing NNI: done in 3.15251 secs using 198.9% CPU
+Optimizing NNI: done in 2.42507 secs using 197.9% CPU
+Optimizing NNI: done in 3.42054 secs using 198.4% CPU
+Optimizing NNI: done in 3.13213 secs using 199.3% CPU
+Optimizing NNI: done in 2.09537 secs using 198.7% CPU
+Optimizing NNI: done in 2.85532 secs using 199.3% CPU
+Iteration 600 / LogL: -5560.710 / Time: 0h:43m:19s (0h:0m:0s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.934
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 3.41401 secs using 198.4% CPU
-Optimizing NNI: done in 5.26296 secs using 199.3% CPU
-BETTER TREE FOUND at iteration 502: -5578.023
-Optimizing NNI: done in 3.42655 secs using 198.4% CPU
-Optimizing NNI: done in 5.66475 secs using 198.5% CPU
-BETTER TREE FOUND at iteration 504: -5578.018
-Optimizing NNI: done in 2.71378 secs using 198.8% CPU
-Optimizing NNI: done in 2.21555 secs using 198.9% CPU
-Optimizing NNI: done in 3.93953 secs using 198.7% CPU
-Optimizing NNI: done in 2.36618 secs using 198.7% CPU
-Optimizing NNI: done in 2.18932 secs using 198.7% CPU
-Optimizing NNI: done in 2.10995 secs using 198.5% CPU
-Iteration 510 / LogL: -5590.541 / Time: 0h:37m:7s (0h:6m:51s left)
-Optimizing NNI: done in 2.21889 secs using 199.7% CPU
-Optimizing NNI: done in 3.17453 secs using 198.6% CPU
-Optimizing NNI: done in 3.4848 secs using 198.7% CPU
-Optimizing NNI: done in 5.28857 secs using 199.2% CPU
-Optimizing NNI: done in 3.66076 secs using 198.7% CPU
-Optimizing NNI: done in 6.09048 secs using 198.7% CPU
-Optimizing NNI: done in 1.68359 secs using 198.6% CPU
-Optimizing NNI: done in 4.71044 secs using 199% CPU
-Optimizing NNI: done in 3.42666 secs using 199.1% CPU
-Optimizing NNI: done in 2.94708 secs using 198.9% CPU
-Iteration 520 / LogL: -5578.994 / Time: 0h:37m:51s (0h:6m:7s left)
-Optimizing NNI: done in 2.6556 secs using 198.9% CPU
-Optimizing NNI: done in 4.4445 secs using 199.1% CPU
-Optimizing NNI: done in 2.5722 secs using 198.9% CPU
-Optimizing NNI: done in 1.79482 secs using 198.9% CPU
-Optimizing NNI: done in 3.26376 secs using 199.5% CPU
-Optimizing NNI: done in 2.91515 secs using 198.4% CPU
-Optimizing NNI: done in 2.77003 secs using 198.9% CPU
-Optimizing NNI: done in 2.49868 secs using 198.9% CPU
-Optimizing NNI: done in 3.59106 secs using 199.3% CPU
-Optimizing NNI: done in 1.8592 secs using 198.1% CPU
-Iteration 530 / LogL: -5582.385 / Time: 0h:38m:27s (0h:5m:22s left)
-Optimizing NNI: done in 4.24115 secs using 198.5% CPU
-Optimizing NNI: done in 2.53066 secs using 198.4% CPU
-Optimizing NNI: done in 4.97384 secs using 199.1% CPU
-Optimizing NNI: done in 1.68086 secs using 197% CPU
-Optimizing NNI: done in 2.34544 secs using 198.9% CPU
-Optimizing NNI: done in 3.2789 secs using 198.4% CPU
-Optimizing NNI: done in 3.19248 secs using 199.2% CPU
-Optimizing NNI: done in 2.8324 secs using 198.7% CPU
-Optimizing NNI: done in 2.68517 secs using 198.3% CPU
-Optimizing NNI: done in 5.1255 secs using 199% CPU
-Iteration 540 / LogL: -5600.113 / Time: 0h:39m:7s (0h:4m:38s left)
-Optimizing NNI: done in 3.3925 secs using 199.1% CPU
-Optimizing NNI: done in 4.76482 secs using 199.4% CPU
-Optimizing NNI: done in 3.86519 secs using 198.8% CPU
-Optimizing NNI: done in 4.67999 secs using 199% CPU
-Optimizing NNI: done in 2.8253 secs using 199.1% CPU
-Optimizing NNI: done in 2.50432 secs using 198.7% CPU
-Optimizing NNI: done in 2.50762 secs using 199.2% CPU
-Optimizing NNI: done in 2.37923 secs using 199.2% CPU
-Optimizing NNI: done in 3.17756 secs using 198.8% CPU
-Optimizing NNI: done in 3.78074 secs using 198.9% CPU
-Iteration 550 / LogL: -5578.766 / Time: 0h:39m:49s (0h:3m:54s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 1.43377 secs using 196.5% CPU
-Optimizing NNI: done in 2.26712 secs using 198.1% CPU
-Optimizing NNI: done in 3.71134 secs using 199.3% CPU
-Optimizing NNI: done in 2.73268 secs using 198.8% CPU
-Optimizing NNI: done in 3.89194 secs using 198.9% CPU
-Optimizing NNI: done in 3.65734 secs using 199.1% CPU
-Optimizing NNI: done in 2.69812 secs using 198.8% CPU
-BETTER TREE FOUND at iteration 557: -5578.016
-Optimizing NNI: done in 1.75631 secs using 199.7% CPU
-Optimizing NNI: done in 4.233 secs using 199.1% CPU
-Optimizing NNI: done in 2.76348 secs using 198.4% CPU
-Iteration 560 / LogL: -5578.036 / Time: 0h:40m:31s (0h:7m:1s left)
-Optimizing NNI: done in 2.32795 secs using 199.1% CPU
-Optimizing NNI: done in 2.30438 secs using 198.7% CPU
-Optimizing NNI: done in 3.73896 secs using 198.1% CPU
-Optimizing NNI: done in 2.32667 secs using 198.6% CPU
-Optimizing NNI: done in 2.12218 secs using 198% CPU
-Optimizing NNI: done in 2.94597 secs using 198.3% CPU
-Optimizing NNI: done in 2.81701 secs using 198.6% CPU
-Optimizing NNI: done in 3.5303 secs using 198.3% CPU
-Optimizing NNI: done in 5.75512 secs using 198.4% CPU
-Optimizing NNI: done in 2.51039 secs using 199.1% CPU
-Iteration 570 / LogL: -5580.791 / Time: 0h:41m:10s (0h:6m:17s left)
-Optimizing NNI: done in 3.78423 secs using 198.8% CPU
-Optimizing NNI: done in 1.94418 secs using 199.3% CPU
-Optimizing NNI: done in 2.99358 secs using 199.4% CPU
-Optimizing NNI: done in 4.93901 secs using 198.6% CPU
-Optimizing NNI: done in 2.45597 secs using 199.3% CPU
-Optimizing NNI: done in 3.35136 secs using 199.1% CPU
-Optimizing NNI: done in 2.52192 secs using 199.2% CPU
-Optimizing NNI: done in 3.87625 secs using 199.6% CPU
-Optimizing NNI: done in 4.38801 secs using 198.1% CPU
-Optimizing NNI: done in 2.51841 secs using 199.2% CPU
-Iteration 580 / LogL: -5590.929 / Time: 0h:41m:51s (0h:5m:33s left)
-Optimizing NNI: done in 5.73876 secs using 199.1% CPU
-Optimizing NNI: done in 3.15801 secs using 197.9% CPU
-Optimizing NNI: done in 2.60177 secs using 199% CPU
-Optimizing NNI: done in 6.59431 secs using 199% CPU
-Optimizing NNI: done in 1.86647 secs using 199.2% CPU
-Optimizing NNI: done in 1.2252 secs using 198.9% CPU
-Optimizing NNI: done in 3.24061 secs using 198.8% CPU
-Optimizing NNI: done in 6.12952 secs using 198.8% CPU
-Optimizing NNI: done in 5.94583 secs using 198.9% CPU
-Optimizing NNI: done in 1.43638 secs using 198.8% CPU
-Iteration 590 / LogL: -5579.929 / Time: 0h:42m:37s (0h:4m:50s left)
-Optimizing NNI: done in 1.87041 secs using 197.7% CPU
-Optimizing NNI: done in 3.29967 secs using 198.4% CPU
-Optimizing NNI: done in 2.36139 secs using 198.7% CPU
-Optimizing NNI: done in 2.64326 secs using 198.8% CPU
-Optimizing NNI: done in 3.12964 secs using 199.4% CPU
-Optimizing NNI: done in 1.74842 secs using 199% CPU
-Optimizing NNI: done in 2.96956 secs using 198.8% CPU
-Optimizing NNI: done in 2.43889 secs using 199% CPU
-Optimizing NNI: done in 2.43418 secs using 198.5% CPU
-Optimizing NNI: done in 6.43305 secs using 198.9% CPU
-Iteration 600 / LogL: -5578.019 / Time: 0h:43m:15s (0h:4m:6s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.922
+Optimizing NNI: done in 3.53602 secs using 198.6% CPU
+Optimizing NNI: done in 6.88231 secs using 198.8% CPU
+Optimizing NNI: done in 4.031 secs using 198.9% CPU
+Optimizing NNI: done in 3.611 secs using 199% CPU
+Optimizing NNI: done in 2.87141 secs using 199.6% CPU
+Optimizing NNI: done in 3.04995 secs using 198.9% CPU
+Optimizing NNI: done in 2.2208 secs using 199.2% CPU
+Optimizing NNI: done in 2.00157 secs using 198.7% CPU
+Optimizing NNI: done in 2.53137 secs using 199% CPU
+Optimizing NNI: done in 2.77292 secs using 198.5% CPU
+Iteration 610 / LogL: -5560.698 / Time: 0h:44m:6s (0h:6m:31s left)
+Optimizing NNI: done in 2.97319 secs using 199.3% CPU
+Optimizing NNI: done in 3.05005 secs using 199% CPU
+Optimizing NNI: done in 3.22787 secs using 199.3% CPU
+Optimizing NNI: done in 3.16057 secs using 199.5% CPU
+Optimizing NNI: done in 2.83198 secs using 198.3% CPU
+Optimizing NNI: done in 2.72551 secs using 199.3% CPU
+Optimizing NNI: done in 7.29385 secs using 198.8% CPU
+Optimizing NNI: done in 3.93956 secs using 198.8% CPU
+Optimizing NNI: done in 3.21469 secs using 199% CPU
+Optimizing NNI: done in 4.40972 secs using 198.9% CPU
+Iteration 620 / LogL: -5561.539 / Time: 0h:44m:52s (0h:5m:47s left)
+Optimizing NNI: done in 2.05739 secs using 197.6% CPU
+Optimizing NNI: done in 2.13389 secs using 198% CPU
+Optimizing NNI: done in 2.87136 secs using 198% CPU
+Optimizing NNI: done in 2.54769 secs using 199.2% CPU
+Optimizing NNI: done in 2.10782 secs using 198.5% CPU
+Optimizing NNI: done in 4.41131 secs using 198.5% CPU
+Optimizing NNI: done in 4.67348 secs using 198.9% CPU
+Optimizing NNI: done in 1.99734 secs using 198.7% CPU
+Optimizing NNI: done in 2.65297 secs using 198.9% CPU
+Optimizing NNI: done in 2.96401 secs using 199.4% CPU
+Iteration 630 / LogL: -5563.197 / Time: 0h:45m:29s (0h:5m:3s left)
+Optimizing NNI: done in 2.50492 secs using 198.8% CPU
+Optimizing NNI: done in 3.02669 secs using 199.2% CPU
+Optimizing NNI: done in 3.39517 secs using 198.7% CPU
+Optimizing NNI: done in 3.37989 secs using 199.5% CPU
+Optimizing NNI: done in 3.11374 secs using 199% CPU
+Optimizing NNI: done in 3.76283 secs using 199.3% CPU
+Optimizing NNI: done in 1.50959 secs using 197.7% CPU
+Optimizing NNI: done in 2.37584 secs using 198.5% CPU
+Optimizing NNI: done in 2.74097 secs using 197.7% CPU
+Optimizing NNI: done in 3.16455 secs using 199.3% CPU
+Iteration 640 / LogL: -5561.537 / Time: 0h:46m:6s (0h:4m:19s left)
+Optimizing NNI: done in 4.68121 secs using 199.3% CPU
+Optimizing NNI: done in 4.51889 secs using 198.5% CPU
+Optimizing NNI: done in 3.8722 secs using 199% CPU
+Optimizing NNI: done in 2.9399 secs using 199.2% CPU
+Optimizing NNI: done in 6.31096 secs using 198.9% CPU
+Optimizing NNI: done in 2.89585 secs using 199% CPU
+Optimizing NNI: done in 5.20753 secs using 198.9% CPU
+Optimizing NNI: done in 3.5499 secs using 199.4% CPU
+Optimizing NNI: done in 4.12183 secs using 199.2% CPU
+Optimizing NNI: done in 3.02472 secs using 198.9% CPU
+Iteration 650 / LogL: -5560.702 / Time: 0h:46m:56s (0h:3m:36s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 3.22633 secs using 198.7% CPU
+Optimizing NNI: done in 3.95113 secs using 198.7% CPU
+Optimizing NNI: done in 2.03817 secs using 198.7% CPU
+Optimizing NNI: done in 5.39267 secs using 198.4% CPU
+Optimizing NNI: done in 3.26628 secs using 198.6% CPU
+Optimizing NNI: done in 3.09712 secs using 198.8% CPU
+Optimizing NNI: done in 7.00875 secs using 199.1% CPU
+Optimizing NNI: done in 3.19209 secs using 198.7% CPU
+Optimizing NNI: done in 5.4269 secs using 199% CPU
+Optimizing NNI: done in 1.72359 secs using 199.3% CPU
+Iteration 660 / LogL: -5560.799 / Time: 0h:47m:48s (0h:2m:54s left)
+Optimizing NNI: done in 5.08618 secs using 198.9% CPU
+Optimizing NNI: done in 2.44285 secs using 199% CPU
+Optimizing NNI: done in 2.72993 secs using 198% CPU
+Optimizing NNI: done in 3.3556 secs using 199% CPU
+Optimizing NNI: done in 5.17257 secs using 198.8% CPU
+Optimizing NNI: done in 3.33946 secs using 199% CPU
+Optimizing NNI: done in 2.04098 secs using 198.8% CPU
+Optimizing NNI: done in 3.50132 secs using 199% CPU
+Optimizing NNI: done in 2.86009 secs using 198.7% CPU
+Optimizing NNI: done in 2.18347 secs using 198.9% CPU
+Iteration 670 / LogL: -5576.766 / Time: 0h:48m:30s (0h:2m:10s left)
+Optimizing NNI: done in 1.77383 secs using 199.2% CPU
+Optimizing NNI: done in 3.90318 secs using 199% CPU
+Optimizing NNI: done in 2.45599 secs using 198.7% CPU
+Optimizing NNI: done in 3.8639 secs using 198.8% CPU
+Optimizing NNI: done in 4.27254 secs using 199% CPU
+Optimizing NNI: done in 3.17184 secs using 199.3% CPU
+Optimizing NNI: done in 1.2969 secs using 198.3% CPU
+Optimizing NNI: done in 3.41229 secs using 199.1% CPU
+Optimizing NNI: done in 5.87299 secs using 198.9% CPU
+Optimizing NNI: done in 3.236 secs using 199.5% CPU
+Iteration 680 / LogL: -5560.709 / Time: 0h:49m:12s (0h:1m:26s left)
+Optimizing NNI: done in 1.54137 secs using 197.8% CPU
+Optimizing NNI: done in 4.12742 secs using 199.3% CPU
+Optimizing NNI: done in 5.90085 secs using 198.9% CPU
+Optimizing NNI: done in 3.03796 secs using 199.3% CPU
+Optimizing NNI: done in 3.73202 secs using 198.9% CPU
+Optimizing NNI: done in 1.74795 secs using 198.1% CPU
+BETTER TREE FOUND at iteration 686: -5560.694
+Optimizing NNI: done in 3.98702 secs using 199.4% CPU
+Optimizing NNI: done in 1.74858 secs using 198.3% CPU
+Optimizing NNI: done in 3.26978 secs using 198.3% CPU
+Optimizing NNI: done in 2.11455 secs using 198.7% CPU
+Iteration 690 / LogL: -5561.514 / Time: 0h:49m:53s (0h:6m:57s left)
+Optimizing NNI: done in 3.02516 secs using 198.7% CPU
+Optimizing NNI: done in 2.09943 secs using 198.3% CPU
+Optimizing NNI: done in 2.99652 secs using 199.3% CPU
+Optimizing NNI: done in 1.66422 secs using 199.2% CPU
+Optimizing NNI: done in 3.07971 secs using 199.1% CPU
+Optimizing NNI: done in 2.272 secs using 198.7% CPU
+Optimizing NNI: done in 3.13987 secs using 197.7% CPU
+Optimizing NNI: done in 3.04016 secs using 198.4% CPU
+Optimizing NNI: done in 2.46796 secs using 199.1% CPU
+Optimizing NNI: done in 2.18958 secs using 198.3% CPU
+Iteration 700 / LogL: -5560.704 / Time: 0h:50m:28s (0h:6m:12s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.920
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 3.03925 secs using 198.9% CPU
-Optimizing NNI: done in 3.38227 secs using 199% CPU
-Optimizing NNI: done in 1.75587 secs using 199.3% CPU
-Optimizing NNI: done in 3.34371 secs using 198.3% CPU
-Optimizing NNI: done in 7.29365 secs using 198.8% CPU
-Optimizing NNI: done in 3.48963 secs using 198.8% CPU
-Optimizing NNI: done in 5.10274 secs using 199.4% CPU
-Estimate model parameters (epsilon = 0.100)
-BETTER TREE FOUND at iteration 607: -5577.906
-Optimizing NNI: done in 2.49319 secs using 198.6% CPU
-Optimizing NNI: done in 5.08167 secs using 199.2% CPU
-Optimizing NNI: done in 0.780052 secs using 198.3% CPU
-Iteration 610 / LogL: -5588.454 / Time: 0h:44m:5s (0h:7m:1s left)
-Optimizing NNI: done in 3.5716 secs using 198.6% CPU
-Optimizing NNI: done in 2.26161 secs using 199% CPU
-Optimizing NNI: done in 4.589 secs using 198.6% CPU
-Optimizing NNI: done in 4.96736 secs using 199% CPU
-Optimizing NNI: done in 0.795519 secs using 199.5% CPU
-Optimizing NNI: done in 7.76631 secs using 198.9% CPU
-Optimizing NNI: done in 4.25304 secs using 199.2% CPU
-Optimizing NNI: done in 2.38656 secs using 199% CPU
-Optimizing NNI: done in 3.14717 secs using 199.5% CPU
-Optimizing NNI: done in 2.03149 secs using 199.2% CPU
-Iteration 620 / LogL: -5587.407 / Time: 0h:44m:50s (0h:6m:18s left)
-Optimizing NNI: done in 6.04487 secs using 199.4% CPU
-BETTER TREE FOUND at iteration 621: -5577.904
-Optimizing NNI: done in 2.36334 secs using 198.8% CPU
-Optimizing NNI: done in 5.39383 secs using 198.2% CPU
-Optimizing NNI: done in 2.79038 secs using 198.9% CPU
-BETTER TREE FOUND at iteration 624: -5577.903
-Optimizing NNI: done in 3.59132 secs using 198.4% CPU
-Optimizing NNI: done in 0.779245 secs using 197.3% CPU
-Optimizing NNI: done in 2.50982 secs using 198.6% CPU
-Optimizing NNI: done in 4.6288 secs using 199% CPU
-Optimizing NNI: done in 2.86764 secs using 199.4% CPU
-Optimizing NNI: done in 1.26249 secs using 199.4% CPU
-Iteration 630 / LogL: -5578.018 / Time: 0h:45m:31s (0h:6m:48s left)
-Optimizing NNI: done in 3.46278 secs using 198.8% CPU
-Optimizing NNI: done in 4.12057 secs using 198.8% CPU
-Optimizing NNI: done in 2.85704 secs using 198.5% CPU
-Optimizing NNI: done in 4.10116 secs using 199.3% CPU
-Optimizing NNI: done in 3.37782 secs using 198.7% CPU
-Optimizing NNI: done in 3.98673 secs using 198.3% CPU
-BETTER TREE FOUND at iteration 636: -5577.902
-Optimizing NNI: done in 3.91865 secs using 199.4% CPU
-BETTER TREE FOUND at iteration 637: -5577.893
-Optimizing NNI: done in 3.37403 secs using 198.9% CPU
-Optimizing NNI: done in 3.24222 secs using 199.4% CPU
-Optimizing NNI: done in 5.83961 secs using 198.8% CPU
-Iteration 640 / LogL: -5591.977 / Time: 0h:46m:19s (0h:7m:1s left)
-Optimizing NNI: done in 1.90113 secs using 198.2% CPU
-Optimizing NNI: done in 5.13708 secs using 199.3% CPU
-Optimizing NNI: done in 4.36615 secs using 198.4% CPU
-Optimizing NNI: done in 7.31538 secs using 198.8% CPU
-Optimizing NNI: done in 3.53572 secs using 198.2% CPU
-Optimizing NNI: done in 3.50591 secs using 198.4% CPU
-Optimizing NNI: done in 5.03359 secs using 198.6% CPU
-Optimizing NNI: done in 2.82734 secs using 198.6% CPU
-Optimizing NNI: done in 3.05483 secs using 198.7% CPU
-Optimizing NNI: done in 3.32358 secs using 198.8% CPU
-BETTER TREE FOUND at iteration 650: -5577.891
-Iteration 650 / LogL: -5577.891 / Time: 0h:47m:8s (0h:7m:15s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 4.7258 secs using 198.5% CPU
-Optimizing NNI: done in 3.53759 secs using 199.7% CPU
-Optimizing NNI: done in 2.98705 secs using 199.5% CPU
-Optimizing NNI: done in 4.21538 secs using 198.4% CPU
-Optimizing NNI: done in 2.68435 secs using 199.5% CPU
-Optimizing NNI: done in 2.7011 secs using 199% CPU
-Optimizing NNI: done in 3.00706 secs using 198.9% CPU
-Optimizing NNI: done in 4.76215 secs using 199.2% CPU
-Optimizing NNI: done in 1.06836 secs using 196.9% CPU
-Optimizing NNI: done in 2.06363 secs using 198.8% CPU
-Iteration 660 / LogL: -5581.427 / Time: 0h:47m:55s (0h:6m:32s left)
-Optimizing NNI: done in 6.92039 secs using 198.5% CPU
-Optimizing NNI: done in 2.42372 secs using 199% CPU
-Optimizing NNI: done in 3.40375 secs using 198.8% CPU
-Optimizing NNI: done in 3.49481 secs using 198.5% CPU
-Optimizing NNI: done in 2.15943 secs using 199% CPU
-Optimizing NNI: done in 3.53526 secs using 199.1% CPU
-Optimizing NNI: done in 3.18978 secs using 197.8% CPU
-Optimizing NNI: done in 5.70185 secs using 199.3% CPU
-Optimizing NNI: done in 3.02293 secs using 198.7% CPU
-Optimizing NNI: done in 3.35037 secs using 198.5% CPU
-Iteration 670 / LogL: -5577.898 / Time: 0h:48m:43s (0h:5m:49s left)
-Optimizing NNI: done in 3.03352 secs using 199.1% CPU
-Optimizing NNI: done in 1.80019 secs using 199% CPU
-Optimizing NNI: done in 2.32202 secs using 198.1% CPU
-Optimizing NNI: done in 2.16834 secs using 199.2% CPU
-Optimizing NNI: done in 3.21392 secs using 198.8% CPU
-Optimizing NNI: done in 2.84171 secs using 198.9% CPU
-Optimizing NNI: done in 2.89628 secs using 199% CPU
-Optimizing NNI: done in 5.72741 secs using 199.3% CPU
-Optimizing NNI: done in 6.73476 secs using 199.3% CPU
-Optimizing NNI: done in 6.18681 secs using 199% CPU
-Iteration 680 / LogL: -5577.896 / Time: 0h:49m:30s (0h:5m:6s left)
-Optimizing NNI: done in 3.51775 secs using 199.4% CPU
-Optimizing NNI: done in 1.39088 secs using 198.9% CPU
-Optimizing NNI: done in 2.84468 secs using 198.5% CPU
-Optimizing NNI: done in 1.34342 secs using 196.4% CPU
-Optimizing NNI: done in 3.97164 secs using 198.6% CPU
-Optimizing NNI: done in 2.4874 secs using 198.5% CPU
-Optimizing NNI: done in 3.15113 secs using 199.3% CPU
-Optimizing NNI: done in 1.19717 secs using 198.5% CPU
-Optimizing NNI: done in 2.90599 secs using 198.8% CPU
-Optimizing NNI: done in 3.88214 secs using 198.8% CPU
-Iteration 690 / LogL: -5577.966 / Time: 0h:50m:7s (0h:4m:21s left)
-Optimizing NNI: done in 2.93766 secs using 198.4% CPU
-Optimizing NNI: done in 2.31491 secs using 198.3% CPU
-Optimizing NNI: done in 2.29724 secs using 198.3% CPU
-Optimizing NNI: done in 2.26197 secs using 199.3% CPU
-Optimizing NNI: done in 6.70214 secs using 198.8% CPU
-Optimizing NNI: done in 2.99218 secs using 198.2% CPU
-Optimizing NNI: done in 6.77278 secs using 199.2% CPU
-Optimizing NNI: done in 2.73832 secs using 199.6% CPU
-Optimizing NNI: done in 2.30708 secs using 199.1% CPU
-Optimizing NNI: done in 4.17746 secs using 199.5% CPU
-Iteration 700 / LogL: -5577.903 / Time: 0h:50m:52s (0h:3m:38s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.952
+Optimizing NNI: done in 3.39947 secs using 199.5% CPU
+Optimizing NNI: done in 2.18388 secs using 198.7% CPU
+Optimizing NNI: done in 4.53644 secs using 198.8% CPU
+Optimizing NNI: done in 3.2336 secs using 198.9% CPU
+Optimizing NNI: done in 3.22044 secs using 199% CPU
+Optimizing NNI: done in 3.03143 secs using 198.4% CPU
+Optimizing NNI: done in 5.13263 secs using 199% CPU
+Optimizing NNI: done in 3.60643 secs using 198.7% CPU
+Optimizing NNI: done in 4.00019 secs using 198.8% CPU
+Optimizing NNI: done in 1.71802 secs using 198.9% CPU
+Iteration 710 / LogL: -5564.302 / Time: 0h:51m:17s (0h:6m:30s left)
+Optimizing NNI: done in 2.57683 secs using 198.5% CPU
+Optimizing NNI: done in 3.21655 secs using 198.7% CPU
+Optimizing NNI: done in 3.04842 secs using 199% CPU
+Optimizing NNI: done in 5.65949 secs using 198.6% CPU
+Optimizing NNI: done in 2.00634 secs using 198.9% CPU
+Optimizing NNI: done in 2.31956 secs using 198.3% CPU
+Optimizing NNI: done in 2.58894 secs using 198.8% CPU
+Optimizing NNI: done in 3.42241 secs using 199.1% CPU
+Optimizing NNI: done in 2.52619 secs using 198.6% CPU
+Optimizing NNI: done in 0.305352 secs using 198% CPU
+Iteration 720 / LogL: -5650.246 / Time: 0h:51m:54s (0h:5m:46s left)
+Optimizing NNI: done in 2.97984 secs using 198.8% CPU
+Optimizing NNI: done in 1.70167 secs using 198.9% CPU
+Optimizing NNI: done in 2.73313 secs using 198.9% CPU
+Optimizing NNI: done in 2.54534 secs using 199% CPU
+Optimizing NNI: done in 2.51453 secs using 198.4% CPU
+Optimizing NNI: done in 1.85679 secs using 199.5% CPU
+Optimizing NNI: done in 2.71373 secs using 198.6% CPU
+Optimizing NNI: done in 3.00981 secs using 198.8% CPU
+Optimizing NNI: done in 3.37933 secs using 198.8% CPU
+Optimizing NNI: done in 2.77342 secs using 198.5% CPU
+Iteration 730 / LogL: -5560.696 / Time: 0h:52m:30s (0h:5m:2s left)
+Optimizing NNI: done in 3.81373 secs using 198.9% CPU
+Optimizing NNI: done in 3.75593 secs using 199.1% CPU
+Optimizing NNI: done in 2.74024 secs using 198.8% CPU
+Optimizing NNI: done in 2.99262 secs using 199.1% CPU
+Optimizing NNI: done in 2.34508 secs using 199.8% CPU
+Optimizing NNI: done in 2.47933 secs using 199.3% CPU
+Optimizing NNI: done in 1.39042 secs using 197.7% CPU
+Optimizing NNI: done in 2.86514 secs using 199.1% CPU
+Optimizing NNI: done in 2.94965 secs using 199.4% CPU
+Optimizing NNI: done in 2.17876 secs using 199.1% CPU
+Iteration 740 / LogL: -5560.720 / Time: 0h:53m:8s (0h:4m:18s left)
+Optimizing NNI: done in 2.15195 secs using 198.5% CPU
+Optimizing NNI: done in 3.02166 secs using 199.5% CPU
+Optimizing NNI: done in 2.86323 secs using 198.9% CPU
+Optimizing NNI: done in 2.53823 secs using 197.8% CPU
+BETTER TREE FOUND at iteration 744: -5560.690
+Optimizing NNI: done in 3.05622 secs using 198.6% CPU
+Optimizing NNI: done in 2.60734 secs using 198.7% CPU
+Optimizing NNI: done in 4.98708 secs using 198.6% CPU
+Optimizing NNI: done in 5.2463 secs using 198.6% CPU
+Optimizing NNI: done in 2.95996 secs using 199.3% CPU
+Optimizing NNI: done in 3.54095 secs using 199.6% CPU
+Iteration 750 / LogL: -5561.521 / Time: 0h:53m:51s (0h:6m:45s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 2.63138 secs using 198.8% CPU
+Optimizing NNI: done in 3.33198 secs using 198.8% CPU
+Optimizing NNI: done in 3.19208 secs using 198.8% CPU
+Optimizing NNI: done in 2.18673 secs using 198.2% CPU
+Optimizing NNI: done in 2.55229 secs using 199.2% CPU
+Optimizing NNI: done in 3.33773 secs using 199.1% CPU
+Optimizing NNI: done in 2.41576 secs using 199.3% CPU
+Optimizing NNI: done in 2.52932 secs using 198.8% CPU
+Optimizing NNI: done in 3.95187 secs using 198.4% CPU
+Optimizing NNI: done in 3.53957 secs using 198.8% CPU
+Iteration 760 / LogL: -5563.183 / Time: 0h:54m:35s (0h:6m:2s left)
+Optimizing NNI: done in 2.60715 secs using 198.3% CPU
+Optimizing NNI: done in 2.26671 secs using 198.8% CPU
+Optimizing NNI: done in 2.54855 secs using 198.5% CPU
+Optimizing NNI: done in 2.91612 secs using 197.8% CPU
+Optimizing NNI: done in 2.69384 secs using 199% CPU
+Optimizing NNI: done in 2.29206 secs using 198.7% CPU
+Optimizing NNI: done in 2.76017 secs using 199.1% CPU
+Optimizing NNI: done in 2.14421 secs using 198.5% CPU
+Optimizing NNI: done in 2.49998 secs using 199.5% CPU
+Optimizing NNI: done in 2.47876 secs using 199.2% CPU
+Iteration 770 / LogL: -5560.715 / Time: 0h:55m:11s (0h:5m:18s left)
+Optimizing NNI: done in 2.34643 secs using 198.7% CPU
+Optimizing NNI: done in 3.0921 secs using 199.1% CPU
+Optimizing NNI: done in 1.02749 secs using 198% CPU
+Optimizing NNI: done in 2.98925 secs using 198.6% CPU
+Optimizing NNI: done in 2.98696 secs using 199.3% CPU
+Optimizing NNI: done in 2.25438 secs using 199% CPU
+Optimizing NNI: done in 2.27286 secs using 198.2% CPU
+Optimizing NNI: done in 5.00028 secs using 198.8% CPU
+Optimizing NNI: done in 2.35116 secs using 198.6% CPU
+Optimizing NNI: done in 2.04983 secs using 199.5% CPU
+Iteration 780 / LogL: -5564.646 / Time: 0h:55m:48s (0h:4m:35s left)
+Optimizing NNI: done in 3.41826 secs using 199% CPU
+Optimizing NNI: done in 3.04125 secs using 198.5% CPU
+Optimizing NNI: done in 2.04154 secs using 198.1% CPU
+Optimizing NNI: done in 4.46241 secs using 198.8% CPU
+Optimizing NNI: done in 3.75344 secs using 198.7% CPU
+Optimizing NNI: done in 5.36464 secs using 198.7% CPU
+Optimizing NNI: done in 3.89093 secs using 198.3% CPU
+Optimizing NNI: done in 2.23285 secs using 198.7% CPU
+Optimizing NNI: done in 3.36438 secs using 199.4% CPU
+Optimizing NNI: done in 2.5271 secs using 199.1% CPU
+Iteration 790 / LogL: -5560.705 / Time: 0h:56m:33s (0h:3m:52s left)
+Optimizing NNI: done in 3.05017 secs using 198.7% CPU
+Optimizing NNI: done in 4.22954 secs using 197.7% CPU
+Optimizing NNI: done in 1.797 secs using 198.8% CPU
+Optimizing NNI: done in 3.96702 secs using 199% CPU
+Optimizing NNI: done in 2.62239 secs using 199.6% CPU
+Optimizing NNI: done in 2.41564 secs using 198.8% CPU
+Optimizing NNI: done in 3.28527 secs using 198.9% CPU
+Optimizing NNI: done in 2.56698 secs using 198.8% CPU
+Optimizing NNI: done in 3.07909 secs using 198.8% CPU
+Optimizing NNI: done in 1.17114 secs using 198.7% CPU
+Iteration 800 / LogL: -5561.654 / Time: 0h:57m:12s (0h:3m:9s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.923
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 3.27301 secs using 198.5% CPU
-Optimizing NNI: done in 1.30794 secs using 197.4% CPU
-Optimizing NNI: done in 2.82947 secs using 197.8% CPU
-Optimizing NNI: done in 3.4067 secs using 199.2% CPU
-Optimizing NNI: done in 3.69426 secs using 198.9% CPU
-Optimizing NNI: done in 4.09796 secs using 198.8% CPU
-Optimizing NNI: done in 3.25263 secs using 198.5% CPU
-Optimizing NNI: done in 3.21103 secs using 198.5% CPU
-Optimizing NNI: done in 1.49318 secs using 198% CPU
-Optimizing NNI: done in 2.04521 secs using 199.7% CPU
-Iteration 710 / LogL: -5577.895 / Time: 0h:51m:37s (0h:6m:33s left)
-Optimizing NNI: done in 4.19992 secs using 198.4% CPU
-Optimizing NNI: done in 2.12876 secs using 197.8% CPU
-Optimizing NNI: done in 4.25141 secs using 198.3% CPU
-Optimizing NNI: done in 3.79563 secs using 198.3% CPU
-Optimizing NNI: done in 2.04405 secs using 198.5% CPU
-Optimizing NNI: done in 3.67551 secs using 198.8% CPU
-Optimizing NNI: done in 2.21293 secs using 199.3% CPU
-Optimizing NNI: done in 2.35514 secs using 198.5% CPU
-Optimizing NNI: done in 2.71457 secs using 198.2% CPU
-Optimizing NNI: done in 6.63845 secs using 199.1% CPU
-Iteration 720 / LogL: -5577.894 / Time: 0h:52m:22s (0h:5m:49s left)
-Optimizing NNI: done in 2.91474 secs using 199.3% CPU
-Optimizing NNI: done in 3.89257 secs using 198.7% CPU
-Optimizing NNI: done in 1.42208 secs using 198.9% CPU
-Optimizing NNI: done in 2.47428 secs using 199% CPU
-Optimizing NNI: done in 4.90161 secs using 198.6% CPU
-Optimizing NNI: done in 4.45989 secs using 199.3% CPU
-Optimizing NNI: done in 2.29397 secs using 198.1% CPU
-Optimizing NNI: done in 3.39877 secs using 199.1% CPU
-Optimizing NNI: done in 4.58824 secs using 198.9% CPU
-Optimizing NNI: done in 4.47091 secs using 199.5% CPU
-Iteration 730 / LogL: -5579.563 / Time: 0h:53m:8s (0h:5m:6s left)
-Optimizing NNI: done in 2.70362 secs using 199.2% CPU
-Optimizing NNI: done in 3.67618 secs using 199% CPU
-Optimizing NNI: done in 4.11938 secs using 198.9% CPU
-Optimizing NNI: done in 1.97004 secs using 198.2% CPU
-Optimizing NNI: done in 5.58045 secs using 199.3% CPU
-Optimizing NNI: done in 3.01894 secs using 198.9% CPU
-Optimizing NNI: done in 3.32112 secs using 199% CPU
-Optimizing NNI: done in 1.92 secs using 197.6% CPU
-Optimizing NNI: done in 5.97354 secs using 199.3% CPU
-Optimizing NNI: done in 5.58818 secs using 199.1% CPU
-Iteration 740 / LogL: -5577.895 / Time: 0h:53m:56s (0h:4m:22s left)
-Optimizing NNI: done in 2.79796 secs using 198.7% CPU
-Optimizing NNI: done in 2.97279 secs using 199.5% CPU
-Optimizing NNI: done in 2.29995 secs using 198.9% CPU
-Optimizing NNI: done in 5.97448 secs using 198.9% CPU
-Optimizing NNI: done in 6.91025 secs using 198.7% CPU
-Optimizing NNI: done in 2.23497 secs using 198.6% CPU
-Optimizing NNI: done in 3.39526 secs using 199.6% CPU
-Optimizing NNI: done in 3.2878 secs using 198.5% CPU
-Optimizing NNI: done in 2.51293 secs using 198.9% CPU
-Optimizing NNI: done in 5.16874 secs using 198.9% CPU
-Iteration 750 / LogL: -5586.713 / Time: 0h:54m:45s (0h:3m:39s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 2.55425 secs using 199.2% CPU
-Optimizing NNI: done in 3.93903 secs using 199.1% CPU
-Optimizing NNI: done in 2.9193 secs using 199.2% CPU
-Optimizing NNI: done in 4.85607 secs using 199.1% CPU
-BETTER TREE FOUND at iteration 754: -5577.890
-Optimizing NNI: done in 1.9086 secs using 197.8% CPU
-Optimizing NNI: done in 5.02319 secs using 198.6% CPU
-Optimizing NNI: done in 3.18738 secs using 199.5% CPU
-Optimizing NNI: done in 2.4041 secs using 199.3% CPU
-Optimizing NNI: done in 3.37591 secs using 198.9% CPU
-Optimizing NNI: done in 2.2972 secs using 198.3% CPU
-Iteration 760 / LogL: -5577.903 / Time: 0h:55m:34s (0h:6m:52s left)
-Optimizing NNI: done in 6.77501 secs using 198.7% CPU
-Optimizing NNI: done in 2.80728 secs using 198.7% CPU
-Optimizing NNI: done in 2.28502 secs using 199% CPU
-Optimizing NNI: done in 3.05982 secs using 199% CPU
-Optimizing NNI: done in 4.82673 secs using 199.2% CPU
-Optimizing NNI: done in 3.5166 secs using 199.4% CPU
-Optimizing NNI: done in 3.81702 secs using 198.8% CPU
-Optimizing NNI: done in 3.6664 secs using 198.9% CPU
-Optimizing NNI: done in 4.14722 secs using 198.8% CPU
-Optimizing NNI: done in 3.23632 secs using 199.1% CPU
-Iteration 770 / LogL: -5579.132 / Time: 0h:56m:24s (0h:6m:9s left)
-Optimizing NNI: done in 1.62654 secs using 198.3% CPU
-Optimizing NNI: done in 2.97183 secs using 199.3% CPU
-Optimizing NNI: done in 3.85691 secs using 198.9% CPU
-Optimizing NNI: done in 3.22209 secs using 198.9% CPU
-Optimizing NNI: done in 2.30057 secs using 199.2% CPU
-Optimizing NNI: done in 2.1265 secs using 199.1% CPU
-Optimizing NNI: done in 3.005 secs using 198.4% CPU
-Optimizing NNI: done in 1.24972 secs using 198.5% CPU
-Optimizing NNI: done in 3.59448 secs using 198.3% CPU
-Optimizing NNI: done in 2.78378 secs using 198.5% CPU
-Iteration 780 / LogL: -5585.148 / Time: 0h:57m:3s (0h:5m:25s left)
-Optimizing NNI: done in 5.19007 secs using 199.2% CPU
-Optimizing NNI: done in 3.86181 secs using 199.2% CPU
-Optimizing NNI: done in 2.6172 secs using 198.8% CPU
-Optimizing NNI: done in 3.56066 secs using 198.6% CPU
-Optimizing NNI: done in 6.03069 secs using 199.2% CPU
-Optimizing NNI: done in 2.24308 secs using 198.5% CPU
-Optimizing NNI: done in 8.20964 secs using 198.9% CPU
-Optimizing NNI: done in 3.22382 secs using 199.2% CPU
-Optimizing NNI: done in 3.46752 secs using 198.7% CPU
-Optimizing NNI: done in 1.9707 secs using 199% CPU
-Iteration 790 / LogL: -5578.294 / Time: 0h:57m:55s (0h:4m:41s left)
-Optimizing NNI: done in 2.36137 secs using 199.2% CPU
-Optimizing NNI: done in 2.96519 secs using 198.6% CPU
-Optimizing NNI: done in 8.43554 secs using 198.8% CPU
-Optimizing NNI: done in 3.93483 secs using 198.2% CPU
-Optimizing NNI: done in 3.91046 secs using 199% CPU
-Optimizing NNI: done in 3.32324 secs using 198.2% CPU
-Optimizing NNI: done in 3.36855 secs using 198.5% CPU
-Optimizing NNI: done in 7.1534 secs using 199.1% CPU
-Optimizing NNI: done in 3.77547 secs using 198.6% CPU
-Optimizing NNI: done in 2.04445 secs using 198.9% CPU
-Iteration 800 / LogL: -5579.545 / Time: 0h:58m:48s (0h:3m:58s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.960
+Optimizing NNI: done in 4.26801 secs using 198.6% CPU
+Optimizing NNI: done in 6.13273 secs using 199.1% CPU
+Optimizing NNI: done in 3.58005 secs using 198.4% CPU
+Optimizing NNI: done in 2.45885 secs using 198.7% CPU
+Optimizing NNI: done in 4.69482 secs using 198.6% CPU
+Optimizing NNI: done in 6.76335 secs using 198.6% CPU
+Optimizing NNI: done in 2.96739 secs using 199.4% CPU
+Optimizing NNI: done in 3.46997 secs using 199.2% CPU
+Optimizing NNI: done in 5.09053 secs using 198.9% CPU
+Optimizing NNI: done in 2.45775 secs using 198.6% CPU
+Iteration 810 / LogL: -5562.440 / Time: 0h:58m:10s (0h:6m:28s left)
+Optimizing NNI: done in 2.64852 secs using 199% CPU
+Optimizing NNI: done in 3.26432 secs using 198.5% CPU
+Optimizing NNI: done in 2.84776 secs using 199% CPU
+Optimizing NNI: done in 1.88344 secs using 198.7% CPU
+Optimizing NNI: done in 1.96101 secs using 198.1% CPU
+Optimizing NNI: done in 2.48457 secs using 198.7% CPU
+Optimizing NNI: done in 3.39698 secs using 198.6% CPU
+Optimizing NNI: done in 2.22221 secs using 198.6% CPU
+Optimizing NNI: done in 1.96404 secs using 197.7% CPU
+Optimizing NNI: done in 4.63051 secs using 199.3% CPU
+Iteration 820 / LogL: -5579.638 / Time: 0h:58m:48s (0h:5m:44s left)
+Optimizing NNI: done in 2.04449 secs using 198% CPU
+Optimizing NNI: done in 5.48868 secs using 198.8% CPU
+Optimizing NNI: done in 2.81157 secs using 199.7% CPU
+Optimizing NNI: done in 4.58804 secs using 199.4% CPU
+Optimizing NNI: done in 1.77386 secs using 198.3% CPU
+Optimizing NNI: done in 1.07912 secs using 198.8% CPU
+Optimizing NNI: done in 3.18066 secs using 198.8% CPU
+Optimizing NNI: done in 2.37342 secs using 198.9% CPU
+Optimizing NNI: done in 6.31491 secs using 199.2% CPU
+Optimizing NNI: done in 2.60823 secs using 199.3% CPU
+Iteration 830 / LogL: -5578.748 / Time: 0h:59m:32s (0h:5m:1s left)
+Optimizing NNI: done in 2.50794 secs using 199.3% CPU
+Optimizing NNI: done in 5.85124 secs using 198.7% CPU
+Optimizing NNI: done in 1.99996 secs using 198.9% CPU
+Optimizing NNI: done in 3.94829 secs using 199.3% CPU
+Optimizing NNI: done in 4.47749 secs using 199% CPU
+Optimizing NNI: done in 6.56029 secs using 198.9% CPU
+Optimizing NNI: done in 2.87431 secs using 199.2% CPU
+Optimizing NNI: done in 3.63672 secs using 198.9% CPU
+Optimizing NNI: done in 3.28641 secs using 198.5% CPU
+Optimizing NNI: done in 2.37669 secs using 199.2% CPU
+Iteration 840 / LogL: -5560.724 / Time: 1h:0m:21s (0h:4m:18s left)
+Optimizing NNI: done in 2.79642 secs using 198.5% CPU
+Optimizing NNI: done in 3.3706 secs using 198.6% CPU
+Optimizing NNI: done in 3.95072 secs using 198.4% CPU
+Optimizing NNI: done in 2.56855 secs using 198.7% CPU
+Optimizing NNI: done in 1.80475 secs using 199.7% CPU
+Optimizing NNI: done in 4.34658 secs using 198.7% CPU
+Optimizing NNI: done in 5.59905 secs using 198.4% CPU
+Optimizing NNI: done in 3.04022 secs using 199.3% CPU
+Optimizing NNI: done in 2.62556 secs using 199.6% CPU
+Optimizing NNI: done in 1.7128 secs using 199.7% CPU
+Iteration 850 / LogL: -5560.861 / Time: 1h:1m:4s (0h:3m:35s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 1.45377 secs using 198.2% CPU
+Optimizing NNI: done in 2.76705 secs using 198.5% CPU
+Optimizing NNI: done in 1.65533 secs using 198.8% CPU
+Optimizing NNI: done in 2.88651 secs using 199% CPU
+Optimizing NNI: done in 4.34736 secs using 198.3% CPU
+Optimizing NNI: done in 4.70687 secs using 199.2% CPU
+Optimizing NNI: done in 2.39117 secs using 198.4% CPU
+Optimizing NNI: done in 3.43345 secs using 199.2% CPU
+Optimizing NNI: done in 3.51351 secs using 198.7% CPU
+Optimizing NNI: done in 3.10091 secs using 198.3% CPU
+Iteration 860 / LogL: -5562.543 / Time: 1h:1m:51s (0h:2m:52s left)
+Optimizing NNI: done in 2.46455 secs using 198.6% CPU
+Optimizing NNI: done in 1.65714 secs using 197.5% CPU
+Optimizing NNI: done in 3.34449 secs using 199.1% CPU
+Optimizing NNI: done in 2.60329 secs using 199.3% CPU
+Optimizing NNI: done in 3.3572 secs using 198.4% CPU
+Optimizing NNI: done in 1.42877 secs using 199.3% CPU
+Optimizing NNI: done in 2.35945 secs using 198.1% CPU
+Optimizing NNI: done in 4.89068 secs using 198.7% CPU
+Optimizing NNI: done in 2.61515 secs using 198.8% CPU
+Optimizing NNI: done in 5.93588 secs using 199% CPU
+Iteration 870 / LogL: -5560.713 / Time: 1h:2m:33s (0h:2m:9s left)
+Optimizing NNI: done in 2.55282 secs using 198.5% CPU
+Optimizing NNI: done in 5.32485 secs using 198.2% CPU
+Optimizing NNI: done in 2.66548 secs using 199.1% CPU
+Optimizing NNI: done in 2.2154 secs using 198.5% CPU
+Optimizing NNI: done in 4.51148 secs using 197.6% CPU
+Optimizing NNI: done in 2.08797 secs using 199% CPU
+Optimizing NNI: done in 2.3242 secs using 199.1% CPU
+Optimizing NNI: done in 2.53932 secs using 197.8% CPU
+Optimizing NNI: done in 2.4244 secs using 199.1% CPU
+Optimizing NNI: done in 2.40225 secs using 198.5% CPU
+Iteration 880 / LogL: -5560.699 / Time: 1h:3m:15s (0h:1m:26s left)
+Optimizing NNI: done in 2.75485 secs using 199% CPU
+Optimizing NNI: done in 2.9973 secs using 198.7% CPU
+Optimizing NNI: done in 2.15499 secs using 198.7% CPU
+Optimizing NNI: done in 2.69501 secs using 198.8% CPU
+Optimizing NNI: done in 8.05424 secs using 199.2% CPU
+Optimizing NNI: done in 2.43062 secs using 198.7% CPU
+Optimizing NNI: done in 3.49977 secs using 198.7% CPU
+Optimizing NNI: done in 1.50466 secs using 199.1% CPU
+Optimizing NNI: done in 3.35746 secs using 198.6% CPU
+Optimizing NNI: done in 2.06075 secs using 197.8% CPU
+Iteration 890 / LogL: -5560.704 / Time: 1h:3m:58s (0h:0m:43s left)
+Optimizing NNI: done in 5.77729 secs using 199.3% CPU
+Optimizing NNI: done in 2.56647 secs using 198.9% CPU
+Optimizing NNI: done in 6.09254 secs using 199.2% CPU
+Optimizing NNI: done in 2.63422 secs using 198.5% CPU
+Optimizing NNI: done in 2.80855 secs using 198.9% CPU
+Optimizing NNI: done in 6.2666 secs using 198.7% CPU
+Optimizing NNI: done in 3.88876 secs using 198.5% CPU
+Optimizing NNI: done in 3.5668 secs using 198.2% CPU
+Optimizing NNI: done in 3.60398 secs using 198.5% CPU
+Optimizing NNI: done in 2.59252 secs using 198.6% CPU
+Iteration 900 / LogL: -5586.608 / Time: 1h:4m:50s (0h:0m:0s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.949
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 6.05348 secs using 199.1% CPU
-Optimizing NNI: done in 4.1433 secs using 199.1% CPU
-Optimizing NNI: done in 6.5457 secs using 199.5% CPU
-Optimizing NNI: done in 6.71088 secs using 198.8% CPU
-Optimizing NNI: done in 1.84254 secs using 198.5% CPU
-Optimizing NNI: done in 2.10023 secs using 199.7% CPU
-Optimizing NNI: done in 1.82214 secs using 197.7% CPU
-Optimizing NNI: done in 2.91315 secs using 198.8% CPU
-Optimizing NNI: done in 2.5911 secs using 198.7% CPU
-Optimizing NNI: done in 4.52893 secs using 199.4% CPU
-Iteration 810 / LogL: -5579.228 / Time: 0h:59m:45s (0h:6m:38s left)
-Optimizing NNI: done in 1.83393 secs using 198.5% CPU
-Optimizing NNI: done in 2.25216 secs using 198.7% CPU
-Optimizing NNI: done in 2.74382 secs using 198.6% CPU
-Optimizing NNI: done in 3.1897 secs using 198.9% CPU
-Optimizing NNI: done in 3.29922 secs using 199.1% CPU
-Optimizing NNI: done in 2.06774 secs using 198.4% CPU
-Optimizing NNI: done in 3.03964 secs using 198.4% CPU
-Optimizing NNI: done in 2.98338 secs using 198.9% CPU
-Optimizing NNI: done in 2.3472 secs using 198.9% CPU
-Optimizing NNI: done in 5.51425 secs using 198.5% CPU
-Iteration 820 / LogL: -5578.790 / Time: 1h:0m:28s (0h:5m:54s left)
-Optimizing NNI: done in 2.64263 secs using 198.6% CPU
-Optimizing NNI: done in 2.71545 secs using 199.1% CPU
-Optimizing NNI: done in 3.5616 secs using 198.9% CPU
-Optimizing NNI: done in 2.85958 secs using 198.8% CPU
-Optimizing NNI: done in 2.76749 secs using 198.8% CPU
-Optimizing NNI: done in 2.83378 secs using 199.3% CPU
-Optimizing NNI: done in 2.82899 secs using 197.9% CPU
-Optimizing NNI: done in 2.86903 secs using 198.5% CPU
-Optimizing NNI: done in 3.5846 secs using 199.2% CPU
-Optimizing NNI: done in 5.98538 secs using 199.1% CPU
-Iteration 830 / LogL: -5577.923 / Time: 1h:1m:13s (0h:5m:10s left)
-Optimizing NNI: done in 3.41988 secs using 199.4% CPU
-Optimizing NNI: done in 3.42089 secs using 199.2% CPU
-Optimizing NNI: done in 2.07606 secs using 198% CPU
-Optimizing NNI: done in 5.82075 secs using 198.9% CPU
-Optimizing NNI: done in 2.92462 secs using 198.8% CPU
-Optimizing NNI: done in 3.26192 secs using 198.6% CPU
-Optimizing NNI: done in 1.3051 secs using 198.3% CPU
-Optimizing NNI: done in 1.84304 secs using 198.2% CPU
-Optimizing NNI: done in 6.50366 secs using 198.7% CPU
-Optimizing NNI: done in 3.20751 secs using 199.1% CPU
-Iteration 840 / LogL: -5579.424 / Time: 1h:2m:0s (0h:4m:26s left)
-Optimizing NNI: done in 3.53177 secs using 198.8% CPU
-Optimizing NNI: done in 2.68425 secs using 198.6% CPU
-Optimizing NNI: done in 5.58753 secs using 199.1% CPU
-Optimizing NNI: done in 3.76567 secs using 199.1% CPU
-Optimizing NNI: done in 6.55439 secs using 199.2% CPU
-Optimizing NNI: done in 3.47162 secs using 199.4% CPU
-Optimizing NNI: done in 2.22612 secs using 199.5% CPU
-Optimizing NNI: done in 2.44173 secs using 199.2% CPU
-Optimizing NNI: done in 4.28552 secs using 198.4% CPU
-Optimizing NNI: done in 7.33126 secs using 199% CPU
-Iteration 850 / LogL: -5590.564 / Time: 1h:2m:55s (0h:3m:42s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 8.20648 secs using 199.2% CPU
-Optimizing NNI: done in 3.43486 secs using 198.8% CPU
-Optimizing NNI: done in 3.14681 secs using 198.4% CPU
-Optimizing NNI: done in 3.70545 secs using 198.3% CPU
-Optimizing NNI: done in 3.2273 secs using 199% CPU
-Optimizing NNI: done in 2.76189 secs using 197.9% CPU
-Optimizing NNI: done in 2.71053 secs using 198.8% CPU
-Optimizing NNI: done in 5.34994 secs using 199.1% CPU
-Optimizing NNI: done in 3.73446 secs using 199.1% CPU
-Optimizing NNI: done in 2.64938 secs using 198.1% CPU
-Iteration 860 / LogL: -5577.901 / Time: 1h:3m:52s (0h:2m:58s left)
-Optimizing NNI: done in 2.69943 secs using 198.6% CPU
-Optimizing NNI: done in 5.87053 secs using 199% CPU
-Optimizing NNI: done in 8.6437 secs using 199.1% CPU
-Optimizing NNI: done in 3.70107 secs using 199.3% CPU
-Optimizing NNI: done in 2.59452 secs using 198.9% CPU
-Optimizing NNI: done in 2.52174 secs using 197.6% CPU
-Optimizing NNI: done in 8.56919 secs using 199.4% CPU
-Optimizing NNI: done in 3.00657 secs using 199.3% CPU
-Optimizing NNI: done in 2.61312 secs using 199.4% CPU
-Optimizing NNI: done in 2.46688 secs using 199.2% CPU
-Iteration 870 / LogL: -5578.539 / Time: 1h:4m:49s (0h:2m:14s left)
-Optimizing NNI: done in 2.32118 secs using 198.8% CPU
-Optimizing NNI: done in 2.71075 secs using 199.1% CPU
-Optimizing NNI: done in 3.68511 secs using 199% CPU
-Optimizing NNI: done in 2.46327 secs using 198.5% CPU
-Optimizing NNI: done in 3.60795 secs using 198.8% CPU
-Optimizing NNI: done in 2.911 secs using 199.3% CPU
-Optimizing NNI: done in 4.92418 secs using 199.1% CPU
-Optimizing NNI: done in 3.28117 secs using 199.2% CPU
-Optimizing NNI: done in 2.57575 secs using 199% CPU
-Optimizing NNI: done in 3.78029 secs using 198.7% CPU
-Iteration 880 / LogL: -5596.545 / Time: 1h:5m:35s (0h:1m:29s left)
-Optimizing NNI: done in 3.77834 secs using 198.9% CPU
-Optimizing NNI: done in 7.82974 secs using 199.1% CPU
-Optimizing NNI: done in 4.83798 secs using 199.3% CPU
-Optimizing NNI: done in 3.73126 secs using 198.8% CPU
-Optimizing NNI: done in 3.94712 secs using 199.7% CPU
-Optimizing NNI: done in 3.13966 secs using 199.2% CPU
-Optimizing NNI: done in 3.30757 secs using 199.2% CPU
-Optimizing NNI: done in 6.85787 secs using 199.1% CPU
-Optimizing NNI: done in 3.05032 secs using 198.5% CPU
-Optimizing NNI: done in 8.10758 secs using 198.9% CPU
-Iteration 890 / LogL: -5577.908 / Time: 1h:6m:38s (0h:0m:44s left)
-Optimizing NNI: done in 2.69416 secs using 198.2% CPU
-Optimizing NNI: done in 2.41123 secs using 199% CPU
-Optimizing NNI: done in 8.23069 secs using 199.2% CPU
-Optimizing NNI: done in 1.15575 secs using 199.2% CPU
-Optimizing NNI: done in 8.49067 secs using 199.3% CPU
-Optimizing NNI: done in 5.07778 secs using 199% CPU
-Optimizing NNI: done in 2.77558 secs using 198.6% CPU
-Optimizing NNI: done in 3.18135 secs using 198.9% CPU
-Optimizing NNI: done in 2.41781 secs using 198.7% CPU
-Optimizing NNI: done in 6.85209 secs using 198.7% CPU
-Iteration 900 / LogL: -5579.749 / Time: 1h:7m:35s (0h:0m:0s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.960
+Optimizing NNI: done in 2.62461 secs using 199.2% CPU
+Optimizing NNI: done in 3.12899 secs using 198.9% CPU
+Optimizing NNI: done in 3.62599 secs using 198.7% CPU
+Optimizing NNI: done in 4.4545 secs using 198.8% CPU
+Optimizing NNI: done in 3.15584 secs using 198.3% CPU
+Optimizing NNI: done in 2.011 secs using 198.5% CPU
+Optimizing NNI: done in 2.61584 secs using 198.3% CPU
+Optimizing NNI: done in 3.5506 secs using 198.6% CPU
+Optimizing NNI: done in 1.99579 secs using 198.3% CPU
+Optimizing NNI: done in 2.62098 secs using 198.2% CPU
+Iteration 910 / LogL: -5562.073 / Time: 1h:5m:37s (0h:6m:29s left)
+Optimizing NNI: done in 3.90437 secs using 198.9% CPU
+Optimizing NNI: done in 2.51875 secs using 199.2% CPU
+Optimizing NNI: done in 3.43734 secs using 198.9% CPU
+Optimizing NNI: done in 3.3074 secs using 198.5% CPU
+Optimizing NNI: done in 2.9029 secs using 199% CPU
+Optimizing NNI: done in 2.98296 secs using 198.8% CPU
+Optimizing NNI: done in 3.18184 secs using 198.8% CPU
+Optimizing NNI: done in 2.83235 secs using 199% CPU
+Optimizing NNI: done in 2.0636 secs using 197.8% CPU
+Optimizing NNI: done in 2.40788 secs using 198.1% CPU
+Iteration 920 / LogL: -5580.371 / Time: 1h:6m:19s (0h:5m:46s left)
+Optimizing NNI: done in 2.37746 secs using 198.4% CPU
+Optimizing NNI: done in 2.00899 secs using 198.9% CPU
+Optimizing NNI: done in 3.48532 secs using 199.2% CPU
+Optimizing NNI: done in 4.12006 secs using 198% CPU
+Optimizing NNI: done in 2.25382 secs using 199.2% CPU
+Optimizing NNI: done in 3.21595 secs using 199.3% CPU
+Optimizing NNI: done in 1.7875 secs using 198.8% CPU
+Optimizing NNI: done in 2.15308 secs using 199.2% CPU
+Optimizing NNI: done in 2.21486 secs using 198.7% CPU
+Optimizing NNI: done in 3.159 secs using 198.5% CPU
+Iteration 930 / LogL: -5566.638 / Time: 1h:6m:59s (0h:5m:2s left)
+Optimizing NNI: done in 1.87271 secs using 198% CPU
+Optimizing NNI: done in 2.61886 secs using 198.9% CPU
+Optimizing NNI: done in 2.05958 secs using 198.8% CPU
+Optimizing NNI: done in 2.43968 secs using 199.3% CPU
+Optimizing NNI: done in 2.40863 secs using 198.8% CPU
+Optimizing NNI: done in 2.05666 secs using 199.3% CPU
+Optimizing NNI: done in 4.00991 secs using 198.8% CPU
+Optimizing NNI: done in 1.42099 secs using 196.7% CPU
+Optimizing NNI: done in 1.24631 secs using 199.1% CPU
+Optimizing NNI: done in 7.35685 secs using 198.8% CPU
+Iteration 940 / LogL: -5565.234 / Time: 1h:7m:39s (0h:4m:19s left)
+Optimizing NNI: done in 3.8117 secs using 198.8% CPU
+Optimizing NNI: done in 1.86969 secs using 197.7% CPU
+Optimizing NNI: done in 2.98318 secs using 198.4% CPU
+Optimizing NNI: done in 4.21144 secs using 197.9% CPU
+Optimizing NNI: done in 2.75891 secs using 198.3% CPU
+Optimizing NNI: done in 3.47969 secs using 198.5% CPU
+Optimizing NNI: done in 1.35688 secs using 198.4% CPU
+Optimizing NNI: done in 2.68061 secs using 199% CPU
+Optimizing NNI: done in 3.99141 secs using 199% CPU
+Optimizing NNI: done in 5.00266 secs using 198.6% CPU
+Iteration 950 / LogL: -5560.858 / Time: 1h:8m:24s (0h:3m:36s left)
+Log-likelihood cutoff on original alignment: -5615.499
+Optimizing NNI: done in 3.5047 secs using 197.6% CPU
+Optimizing NNI: done in 1.49803 secs using 198.3% CPU
+Optimizing NNI: done in 2.32924 secs using 198.5% CPU
+Optimizing NNI: done in 2.82897 secs using 198.7% CPU
+Optimizing NNI: done in 2.57422 secs using 198.2% CPU
+Optimizing NNI: done in 3.07302 secs using 198.5% CPU
+Optimizing NNI: done in 3.09727 secs using 198.7% CPU
+Optimizing NNI: done in 3.06858 secs using 198.5% CPU
+Optimizing NNI: done in 1.76974 secs using 196.5% CPU
+Optimizing NNI: done in 2.83092 secs using 198.6% CPU
+Iteration 960 / LogL: -5573.348 / Time: 1h:9m:9s (0h:2m:53s left)
+Optimizing NNI: done in 2.73598 secs using 198.5% CPU
+Optimizing NNI: done in 3.5263 secs using 199% CPU
+Optimizing NNI: done in 3.30056 secs using 199.3% CPU
+Optimizing NNI: done in 3.27212 secs using 198.9% CPU
+Optimizing NNI: done in 5.49463 secs using 198.7% CPU
+Optimizing NNI: done in 3.59726 secs using 198.8% CPU
+Optimizing NNI: done in 3.66289 secs using 198.4% CPU
+Optimizing NNI: done in 2.25702 secs using 198.7% CPU
+Optimizing NNI: done in 4.64897 secs using 199.2% CPU
+Optimizing NNI: done in 2.82706 secs using 199.3% CPU
+Iteration 970 / LogL: -5560.696 / Time: 1h:9m:58s (0h:2m:9s left)
+Optimizing NNI: done in 3.18591 secs using 198.9% CPU
+Optimizing NNI: done in 1.91294 secs using 198.6% CPU
+Optimizing NNI: done in 2.05815 secs using 198.5% CPU
+Optimizing NNI: done in 3.02014 secs using 198.9% CPU
+Optimizing NNI: done in 2.61942 secs using 198.1% CPU
+Optimizing NNI: done in 2.02218 secs using 198.7% CPU
+Optimizing NNI: done in 2.77741 secs using 198.8% CPU
+Optimizing NNI: done in 8.44974 secs using 198.6% CPU
+Optimizing NNI: done in 3.50022 secs using 198.9% CPU
+Optimizing NNI: done in 3.57748 secs using 198.1% CPU
+Iteration 980 / LogL: -5560.707 / Time: 1h:10m:45s (0h:1m:26s left)
+Optimizing NNI: done in 4.06403 secs using 199% CPU
+Optimizing NNI: done in 3.79377 secs using 198% CPU
+Optimizing NNI: done in 2.94948 secs using 199% CPU
+Optimizing NNI: done in 2.72335 secs using 199.7% CPU
+Optimizing NNI: done in 3.54877 secs using 198.9% CPU
+Optimizing NNI: done in 2.95103 secs using 199.2% CPU
+Optimizing NNI: done in 2.11687 secs using 198.2% CPU
+Optimizing NNI: done in 5.63309 secs using 198.3% CPU
+Optimizing NNI: done in 4.64011 secs using 198.6% CPU
+Optimizing NNI: done in 2.63984 secs using 198.5% CPU
+Iteration 990 / LogL: -5560.692 / Time: 1h:11m:34s (0h:0m:43s left)
+Optimizing NNI: done in 2.28619 secs using 198.6% CPU
+Optimizing NNI: done in 7.7029 secs using 198.5% CPU
+Optimizing NNI: done in 2.80214 secs using 198.6% CPU
+Optimizing NNI: done in 3.83955 secs using 199% CPU
+Optimizing NNI: done in 2.61838 secs using 199.3% CPU
+Optimizing NNI: done in 3.19661 secs using 199.1% CPU
+Optimizing NNI: done in 3.61076 secs using 198.8% CPU
+Optimizing NNI: done in 3.41148 secs using 198.9% CPU
+Optimizing NNI: done in 3.29715 secs using 199.4% CPU
+Optimizing NNI: done in 3.35226 secs using 198.9% CPU
+Iteration 1000 / LogL: -5560.957 / Time: 1h:12m:23s (0h:0m:0s left)
+Log-likelihood cutoff on original alignment: -5615.499
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.941
 NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 1.80239 secs using 196.5% CPU
-Optimizing NNI: done in 3.81389 secs using 198.5% CPU
-Optimizing NNI: done in 2.76236 secs using 198.5% CPU
-Optimizing NNI: done in 1.85853 secs using 198.9% CPU
-Optimizing NNI: done in 3.51237 secs using 199.5% CPU
-Optimizing NNI: done in 3.02526 secs using 199.1% CPU
-Optimizing NNI: done in 2.44402 secs using 198.3% CPU
-Optimizing NNI: done in 4.37702 secs using 198.8% CPU
-Optimizing NNI: done in 2.90695 secs using 198.9% CPU
-Optimizing NNI: done in 4.12331 secs using 198.1% CPU
-Iteration 910 / LogL: -5580.778 / Time: 1h:8m:25s (0h:6m:46s left)
-Optimizing NNI: done in 2.97212 secs using 198.6% CPU
-Optimizing NNI: done in 2.25769 secs using 198.8% CPU
-Optimizing NNI: done in 4.7817 secs using 198.3% CPU
-Optimizing NNI: done in 2.68625 secs using 198.9% CPU
-Optimizing NNI: done in 2.28585 secs using 198.8% CPU
-Optimizing NNI: done in 2.21287 secs using 199% CPU
-Optimizing NNI: done in 2.69407 secs using 198.2% CPU
-Optimizing NNI: done in 2.95412 secs using 199.6% CPU
-Optimizing NNI: done in 6.03416 secs using 199.2% CPU
-Optimizing NNI: done in 8.13191 secs using 198.8% CPU
-Iteration 920 / LogL: -5579.133 / Time: 1h:9m:17s (0h:6m:1s left)
-Optimizing NNI: done in 2.35275 secs using 198.4% CPU
-Optimizing NNI: done in 5.13229 secs using 199% CPU
-Optimizing NNI: done in 4.36738 secs using 199.2% CPU
-Optimizing NNI: done in 3.99246 secs using 197.9% CPU
-Optimizing NNI: done in 3.38027 secs using 198.8% CPU
-Optimizing NNI: done in 8.72572 secs using 198.7% CPU
-Optimizing NNI: done in 3.06743 secs using 199.1% CPU
-Optimizing NNI: done in 2.34148 secs using 198.1% CPU
-Optimizing NNI: done in 2.48565 secs using 198.8% CPU
-Optimizing NNI: done in 3.87171 secs using 198.6% CPU
-Iteration 930 / LogL: -5578.805 / Time: 1h:10m:11s (0h:5m:17s left)
-Optimizing NNI: done in 3.28336 secs using 199% CPU
-Optimizing NNI: done in 1.72322 secs using 199% CPU
-Optimizing NNI: done in 8.14125 secs using 199.1% CPU
-Optimizing NNI: done in 3.50913 secs using 198.5% CPU
-Optimizing NNI: done in 3.65945 secs using 199% CPU
-Optimizing NNI: done in 5.91187 secs using 199% CPU
-Optimizing NNI: done in 2.53861 secs using 198.6% CPU
-Optimizing NNI: done in 3.95059 secs using 199.2% CPU
-Optimizing NNI: done in 4.97311 secs using 198.8% CPU
-Optimizing NNI: done in 3.97565 secs using 199.3% CPU
-Iteration 940 / LogL: -5577.909 / Time: 1h:11m:8s (0h:4m:32s left)
-Optimizing NNI: done in 2.45622 secs using 199.3% CPU
-Optimizing NNI: done in 3.50014 secs using 199.1% CPU
-Optimizing NNI: done in 1.81666 secs using 198.3% CPU
-Optimizing NNI: done in 7.59485 secs using 198.7% CPU
-Optimizing NNI: done in 7.47146 secs using 199% CPU
-Optimizing NNI: done in 3.0478 secs using 198% CPU
-Optimizing NNI: done in 4.89813 secs using 199.3% CPU
-Optimizing NNI: done in 3.80344 secs using 198.9% CPU
-Optimizing NNI: done in 3.23204 secs using 199.1% CPU
-Optimizing NNI: done in 3.43522 secs using 198.8% CPU
-Iteration 950 / LogL: -5578.874 / Time: 1h:12m:4s (0h:3m:47s left)
-Log-likelihood cutoff on original alignment: -5625.589
-Optimizing NNI: done in 1.20257 secs using 199% CPU
-Optimizing NNI: done in 4.47351 secs using 198.4% CPU
-Optimizing NNI: done in 2.43382 secs using 198.4% CPU
-Optimizing NNI: done in 5.80918 secs using 198.5% CPU
-Optimizing NNI: done in 1.95317 secs using 199% CPU
-Optimizing NNI: done in 6.65391 secs using 198.8% CPU
-Optimizing NNI: done in 5.02932 secs using 199.3% CPU
-Optimizing NNI: done in 8.58269 secs using 198.8% CPU
-Optimizing NNI: done in 7.0086 secs using 198.8% CPU
-Optimizing NNI: done in 2.93885 secs using 199% CPU
-Iteration 960 / LogL: -5577.894 / Time: 1h:13m:11s (0h:3m:3s left)
-Optimizing NNI: done in 2.98325 secs using 199.2% CPU
-Optimizing NNI: done in 5.16604 secs using 198.4% CPU
-Optimizing NNI: done in 3.08561 secs using 198.8% CPU
-Optimizing NNI: done in 4.9985 secs using 198.9% CPU
-Optimizing NNI: done in 2.0831 secs using 197.9% CPU
-Optimizing NNI: done in 7.50661 secs using 198.9% CPU
-Optimizing NNI: done in 4.49917 secs using 199.1% CPU
-Optimizing NNI: done in 6.67605 secs using 198.9% CPU
-Optimizing NNI: done in 1.76758 secs using 198.3% CPU
-Optimizing NNI: done in 6.36149 secs using 199.1% CPU
-Iteration 970 / LogL: -5577.896 / Time: 1h:14m:12s (0h:2m:17s left)
-Optimizing NNI: done in 3.75554 secs using 199.1% CPU
-Optimizing NNI: done in 4.09438 secs using 198.7% CPU
-Optimizing NNI: done in 4.77702 secs using 199% CPU
-Optimizing NNI: done in 2.98815 secs using 198.7% CPU
-Optimizing NNI: done in 2.87381 secs using 198.6% CPU
-Optimizing NNI: done in 4.83553 secs using 199% CPU
-Optimizing NNI: done in 2.75381 secs using 198.3% CPU
-Optimizing NNI: done in 7.91201 secs using 198.4% CPU
-Optimizing NNI: done in 2.72183 secs using 199.2% CPU
-Optimizing NNI: done in 2.13326 secs using 198.3% CPU
-Iteration 980 / LogL: -5578.787 / Time: 1h:15m:7s (0h:1m:32s left)
-Optimizing NNI: done in 4.90597 secs using 199.4% CPU
-Optimizing NNI: done in 6.52059 secs using 198.7% CPU
-Optimizing NNI: done in 2.04334 secs using 198.4% CPU
-Optimizing NNI: done in 2.29204 secs using 199.8% CPU
-Optimizing NNI: done in 3.71936 secs using 198.7% CPU
-Optimizing NNI: done in 6.54258 secs using 198.7% CPU
-Optimizing NNI: done in 4.2025 secs using 198.6% CPU
-Optimizing NNI: done in 3.21301 secs using 198.9% CPU
-Optimizing NNI: done in 3.58547 secs using 199.2% CPU
-Optimizing NNI: done in 4.60256 secs using 198.6% CPU
-Iteration 990 / LogL: -5580.102 / Time: 1h:16m:5s (0h:0m:46s left)
-Optimizing NNI: done in 2.35036 secs using 198.3% CPU
-Optimizing NNI: done in 2.91029 secs using 199.4% CPU
-Optimizing NNI: done in 0.768947 secs using 198.6% CPU
-Optimizing NNI: done in 2.22539 secs using 198.9% CPU
-Optimizing NNI: done in 2.88966 secs using 198.6% CPU
-Optimizing NNI: done in 2.99786 secs using 199.2% CPU
-Optimizing NNI: done in 4.36348 secs using 198.9% CPU
-Optimizing NNI: done in 4.01136 secs using 199% CPU
-Optimizing NNI: done in 3.41718 secs using 198.6% CPU
-Optimizing NNI: done in 3.7731 secs using 199% CPU
-Iteration 1000 / LogL: -5598.403 / Time: 1h:16m:51s (0h:0m:0s left)
-Log-likelihood cutoff on original alignment: -5625.589
-NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.959
-NOTE: UFBoot does not converge, continue at least 100 more iterations
-Optimizing NNI: done in 4.37704 secs using 199.1% CPU
+Optimizing NNI: done in 1.87793 secs using 199% CPU
 WARNING: bootstrap analysis did not converge. You should rerun with higher number of iterations (-nm option)
-TREE SEARCH COMPLETED AFTER 1001 ITERATIONS / Time: 1h:17m:3s
+TREE SEARCH COMPLETED AFTER 1001 ITERATIONS / Time: 1h:12m:33s
 
 --------------------------------------------------------------------
 |                    FINALIZING TREE SEARCH                        |
 --------------------------------------------------------------------
 Performs final model parameters optimization
 Estimate model parameters (epsilon = 0.010)
-1. Initial log-likelihood: -5577.890
-Optimal log-likelihood: -5577.886
-Rate parameters:  A-C: 1.00000  A-G: 1.25258  A-T: 1.00000  C-G: 1.00000  C-T: 3.13385  G-T: 1.00000
+1. Initial log-likelihood: -5560.690
+Optimal log-likelihood: -5560.688
+Rate parameters:  A-C: 1.00000  A-G: 1.27305  A-T: 1.00000  C-G: 1.00000  C-T: 3.09280  G-T: 1.00000
 Base frequencies:  A: 0.251  C: 0.197  G: 0.269  T: 0.283
-Site proportion and rates:  (0.917,0.454) (0.083,7.004)
-Parameters optimization took 1 rounds (0.125 sec)
-BEST SCORE FOUND : -5577.886
+Site proportion and rates:  (0.917,0.458) (0.083,6.990)
+Parameters optimization took 1 rounds (0.126 sec)
+BEST SCORE FOUND : -5560.688
 Creating bootstrap support values...
 Split supports printed to NEXUS file tmp/Eimeria18S_wild_lab_ref.fasta.splits.nex
-Total tree length: 0.361
+Total tree length: 0.354
 
 Total number of iterations: 1001
-CPU time used for tree search: 7856.096 sec (2h:10m:56s)
-Wall-clock time used for tree search: 4372.986 sec (1h:12m:52s)
-Total CPU time used: 8342.209 sec (2h:19m:2s)
-Total wall-clock time used: 4630.068 sec (1h:17m:10s)
+CPU time used for tree search: 7354.189 sec (2h:2m:34s)
+Wall-clock time used for tree search: 4088.375 sec (1h:8m:8s)
+Total CPU time used: 7871.213 sec (2h:11m:11s)
+Total wall-clock time used: 4359.501 sec (1h:12m:39s)
 
 Computing bootstrap consensus tree...
 Reading input file tmp/Eimeria18S_wild_lab_ref.fasta.splits.nex...
-226 taxa and 19456 splits.
+226 taxa and 13541 splits.
 Consensus tree written to tmp/Eimeria18S_wild_lab_ref.fasta.contree
 Reading input trees file tmp/Eimeria18S_wild_lab_ref.fasta.contree
-Log-likelihood of consensus tree: -5578.290
+Log-likelihood of consensus tree: -5560.879
 
 Analysis results written to: 
   IQ-TREE report:                tmp/Eimeria18S_wild_lab_ref.fasta.iqtree
@@ -1598,4 +1572,4 @@ Ultrafast bootstrap approximation results written to:
   Consensus tree:                tmp/Eimeria18S_wild_lab_ref.fasta.contree
   Screen log file:               tmp/Eimeria18S_wild_lab_ref.fasta.log
 
-Date and Time: Mon Nov  7 15:37:45 2022
+Date and Time: Mon Nov 21 10:22:41 2022
