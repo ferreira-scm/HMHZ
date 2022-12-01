@@ -46,13 +46,14 @@ along<- names(PS.l.2)
 PS.l <- lapply(along, function(i) merge_phyloseq(PS.l.1[[i]], PS.l.2[[i]])) ##Merge all the information from both experiments
 names(PS.l) <- names(PS.l.2)
 
-x<- names(PS.l)
-x
+#### this is no longer necessary, but better check
+#x<- names(PS.l)
+#x
 
-x[6]<-"BGf_132_F.BGr_132_R"
-x[22]<-"LSU_Fwd_2_3Mod_55_F.LSU_Rev_4_54_R"
-x[28]<-"NLF184cw_74_F.NL818cw_74_R"
-names(PS.l)<- x
+#x[6]<-"BGf_132_F.BGr_132_R"
+#x[22]<-"LSU_Fwd_2_3Mod_55_F.LSU_Rev_4_54_R"
+#x[28]<-"NLF184cw_74_F.NL818cw_74_R"
+#names(PS.l)<- x
 
 saveRDS(PS.l, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/PhyloSeqList_HMHZ_All.Rds")
 
@@ -63,8 +64,6 @@ rm(PS.l.2)
 rm(PS.l.2.1)
 rm(PS.l.2.2)
 rm(along)
-
-PS.l[[1]]@sam_data$Sex[PS.l[[1]]@sam_data$Mouse_ID%in%c("AA_0462", "AA_0447")]
 
 ########################################### New taxonomic annotation, outside MA
 

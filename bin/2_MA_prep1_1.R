@@ -25,7 +25,7 @@ doTax <- FALSE
 ###################Full run Microbiome#######################
 #Preparation of files
 ##These are the same steps that are followed by the DADA2 pipeline
-path <- "/SAN/Susanas_den/HMHZ/data/2018_22_HMHZ_1_1/"
+path <- "/SAN/Susanas_den/gitProj/HMHZ/data/2018_22_HMHZ_1_1/"
 
 fastqFiles <- list.files(path, pattern=".fastq.gz$", full.names=TRUE) #take all fastaq files from the folder
 fastqF <- grep("_R1_001.fastq.gz", fastqFiles, value = TRUE) #separate the forward reads
@@ -57,7 +57,8 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(260,230),
+#                      truncLen=c(260,230),
+                      minLen=c(200, 200),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -89,6 +90,7 @@ if(doMultiAmp){
     MA <- sortAmplicons(MA, n=1e+05, filedir=filedir) ## This step sort the reads into amplicons based on the number of primer pairs
     errF <-  learnErrors(unlist(getStratifiedFilesF(MA)), nbase=1e8,
                          verbose=0, multithread = 90)
+
     errR <- learnErrors(unlist(getStratifiedFilesR(MA)), nbase=1e8,
                         verbose=0, multithread = 90)
     MA <- dadaMulti(MA, Ferr=errF, Rerr=errR,  pool=FALSE,
@@ -116,23 +118,23 @@ if(doMultiAmp){
 #head(all.dada.seq)
 #writeFasta(all.dada.seq, "/SAN/Susanas_den/HMHZ/results/2020May/HMHZ1_1.fasta")
 
-#err_F <- plotErrors(errF, nominalQ=TRUE)
-#pdf("fig/quality/Estimeted_error_ratesF_1_1.pdf",
-#    height = 7, width = 7)
-#err_F
-#dev.off()
+err_F <- plotErrors(errF, nominalQ=TRUE)
+pdf("fig/quality/Estimeted_error_ratesF_1_1.pdf",
+    height = 7, width = 7)
+err_F
+dev.off()
 
-#err_R <- plotErrors(errR, nominalQ=TRUE)
-#pdf("fig/quality/Estimeted_error_ratesR_1_1.pdf",
-#    height = 7, width = 7)
-#err_R
-#dev.off()
+err_R <- plotErrors(errR, nominalQ=TRUE)
+pdf("fig/quality/Estimeted_error_ratesR_1_1.pdf",
+    height = 7, width = 7)
+err_R
+dev.off()
 
-#Heatmap <- plotAmpliconNumbers(MA)
-#pdf("fig/quality/heat_Sequencing_summary_HMHZ_1_1.pdf",
-#    height = 15, width = 15)
-#Heatmap
-#dev.off()
+Heatmap <- plotAmpliconNumbers(MA)
+pdf("fig/quality/heat_Sequencing_summary_HMHZ_1_1.pdf",
+    height = 15, width = 15)
+Heatmap
+dev.off()
 
 ###New taxonomic assignment
 #MA <- blastTaxAnnot(MA,
@@ -144,7 +146,6 @@ if(doMultiAmp){
 #                    num_threads = 90)
 
 #saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_1Tax.Rds") ##Just Test run HMHZ 1
-
 ##Start from here after the taxonomic annotation
 #MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_1Tax.Rds")
 
@@ -159,7 +160,7 @@ seqs <- lapply(seqs, DNAStringSet)
 for (i in 1:48){
     if (p.df$Gen[i]=="16S"){
         try(taxT1[[i]] <- assignTaxonomy(seqs[[i]],
-                                         "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
+                "/SAN/Susanas_den/AmpMarkers/RESCRIPt/SSURef_NR99/Fastas/Slv138.dada2.fa",
           multithread=90,
                                     tryRC = TRUE,
                                    verbose=TRUE))
@@ -201,6 +202,7 @@ saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_1Tax.Rds")
 ##To phyloseq
 #PS <- toPhyloseq(MA, colnames(MA)) ##it's broken
 source("bin/toPhyloseq.R")
+
 PS <- TMPtoPhyloseq(MA, colnames(MA))
 PS.l <- TMPtoPhyloseq(MA, colnames(MA),  multi2Single=FALSE) ##It work
 #
@@ -262,7 +264,7 @@ ps@tax_table[rownames(contamdf.freq[contamdf.freq$contaminant==TRUE,]),5]
 #df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
 #                    contaminant=contamdf.prev$contaminant)
 #ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
-      xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
+#      xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
 #
 ## let's remove them now and negative controls
 Keep <- rownames(contamdf.freq[contamdf.freq$contaminant==FALSE,])

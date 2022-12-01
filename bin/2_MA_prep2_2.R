@@ -25,7 +25,7 @@ doTax <- TRUE
 ###################Full run Microbiome#######################
 #Preparation of files
 ##These are the same steps that are followed by the DADA2 pipeline
-path <- "/SAN/Susanas_den/HMHZ/data/2018_22_HMHZ_1_1/"
+path <- "/SAN/Susanas_den/gitProj/HMHZ/data/2018_22_HMHZ_1_1/"
 fastqFiles <- list.files(path, pattern=".fastq.gz$", full.names=TRUE) #take all fastaq files from the folder
 fastqF <- grep("_R1_001.fastq.gz", fastqFiles, value = TRUE) #separate the forward reads
 fastqR <- grep("_R2_001.fastq.gz", fastqFiles, value = TRUE) #separate the reverse reads
@@ -56,7 +56,7 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(260,230),
+                      minLen=c(200,200),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -96,11 +96,10 @@ if(doMultiAmp){
     MA <- removeChimeraMulti(MA, mc.cores=90)
     saveRDS(MA, "tmp/interData/MA2_2.RDS")
 } else{
-
     MA <- readRDS("tmp/interData/MA2_2.RDS")
-
 }
-#trackingF <- getPipelineSummary(MA)
+
+                                        #trackingF <- getPipelineSummary(MA)
 #PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
 #ggsave("Sequencing_summary_HMHZ_2_2.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
 # save fasta file with all sequences for taxonomic analyses
@@ -205,23 +204,34 @@ saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") #
 ##Start from here after the taxonomic annotation
 #MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA2_2Tax.Rds") ###Test run
 ##To phyloseq
+
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
+
+source("bin/1_LoadingSOTA.R")
+
 meta <- sota[match(rownames(PS@sam_data), sota$Mouse_ID),] 
 nrow(meta)
 #sanity checks
 rownames(PS@otu_table)==rownames(meta)
 PS@sam_data <- sample_data(meta)
+
 #sanity check
 #PS@sam_data[which(!rownames(PS@sam_data)==rownames(PS@otu_table))]
 rownames(PS@sam_data) <- rownames(PS@otu_table)
+
 # another sanity check
+
 sample_names(PS)==rownames(PS@sam_data)
 PS_neg <- subset_samples(PS, grepl("NE",rownames(PS@otu_table)))   
+
 PS@sam_data$Control <- FALSE
 PS@sam_data$Control[which(sample_names(PS)%in%sample_names(PS_neg))] <- TRUE
+
 # sanity check
 PS@sam_data$Mouse_ID[PS@sam_data$Control==FALSE]
+
 rownames(PS@sam_data)[PS@sam_data$Control==TRUE]
+
 library("decontam")
 ###### removing contaminants
 ## assuming that negative controls have 0 DNA
@@ -232,8 +242,11 @@ PS@sam_data$Concentration[PS@sam_data$Control==TRUE] <- 0.0001
 #df <- df[order(df$LibrarySize),]
 #df$Index <- seq(nrow(df))
 #ggplot(data=df, aes(x=Index, y=LibrarySize, color=Control)) + geom_point()
+
 ps <- phyloseq::prune_samples(sample_sums(PS)>0, PS)
+
 contamdf.freq <- isContaminant(ps, method="either", conc="Concentration", neg="Control", threshold=c(0.1,0.5), normalize=TRUE)
+
 table(contamdf.freq$contaminant)
 ### taxa to remove
 ps@tax_table[rownames(contamdf.freq[contamdf.freq$contaminant==TRUE,]),5]
@@ -246,7 +259,7 @@ ps@tax_table[rownames(contamdf.freq[contamdf.freq$contaminant==TRUE,]),5]
 #                    contaminant=contamdf.prev$contaminant)
 #ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
 #      xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
-#
+
 ## let's remove them now and negative controls
 Keep <- rownames(contamdf.freq[contamdf.freq$contaminant==FALSE,])
 PS <- prune_samples(sample_data(PS)$Control == FALSE, PS)

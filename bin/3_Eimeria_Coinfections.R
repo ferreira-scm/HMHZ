@@ -7,18 +7,23 @@ eim <- psmelt(Eim.TSS18)
 eim2 <- psmelt(Eim18)
 
 Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
+
 Eim.m0@tax_table[,6] <- Eim.m0@tax_table[,7]
-Eim.m0.sp <- tax_glom(Eim.m0, "species")
+
+Eim.m0.sp <- tax_glom(Eim.m0, "Species")
+
 Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
 
 Eim.m1 <- phyloseq::prune_samples(sample_sums(Eim.m)>0, Eim.m)
-Eim.m1 <- tax_glom(Eim.m1, "genus")
+
+Eim.m1 <- tax_glom(Eim.m1, "Genus")
+
 Eim.m1 <- transform_sample_counts(Eim.m1, function(x) x / sum(x)) 
 
 eim.m1 <- psmelt(Eim.m1)
 eim.m0 <- psmelt(Eim.m0.sp)
 eim.m <- psmelt(Eim.m0)
-eim$genus <- as.factor(eim$genus)
+eim$Genus <- as.factor(eim$Genus)
 
 # relevel
 dist_bc18 <- (vegdist(Eim.TSS18@otu_table, method="bray"))
@@ -46,17 +51,20 @@ EH_sort18==levels(eim$Sample)
 EH_sort182==levels(eim_sp$Sample)
 EH_sort==levels(eim.m$Sample)
 
-nb.cols <- 9
+eim$Genus <- as.factor(eim$Genus)
+eim.m$Genus <- as.factor(eim.m$Genus)
+
+levels(eim$Genus)
+levels(eim.m$Genus)
+
+nb.cols <- 9+1
 mycolors <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
 
-eim$genus <- as.factor(eim$genus)
-eim.m$genus <- as.factor(eim.m$genus)
 
-mycolors2 <- mycolors[c(1, 2, 4:9)]
-
+mycolors2 <- mycolors[c(1, 2, 4:10)]
 mycolors2
 
-com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
+com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=Genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors2)+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
@@ -75,7 +83,7 @@ com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=genus))+
 
 com_plot_Amp
 
-com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
+com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=Species))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=c("forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
     labs(fill="Eimeria ASV species", x="Sample", y="Proportion within all ASVs")+
@@ -95,9 +103,7 @@ com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=species))+
 
 com_plot
 
-levels(as.factor(eim$species))
-
-Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=species))+
+Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Species))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=c("pink", "forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
     labs(fill="Eimeria", x="Sample", y="Proportion within all ASVs")+
@@ -116,7 +122,7 @@ Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=species))+
 
 Com.m.all
 
-Com.m.all_amp <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=genus))+
+Com.m.all_amp <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors)+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
@@ -149,7 +155,7 @@ library(wesanderson)
 library(scales)
 
 pal <- wes_palette("Zissou1", 500, type = "continuous")
-Eim_heat <-ggplot(eim_sp, aes(Sample, species, fill=Abundance))+
+Eim_heat <-ggplot(eim_sp, aes(Sample, Species, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within all ASVs")+
     scale_fill_gradientn(colours = pal, values=rescale(c(0, 0.25, 1)))+
@@ -170,9 +176,7 @@ Eim_heat <-ggplot(eim_sp, aes(Sample, species, fill=Abundance))+
 
 Eim_heat
 
-eim.m0
-
-Eim_heat_all <- ggplot(eim.m0, aes(Sample, species, fill=Abundance))+
+Eim_heat_all <- ggplot(eim.m0, aes(Sample, Species, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
     scale_fill_gradientn(colours = pal, values=rescale(c(0,0.25,1)),)+
@@ -190,7 +194,7 @@ Eim_heat_all <- ggplot(eim.m0, aes(Sample, species, fill=Abundance))+
 
 Eim_heat_all
 
-ggplot(eim.m1, aes(Sample, genus, fill=Abundance))+
+ggplot(eim.m1, aes(Sample, Genus, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
     scale_fill_gradientn(colours = pal, values=rescale(c(0,0.05,1)),)+
@@ -212,7 +216,7 @@ ggplot(eim.m1, aes(Sample, genus, fill=Abundance))+
 
 levels(as.factor(eim.m$species))
 
-Sp.m <- ggplot(eim.m, aes(x=genus, y=Abundance, fill=species))+
+Sp.m <- ggplot(eim.m, aes(x=Genus, y=Abundance, fill=Species))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=c("pink","forestgreen", "dodgerblue4", "darkgray", "darkred"))+
     labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
@@ -246,16 +250,16 @@ ggsave("fig/Eimeria_18S_28S_amplicons.png", M.dis, height=9, width=14, dpi=400)
 
 Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim18_sp)>0, Eim18_sp)
 
-Fer <- subset_taxa(Eim.ra0, species %in% "ferrisi")
+Fer <- subset_taxa(Eim.ra0, Species %in% "ferrisi")
 sample_data(Eim.ra0)$Ferrisi <- sample_sums(Fer)
 
-Fal <- subset_taxa(Eim.ra0, species %in% "falciformis")
+Fal <- subset_taxa(Eim.ra0, Species %in% "falciformis")
 sample_data(Eim.ra0)$Falciformis <- sample_sums(Fal)
 
-Ver <- subset_taxa(Eim.ra0, species %in% "vermiformis")
+Ver <- subset_taxa(Eim.ra0, Species %in% "vermiformis")
 sample_data(Eim.ra0)$Vermiformis <- sample_sums(Ver)
 
-Sp <- subset_taxa(Eim.ra0, species %in% "sp")
+Sp <- subset_taxa(Eim.ra0, Species %in% "sp")
 sample_data(Eim.ra0)$Sp <- sample_sums(Sp)
 
 sample_data(Eim.ra0)$Sp
@@ -271,11 +275,11 @@ dis=phyloseq::distance(Eim.ra0, method="bray", type="samples")
 
 dis
 
-#permaPS=adonis2(dis~
-#            Eimdf$HI+
-#            Eimdf$Locality+
-#            Eimdf$Year,
-#            permutations = 1000, method = "bray")
+permaPS=adonis2(dis~
+            Eimdf$HI+
+            Eimdf$Locality+
+            Eimdf$Year,
+            permutations = 1000, method = "bray")
 
 permaPS
 
@@ -338,7 +342,7 @@ library("effects")
 #     main="E.falciformis* E.ferrisi")
 
 library(lmerTest)
-ranova(falModel)
+#ranova(falModel)
 
 #### quantit
 
@@ -416,7 +420,7 @@ ranova(FalQ) # not signigicant
 
 FalModel <- glm(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdf)
 
-plot(FalModel) # not too terrible
+#plot(FalModel) # not too terrible
 
 FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdfq)
 summary(FalModel) # bad deviance too
@@ -430,7 +434,7 @@ head(eim_sp)
 
 eim_sp$Concatenated <- as.factor(eim_sp$Concatenated)
 
-ggplot(eim_sp, aes(x=Concatenated, y=Abundance, fill=species))+
+ggplot(eim_sp, aes(x=Concatenated, y=Abundance, fill=Species))+
     geom_bar(position="dodge", stat="identity")
 
 
@@ -445,7 +449,7 @@ library("fitdistrplus")
 library("optimx")
 library(FSA)
 
-PS.E <- subset_taxa(fPS, genus%in%"Eimeria")
+PS.E <- subset_taxa(fPS, Genus%in%"g__Eimeria")
 
 PS.E@sam_data$EimeriaCounts <- sample_sums(PS.E)
 
@@ -487,8 +491,6 @@ Eimdf$EimeriaTotalT
 
 #eimraoo <- eimraoo[!is.na(eimraoo$Sex),]
 
-Eimdf[is.na(Eimdf$Sex),]
-
 fitp <- parasiteLoad::analyse(data = Eimdf, response = "EimeriaTotalT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
 
 fitp
@@ -504,7 +506,7 @@ Eimp <- parasiteLoad::bananaPlot(mod = fitp$H0,
 
 Eimp
 
-Eimdff <-Eimdf.s[which(Eimdf.s$fer==1),]
+Eimdff <-Eimdf[which(Eimdf$fer==1),]
 
 
 fit.fer <- parasiteLoad::analyse(data = Eimdff, response = "FerrisiT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")

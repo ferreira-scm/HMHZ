@@ -20,26 +20,28 @@ devtools::load_all("/SAN/Susanas_den/MultiAmplicon/")
 ## Set to FALSE to use pre-computed and saved results, TRUE to redo analyses.
 doFilter <- TRUE
 doMultiAmp <- TRUE    
-doTax <- TRUE
+doTax <- FALSE
 
 ###################Full run Microbiome#######################
 #Preparation of files
 ##These are the same steps that are followed by the DADA2 pipeline
-path <- "/SAN/Susanas_den/HMHZ/data/2018_22_HMHZ_2_1/"
+path <- "/SAN/Susanas_den/gitProj/HMHZ/data/2018_22_HMHZ_2_1/"
 fastqFiles <- list.files(path, pattern=".fastq.gz$", full.names=TRUE) #take all fastaq files from the folder
 fastqF <- grep("_R1_001.fastq.gz", fastqFiles, value = TRUE) #separate the forward reads
 fastqR <- grep("_R2_001.fastq.gz", fastqFiles, value = TRUE) #separate the reverse reads
 samples <- gsub("_S\\d+_L001_R1_001.fastq\\.gz", "\\1", basename(fastqF))
 samples<- gsub("s\\d+-", "\\1", basename(samples)) ##For Pool 1
 samples<- gsub("-", "_", basename(samples))
-#Quality plots of the reads
+
+                                        #Quality plots of the reads
 #pdf("fig/quality/qualityProfileF1_2_1.pdf", height = 7, width = 7)
-#plotQualityProfile(fastqF[[1]])
+plotQualityProfile(fastqF[[1]])
 #dev.off()
 #pdf("fig/quality/qualityProfileR1_2_1.pdf", height = 7, width = 7)
 #plotQualityProfile(fastqR[[1]])
 #dev.off()
-#Creation of a folder for filtrated reads
+
+                                        #Creation of a folder for filtrated reads
 filt_path <- "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/filtered2_1"
 #Pipeline filtration of pair-end reads
 if(!file_test("-d", filt_path)) dir.create(filt_path)
@@ -51,7 +53,8 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(260,230),
+#                      truncLen=c(260,230),
+                      minLen=c(200,200),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -66,6 +69,7 @@ primerR <- ptable[, "Seq_R"]
 names(primerF) <- as.character(ptable[, "Name_F"])
 names(primerR) <- as.character(ptable[, "Name_R"])
 primer <- PrimerPairsSet(primerF, primerR)
+
 ##Multi amplicon pipeline
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
 if(doMultiAmp){
@@ -91,7 +95,9 @@ if(doMultiAmp){
 } else{
     MA <- readRDS("tmp/interData/MA2_1.RDS")
 }
-#trackingF <- getPipelineSummary(MA)
+
+
+                                        #trackingF <- getPipelineSummary(MA)
 #PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
 #ggsave("Sequencing_summary_HMHZ_2_1.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
 # save fasta file with all sequences for taxonomic analyses

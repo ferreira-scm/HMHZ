@@ -24,7 +24,7 @@ doTax <- FALSE
 ###################Full run Microbiome#######################
 #Preparation of files
 ##These are the same steps that are followed by the DADA2 pipeline
-path <- "/SAN/Susanas_den/HMHZ/data/2018_22_HMHZ_1_2/"
+path <- "/SAN/Susanas_den/gitProj/HMHZ/data/2018_22_HMHZ_1_2"
 fastqFiles <- list.files(path, pattern=".fastq.gz$", full.names=TRUE) #take all fastaq files from the folder
 fastqF <- grep("_R1_001.fastq.gz", fastqFiles, value = TRUE) #separate the forward reads
 fastqR <- grep("_R2_001.fastq.gz", fastqFiles, value = TRUE) #separate the reverse reads
@@ -52,7 +52,7 @@ names(filtRs) <- samples
 if(doFilter){
     lapply(seq_along(fastqF),  function (i) {
         filterAndTrim(fastqF[i], filtFs[i], fastqR[i], filtRs[i],
-                      truncLen=c(260,230),
+                      minLen=c(200,200),
                       maxN=0, maxEE=2, truncQ=2,
                       compress=TRUE, verbose=TRUE)
     })
@@ -74,7 +74,7 @@ primer <- PrimerPairsSet(primerF, primerR)
 #We start by sorting our amplicons by primer sequences cutting off the latter from sequencing reads. The directory for sorted amplicons must be empty before that.
 if(doMultiAmp){
     MA <- MultiAmplicon(primer, files)
-    filedir <- "tmp/interData/stratified_files_1_2"
+    filedir <- "tmp/interData/stratified_files_1_2/"
     if(dir.exists(filedir)) unlink(filedir, recursive=TRUE)
     MA <- sortAmplicons(MA, n=1e+05, filedir=filedir) ## This step sort the reads into amplicons based on the number of primer pairs
     errF <-  learnErrors(unlist(getStratifiedFilesF(MA)), nbase=1e8,
@@ -93,6 +93,7 @@ if(doMultiAmp){
 } else{
     MA <- readRDS("tmp/interData/MA1_2.RDS")
 }
+
 #trackingF <- getPipelineSummary(MA)
 #PipSum <- plotPipelineSummary(trackingF)+scale_y_log10() 
 #ggsave("Sequencing_summary_HMHZ_1_2.pdf", PipSum, path = "fig/quality/", height = 15, width = 15)
@@ -176,7 +177,7 @@ MA@taxonTable <- taxT1
 saveRDS(MA, file="/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds")
 ##Start from here after the taxonomic annotation
 #MA<- readRDS(file= "/SAN/Susanas_den/gitProj/HMHZ/tmp/interData/MA1_2Tax.Rds") ###Test run
-#
+
 ##To phyloseq
 PS <- TMPtoPhyloseq(MA, colnames(MA)) ##Now it work
 #
