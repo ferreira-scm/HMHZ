@@ -2,17 +2,73 @@
 
 source("bin/Pre_Functions.R")
 
+######### Preparing phyloseq objects for plotting and so on
+# removing empty samples
+Eim <- phyloseq::prune_samples(sample_sums(Eim)>0, Eim)
+Eim.TSS <- phyloseq::prune_samples(sample_sums(Eim.TSS)>0, Eim.TSS)
+Eim.T <- phyloseq::prune_samples(sample_sums(Eim.T)>0, Eim.T)
+
+
+amp_names <- gsub("_ASV.*", "", names18S)
+Eim@tax_table[,6] <- amp_names
+Eim.TSS@tax_table[,6] <- amp_names
+Eim.T@tax_table[,6] <- amp_names
+
+Eim.m <- Eim
+Eim.TSS.m <- Eim.TSS
+Eim.T.m <- Eim.T
+
+#Eim.m@tax_table[,6] <- amplicon$names18S
+#Eim.TSS.m@tax_table[,6] <- amplicon$names18S
+
+
+Eim18 <- Eim
+Eim.TSS18 <- Eim.TSS
+Eim.T18 <- Eim.T
+Eim28 <- Eim
+Eim.TSS28 <- Eim.TSS
+Eim.T28 <- Eim.T
+
+Eim18 <- subset_taxa(Eim18, !Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+Eim.TSS18 <- subset_taxa(Eim.TSS18, !Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+Eim.T18 <- subset_taxa(Eim.T18, !Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+Eim28 <- subset_taxa(Eim28, Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+Eim.TSS28 <- subset_taxa(Eim.TSS28, Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+Eim.T28 <- subset_taxa(Eim.T28, Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R")
+
+#Eim28@tax_table[10,6]
+
+get_taxa_unique(Eim18, "Species")
+get_taxa_unique(Eim28, "Species")
+
+# now this is for plotting co-infections
+Eim18 <- phyloseq::prune_samples(sample_sums(Eim18)>0, Eim18)
+Eim.TSS18 <- phyloseq::prune_samples(sample_sums(Eim.TSS18)>0, Eim.TSS18)
+Eim.T18 <- phyloseq::prune_samples(sample_sums(Eim.T18)>0, Eim.T18)
+#eim18.TSS <- transform_sample_counts(Eim18, function(x) x / sum(x)) 
+Eim18_sp <- Eim.T18
+
+Eim18_sp@tax_table[,6] <- "Eimeria"
+
+Eim18_sp <- tax_glom(Eim18_sp, taxrank="Species")
+
+Eim18_sp
+
+#sanity check
+colnames(Eim18_sp@otu_table)==rownames(Eim18_sp@tax_table)
+#colnames(Eim18_sp@otu_table) <- Eim18_sp@tax_table[,5]
+
 eim_sp <- psmelt(Eim18_sp)
-eim <- psmelt(Eim.TSS18)
+eim <- psmelt(Eim.T18)
 eim2 <- psmelt(Eim18)
 
-Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
+Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.T.m)>0, Eim.T.m)
 
-Eim.m0@tax_table[,6] <- Eim.m0@tax_table[,7]
+Eim.m0@tax_table[,6] <- "Eimeria"
 
 Eim.m0.sp <- tax_glom(Eim.m0, "Species")
 
-Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.TSS.m)>0, Eim.TSS.m)
+Eim.m0 <- phyloseq::prune_samples(sample_sums(Eim.T.m)>0, Eim.T.m)
 
 Eim.m1 <- phyloseq::prune_samples(sample_sums(Eim.m)>0, Eim.m)
 
@@ -26,7 +82,7 @@ eim.m <- psmelt(Eim.m0)
 eim$Genus <- as.factor(eim$Genus)
 
 # relevel
-dist_bc18 <- (vegdist(Eim.TSS18@otu_table, method="bray"))
+dist_bc18 <- (vegdist(Eim.T18@otu_table, method="bray"))
 dist_bc182 <- (vegdist(Eim18_sp@otu_table, method="bray"))
 dist_bc <- (vegdist(Eim.m0@otu_table, method="bray"))
 res18 <- pcoa(dist_bc18)
@@ -62,12 +118,13 @@ mycolors <- colorRampPalette(brewer.pal(8, "Dark2"))(nb.cols)
 
 
 mycolors2 <- mycolors[c(1, 2, 4:10)]
+
 mycolors2
 
 com_plot_Amp <- ggplot(eim, aes(x=Sample, y=Abundance, fill=Genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors2)+
-    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
+    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs/ngDNA")+
     theme_bw(base_size=14)+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -85,8 +142,8 @@ com_plot_Amp
 
 com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=Species))+
     geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=c("forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
-    labs(fill="Eimeria ASV species", x="Sample", y="Proportion within all ASVs")+
+    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
+    labs(fill="Eimeria ASV species", x="Sample", y="Proportion within all ASVs/ngDNA")+
     theme_bw(base_size=14)+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -103,9 +160,14 @@ com_plot <- ggplot(eim, aes(x=Sample, y=Abundance, fill=Species))+
 
 com_plot
 
-Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Species))+
+#### litle cheat for plotting
+eim.m$Species2 <- eim.m$Species
+
+eim.m$Species2[eim.m$Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R"] <- paste(eim.m$Species2[eim.m$Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R"], "28S", sep="_")
+
+Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Species2))+
     geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=c("pink", "forestgreen", "dodgerblue4",  "darkgray", "darkred"))+
+    scale_fill_manual(values=c("forestgreen", "pink", "dodgerblue4",  "darkgray", "darkred"))+
     labs(fill="Eimeria", x="Sample", y="Proportion within all ASVs")+
     theme_bw(base_size=14)+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
