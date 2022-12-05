@@ -1,6 +1,8 @@
 # Eimeria species
 
-source("bin/Pre_Functions.R")
+source("bin/3_Eim_species_Alignment_Tree_Correlation.R")
+
+
 
 ######### Preparing phyloseq objects for plotting and so on
 # removing empty samples
@@ -165,9 +167,10 @@ eim.m$Species2 <- eim.m$Species
 
 eim.m$Species2[eim.m$Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R"] <- paste(eim.m$Species2[eim.m$Genus=="D3A_5Mod_46_F.D3B_5Mod_46_R"], "28S", sep="_")
 
-Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Species2))+
+Com.m.all <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Species))+
     geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=c("forestgreen", "pink", "dodgerblue4",  "darkgray", "darkred"))+
+#    scale_fill_manual(values=c("forestgreen", "pink", "dodgerblue4",  "darkgray", "darkred"))+
+    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
     labs(fill="Eimeria", x="Sample", y="Proportion within all ASVs")+
     theme_bw(base_size=14)+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
@@ -187,7 +190,7 @@ Com.m.all
 Com.m.all_amp <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Genus))+
     geom_bar(position="stack", stat="identity")+
     scale_fill_manual(values=mycolors)+
-    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
+    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs/ng DNA")+
     theme_bw(base_size=14)+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -204,44 +207,31 @@ Com.m.all_amp <- ggplot(eim.m, aes(x=Sample, y=Abundance, fill=Genus))+
 
 Com.m.all_amp
 
+eim.m$Abundance
+
+eim_sp$Abundance
+
 library(cowplot)
 
 Comp_amplicon <- plot_grid(com_plot, com_plot_Amp, ncol=1, align="v", rel_heights=c(1, 1))
 
-ggsave("fig/Eimeria_Amplicon_composition.pdf", Comp_amplicon, height=9, width=14, dpi=400)
+Comp_amplicon2 <- plot_grid(Com.m.all, Com.m.all_amp, ncol=1, align="v", rel_heights=c(1, 1))
 
-ggsave("fig/Eimeria_Amplicon_composition.png", Comp_amplicon, height=9, width=14, dpi=200)
+Comp_amplicon2
+
+ggsave("fig/Eimeria_Amplicon_composition.pdf", Comp_amplicon2, height=9, width=14, dpi=400)
+ggsave("fig/Eimeria_Amplicon_composition.png", Comp_amplicon2, height=9, width=14, dpi=200)
 
 library(viridis)
 library(wesanderson)
 library(scales)
 
 pal <- wes_palette("Zissou1", 500, type = "continuous")
-Eim_heat <-ggplot(eim_sp, aes(Sample, Species, fill=Abundance))+
-    geom_tile()+
-      labs(y="Eimeria ASV species", x="Sample", fill="Proportion within all ASVs")+
-    scale_fill_gradientn(colours = pal, values=rescale(c(0, 0.25, 1)))+
-    theme_bw(base_size=14)+
-      theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
-      axis.title.x=element_blank(),
-      axis.text.x=element_blank(),
-      axis.ticks.x=element_blank(),
-      legend.key = element_blank(),
-      strip.background = element_rect(colour="black", fill="white"),
-      legend.text=element_text(size=10),
-#      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      legend.position="bottom")
-#    scale_fill_distiller(palette = "RdPu")
-#    scale_fill_gradient2(low="#00AFBB", mid="#E7B800", high="#FC4E07", midpoint=0.5)
-#    scale_fill_viridis(discrete=FALSE)
-
-Eim_heat
 
 Eim_heat_all <- ggplot(eim.m0, aes(Sample, Species, fill=Abundance))+
     geom_tile()+
-      labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
-    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.25,1)),)+
+    labs(y="Eimeria species", x="Sample", fill="Proportion within all ASVs/ng DNA")+
+    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.5,1)),)+
     theme_bw(base_size=14)+
       theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -259,7 +249,7 @@ Eim_heat_all
 ggplot(eim.m1, aes(Sample, Genus, fill=Abundance))+
     geom_tile()+
       labs(y="Eimeria ASV species", x="Sample", fill="Proportion within Eimeria ASVs")+
-    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.05,1)),)+
+    scale_fill_gradientn(colours = pal, values=rescale(c(0,0.5,1)),)+
     theme_bw(base_size=14)+
       theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
       axis.title.x=element_blank(),
@@ -276,12 +266,13 @@ ggplot(eim.m1, aes(Sample, Genus, fill=Abundance))+
 #    scale_fill_gradient2(low="#00AFBB", mid="#E7B800", high="#FC4E07", midpoint=0.5)
 #    scale_fill_viridis(discrete=FALSE)
 
-levels(as.factor(eim.m$species))
 
-Sp.m <- ggplot(eim.m, aes(x=Genus, y=Abundance, fill=Species))+
-    geom_bar(position="stack", stat="identity")+
-    scale_fill_manual(values=c("pink","forestgreen", "dodgerblue4", "darkgray", "darkred"))+
-    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs")+
+Sp.m <-ggplot(eim.m[eim.m$Abundance>0,], aes(x=Genus, y=Abundance, fill=Species))+
+#    geom_bar(position="stack", stat="identity")+
+    geom_point(size=4, shape=21, position=position_jitterdodge(dodge.width=0.75, jitter.width=0.1), alpha=0.5)+
+    geom_boxplot(alpha=0.3, colour="black", outlier.shape = NA)+
+    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
+    labs(fill="Amplicon", x="Sample", y="Proportion within all ASVs/ng DNA")+
     theme_bw(base_size=14)+
     guides(fill=guide_legend(ncol=4))+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
@@ -293,24 +284,38 @@ Sp.m <- ggplot(eim.m, aes(x=Genus, y=Abundance, fill=Species))+
       panel.grid.minor = element_blank(),
       strip.background = element_rect(colour="black", fill="white"),
       legend.text = element_text(colour = 'black', size = 10, face = 'italic'),
-      legend.position="none")+
+      legend.position="none"
+      )+
     coord_flip()
 
 Sp.m
 
-M.dis <- plot_grid(plot_grid(Com.m.all, Eim_heat_all, ncol=1, align="v", rel_heights=c(1, 1)), Sp.m, ncol=1, rel_heights=c(1, 0.6))
+levels(Eim_heat_all$data$Sample)==levels(Com.m.all_amp$data$Sample)
+
+
+M.dis <- plot_grid(plot_grid(Eim_heat_all, Com.m.all_amp, ncol=1, align="v", rel_heights=c(1, 1)), Sp.m, ncol=1, rel_heights=c(1, 0.6))
 
 M.dis
 
 ggsave("fig/Eimeria_18S_28S_amplicons.pdf", M.dis, height=9, width=14, dpi=400)
 ggsave("fig/Eimeria_18S_28S_amplicons.png", M.dis, height=9, width=14, dpi=400)
 
+ggsave("fig/Eimeria_amplicon_sp.pdf", Sp.m, height=4, width=6, dpi=400)
+ggsave("fig/Eimeria_amplicon_sp.png", Sp.m, height=4, width=6, dpi=400)
+
+
 
 #####################################################################
 # Ok, let's try and figure it out what is happening with these co-infections
 # removing empty samples
 
-Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim18_sp)>0, Eim18_sp)
+#Eim@tax_table[,6] <- amp_names
+#Eim.TSS@tax_table[,6] <- amp_names
+Eim.T@tax_table[,6] <- "Eimeria"
+Eim_sp <- tax_glom(Eim.T, "Species")
+
+
+Eim.ra0 <- phyloseq::prune_samples(sample_sums(Eim_sp)>0, Eim_sp)
 
 Fer <- subset_taxa(Eim.ra0, Species %in% "ferrisi")
 sample_data(Eim.ra0)$Ferrisi <- sample_sums(Fer)
@@ -321,11 +326,9 @@ sample_data(Eim.ra0)$Falciformis <- sample_sums(Fal)
 Ver <- subset_taxa(Eim.ra0, Species %in% "vermiformis")
 sample_data(Eim.ra0)$Vermiformis <- sample_sums(Ver)
 
-Sp <- subset_taxa(Eim.ra0, Species %in% "sp")
-sample_data(Eim.ra0)$Sp <- sample_sums(Sp)
+sample_data(Eim.ra0)$Ferrisi
 
-sample_data(Eim.ra0)$Sp
-
+    
 #Eimra0 <- subset_samples(Eim.ra0, !BMI=="NA")
 
 Eimdf <- sample_data(Eim.ra0)
@@ -365,25 +368,20 @@ Eimdf$fer[Eimdf$Ferrisi==0] <- 0
 Eimdf$ver[Eimdf$Vermiformis>0] <- 1
 Eimdf$ver[Eimdf$Vermiformis==0] <- 0
 
-Eimdf$sp[Eimdf$Sp>0] <- 1
-Eimdf$sp[Eimdf$Sp==0] <- 0
-
-
 ### new variable with amplicon
-falModel <- glmer(fal~ver*fer*sp + (1|Locality), family=binomial(), data=Eimdf)
+falModel <- glmer(fal~ver*fer + (1|Locality), family=binomial(), data=Eimdf)
 
-ferModel <- glmer(fer~ver*fal*sp + (1|Locality), family=binomial(), data=Eimdf)
+ferModel <- glmer(fer~ver*fal + (1|Locality), family=binomial(), data=Eimdf)
 
-spModel <- glmer(sp~fer*fal*ver + (1|Locality), family=binomial(), data=Eimdf)
-
-verModel <- glmer(ver~fer*fal*sp + (1|Locality), family=binomial(), data=Eimdf)
+verModel <- glmer(ver~fer*fal + (1|Locality), family=binomial(), data=Eimdf)
 
 summary(falModel)
-summary(ferModel)
-summary(verModel)
-summary(spModel)
 
-library("effects")
+summary(ferModel)
+
+summary(verModel)
+
+#library("effects")
 
 #F.plot <- plot(effect("ver", ferModel),
 #     ylab="Probability of E. falciformis",
@@ -408,31 +406,27 @@ library(lmerTest)
 
 #### quantit
 
-Eimdf$EimeriaTotal <- Eimdf$Falciformis+Eimdf$Vermiformis+Eimdf$Ferrisi + Eimdf$Sp
+Eimdf$EimeriaTotal <- Eimdf$Falciformis+Eimdf$Vermiformis+Eimdf$Ferrisi
 
 Eimdf$EimeriaTotal
 
 #FalQ <- lmer(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi)*log(1+Sp) + (1|Locality), data=Eimdf)
 
-FalQ <- lmer(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdf)
+FalQ <- lmer(Falciformis~Vermiformis*Ferrisi + (1|Locality), data=Eimdf)
 
 summary(FalQ)
 
-FerQ <- lmer(Ferrisi~Vermiformis*Falciformis*Sp + (1|Locality), data=Eimdf)
+FerQ <- lmer(Ferrisi~Vermiformis*Falciformis + (1|Locality), data=Eimdf)
 
 summary(FerQ)
 
-VerQ <- lmer(Vermiformis~Ferrisi*Falciformis*Sp + (1|Locality), data=Eimdf)
-
-SpQ <- lmer(Sp~Ferrisi*Falciformis*Vermiformis + (1|Locality), data=Eimdf)
+VerQ <- lmer(Vermiformis~Ferrisi*Falciformis + (1|Locality), data=Eimdf)
 
 summary(VerQ)
 
-summary(SpQ)
-
 library(randomForest)
 
-Fal.fit <- randomForest(Falciformis ~ Ferrisi + Vermiformis + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Fal.fit <- randomForest(Falciformis ~ Ferrisi + Vermiformis, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
 Fal.fit
 varImpPlot(Fal.fit)
 
@@ -453,38 +447,30 @@ ggplot(ImpData, aes(x=Var.Names, y=`%IncMSE`))+
                       )
 
 
-Fer.fit <- randomForest(Ferrisi ~ Falciformis + Vermiformis + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Fer.fit <- randomForest(Ferrisi ~ Falciformis + Vermiformis , data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
 Fer.fit
 varImpPlot(Fer.fit)
 
-Ver.fit <- randomForest(Vermiformis ~ Falciformis + Ferrisi + Sp, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
+Ver.fit <- randomForest(Vermiformis ~ Falciformis + Ferrisi, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
 Ver.fit
 varImpPlot(Ver.fit)
-
-Sp.fit <- randomForest(Sp ~ Vermiformis+Falciformis + Ferrisi, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
-Sp.fit
-varImpPlot(Sp.fit)
-
-
 
 #FalQ <- glmer.nb(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
 #FalQ <- lmer(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
 
-summary(FalQ)
-
 ## terrible, even after transforming or using a NB
-plot(FalQ)
-qqnorm(residuals(FalQ))
-qqline(residuals(FalQ))
+#plot(FalQ)
+#qqnorm(residuals(FalQ))
+#qqline(residuals(FalQ))
 
 library(lmerTest)
 ranova(FalQ) # not signigicant
 
-FalModel <- glm(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdf)
+#FalModel <- glm(Falciformis~Vermiformis*Ferrisi, data=Eimdf)
 
 #plot(FalModel) # not too terrible
 
-FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdfq)
+#FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdfq)
 summary(FalModel) # bad deviance too
 #plot(FalModel) # ugly! More variables?
 
@@ -496,9 +482,40 @@ head(eim_sp)
 
 eim_sp$Concatenated <- as.factor(eim_sp$Concatenated)
 
-ggplot(eim_sp, aes(x=Concatenated, y=Abundance, fill=Species))+
-    geom_bar(position="dodge", stat="identity")
 
+eim_c <- eim_sp[eim_sp$Abundance>0,]
+eim_c <- eim_c[!is.na(eim_c$Concatenated),]
+
+
+length(unique(as.factor(eim_c$Mouse_ID)))
+
+
+eim_c[eim_c$Concatenated=="E_vermiformis", c("Abundance", "Mouse_ID", "Group_18S", "Group_COI_1", "Group_COI_2", "Group_ORF", "Concatenated", "Species")]
+
+
+TISSUE_MA <- ggplot(eim_c, aes(x=Concatenated, y=Abundance, fill=Species))+
+    scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
+    geom_boxplot(alpha=0.3, colour="black", outlier.shape = NA)+
+    geom_point(size=4, shape=21, position=position_jitterdodge(dodge.width=0.75, jitter.width=0.1), alpha=0.7)+
+#    geom_bar(position="dodge", stat="identity")+
+    guides(fill=guide_legend(ncol=4))+
+    theme_classic()+
+    theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
+      axis.title.x=element_blank(),
+#      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      legend.key = element_blank(),
+#      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      strip.background = element_rect(colour="black", fill="white"),
+      legend.text = element_text(colour = 'black', size = 10, face = 'italic'),
+      legend.position="none"
+      )
+
+ggsave("fig/Eimeria_qPCR_MA.pdf", TISSUE_MA, height=4, width=5, dpi=400)
+ggsave("fig/Eimeria_qPCR_MA.png", TISSUE_MA, height=4, width=5, dpi=400)
+
+Eimdf
 
 library(parasiteLoad)
 
@@ -510,6 +527,8 @@ source("bin/bananaplotNoCI.R")
 library("fitdistrplus")
 library("optimx")
 library(FSA)
+
+Eim.T
 
 PS.E <- subset_taxa(fPS, Genus%in%"g__Eimeria")
 
@@ -523,15 +542,7 @@ table(PS.E@sam_data$OPG>0, PS.E@sam_data$EimeriaCounts>0)
 
 summary(PS.E@sam_data$OPG>0)
 
-head(PS.E@sam_data)
-
-PS.E@sam_data$eimeriaSpecies
-
-fPS
-
 #devtools::install_github("alicebalard/parasiteLoad@v2.0")
-
-library(parasiteLoad)
 
 findGoodDist(round(Eimdf$EimeriaTotal*10000),
              distribs = c("normal", "negative binomial", "poisson"),
@@ -545,8 +556,6 @@ Eimdf$FalciformisT <- round(Eimdf$Falciformis*10000)
 
 Eimdf$VermiformisT <- round(Eimdf$Vermiformis*10000)
 
-Eimdf$SpT <- round(Eimdf$Sp*10000)
-
 # for eimeria (test)
 
 Eimdf$EimeriaTotalT
@@ -557,7 +566,7 @@ fitp <- parasiteLoad::analyse(data = Eimdf, response = "EimeriaTotalT", model = 
 
 fitp
 
-Eimp <- parasiteLoad::bananaPlot(mod = fitp$H0,
+Eimp <- parasiteLoad::bananaPlot(mod = fitp$H1,
                                  data = Eimdf,
                                  response = "EimeriaTotalT",
                                  hybridIndex=seq(0,1,0.005),
@@ -571,10 +580,10 @@ Eimp
 Eimdff <-Eimdf[which(Eimdf$fer==1),]
 
 
-fit.fer <- parasiteLoad::analyse(data = Eimdff, response = "FerrisiT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+fit.fer <- parasiteLoad::analyse(data = Eimdf, response = "FerrisiT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
 
-Eim.fer <- parasiteLoad::bananaPlot(mod = fit.fer$H0,
-                                 data = Eimdff,
+Eim.fer <- parasiteLoad::bananaPlot(mod = fit.fer$H2,
+                                 data = Eimdf,
                                  response = "FerrisiT",
                                  hybridIndex=seq(0,1,0.005),
                                  islog10 = F,
@@ -584,8 +593,9 @@ Eim.fer <- parasiteLoad::bananaPlot(mod = fit.fer$H0,
 
 Eim.fer
 
-Eimdffa <-Eimdf.s[which(Eimdf.s$fal==1),]
-fit.fal <- parasiteLoad::analyse(data = Eimdffa, response = "FalciformisT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
+Eimdffa <-Eimdf[which(Eimdf$fal==1),]
+
+fit.fal <- parasiteLoad::analyse(data = Eimdf, response = "FalciformisT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
 
 Eim.fal <- parasiteLoad::bananaPlot(mod = fit.fal$H1,
                                  data = Eimdffa,
@@ -597,13 +607,11 @@ Eim.fal <- parasiteLoad::bananaPlot(mod = fit.fal$H1,
 
 Eim.fal
 
-Eimdfv <-Eimdf[which(Eimdf.s$ver==1),]
-
-Eimdfv
+Eimdfv <-Eimdf[which(Eimdf$ver==1),]
 
 fit.ver <- parasiteLoad::analyse(data = Eimdfv, response = "VermiformisT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
 
-Eim.ver <- parasiteLoad::bananaPlot(mod = fit.ver$H1,
+Eim.ver <- parasiteLoad::bananaPlot(mod = fit.ver$H0,
                                  data = Eimdfv,
                                  response = "VermiformisT",
                                  hybridIndex=seq(0,1,0.005),
@@ -612,20 +620,6 @@ Eim.ver <- parasiteLoad::bananaPlot(mod = fit.ver$H1,
                                  cols = c("#006A4E", "#E69F00"))
 
 Eim.ver
-
-Eimdfs <-Eimdf[which(Eimdf.s$sp==1),]
-
-fit.sp <- parasiteLoad::analyse(data = Eimdfs, response = "SpT", model = "negbin", group = "Sex", hybridIndex = "HI", myparamBounds="default")
-
-Eim.sp <- parasiteLoad::bananaPlot(mod = fit.sp$H0,
-                                 data = Eimdfs,
-                                 response = "SpT",
-                                 hybridIndex=seq(0,1,0.005),
-                                 islog10 = F,
-                                 group = "Sex",
-                                 cols = c("#006A4E", "#E69F00"))
-
-Eim.sp
 
 
 
