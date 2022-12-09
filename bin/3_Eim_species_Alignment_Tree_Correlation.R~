@@ -169,13 +169,10 @@ amplicon$species[grep("D3A_5", amplicon$names_ASVs)] <- "28S"
 amplicon$BS[grep("D3A_5", amplicon$names_ASVs)] <- 1
 
 # inspection
-amplicon[amplicon$species=="ferrisi",]
-
-amplicon[amplicon$species=="falciformis",]
-
-amplicon[amplicon$species=="vermiformis",]
-
-amplicon
+amplicon$names_ASVs[amplicon$spec=="ferrisi"]
+amplicon$names_ASVs[amplicon$spec=="falciformis"]
+amplicon$names_ASVs[amplicon$spec=="sp"]
+amplicon$names_ASVs[amplicon$spec=="vermiformis"]
 
 #### manual visualization from the tree for the 4 unassigned  asv'S
 amplicon$species[amplicon$names_ASVs=="MarkN_10_F.Proti440R_28_R_ASV_5"] <- "falciformis"
@@ -257,8 +254,6 @@ mc <- coul[as.numeric(amp)]
 names(V(net.grph))==amplicon$names_ASVs
 amplicon$BS <- as.numeric(amplicon$BS)
 
-E(net.grph)$weight <- abs(E(net.grph)$weight)
-
 # now plotting
 pdf("fig/Eimeria_ASVs_Network.pdf",
                 width =15, height = 15)
@@ -266,7 +261,7 @@ set.seed(1235)
 plot(net.grph,
      vertex.label=amplicon$species,
 #     edge.width=as.integer(cut(E(net.grph)$weight, breaks=6))/2,
-     edge.width=E(net.grph)$weight*3,
+     edge.width=abs(E(net.grph)$weight)*1.5,
      vertex.color=adjustcolor(mc, 0.8),
      vertex.size=amplicon$BS/10,
      frame.col="grey")
