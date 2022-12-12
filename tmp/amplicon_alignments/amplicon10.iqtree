@@ -1,0 +1,928 @@
+IQ-TREE 2.2.0 COVID-edition built Jun  1 2022
+
+Input file name: tmp/amplicon_alignments/amplicon9
+Type of analysis: tree reconstruction + ultrafast bootstrap (5000 replicates)
+Random seed number: 272062
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 207 sequences with 1880 nucleotide sites
+Number of constant sites: 1585 (= 84.3085% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 1585 (= 84.3085% of all sites)
+Number of parsimony informative sites: 99
+Number of distinct site patterns: 790
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: TN+F+R2
+
+Rate parameter R:
+
+  A-C: 1.0000
+  A-G: 1.2520
+  A-T: 1.0000
+  C-G: 1.0000
+  C-T: 3.2065
+  G-T: 1.0000
+
+State frequencies: (empirical counts from alignment)
+
+  pi(A) = 0.2515
+  pi(C) = 0.1969
+  pi(G) = 0.2694
+  pi(T) = 0.2823
+
+Rate matrix Q:
+
+  A   -0.7964     0.192     0.329    0.2754
+  C    0.2453    -1.391    0.2627     0.883
+  G    0.3071     0.192   -0.7745    0.2754
+  T    0.2453    0.6158    0.2627    -1.124
+
+Model of rate heterogeneity: FreeRate with 2 categories
+Site proportion and rates:  (0.9037,0.428) (0.09629,6.369)
+
+ Category  Relative_rate  Proportion
+  1         0.428          0.9037
+  2         6.369          0.09629
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -5489.3974 (s.e. 158.9837)
+Unconstrained log-likelihood (without tree): -11188.5607
+Number of free parameters (#branches + #model parameters): 404
+Akaike information criterion (AIC) score: 11786.7949
+Corrected Akaike information criterion (AICc) score: 12008.6525
+Bayesian information criterion (BIC) score: 14024.5618
+
+Total tree length (sum of branch lengths): 0.3430
+Sum of internal branch lengths: 0.1059 (30.8819% of tree length)
+
+WARNING: 158 near-zero internal branches (<0.0005) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'wang1141_13_F.Nem_0425_6_3_R_ASV_1' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++**wang1141_13_F.Nem_0425_6_3_R_ASV_1
+|
+|                                                      +**wang1141_13_F.Nem_0425_6_3_R_ASV_2
+|                                                   +**| (18)
+|                                                   |  |                             +**KU174465_Eimeria_apionodes
+|                                                   |  |                          +**| (25)
+|                                                   |  |                          |  |        +**KT184355_Eimeria_vermiformis
+|                                                   |  |                          |  |     +**| (90)
+|                                                   |  |                          |  |     |  |  +**MH751940.1_Eimeria_vermiformis
+|                                                   |  |                          |  |     |  +**| (96)
+|                                                   |  |                          |  |     |     +**MH751948.1_Eimeria_vermiformis
+|                                                   |  |                          |  |  +**| (27)
+|                                                   |  |                          |  |  |  +**MH751951.1_Eimeria_vermiformis
+|                                                   |  |                          |  +**| (31)
+|                                                   |  |                          |     +**MH751926.1_Eimeria_vermiformis
+|                                                   |  |                       +--| (82)
+|                                                   |  |                       |  +**MH751974.1_Eimeria_vermiformis
+|                                                   |  |                    +**| (52)
+|                                                   |  |                    |  +--MH752030.1_Eimeria_vermiformis
+|                                                   |  |                 +**| (69)
+|                                                   |  |                 |  +**MH751977.1_Eimeria_vermiformis
+|                                                   |  |              +**| (76)
+|                                                   |  |              |  +**MH751957.1_Eimeria_vermiformis
+|                                                   |  |           +**| (80)
+|                                                   |  |           |  +**KU192916_Eimeria_apionodes
+|                                                   |  |        +**| (68)
+|                                                   |  |        |  +**MH752003.1_Eimeria_vermiformis
+|                                                   |  |     +**| (55)
+|                                                   |  |     |  +**KU174467_Eimeria_apionodes
+|                                                   |  |  +**| (41)
+|                                                   |  |  |  +**KU192936_Eimeria_apionodes
+|                                                   |  +--| (96)
+|                                                   |     +**KU192931_Eimeria_apionodes
+|                                                +**| (31)
+|                                                |  +--JQ993649_Eimeria_caviae
+|                                             +**| (27)
+|                                             |  |     +--KU174483_Eimeria_apionodes
+|                                             |  |  +--| (83)
+|                                             |  |  |  |        +--JQ993660_Eimeria_sp._ex_Apodemus_agrarius
+|                                             |  |  |  |     +**| (96)
+|                                             |  |  |  |     |  +**KU192961_Eimeria_alorani
+|                                             |  |  |  |  +**| (78)
+|                                             |  |  |  |  |  +**KU192958_Eimeria_alorani
+|                                             |  |  |  +**| (64)
+|                                             |  |  |     +**KU192965_Eimeria_alorani
+|                                             |  +--| (92)
+|                                             |     +--U40263_Eimeria_nieschulzi
+|                                          +--| (78)
+|                                          |  |                                                        +--JQ993665_Eimeria_nafuko
+|                                          |  |                                                     +**| (51)
+|                                          |  |                                                     |  +--JQ993657_Eimeria_sp._ex_Apodemus_agrarius
+|                                          |  |                                                  +**| (21)
+|                                          |  |                                                  |  +--KU174478_Eimeria_sp._ex_Microtus_arvalis
+|                                          |  |                                               +**| (3)
+|                                          |  |                                               |  +**KU174453_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |                                            +**| (1)
+|                                          |  |                                            |  +**KU174466_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |                                         +**| (7)
+|                                          |  |                                         |  +**KU174457_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |                                      +**| (0)
+|                                          |  |                                      |  +**MH751976.1_Eimeria_falciformis
+|                                          |  |                                   +**| (1)
+|                                          |  |                                   |  +--KU174481_Eimeria_sp._ex_Microtus_agrestis
+|                                          |  |                                +**| (0)
+|                                          |  |                                |  +**KU174469_Eimeria_sp._ex_Microtus_agrestis
+|                                          |  |                             +**| (0)
+|                                          |  |                             |  +**KU174476_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |                          +**| (12)
+|                                          |  |                          |  +**KU192956_Eimeria_apionodes
+|                                          |  |                       +**| (1)
+|                                          |  |                       |  +**KU174482_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |                    +**| (0)
+|                                          |  |                    |  +**MH751941.1_Eimeria_falciformis
+|                                          |  |                 +**| (0)
+|                                          |  |                 |  +**KU174463_Eimeria_apionodes
+|                                          |  |              +**| (0)
+|                                          |  |              |  +**MH751937.1_Eimeria_falciformis
+|                                          |  |           +**| (0)
+|                                          |  |           |  |                    +**KU174470_Eimeria_apionodes
+|                                          |  |           |  |                 +**| (34)
+|                                          |  |           |  |                 |  |        +**KU174461_Eimeria_apionodes
+|                                          |  |           |  |                 |  |     +**| (30)
+|                                          |  |           |  |                 |  |     |  |        +--KU174464_Eimeria_apionodes
+|                                          |  |           |  |                 |  |     |  |     +**| (64)
+|                                          |  |           |  |                 |  |     |  |     |  +--JQ993650_Eimeria_chinchillae
+|                                          |  |           |  |                 |  |     |  |  +**| (65)
+|                                          |  |           |  |                 |  |     |  |  |  +**KU174458_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |           |  |                 |  |     |  +**| (39)
+|                                          |  |           |  |                 |  |     |     +**KU174473_Eimeria_sp._ex_Microtus_arvalis
+|                                          |  |           |  |                 |  |  +**| (24)
+|                                          |  |           |  |                 |  |  |  +**KU174456_Eimeria_sp._ex_Microtus_arvalis
+|                                          |  |           |  |                 |  +**| (10)
+|                                          |  |           |  |                 |     +**KU174472_Eimeria_apionodes
+|                                          |  |           |  |              +**| (36)
+|                                          |  |           |  |              |  +**KU174454_Eimeria_sp._ex_Microtus_agrestis
+|                                          |  |           |  |           +**| (32)
+|                                          |  |           |  |           |  +**KU174451_Eimeria_apionodes
+|                                          |  |           |  |        +**| (10)
+|                                          |  |           |  |        |  +--JQ993666_Eimeria_burdai
+|                                          |  |           |  |     +**| (4)
+|                                          |  |           |  |     |  +**KU174471_Eimeria_sp._ex_Microtus_levis
+|                                          |  |           |  |  +**| (4)
+|                                          |  |           |  |  |  +**KU174460_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |           |  +**| (2)
+|                                          |  |           |     +**MH751960.1_Eimeria_falciformis
+|                                          |  |        +**| (1)
+|                                          |  |        |  +**KU174452_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |     +**| (37)
+|                                          |  |     |  |           +**KU174450_Eimeria_apionodes
+|                                          |  |     |  |        +**| (52)
+|                                          |  |     |  |        |  |     +--AF080614_Eimeria_falciformis
+|                                          |  |     |  |        |  |  +**| (28)
+|                                          |  |     |  |        |  |  |  +**KU174455_Eimeria_sp._ex_Microtus_subterraneus
+|                                          |  |     |  |        |  +**| (23)
+|                                          |  |     |  |        |     +**MH752012.1_Eimeria_falciformis
+|                                          |  |     |  |     +**| (4)
+|                                          |  |     |  |     |  +**KU174474_Eimeria_apionodes
+|                                          |  |     |  |  +**| (0)
+|                                          |  |     |  |  |  |     +-------------------------------AF311644_Eimeria_sevilletensis
+|                                          |  |     |  |  |  |  +**| (51)
+|                                          |  |     |  |  |  |  |  +**KU174486_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                          |  |     |  |  |  +**| (60)
+|                                          |  |     |  |  |     +--KU174484_Eimeria_sp._ex_Microtus_arvalis
+|                                          |  |     |  +**| (1)
+|                                          |  |     |     +**MH752017.1_Eimeria_falciformis
+|                                          |  |  +**| (41)
+|                                          |  |  |  +**KU174449_Eimeria_apionodes
+|                                          |  +--| (46)
+|                                          |     |                    +**MH751998_Eimeria_falciformis
+|                                          |     |                 +**| (19)
+|                                          |     |                 |  |  +**MH751934.1_Eimeria_falciformis
+|                                          |     |                 |  +**| (23)
+|                                          |     |                 |     +--MH751980.1_Eimeria_falciformis
+|                                          |     |              +**| (11)
+|                                          |     |              |  |     +--MH751943.1_Eimeria_falciformis
+|                                          |     |              |  |  +**| (51)
+|                                          |     |              |  |  |  +--MH752016.1_Eimeria_falciformis
+|                                          |     |              |  +**| (7)
+|                                          |     |              |     +**MH752019.1_Eimeria_falciformis
+|                                          |     |           +**| (79)
+|                                          |     |           |  |           +**MH751964.1_Eimeria_falciformis
+|                                          |     |           |  |        +**| (20)
+|                                          |     |           |  |        |  +**MH751998.1_Eimeria_falciformis
+|                                          |     |           |  |     +**| (18)
+|                                          |     |           |  |     |  +**MH751981.1_Eimeria_falciformis
+|                                          |     |           |  |  +**| (15)
+|                                          |     |           |  |  |  +**MH751978.1_Eimeria_falciformis
+|                                          |     |           |  +**| (10)
+|                                          |     |           |     +--MH752011.1_Eimeria_falciformis
+|                                          |     |        +**| (86)
+|                                          |     |        |  +**KT184339.1_Eimeria_falciformis
+|                                          |     |     +**| (23)
+|                                          |     |     |  +**MH752018.1_Eimeria_falciformis
+|                                          |     |  +**| (28)
+|                                          |     |  |  +**MH751942.1_Eimeria_falciformis
+|                                          |     +**| (41)
+|                                          |        +--MH751975.1_Eimeria_falciformis
+|                                       +**| (56)
+|                                       |  |                 +**KU174480_Eimeria_apionodes
+|                                       |  |              +**| (46)
+|                                       |  |              |  |  +--KU174459_Eimeria_apionodes
+|                                       |  |              |  +**| (72)
+|                                       |  |              |     +**KU174487_Eimeria_apionodes
+|                                       |  |           +**| (67)
+|                                       |  |           |  +**KU174479_Eimeria_apionodes
+|                                       |  |        +**| (23)
+|                                       |  |        |  +**KU174468_Eimeria_apionodes
+|                                       |  |     +**| (20)
+|                                       |  |     |  +**KU174462_Eimeria_apionodes
+|                                       |  |  +**| (33)
+|                                       |  |  |  |     +--KU174485_Eimeria_apionodes
+|                                       |  |  |  |  +--| (61)
+|                                       |  |  |  |  |  +--JQ993663_Eimeria_sp._ex_Cricetus_cricetus
+|                                       |  |  |  +**| (43)
+|                                       |  |  |     +---JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus
+|                                       |  +--| (58)
+|                                       |     +---JQ993658_Eimeria_sp._ex_Apodemus_agrarius
+|                                   +---| (98)
+|                                   |   |                                +--JQ993669_Isospora_sp._ex_Talpa_europaea
+|                                   |   |             +------------------| (100)
+|                                   |   |             |                  |  +------JQ993670_Isospora_sp._ex_Talpa_europaea
+|                                   |   |             |                  +**| (86)
+|                                   |   |             |                     +-----------JQ993671_Isospora_sp._ex_Talpa_europaea
+|                                   |   |          +--| (84)
+|                                   |   |          |  |              +--JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013
+|                                   |   |          |  |           +--| (69)
+|                                   |   |          |  |           |  |      +-----AF324214_Eimeria_chobotari
+|                                   |   |          |  |           |  +------| (91)
+|                                   |   |          |  |           |         +----------------------AF339490_Eimeria_dipodomysis
+|                                   |   |          |  |        +--| (56)
+|                                   |   |          |  |        |  |  +-----AF307879_Eimeria_onychomysis
+|                                   |   |          |  |        |  +**| (50)
+|                                   |   |          |  |        |     +--AF307877_Eimeria_rioarribaensis
+|                                   |   |          |  |     +--| (43)
+|                                   |   |          |  |     |  +--AF339491_Eimeria_leucopi
+|                                   |   |          |  |  +--| (51)
+|                                   |   |          |  |  |  |        +--AF307880_Eimeria_albigulae
+|                                   |   |          |  |  |  |     +--| (88)
+|                                   |   |          |  |  |  |     |  |   +--------AF339489_Eimeria_chaetodipi
+|                                   |   |          |  |  |  |     |  +---| (98)
+|                                   |   |          |  |  |  |     |      +--------AF339492_Eimeria_peromysci
+|                                   |   |          |  |  |  |  +--| (89)
+|                                   |   |          |  |  |  |  |  +--AF307878_Eimeria_arizonensis
+|                                   |   |          |  |  |  +**| (53)
+|                                   |   |          |  |  |     +---AF307876_Eimeria_antrozoi
+|                                   |   |          |  +--| (90)
+|                                   |   |          |     +--AF311642_Eimeria_reedi
+|                                   |   |       +--| (85)
+|                                   |   |       |  |        +--JQ993659_Eimeria_alorani
+|                                   |   |       |  |     +--| (92)
+|                                   |   |       |  |     |  +--JQ993655_Eimeria_sp._ex_Apodemus_agrarius
+|                                   |   |       |  |  +--| (92)
+|                                   |   |       |  |  |  |        +--JQ993656_Eimeria_sp._ex_Apodemus_agrarius
+|                                   |   |       |  |  |  |     +**| (39)
+|                                   |   |       |  |  |  |     |  |      +----JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus
+|                                   |   |       |  |  |  |     |  |  +---| (97)
+|                                   |   |       |  |  |  |     |  |  |   +--JQ993667_Eimeria_sp._ex_Mastomys_natalensis
+|                                   |   |       |  |  |  |     |  +**| (72)
+|                                   |   |       |  |  |  |     |     +**KU192938_Eimeria_apionodes
+|                                   |   |       |  |  |  |  +**| (39)
+|                                   |   |       |  |  |  |  |  +**KU174475_Eimeria_apionodes
+|                                   |   |       |  |  |  +**| (37)
+|                                   |   |       |  |  |     +**JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus
+|                                   |   |       |  +--| (95)
+|                                   |   |       |     |  +--JF304148_Eimeria_myoxi
+|                                   |   |       |     +--| (96)
+|                                   |   |       |        +----JQ993651_Eimeria_nkaka
+|                                   |   +-------| (98)
+|                                   |           |       +**JQ993652_Eimeria_sp._2_JK-2013
+|                                   |           +-------| (100)
+|                                   |                   +**JQ993653_Eimeria_vilasi
+|                                +--| (97)
+|                                |  +**MH751946.1_Eimeria_ferrisi
+|                             +**| (61)
+|                             |  |                                      +**KT360995_Eimeria_ferrisi
+|                             |  |                                   +**| (37)
+|                             |  |                                   |  |                       +**MH751935.1_Eimeria_ferrisi
+|                             |  |                                   |  |                    +**| (7)
+|                             |  |                                   |  |                    |  |              +**MH751967.1_Eimeria_ferrisi
+|                             |  |                                   |  |                    |  |           +**| (1)
+|                             |  |                                   |  |                    |  |           |  |  +--MH751970.1_Eimeria_ferrisi
+|                             |  |                                   |  |                    |  |           |  +**| (1)
+|                             |  |                                   |  |                    |  |           |     +**wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV1
+|                             |  |                                   |  |                    |  |        +**| (1)
+|                             |  |                                   |  |                    |  |        |  +**MH751969.1_Eimeria_ferrisi
+|                             |  |                                   |  |                    |  |     +**| (0)
+|                             |  |                                   |  |                    |  |     |  |                         +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV2
+|                             |  |                                   |  |                    |  |     |  +-------------------------| (100)
+|                             |  |                                   |  |                    |  |     |                            +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV3
+|                             |  |                                   |  |                    |  |  +**| (1)
+|                             |  |                                   |  |                    |  |  |  +**MH752029.1_Eimeria_ferrisi
+|                             |  |                                   |  |                    |  +**| (2)
+|                             |  |                                   |  |                    |     +**MH752026.1_Eimeria_ferrisi
+|                             |  |                                   |  |                 +**| (31)
+|                             |  |                                   |  |                 |  +**MH751961.1_Eimeria_ferrisi
+|                             |  |                                   |  |              +**| (38)
+|                             |  |                                   |  |              |  +**MH751954.1_Eimeria_ferrisi
+|                             |  |                                   |  |           +**| (37)
+|                             |  |                                   |  |           |  +**MH752033.1_Eimeria_ferrisi
+|                             |  |                                   |  |        +**| (40)
+|                             |  |                                   |  |        |  +**MH751945.1_Eimeria_ferrisi
+|                             |  |                                   |  |     +**| (38)
+|                             |  |                                   |  |     |  +**MH751962.1_Eimeria_ferrisi
+|                             |  |                                   |  |  +**| (20)
+|                             |  |                                   |  |  |  +**MH751993.1_Eimeria_ferrisi
+|                             |  |                                   |  +**| (31)
+|                             |  |                                   |     +**MH751995.1_Eimeria_ferrisi
+|                             |  |                                +**| (37)
+|                             |  |                                |  +**MH751986.1_Eimeria_ferrisi
+|                             |  |                             +**| (37)
+|                             |  |                             |  +**MH751985.1_Eimeria_ferrisi
+|                             |  |                          +**| (41)
+|                             |  |                          |  +**MH751983.1_Eimeria_ferrisi
+|                             |  |                       +**| (42)
+|                             |  |                       |  |     +**MH751938.1_Eimeria_ferrisi
+|                             |  |                       |  |  +**| (34)
+|                             |  |                       |  |  |  |       +**MH752008.1_Eimeria_ferrisi
+|                             |  |                       |  |  |  |    +**| (77)
+|                             |  |                       |  |  |  |    |  +**MH752025.1_Eimeria_ferrisi
+|                             |  |                       |  |  |  +----| (35)
+|                             |  |                       |  |  |       +**MH752028.1_Eimeria_ferrisi
+|                             |  |                       |  +**| (46)
+|                             |  |                       |     +--MH752010.1_Eimeria_ferrisi
+|                             |  |                    +**| (62)
+|                             |  |                    |  +**MH752004.1_Eimeria_ferrisi
+|                             |  |                 +**| (66)
+|                             |  |                 |  +**MH751979.1_Eimeria_ferrisi
+|                             |  |              +**| (74)
+|                             |  |              |  +**MH752006.1_Eimeria_ferrisi
+|                             |  |           +**| (75)
+|                             |  |           |  +**MH752005.1_Eimeria_ferrisi
+|                             |  |        +**| (58)
+|                             |  |        |  +**MH752015.1_Eimeria_ferrisi
+|                             |  |     +**| (47)
+|                             |  |     |  +**MH752009.1_Eimeria_ferrisi
+|                             |  |  +**| (31)
+|                             |  |  |  +**MH752014.1_Eimeria_ferrisi
+|                             |  +**| (66)
+|                             |     +**MH752013.1_Eimeria_ferrisi
+|                          +**| (53)
+|                          |  +--AF246717_Eimeria_telekii
+|                       +**| (58)
+|                       |  +------AF311643_Eimeria_separata
+|                    +**| (49)
+|                    |  +--MH752027.1_Eimeria_ferrisi
+|                 +--| (69)
+|                 |  |                                   +**MH751925.1_Eimeria_ferrisi
+|                 |  |                                +**| (1)
+|                 |  |                                |  |  +**MH751966.1_Eimeria_ferrisi
+|                 |  |                                |  +**| (0)
+|                 |  |                                |     |     +--MH752000.1_Eimeria_ferrisi
+|                 |  |                                |     |  +**| (1)
+|                 |  |                                |     |  |  +**MH752032.1_Eimeria_ferrisi
+|                 |  |                                |     +**| (2)
+|                 |  |                                |        +**MH752034.1_Eimeria_ferrisi
+|                 |  |                             +**| (0)
+|                 |  |                             |  +**MH751959.1_Eimeria_ferrisi
+|                 |  |                          +**| (0)
+|                 |  |                          |  +**MH751996.1_Eimeria_ferrisi
+|                 |  |                       +**| (0)
+|                 |  |                       |  +**MH751989.1_Eimeria_ferrisi
+|                 |  |                    +**| (0)
+|                 |  |                    |  +**MH752036.1_Eimeria_ferrisi
+|                 |  |                 +**| (0)
+|                 |  |                 |  +**MH751984.1_Eimeria_ferrisi
+|                 |  |              +**| (21)
+|                 |  |              |  +**MH751963.1_Eimeria_ferrisi
+|                 |  |           +**| (13)
+|                 |  |           |  +**MH751968.1_Eimeria_ferrisi
+|                 |  |        +**| (11)
+|                 |  |        |  +**MH751930.1_Eimeria_ferrisi
+|                 |  |     +**| (19)
+|                 |  |     |  +**wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV4
+|                 |  |  +**| (50)
+|                 |  |  |  +**MH751939.1_Eimeria_ferrisi
+|                 |  +**| (39)
+|                 |     |  +**MH751953.1_Eimeria_ferrisi
+|                 |     +--| (73)
+|                 |        |  +**MH751999.1_Eimeria_ferrisi
+|                 |        +--| (77)
+|                 |           +**MH752023.1_Eimeria_ferrisi
+|              +**| (1)
+|              |  |        +**MH751927.1_Eimeria_ferrisi
+|              |  |     +**| (0)
+|              |  |     |  |  +**MH751928.1_Eimeria_ferrisi
+|              |  |     |  +**| (1)
+|              |  |     |     |  +--MH751933.1_Eimeria_ferrisi
+|              |  |     |     +**| (0)
+|              |  |     |        |  +**MH751994.1_Eimeria_ferrisi
+|              |  |     |        +**| (30)
+|              |  |     |           +**MH752022.1_Eimeria_ferrisi
+|              |  |  +**| (1)
+|              |  |  |  +**MH751958.1_Eimeria_ferrisi
+|              |  +--| (1)
+|              |     +**MH752007.1_Eimeria_ferrisi
+|           +**| (0)
+|           |  +--MH751947.1_Eimeria_ferrisi
+|        +**| (56)
+|        |  |                                   +**MH751929.1_Eimeria_ferrisi
+|        |  |                                +--| (84)
+|        |  |                                |  |  +**MH751950.1_Eimeria_ferrisi
+|        |  |                                |  +**| (96)
+|        |  |                                |     +**MH751997.1_Eimeria_ferrisi
+|        |  |                             +**| (79)
+|        |  |                             |  +**MH751972.1_Eimeria_ferrisi
+|        |  |                          +**| (77)
+|        |  |                          |  +**MH751965.1_Eimeria_ferrisi
+|        |  |                       +**| (78)
+|        |  |                       |  +**MH751955.1_Eimeria_ferrisi
+|        |  |                    +--| (84)
+|        |  |                    |  |  +**MH751949.1_Eimeria_ferrisi
+|        |  |                    |  +**| (79)
+|        |  |                    |     +**MH751982.1_Eimeria_ferrisi
+|        |  |                 +**| (79)
+|        |  |                 |  +**MH751988.1_Eimeria_ferrisi
+|        |  |              +**| (27)
+|        |  |              |  +**MH752035.1_Eimeria_ferrisi
+|        |  |           +**| (8)
+|        |  |           |  +**MH751992.1_Eimeria_ferrisi
+|        |  |        +**| (15)
+|        |  |        |  +**MH751944.1_Eimeria_ferrisi
+|        |  |     +**| (9)
+|        |  |     |  +--MH751936.1_Eimeria_ferrisi
+|        |  |  +**| (2)
+|        |  |  |  +**MH751932.1_Eimeria_ferrisi
+|        |  +**| (6)
+|        |     |  +**MH752002.1_Eimeria_ferrisi
+|        |     +--| (85)
+|        |        +**MH752020.1_Eimeria_ferrisi
+|     +**| (57)
+|     |  +**MH751991.1_Eimeria_ferrisi
+|  +**| (60)
+|  |  +**MH751987.1_Eimeria_ferrisi
++--| (73)
+|  +**MH752024.1_Eimeria_ferrisi
+|
+|  +--MH752021.1_Eimeria_ferrisi
++**| (62)
+   +**MH752031.1_Eimeria_ferrisi
+
+Tree in newick format:
+
+(wang1141_13_F.Nem_0425_6_3_R_ASV_1:0.0000009974,((((((((((((((((((wang1141_13_F.Nem_0425_6_3_R_ASV_2:0.0000009974,((((((((((KU174465_Eimeria_apionodes:0.0000009974,(((KT184355_Eimeria_vermiformis:0.0000009974,(MH751940.1_Eimeria_vermiformis:0.0000009974,MH751948.1_Eimeria_vermiformis:0.0000009974)96:0.0000020980)90:0.0000013345,MH751951.1_Eimeria_vermiformis:0.0000009974)27:0.0002176465,MH751926.1_Eimeria_vermiformis:0.0000009974)31:0.0000022598)25:0.0000011743,MH751974.1_Eimeria_vermiformis:0.0000009974)82:0.0008809966,MH752030.1_Eimeria_vermiformis:0.0008704284)52:0.0000020077,MH751977.1_Eimeria_vermiformis:0.0000009974)69:0.0000009974,MH751957.1_Eimeria_vermiformis:0.0000009974)76:0.0000009974,KU192916_Eimeria_apionodes:0.0000009974)80:0.0000009974,MH752003.1_Eimeria_vermiformis:0.0000009974)68:0.0000009974,KU174467_Eimeria_apionodes:0.0000009974)55:0.0000020138,KU192936_Eimeria_apionodes:0.0000009974)41:0.0000009974,KU192931_Eimeria_apionodes:0.0000009974)96:0.0010443689)18:0.0000036631,JQ993649_Eimeria_caviae:0.0015208462)31:0.0000020012,((KU174483_Eimeria_apionodes:0.0024028942,(((JQ993660_Eimeria_sp._ex_Apodemus_agrarius:0.0015371584,KU192961_Eimeria_alorani:0.0000009974)96:0.0000021649,KU192958_Eimeria_alorani:0.0000009974)78:0.0000020933,KU192965_Eimeria_alorani:0.0000009974)64:0.0000021544)83:0.0007650158,U40263_Eimeria_nieschulzi:0.0025880655)92:0.0008535947)27:0.0000024168,(((((((((((((((((((JQ993665_Eimeria_nafuko:0.0007935811,JQ993657_Eimeria_sp._ex_Apodemus_agrarius:0.0006207824)51:0.0000518151,KU174478_Eimeria_sp._ex_Microtus_arvalis:0.0014360377)21:0.0000022605,KU174453_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)3:0.0000015871,KU174466_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)1:0.0000019979,KU174457_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)7:0.0000162916,MH751976.1_Eimeria_falciformis:0.0000009974)0:0.0000021665,KU174481_Eimeria_sp._ex_Microtus_agrestis:0.0034710559)1:0.0000012087,KU174469_Eimeria_sp._ex_Microtus_agrestis:0.0000009974)0:0.0000022442,KU174476_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)0:0.0000022786,KU192956_Eimeria_apionodes:0.0000009974)12:0.0000035853,KU174482_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)1:0.0000036734,MH751941.1_Eimeria_falciformis:0.0000009974)0:0.0000057352,KU174463_Eimeria_apionodes:0.0000009974)0:0.0000171178,MH751937.1_Eimeria_falciformis:0.0000009974)0:0.0000382579,(((((((KU174470_Eimeria_apionodes:0.0000009974,(((KU174461_Eimeria_apionodes:0.0000009974,(((KU174464_Eimeria_apionodes:0.0035105719,JQ993650_Eimeria_chinchillae:0.0021489895)64:0.0000009974,KU174458_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)65:0.0000009974,KU174473_Eimeria_sp._ex_Microtus_arvalis:0.0000009974)39:0.0000009974)30:0.0000009974,KU174456_Eimeria_sp._ex_Microtus_arvalis:0.0000009974)24:0.0000009974,KU174472_Eimeria_apionodes:0.0000009974)10:0.0000009974)34:0.0000009974,KU174454_Eimeria_sp._ex_Microtus_agrestis:0.0000009974)36:0.0000009974,KU174451_Eimeria_apionodes:0.0000009974)32:0.0000009974,JQ993666_Eimeria_burdai:0.0030798054)10:0.0000009974,KU174471_Eimeria_sp._ex_Microtus_levis:0.0000009974)4:0.0000009974,KU174460_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)4:0.0000009974,MH751960.1_Eimeria_falciformis:0.0000009974)2:0.0000009974)0:0.0000009974,KU174452_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)1:0.0000009974,((((KU174450_Eimeria_apionodes:0.0000009974,((AF080614_Eimeria_falciformis:0.0028643740,KU174455_Eimeria_sp._ex_Microtus_subterraneus:0.0000009974)28:0.0000009974,MH752012.1_Eimeria_falciformis:0.0000009974)23:0.0000009974)52:0.0000009974,KU174474_Eimeria_apionodes:0.0000009974)4:0.0000009974,((AF311644_Eimeria_sevilletensis:0.0308576150,KU174486_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000009974)51:0.0000009974,KU174484_Eimeria_sp._ex_Microtus_arvalis:0.0011753184)60:0.0000009974)0:0.0000009974,MH752017.1_Eimeria_falciformis:0.0000009974)1:0.0000009974)37:0.0000009974,KU174449_Eimeria_apionodes:0.0000009974)41:0.0000026552,(((((((MH751998_Eimeria_falciformis:0.0000009974,(MH751934.1_Eimeria_falciformis:0.0000009974,MH751980.1_Eimeria_falciformis:0.0015978080)23:0.0000009974)19:0.0000009974,((MH751943.1_Eimeria_falciformis:0.0010136185,MH752016.1_Eimeria_falciformis:0.0016505074)51:0.0000009974,MH752019.1_Eimeria_falciformis:0.0000009974)7:0.0000009974)11:0.0000009974,((((MH751964.1_Eimeria_falciformis:0.0000009974,MH751998.1_Eimeria_falciformis:0.0000009974)20:0.0000009974,MH751981.1_Eimeria_falciformis:0.0000009974)18:0.0000009974,MH751978.1_Eimeria_falciformis:0.0000009974)15:0.0000009974,MH752011.1_Eimeria_falciformis:0.0015486732)10:0.0000009974)79:0.0000014747,KT184339.1_Eimeria_falciformis:0.0000009974)86:0.0000013811,MH752018.1_Eimeria_falciformis:0.0000009974)23:0.0005190708,MH751942.1_Eimeria_falciformis:0.0000009974)28:0.0000020900,MH751975.1_Eimeria_falciformis:0.0011185168)41:0.0000454887)46:0.0017002103)78:0.0013577050,((((((KU174480_Eimeria_apionodes:0.0000009974,(KU174459_Eimeria_apionodes:0.0023454924,KU174487_Eimeria_apionodes:0.0000009974)72:0.0000033244)46:0.0000009974,KU174479_Eimeria_apionodes:0.0000009974)67:0.0000028802,KU174468_Eimeria_apionodes:0.0000009974)23:0.0000024922,KU174462_Eimeria_apionodes:0.0000009974)20:0.0000021002,((KU174485_Eimeria_apionodes:0.0029164137,JQ993663_Eimeria_sp._ex_Cricetus_cricetus:0.0023375952)61:0.0007624977,JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus:0.0038840777)43:0.0000024768)33:0.0000021190,JQ993658_Eimeria_sp._ex_Apodemus_agrarius:0.0039413181)58:0.0007677295)56:0.0000020580,((((JQ993669_Isospora_sp._ex_Talpa_europaea:0.0017550928,(JQ993670_Isospora_sp._ex_Talpa_europaea:0.0072335341,JQ993671_Isospora_sp._ex_Talpa_europaea:0.0117890352)86:0.0000029591)100:0.0179920741,(((((JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013:0.0014725640,(AF324214_Eimeria_chobotari:0.0060933381,AF339490_Eimeria_dipodomysis:0.0221414995)91:0.0071988694)69:0.0006533541,(AF307879_Eimeria_onychomysis:0.0057270975,AF307877_Eimeria_rioarribaensis:0.0027497889)50:0.0000022709)56:0.0007304438,AF339491_Eimeria_leucopi:0.0021699656)43:0.0006463072,(((AF307880_Eimeria_albigulae:0.0007600229,(AF339489_Eimeria_chaetodipi:0.0091339884,AF339492_Eimeria_peromysci:0.0093390250)98:0.0039838541)88:0.0011705267,AF307878_Eimeria_arizonensis:0.0013417471)89:0.0007485624,AF307876_Eimeria_antrozoi:0.0040784418)53:0.0000023432)51:0.0007445998,AF311642_Eimeria_reedi:0.0030636598)90:0.0013787047)84:0.0022070514,(((JQ993659_Eimeria_alorani:0.0015751422,JQ993655_Eimeria_sp._ex_Apodemus_agrarius:0.0015375138)92:0.0007601434,(((JQ993656_Eimeria_sp._ex_Apodemus_agrarius:0.0023011533,((JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus:0.0050946352,JQ993667_Eimeria_sp._ex_Mastomys_natalensis:0.0006996970)97:0.0040619240,KU192938_Eimeria_apionodes:0.0000025698)72:0.0000023324)39:0.0000021760,KU174475_Eimeria_apionodes:0.0000009974)39:0.0000023134,JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus:0.0000009974)37:0.0000024865)92:0.0009895512,(JF304148_Eimeria_myoxi:0.0018968804,JQ993651_Eimeria_nkaka:0.0055150549)96:0.0019919022)95:0.0023190923)85:0.0036518714,(JQ993652_Eimeria_sp._2_JK-2013:0.0000026139,JQ993653_Eimeria_vilasi:0.0000027937)100:0.0077967894)98:0.0079232381)98:0.0040502197,MH751946.1_Eimeria_ferrisi:0.0000021887)97:0.0026854484,(((((((((((((KT360995_Eimeria_ferrisi:0.0000009974,((((((((MH751935.1_Eimeria_ferrisi:0.0000009974,(((((MH751967.1_Eimeria_ferrisi:0.0000009974,(MH751970.1_Eimeria_ferrisi:0.0007178741,wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV1:0.0000009974)1:0.0000045665)1:0.0000010923,MH751969.1_Eimeria_ferrisi:0.0000009974)1:0.0000025536,(wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV2:0.0023881346,wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV3:0.0024121571)100:0.0251048432)0:0.0000015078,MH752029.1_Eimeria_ferrisi:0.0000009974)1:0.0000012796,MH752026.1_Eimeria_ferrisi:0.0000009974)2:0.0000014632)7:0.0000011836,MH751961.1_Eimeria_ferrisi:0.0000009974)31:0.0000011711,MH751954.1_Eimeria_ferrisi:0.0000009974)38:0.0000020166,MH752033.1_Eimeria_ferrisi:0.0000009974)37:0.0000014506,MH751945.1_Eimeria_ferrisi:0.0000009974)40:0.0000011797,MH751962.1_Eimeria_ferrisi:0.0000009974)38:0.0000015597,MH751993.1_Eimeria_ferrisi:0.0000009974)20:0.0000021018,MH751995.1_Eimeria_ferrisi:0.0000009974)31:0.0000013489)37:0.0000010712,MH751986.1_Eimeria_ferrisi:0.0000009974)37:0.0000447126,MH751985.1_Eimeria_ferrisi:0.0000009974)37:0.0000011486,MH751983.1_Eimeria_ferrisi:0.0000009974)41:0.0000025064,((MH751938.1_Eimeria_ferrisi:0.0000009974,((MH752008.1_Eimeria_ferrisi:0.0000024684,MH752025.1_Eimeria_ferrisi:0.0000020791)77:0.0000011156,MH752028.1_Eimeria_ferrisi:0.0000009974)35:0.0052052185)34:0.0000022694,MH752010.1_Eimeria_ferrisi:0.0018507464)46:0.0000026197)42:0.0000027332,MH752004.1_Eimeria_ferrisi:0.0000009974)62:0.0000023319,MH751979.1_Eimeria_ferrisi:0.0000009974)66:0.0000011430,MH752006.1_Eimeria_ferrisi:0.0000009974)74:0.0000026859,MH752005.1_Eimeria_ferrisi:0.0000009974)75:0.0000012639,MH752015.1_Eimeria_ferrisi:0.0000009974)58:0.0000012987,MH752009.1_Eimeria_ferrisi:0.0000009974)47:0.0000023310,MH752014.1_Eimeria_ferrisi:0.0000009974)31:0.0000022277,MH752013.1_Eimeria_ferrisi:0.0000009974)66:0.0000027833)61:0.0000020982,AF246717_Eimeria_telekii:0.0013452893)53:0.0000020210,AF311643_Eimeria_separata:0.0069404581)58:0.0000021562,MH752027.1_Eimeria_ferrisi:0.0031782967)49:0.0000024274,((((((((((((MH751925.1_Eimeria_ferrisi:0.0000009974,(MH751966.1_Eimeria_ferrisi:0.0000009974,((MH752000.1_Eimeria_ferrisi:0.0007245513,MH752032.1_Eimeria_ferrisi:0.0000009974)1:0.0000009974,MH752034.1_Eimeria_ferrisi:0.0000009974)2:0.0000011457)0:0.0000010889)1:0.0000009974,MH751959.1_Eimeria_ferrisi:0.0000009974)0:0.0000009987,MH751996.1_Eimeria_ferrisi:0.0000009974)0:0.0000010570,MH751989.1_Eimeria_ferrisi:0.0000009974)0:0.0000023927,MH752036.1_Eimeria_ferrisi:0.0000009974)0:0.0000015635,MH751984.1_Eimeria_ferrisi:0.0000009974)0:0.0000010739,MH751963.1_Eimeria_ferrisi:0.0000009974)21:0.0000010458,MH751968.1_Eimeria_ferrisi:0.0000009974)13:0.0000022959,MH751930.1_Eimeria_ferrisi:0.0000009974)11:0.0000024887,wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV4:0.0000009974)19:0.0000167241,MH751939.1_Eimeria_ferrisi:0.0000009974)50:0.0000024106,(MH751953.1_Eimeria_ferrisi:0.0000027694,(MH751999.1_Eimeria_ferrisi:0.0000020425,MH752023.1_Eimeria_ferrisi:0.0000023856)77:0.0021964160)73:0.0020423626)39:0.0000028498)69:0.0007578879,(((MH751927.1_Eimeria_ferrisi:0.0000009974,(MH751928.1_Eimeria_ferrisi:0.0000009974,(MH751933.1_Eimeria_ferrisi:0.0010084320,(MH751994.1_Eimeria_ferrisi:0.0000009974,MH752022.1_Eimeria_ferrisi:0.0000010360)30:0.0000016614)0:0.0000019536)1:0.0000018455)0:0.0000024649,MH751958.1_Eimeria_ferrisi:0.0000009974)1:0.0000010941,MH752007.1_Eimeria_ferrisi:0.0000009974)1:0.0007854935)1:0.0000020771,MH751947.1_Eimeria_ferrisi:0.0008028085)0:0.0000029669,((((((((((((MH751929.1_Eimeria_ferrisi:0.0000009974,(MH751950.1_Eimeria_ferrisi:0.0000009974,MH751997.1_Eimeria_ferrisi:0.0000009974)96:0.0000023663)84:0.0025607259,MH751972.1_Eimeria_ferrisi:0.0000009974)79:0.0000025790,MH751965.1_Eimeria_ferrisi:0.0000009974)77:0.0000022105,MH751955.1_Eimeria_ferrisi:0.0000009974)78:0.0000025315,(MH751949.1_Eimeria_ferrisi:0.0000009974,MH751982.1_Eimeria_ferrisi:0.0000009974)79:0.0000026925)84:0.0008043643,MH751988.1_Eimeria_ferrisi:0.0000021834)79:0.0000013647,MH752035.1_Eimeria_ferrisi:0.0000009974)27:0.0000012458,MH751992.1_Eimeria_ferrisi:0.0000009974)8:0.0000021392,MH751944.1_Eimeria_ferrisi:0.0000009974)15:0.0000015772,MH751936.1_Eimeria_ferrisi:0.0010110593)9:0.0004833029,MH751932.1_Eimeria_ferrisi:0.0000009974)2:0.0000021445,(MH752002.1_Eimeria_ferrisi:0.0000023944,MH752020.1_Eimeria_ferrisi:0.0000029665)85:0.0033826817)6:0.0003135319)56:0.0000027260,MH751991.1_Eimeria_ferrisi:0.0000009974)57:0.0000028080,MH751987.1_Eimeria_ferrisi:0.0000009974)60:0.0000024559,MH752024.1_Eimeria_ferrisi:0.0000009974)73:0.0014861680,(MH752021.1_Eimeria_ferrisi:0.0035445622,MH752031.1_Eimeria_ferrisi:0.0000028105)62:0.0000011182);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 5000 bootstrap trees
+Log-likelihood of consensus tree: -5489.611602
+Robinson-Foulds distance between ML tree and consensus tree: 124
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++--wang1141_13_F.Nem_0425_6_3_R_ASV_1
+|
+|                                                +--wang1141_13_F.Nem_0425_6_3_R_ASV_2
+|                                             +--| (43)
+|                                             |  |                                                              +--JQ993665_Eimeria_nafuko
+|                                             |  |                                                           +--| (51)
+|                                             |  |                                                           |  +--JQ993657_Eimeria_sp._ex_Apodemus_agrarius
+|                                             |  |                                                        +--| (21)
+|                                             |  |                                                        |  +--KU174478_Eimeria_sp._ex_Microtus_arvalis
+|                                             |  |                                                     +--| (7)
+|                                             |  |                                                     |  +--KU174466_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                                                  +--| (3)
+|                                             |  |                                                  |  +--KU174457_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                                               +--| (7)
+|                                             |  |                                               |  +--KU174453_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                                            +--| (11)
+|                                             |  |                                            |  +--KU192956_Eimeria_apionodes
+|                                             |  |                                         +--| (15)
+|                                             |  |                                         |  +--KU174476_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                                      +--| (30)
+|                                             |  |                                      |  |  +--KU174481_Eimeria_sp._ex_Microtus_agrestis
+|                                             |  |                                      |  +--| (19)
+|                                             |  |                                      |     +--MH751976.1_Eimeria_falciformis
+|                                             |  |                                   +--| (12)
+|                                             |  |                                   |  |              +--KU174470_Eimeria_apionodes
+|                                             |  |                                   |  |           +--| (13)
+|                                             |  |                                   |  |           |  |     +--KU174461_Eimeria_apionodes
+|                                             |  |                                   |  |           |  |  +--| (30)
+|                                             |  |                                   |  |           |  |  |  |        +--KU174464_Eimeria_apionodes
+|                                             |  |                                   |  |           |  |  |  |     +--| (64)
+|                                             |  |                                   |  |           |  |  |  |     |  +--JQ993650_Eimeria_chinchillae
+|                                             |  |                                   |  |           |  |  |  |  +--| (65)
+|                                             |  |                                   |  |           |  |  |  |  |  +--KU174458_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                                   |  |           |  |  |  +--| (39)
+|                                             |  |                                   |  |           |  |  |     +--KU174473_Eimeria_sp._ex_Microtus_arvalis
+|                                             |  |                                   |  |           |  +--| (24)
+|                                             |  |                                   |  |           |     +--KU174456_Eimeria_sp._ex_Microtus_arvalis
+|                                             |  |                                   |  |        +--| (34)
+|                                             |  |                                   |  |        |  +--KU174472_Eimeria_apionodes
+|                                             |  |                                   |  |     +--| (36)
+|                                             |  |                                   |  |     |  +--KU174454_Eimeria_sp._ex_Microtus_agrestis
+|                                             |  |                                   |  |  +--| (32)
+|                                             |  |                                   |  |  |  +--KU174451_Eimeria_apionodes
+|                                             |  |                                   |  +--| (10)
+|                                             |  |                                   |     +--JQ993666_Eimeria_burdai
+|                                             |  |                                +--| (10)
+|                                             |  |                                |  +--KU174471_Eimeria_sp._ex_Microtus_levis
+|                                             |  |                             +--| (25)
+|                                             |  |                             |  +--KU174460_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |                          +--| (17)
+|                                             |  |                          |  +--MH751960.1_Eimeria_falciformis
+|                                             |  |                       +--| (10)
+|                                             |  |                       |  +--MH751941.1_Eimeria_falciformis
+|                                             |  |                    +--| (13)
+|                                             |  |                    |  +--MH751937.1_Eimeria_falciformis
+|                                             |  |                 +--| (14)
+|                                             |  |                 |  +--KU174482_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |              +--| (31)
+|                                             |  |              |  +--KU174469_Eimeria_sp._ex_Microtus_agrestis
+|                                             |  |           +--| (37)
+|                                             |  |           |  +--KU174452_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |        +--| (40)
+|                                             |  |        |  +--KU174474_Eimeria_apionodes
+|                                             |  |     +--| (37)
+|                                             |  |     |  |        +--KU174463_Eimeria_apionodes
+|                                             |  |     |  |     +--| (62)
+|                                             |  |     |  |     |  |     +--------------------------------AF311644_Eimeria_sevilletensis
+|                                             |  |     |  |     |  |  +--| (51)
+|                                             |  |     |  |     |  |  |  +--KU174486_Eimeria_sp._ex_Clethrionomys_glareolus
+|                                             |  |     |  |     |  +--| (60)
+|                                             |  |     |  |     |     +--KU174484_Eimeria_sp._ex_Microtus_arvalis
+|                                             |  |     |  |  +--| (31)
+|                                             |  |     |  |  |  |  +--KU174450_Eimeria_apionodes
+|                                             |  |     |  |  |  +--| (52)
+|                                             |  |     |  |  |     |     +--AF080614_Eimeria_falciformis
+|                                             |  |     |  |  |     |  +--| (28)
+|                                             |  |     |  |  |     |  |  +--KU174455_Eimeria_sp._ex_Microtus_subterraneus
+|                                             |  |     |  |  |     +--| (23)
+|                                             |  |     |  |  |        +--MH752012.1_Eimeria_falciformis
+|                                             |  |     |  +--| (29)
+|                                             |  |     |     +--MH752017.1_Eimeria_falciformis
+|                                             |  |  +--| (41)
+|                                             |  |  |  +--KU174449_Eimeria_apionodes
+|                                             |  +--| (46)
+|                                             |     |                                +--MH751998_Eimeria_falciformis
+|                                             |     |                             +--| (38)
+|                                             |     |                             |  +--MH751980.1_Eimeria_falciformis
+|                                             |     |                          +--| (19)
+|                                             |     |                          |  +--MH751934.1_Eimeria_falciformis
+|                                             |     |                       +--| (23)
+|                                             |     |                       |  +--MH751998.1_Eimeria_falciformis
+|                                             |     |                    +--| (11)
+|                                             |     |                    |  +--MH751978.1_Eimeria_falciformis
+|                                             |     |                 +--| (20)
+|                                             |     |                 |  |        +--MH751943.1_Eimeria_falciformis
+|                                             |     |                 |  |     +--| (51)
+|                                             |     |                 |  |     |  +--MH752016.1_Eimeria_falciformis
+|                                             |     |                 |  |  +--| (27)
+|                                             |     |                 |  |  |  +--MH751964.1_Eimeria_falciformis
+|                                             |     |                 |  +--| (8)
+|                                             |     |                 |     +--MH751981.1_Eimeria_falciformis
+|                                             |     |              +--| (28)
+|                                             |     |              |  +--MH752019.1_Eimeria_falciformis
+|                                             |     |           +--| (79)
+|                                             |     |           |  +--MH752011.1_Eimeria_falciformis
+|                                             |     |        +--| (86)
+|                                             |     |        |  +--KT184339.1_Eimeria_falciformis
+|                                             |     |     +--| (29)
+|                                             |     |     |  +--MH751942.1_Eimeria_falciformis
+|                                             |     |  +--| (28)
+|                                             |     |  |  +--MH752018.1_Eimeria_falciformis
+|                                             |     +--| (41)
+|                                             |        +--MH751975.1_Eimeria_falciformis
+|                                          +--| (78)
+|                                          |  |        +--KU174483_Eimeria_apionodes
+|                                          |  |     +--| (83)
+|                                          |  |     |  |        +--JQ993660_Eimeria_sp._ex_Apodemus_agrarius
+|                                          |  |     |  |     +--| (96)
+|                                          |  |     |  |     |  +--KU192961_Eimeria_alorani
+|                                          |  |     |  |  +--| (78)
+|                                          |  |     |  |  |  +--KU192958_Eimeria_alorani
+|                                          |  |     |  +--| (64)
+|                                          |  |     |     +--KU192965_Eimeria_alorani
+|                                          |  |  +--| (92)
+|                                          |  |  |  +--U40263_Eimeria_nieschulzi
+|                                          |  +--| (37)
+|                                          |     |                             +--KU174465_Eimeria_apionodes
+|                                          |     |                          +--| (82)
+|                                          |     |                          |  |           +--KT184355_Eimeria_vermiformis
+|                                          |     |                          |  |        +--| (90)
+|                                          |     |                          |  |        |  |  +--MH751940.1_Eimeria_vermiformis
+|                                          |     |                          |  |        |  +--| (96)
+|                                          |     |                          |  |        |     +--MH751948.1_Eimeria_vermiformis
+|                                          |     |                          |  |     +--| (27)
+|                                          |     |                          |  |     |  +--MH751951.1_Eimeria_vermiformis
+|                                          |     |                          |  |  +--| (31)
+|                                          |     |                          |  |  |  +--MH751926.1_Eimeria_vermiformis
+|                                          |     |                          |  +--| (30)
+|                                          |     |                          |     +--MH751974.1_Eimeria_vermiformis
+|                                          |     |                       +--| (52)
+|                                          |     |                       |  +--MH752030.1_Eimeria_vermiformis
+|                                          |     |                    +--| (69)
+|                                          |     |                    |  +--MH751977.1_Eimeria_vermiformis
+|                                          |     |                 +--| (76)
+|                                          |     |                 |  +--MH751957.1_Eimeria_vermiformis
+|                                          |     |              +--| (80)
+|                                          |     |              |  +--KU192916_Eimeria_apionodes
+|                                          |     |           +--| (68)
+|                                          |     |           |  +--MH752003.1_Eimeria_vermiformis
+|                                          |     |        +--| (55)
+|                                          |     |        |  +--KU174467_Eimeria_apionodes
+|                                          |     |     +--| (41)
+|                                          |     |     |  +--KU192936_Eimeria_apionodes
+|                                          |     |  +--| (96)
+|                                          |     |  |  +--KU192931_Eimeria_apionodes
+|                                          |     +--| (43)
+|                                          |        +--JQ993649_Eimeria_caviae
+|                                       +--| (56)
+|                                       |  |                 +--KU174480_Eimeria_apionodes
+|                                       |  |              +--| (46)
+|                                       |  |              |  |  +--KU174459_Eimeria_apionodes
+|                                       |  |              |  +--| (72)
+|                                       |  |              |     +--KU174487_Eimeria_apionodes
+|                                       |  |           +--| (67)
+|                                       |  |           |  +--KU174479_Eimeria_apionodes
+|                                       |  |        +--| (23)
+|                                       |  |        |  +--KU174468_Eimeria_apionodes
+|                                       |  |     +--| (20)
+|                                       |  |     |  +--KU174462_Eimeria_apionodes
+|                                       |  |  +--| (33)
+|                                       |  |  |  |     +--KU174485_Eimeria_apionodes
+|                                       |  |  |  |  +--| (61)
+|                                       |  |  |  |  |  +--JQ993663_Eimeria_sp._ex_Cricetus_cricetus
+|                                       |  |  |  +--| (43)
+|                                       |  |  |     +---JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus
+|                                       |  +--| (58)
+|                                       |     +---JQ993658_Eimeria_sp._ex_Apodemus_agrarius
+|                                   +---| (98)
+|                                   |   |                                +--JQ993669_Isospora_sp._ex_Talpa_europaea
+|                                   |   |             +------------------| (100)
+|                                   |   |             |                  |  +------JQ993670_Isospora_sp._ex_Talpa_europaea
+|                                   |   |             |                  +--| (86)
+|                                   |   |             |                     +-----------JQ993671_Isospora_sp._ex_Talpa_europaea
+|                                   |   |          +--| (84)
+|                                   |   |          |  |              +--JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013
+|                                   |   |          |  |           +--| (69)
+|                                   |   |          |  |           |  |      +-----AF324214_Eimeria_chobotari
+|                                   |   |          |  |           |  +------| (91)
+|                                   |   |          |  |           |         +-----------------------AF339490_Eimeria_dipodomysis
+|                                   |   |          |  |        +--| (56)
+|                                   |   |          |  |        |  |  +-----AF307879_Eimeria_onychomysis
+|                                   |   |          |  |        |  +--| (50)
+|                                   |   |          |  |        |     +--AF307877_Eimeria_rioarribaensis
+|                                   |   |          |  |     +--| (43)
+|                                   |   |          |  |     |  +--AF339491_Eimeria_leucopi
+|                                   |   |          |  |  +--| (51)
+|                                   |   |          |  |  |  |        +--AF307880_Eimeria_albigulae
+|                                   |   |          |  |  |  |     +--| (88)
+|                                   |   |          |  |  |  |     |  |   +--------AF339489_Eimeria_chaetodipi
+|                                   |   |          |  |  |  |     |  +---| (98)
+|                                   |   |          |  |  |  |     |      +---------AF339492_Eimeria_peromysci
+|                                   |   |          |  |  |  |  +--| (89)
+|                                   |   |          |  |  |  |  |  +--AF307878_Eimeria_arizonensis
+|                                   |   |          |  |  |  +--| (53)
+|                                   |   |          |  |  |     +---AF307876_Eimeria_antrozoi
+|                                   |   |          |  +--| (90)
+|                                   |   |          |     +--AF311642_Eimeria_reedi
+|                                   |   |       +--| (85)
+|                                   |   |       |  |        +--JQ993659_Eimeria_alorani
+|                                   |   |       |  |     +--| (92)
+|                                   |   |       |  |     |  +--JQ993655_Eimeria_sp._ex_Apodemus_agrarius
+|                                   |   |       |  |  +--| (92)
+|                                   |   |       |  |  |  |        +--JQ993656_Eimeria_sp._ex_Apodemus_agrarius
+|                                   |   |       |  |  |  |     +--| (39)
+|                                   |   |       |  |  |  |     |  |      +----JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus
+|                                   |   |       |  |  |  |     |  |  +---| (97)
+|                                   |   |       |  |  |  |     |  |  |   +--JQ993667_Eimeria_sp._ex_Mastomys_natalensis
+|                                   |   |       |  |  |  |     |  +--| (72)
+|                                   |   |       |  |  |  |     |     +--KU192938_Eimeria_apionodes
+|                                   |   |       |  |  |  |  +--| (39)
+|                                   |   |       |  |  |  |  |  +--KU174475_Eimeria_apionodes
+|                                   |   |       |  |  |  +--| (37)
+|                                   |   |       |  |  |     +--JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus
+|                                   |   |       |  +--| (95)
+|                                   |   |       |     |  +--JF304148_Eimeria_myoxi
+|                                   |   |       |     +--| (96)
+|                                   |   |       |        +----JQ993651_Eimeria_nkaka
+|                                   |   +-------| (98)
+|                                   |           |       +--JQ993652_Eimeria_sp._2_JK-2013
+|                                   |           +-------| (100)
+|                                   |                   +--JQ993653_Eimeria_vilasi
+|                                +--| (97)
+|                                |  +--MH751946.1_Eimeria_ferrisi
+|                             +--| (61)
+|                             |  |                                      +--KT360995_Eimeria_ferrisi
+|                             |  |                                   +--| (37)
+|                             |  |                                   |  |                                +--MH751935.1_Eimeria_ferrisi
+|                             |  |                                   |  |                             +--| (24)
+|                             |  |                                   |  |                             |  |        +--MH751967.1_Eimeria_ferrisi
+|                             |  |                                   |  |                             |  |     +--| (47)
+|                             |  |                                   |  |                             |  |     |  +--MH751970.1_Eimeria_ferrisi
+|                             |  |                                   |  |                             |  |  +--| (29)
+|                             |  |                                   |  |                             |  |  |  +--MH751969.1_Eimeria_ferrisi
+|                             |  |                                   |  |                             |  +--| (24)
+|                             |  |                                   |  |                             |     +--MH752029.1_Eimeria_ferrisi
+|                             |  |                                   |  |                          +--| (35)
+|                             |  |                                   |  |                          |  +--MH751961.1_Eimeria_ferrisi
+|                             |  |                                   |  |                       +--| (22)
+|                             |  |                                   |  |                       |  +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV1
+|                             |  |                                   |  |                    +--| (11)
+|                             |  |                                   |  |                    |  |                          +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV2
+|                             |  |                                   |  |                    |  +--------------------------| (100)
+|                             |  |                                   |  |                    |                             +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV3
+|                             |  |                                   |  |                 +--| (31)
+|                             |  |                                   |  |                 |  +--MH752026.1_Eimeria_ferrisi
+|                             |  |                                   |  |              +--| (38)
+|                             |  |                                   |  |              |  +--MH751954.1_Eimeria_ferrisi
+|                             |  |                                   |  |           +--| (37)
+|                             |  |                                   |  |           |  +--MH752033.1_Eimeria_ferrisi
+|                             |  |                                   |  |        +--| (40)
+|                             |  |                                   |  |        |  +--MH751945.1_Eimeria_ferrisi
+|                             |  |                                   |  |     +--| (38)
+|                             |  |                                   |  |     |  +--MH751962.1_Eimeria_ferrisi
+|                             |  |                                   |  |  +--| (20)
+|                             |  |                                   |  |  |  +--MH751993.1_Eimeria_ferrisi
+|                             |  |                                   |  +--| (31)
+|                             |  |                                   |     +--MH751995.1_Eimeria_ferrisi
+|                             |  |                                +--| (37)
+|                             |  |                                |  +--MH751986.1_Eimeria_ferrisi
+|                             |  |                             +--| (37)
+|                             |  |                             |  +--MH751985.1_Eimeria_ferrisi
+|                             |  |                          +--| (41)
+|                             |  |                          |  +--MH751983.1_Eimeria_ferrisi
+|                             |  |                       +--| (42)
+|                             |  |                       |  |     +--MH751938.1_Eimeria_ferrisi
+|                             |  |                       |  |  +--| (34)
+|                             |  |                       |  |  |  |     +--MH752008.1_Eimeria_ferrisi
+|                             |  |                       |  |  |  |  +--| (77)
+|                             |  |                       |  |  |  |  |  +--MH752025.1_Eimeria_ferrisi
+|                             |  |                       |  |  |  +--| (35)
+|                             |  |                       |  |  |     +--MH752028.1_Eimeria_ferrisi
+|                             |  |                       |  +--| (46)
+|                             |  |                       |     +--MH752010.1_Eimeria_ferrisi
+|                             |  |                    +--| (62)
+|                             |  |                    |  +--MH752004.1_Eimeria_ferrisi
+|                             |  |                 +--| (66)
+|                             |  |                 |  +--MH751979.1_Eimeria_ferrisi
+|                             |  |              +--| (74)
+|                             |  |              |  +--MH752006.1_Eimeria_ferrisi
+|                             |  |           +--| (75)
+|                             |  |           |  +--MH752005.1_Eimeria_ferrisi
+|                             |  |        +--| (58)
+|                             |  |        |  +--MH752015.1_Eimeria_ferrisi
+|                             |  |     +--| (47)
+|                             |  |     |  +--MH752009.1_Eimeria_ferrisi
+|                             |  |  +--| (31)
+|                             |  |  |  +--MH752014.1_Eimeria_ferrisi
+|                             |  +--| (66)
+|                             |     +--MH752013.1_Eimeria_ferrisi
+|                          +--| (53)
+|                          |  +--AF246717_Eimeria_telekii
+|                       +--| (58)
+|                       |  +------AF311643_Eimeria_separata
+|                    +--| (49)
+|                    |  +--MH752027.1_Eimeria_ferrisi
+|                 +--| (69)
+|                 |  |                          +--MH751925.1_Eimeria_ferrisi
+|                 |  |                       +--| (28)
+|                 |  |                       |  |        +--MH751959.1_Eimeria_ferrisi
+|                 |  |                       |  |     +--| (27)
+|                 |  |                       |  |     |  |        +--MH751963.1_Eimeria_ferrisi
+|                 |  |                       |  |     |  |     +--| (26)
+|                 |  |                       |  |     |  |     |  +--MH752000.1_Eimeria_ferrisi
+|                 |  |                       |  |     |  |  +--| (25)
+|                 |  |                       |  |     |  |  |  +--MH751984.1_Eimeria_ferrisi
+|                 |  |                       |  |     |  +--| (24)
+|                 |  |                       |  |     |     +--MH751989.1_Eimeria_ferrisi
+|                 |  |                       |  |  +--| (26)
+|                 |  |                       |  |  |  +--MH751966.1_Eimeria_ferrisi
+|                 |  |                       |  +--| (27)
+|                 |  |                       |     +--MH751996.1_Eimeria_ferrisi
+|                 |  |                    +--| (46)
+|                 |  |                    |  +--MH752034.1_Eimeria_ferrisi
+|                 |  |                 +--| (26)
+|                 |  |                 |  +--wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV4
+|                 |  |              +--| (16)
+|                 |  |              |  +--MH752032.1_Eimeria_ferrisi
+|                 |  |           +--| (25)
+|                 |  |           |  +--MH752036.1_Eimeria_ferrisi
+|                 |  |        +--| (19)
+|                 |  |        |  +--MH751930.1_Eimeria_ferrisi
+|                 |  |     +--| (19)
+|                 |  |     |  +--MH751968.1_Eimeria_ferrisi
+|                 |  |  +--| (50)
+|                 |  |  |  +--MH751939.1_Eimeria_ferrisi
+|                 |  +--| (39)
+|                 |     |  +--MH751953.1_Eimeria_ferrisi
+|                 |     +--| (73)
+|                 |        |  +--MH751999.1_Eimeria_ferrisi
+|                 |        +--| (77)
+|                 |           +--MH752023.1_Eimeria_ferrisi
+|              +--| (26)
+|              |  |     +--MH751927.1_Eimeria_ferrisi
+|              |  |  +--| (29)
+|              |  |  |  |     +--MH751928.1_Eimeria_ferrisi
+|              |  |  |  |  +--| (26)
+|              |  |  |  |  |  |  +--MH751994.1_Eimeria_ferrisi
+|              |  |  |  |  |  +--| (30)
+|              |  |  |  |  |     +--MH752022.1_Eimeria_ferrisi
+|              |  |  |  +--| (19)
+|              |  |  |     +--MH752007.1_Eimeria_ferrisi
+|              |  +--| (32)
+|              |     +--MH751958.1_Eimeria_ferrisi
+|           +--| (31)
+|           |  +--MH751947.1_Eimeria_ferrisi
+|        +--| (56)
+|        |  |                                                           +**MH751929.1_Eimeria_ferrisi
+|        |  |                                                        +**|
+|        |  |                                                        |  +**MH751952.1_Eimeria_ferrisi
+|        |  |                                                     +**|
+|        |  |                                                     |  +**MH751990.1_Eimeria_ferrisi
+|        |  |                                                  +**|
+|        |  |                                                  |  +**MH752001.1_Eimeria_ferrisi
+|        |  |                                               +**|
+|        |  |                                               |  +**MH751931.1_Eimeria_ferrisi
+|        |  |                                            +**|
+|        |  |                                            |  +**MH751973.1_Eimeria_ferrisi
+|        |  |                                         +**|
+|        |  |                                         |  +**MH751971.1_Eimeria_ferrisi
+|        |  |                                      +--|
+|        |  |                                      |  +**MH751956.1_Eimeria_ferrisi
+|        |  |                                   +--| (84)
+|        |  |                                   |  |  +--MH751950.1_Eimeria_ferrisi
+|        |  |                                   |  +--| (96)
+|        |  |                                   |     +--MH751997.1_Eimeria_ferrisi
+|        |  |                                +--| (79)
+|        |  |                                |  +--MH751972.1_Eimeria_ferrisi
+|        |  |                             +--| (77)
+|        |  |                             |  +--MH751965.1_Eimeria_ferrisi
+|        |  |                          +--| (78)
+|        |  |                          |  +--MH751955.1_Eimeria_ferrisi
+|        |  |                       +--| (84)
+|        |  |                       |  |  +--MH751949.1_Eimeria_ferrisi
+|        |  |                       |  +--| (79)
+|        |  |                       |     +--MH751982.1_Eimeria_ferrisi
+|        |  |                    +--| (79)
+|        |  |                    |  +--MH751988.1_Eimeria_ferrisi
+|        |  |                 +--| (27)
+|        |  |                 |  +--MH752035.1_Eimeria_ferrisi
+|        |  |              +--| (9)
+|        |  |              |  +--MH751944.1_Eimeria_ferrisi
+|        |  |           +--| (15)
+|        |  |           |  +--MH751992.1_Eimeria_ferrisi
+|        |  |        +--| (12)
+|        |  |        |  +--MH751933.1_Eimeria_ferrisi
+|        |  |     +--| (20)
+|        |  |     |  +--MH751936.1_Eimeria_ferrisi
+|        |  |  +--| (28)
+|        |  |  |  |  +--MH752002.1_Eimeria_ferrisi
+|        |  |  |  +--| (85)
+|        |  |  |     +--MH752020.1_Eimeria_ferrisi
+|        |  +--| (49)
+|        |     +--MH751932.1_Eimeria_ferrisi
+|     +--| (57)
+|     |  +--MH751991.1_Eimeria_ferrisi
+|  +--| (60)
+|  |  +--MH751987.1_Eimeria_ferrisi
++--| (73)
+|  +--MH752024.1_Eimeria_ferrisi
+|
+|  +--MH752021.1_Eimeria_ferrisi
++--| (62)
+   +--MH752031.1_Eimeria_ferrisi
+
+
+Consensus tree in newick format: 
+
+(wang1141_13_F.Nem_0425_6_3_R_ASV_1:0.0000020377,((((((((((((((((wang1141_13_F.Nem_0425_6_3_R_ASV_2:0.0000020377,(((((((((((((((((((((JQ993665_Eimeria_nafuko:0.0007939880,JQ993657_Eimeria_sp._ex_Apodemus_agrarius:0.0005287656)51:0.0002280537,KU174478_Eimeria_sp._ex_Microtus_arvalis:0.0014357314)21:0.0000031250,KU174466_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)7:0.0000020377,KU174457_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)3:0.0000020377,KU174453_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)7:0.0000020377,KU192956_Eimeria_apionodes:0.0000020377)11:0.0000020377,KU174476_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)15:0.0000020377,(KU174481_Eimeria_sp._ex_Microtus_agrestis:0.0015851992,MH751976.1_Eimeria_falciformis:0.0000020377)19:0.0018770686)30:0.0000020377,(((((KU174470_Eimeria_apionodes:0.0000020377,((KU174461_Eimeria_apionodes:0.0000020377,(((KU174464_Eimeria_apionodes:0.0035114459,JQ993650_Eimeria_chinchillae:0.0021407070)64:0.0000020394,KU174458_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)65:0.0000020377,KU174473_Eimeria_sp._ex_Microtus_arvalis:0.0000020377)39:0.0000020377)30:0.0000020377,KU174456_Eimeria_sp._ex_Microtus_arvalis:0.0000020377)24:0.0000020377)13:0.0000020377,KU174472_Eimeria_apionodes:0.0000020377)34:0.0000020377,KU174454_Eimeria_sp._ex_Microtus_agrestis:0.0000020377)36:0.0000020377,KU174451_Eimeria_apionodes:0.0000020377)32:0.0000020377,JQ993666_Eimeria_burdai:0.0030806681)10:0.0000020377)12:0.0000020377,KU174471_Eimeria_sp._ex_Microtus_levis:0.0000020377)10:0.0000020377,KU174460_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)25:0.0000020377,MH751960.1_Eimeria_falciformis:0.0000020377)17:0.0000020377,MH751941.1_Eimeria_falciformis:0.0000020377)10:0.0000020377,MH751937.1_Eimeria_falciformis:0.0000020377)13:0.0000020377,KU174482_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)14:0.0000020377,KU174469_Eimeria_sp._ex_Microtus_agrestis:0.0000020377)31:0.0000020377,KU174452_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)37:0.0000020377,KU174474_Eimeria_apionodes:0.0000020377)40:0.0000020377,(((KU174463_Eimeria_apionodes:0.0000020377,((AF311644_Eimeria_sevilletensis:0.0308624518,KU174486_Eimeria_sp._ex_Clethrionomys_glareolus:0.0000020377)51:0.0000029410,KU174484_Eimeria_sp._ex_Microtus_arvalis:0.0011752072)60:0.0000021995)62:0.0000026526,(KU174450_Eimeria_apionodes:0.0000020377,((AF080614_Eimeria_falciformis:0.0028632332,KU174455_Eimeria_sp._ex_Microtus_subterraneus:0.0000020377)28:0.0000020394,MH752012.1_Eimeria_falciformis:0.0000020377)23:0.0000020394)52:0.0000020394)31:0.0000020394,MH752017.1_Eimeria_falciformis:0.0000020377)29:0.0000020394)37:0.0000020394,KU174449_Eimeria_apionodes:0.0000020377)41:0.0000020394,(((((((((((MH751998_Eimeria_falciformis:0.0000020377,MH751980.1_Eimeria_falciformis:0.0015955007)38:0.0000020377,MH751934.1_Eimeria_falciformis:0.0000020377)19:0.0000020377,MH751998.1_Eimeria_falciformis:0.0000020377)23:0.0000020377,MH751978.1_Eimeria_falciformis:0.0000020377)11:0.0000020377,(((MH751943.1_Eimeria_falciformis:0.0010142334,MH752016.1_Eimeria_falciformis:0.0016487051)51:0.0000020377,MH751964.1_Eimeria_falciformis:0.0000020377)27:0.0000020377,MH751981.1_Eimeria_falciformis:0.0000020377)8:0.0000020377)20:0.0000020377,MH752019.1_Eimeria_falciformis:0.0000020377)28:0.0000020377,MH752011.1_Eimeria_falciformis:0.0015484243)79:0.0000020377,KT184339.1_Eimeria_falciformis:0.0000020377)86:0.0005322946,MH751942.1_Eimeria_falciformis:0.0000020377)29:0.0000321789,MH752018.1_Eimeria_falciformis:0.0000020377)28:0.0000020377,MH751975.1_Eimeria_falciformis:0.0011192538)41:0.0000020377)46:0.0000823846)43:0.0016180426,(((KU174483_Eimeria_apionodes:0.0024040219,(((JQ993660_Eimeria_sp._ex_Apodemus_agrarius:0.0015369507,KU192961_Eimeria_alorani:0.0000020377)96:0.0005322946,KU192958_Eimeria_alorani:0.0000020377)78:0.0002241769,KU192965_Eimeria_alorani:0.0000020377)64:0.0000020377)83:0.0000088794,U40263_Eimeria_nieschulzi:0.0025853809)92:0.0008560494,((((((((((KU174465_Eimeria_apionodes:0.0000020377,((((KT184355_Eimeria_vermiformis:0.0000020377,(MH751940.1_Eimeria_vermiformis:0.0000020377,MH751948.1_Eimeria_vermiformis:0.0000020377)96:0.0000020874)90:0.0007653606,MH751951.1_Eimeria_vermiformis:0.0000020377)27:0.0000020394,MH751926.1_Eimeria_vermiformis:0.0000020377)31:0.0000020394,MH751974.1_Eimeria_vermiformis:0.0000020377)30:0.0000020394)82:0.0003316604,MH752030.1_Eimeria_vermiformis:0.0008708523)52:0.0000020377,MH751977.1_Eimeria_vermiformis:0.0000020377)69:0.0000020377,MH751957.1_Eimeria_vermiformis:0.0000020377)76:0.0000020377,KU192916_Eimeria_apionodes:0.0000020377)80:0.0000020377,MH752003.1_Eimeria_vermiformis:0.0000020377)68:0.0000020377,KU174467_Eimeria_apionodes:0.0000020377)55:0.0000020377,KU192936_Eimeria_apionodes:0.0000020377)41:0.0000020377,KU192931_Eimeria_apionodes:0.0000020377)96:0.0010464059,JQ993649_Eimeria_caviae:0.0015216043)43:0.0000020377)37:0.0000025607)78:0.0013581018,((((((KU174480_Eimeria_apionodes:0.0000020377,(KU174459_Eimeria_apionodes:0.0016052326,KU174487_Eimeria_apionodes:0.0000020377)72:0.0007435584)46:0.0000020394,KU174479_Eimeria_apionodes:0.0000020377)67:0.0000020394,KU174468_Eimeria_apionodes:0.0000020377)23:0.0000020377,KU174462_Eimeria_apionodes:0.0000020377)20:0.0000020377,((KU174485_Eimeria_apionodes:0.0029180401,JQ993663_Eimeria_sp._ex_Cricetus_cricetus:0.0023386128)61:0.0007626381,JQ993662_Eimeria_sp._ex_Apodemus_sylvaticus:0.0038860627)43:0.0000020377)33:0.0000020377,JQ993658_Eimeria_sp._ex_Apodemus_agrarius:0.0039432725)58:0.0007681474)56:0.0000025646,((((JQ993669_Isospora_sp._ex_Talpa_europaea:0.0017564713,(JQ993670_Isospora_sp._ex_Talpa_europaea:0.0072402243,JQ993671_Isospora_sp._ex_Talpa_europaea:0.0117993608)86:0.0000024073)100:0.0180063933,(((((JQ993654_Eimeria_sp._ex_Acomys_sp._JK-2013:0.0014737545,(AF324214_Eimeria_chobotari:0.0060982056,AF339490_Eimeria_dipodomysis:0.0221586221)91:0.0072029449)69:0.0006545702,(AF307879_Eimeria_onychomysis:0.0057317658,AF307877_Eimeria_rioarribaensis:0.0027520052)50:0.0000020377)56:0.0007317419,AF339491_Eimeria_leucopi:0.0021717672)43:0.0006470989,(((AF307880_Eimeria_albigulae:0.0007611542,(AF339489_Eimeria_chaetodipi:0.0091398588,AF339492_Eimeria_peromysci:0.0093451398)98:0.0039855751)88:0.0011697443,AF307878_Eimeria_arizonensis:0.0013419736)89:0.0007486673,AF307876_Eimeria_antrozoi:0.0040811477)53:0.0000020394)51:0.0007456527,AF311642_Eimeria_reedi:0.0030659395)90:0.0013791566)84:0.0022086486,(((JQ993659_Eimeria_alorani:0.0015762244,JQ993655_Eimeria_sp._ex_Apodemus_agrarius:0.0015385641)92:0.0007606884,(((JQ993656_Eimeria_sp._ex_Apodemus_agrarius:0.0023027215,((JQ993664_Eimeria_sp._ex_Gerbillus_dasyurus:0.0050979291,JQ993667_Eimeria_sp._ex_Mastomys_natalensis:0.0007001374)97:0.0040650917,KU192938_Eimeria_apionodes:0.0000020377)72:0.0000020149)39:0.0000020394,KU174475_Eimeria_apionodes:0.0000020377)39:0.0000020394,JQ993661_Eimeria_sp._ex_Apodemus_sylvaticus:0.0000020377)37:0.0000020394)92:0.0009899871,(JF304148_Eimeria_myoxi:0.0018981443,JQ993651_Eimeria_nkaka:0.0055189408)96:0.0019931091)95:0.0023206762)85:0.0036543411,(JQ993652_Eimeria_sp._2_JK-2013:0.0000020377,JQ993653_Eimeria_vilasi:0.0000023028)100:0.0078040285)98:0.0079292820)98:0.0040549504,MH751946.1_Eimeria_ferrisi:0.0000020377)97:0.0026855308,(((((((((((((KT360995_Eimeria_ferrisi:0.0000020377,(((((((((((MH751935.1_Eimeria_ferrisi:0.0000020377,(((MH751967.1_Eimeria_ferrisi:0.0000020377,MH751970.1_Eimeria_ferrisi:0.0005322946)47:0.0002265106,MH751969.1_Eimeria_ferrisi:0.0000020377)29:0.0000020377,MH752029.1_Eimeria_ferrisi:0.0000020377)24:0.0000020377)24:0.0000020377,MH751961.1_Eimeria_ferrisi:0.0000020377)35:0.0000020377,wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV1:0.0000020377)22:0.0000020377,(wang1141_13_F.Nem_0425_6_3_R_Lab_single-multi-amplicon_ASV2:0.0014264155,wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV3:0.0034467331)100:0.0251557771)11:0.0000020377,MH752026.1_Eimeria_ferrisi:0.0000020377)31:0.0000020377,MH751954.1_Eimeria_ferrisi:0.0000020377)38:0.0000020377,MH752033.1_Eimeria_ferrisi:0.0000020377)37:0.0000020377,MH751945.1_Eimeria_ferrisi:0.0000020377)40:0.0000020377,MH751962.1_Eimeria_ferrisi:0.0000020377)38:0.0000020377,MH751993.1_Eimeria_ferrisi:0.0000020377)20:0.0000020377,MH751995.1_Eimeria_ferrisi:0.0000020377)31:0.0000020377)37:0.0000020377,MH751986.1_Eimeria_ferrisi:0.0000020377)37:0.0000020377,MH751985.1_Eimeria_ferrisi:0.0000020377)37:0.0000020377,MH751983.1_Eimeria_ferrisi:0.0000020377)41:0.0000020377,((MH751938.1_Eimeria_ferrisi:0.0000020377,((MH752008.1_Eimeria_ferrisi:0.0000028285,MH752025.1_Eimeria_ferrisi:0.0000020377)77:0.0029486897,MH752028.1_Eimeria_ferrisi:0.0000020377)35:0.0000025816)34:0.0000028267,MH752010.1_Eimeria_ferrisi:0.0018527245)46:0.0022378417)42:0.0000020377,MH752004.1_Eimeria_ferrisi:0.0000020377)62:0.0000020377,MH751979.1_Eimeria_ferrisi:0.0000020377)66:0.0000020377,MH752006.1_Eimeria_ferrisi:0.0000020377)74:0.0000020377,MH752005.1_Eimeria_ferrisi:0.0000020377)75:0.0000020377,MH752015.1_Eimeria_ferrisi:0.0000020377)58:0.0000020377,MH752009.1_Eimeria_ferrisi:0.0000020377)47:0.0000020377,MH752014.1_Eimeria_ferrisi:0.0000020377)31:0.0000020377,MH752013.1_Eimeria_ferrisi:0.0000020377)66:0.0000020377)61:0.0000020377,AF246717_Eimeria_telekii:0.0013465667)53:0.0000020377,AF311643_Eimeria_separata:0.0069479011)58:0.0000020377,MH752027.1_Eimeria_ferrisi:0.0031817497)49:0.0000020377,(((((((((MH751925.1_Eimeria_ferrisi:0.0000020377,(((MH751959.1_Eimeria_ferrisi:0.0000020377,(((MH751963.1_Eimeria_ferrisi:0.0000020377,MH752000.1_Eimeria_ferrisi:0.0005438812)26:0.0001924401,MH751984.1_Eimeria_ferrisi:0.0000020377)25:0.0000020377,MH751989.1_Eimeria_ferrisi:0.0000020377)24:0.0000020377)27:0.0000020377,MH751966.1_Eimeria_ferrisi:0.0000020377)26:0.0000020377,MH751996.1_Eimeria_ferrisi:0.0000020377)27:0.0000020377)28:0.0000020377,MH752034.1_Eimeria_ferrisi:0.0000020377)46:0.0000020377,wang1141_13_F.Nem_0425_6_3_R_Lab_single-amplicon_ASV4:0.0000020377)26:0.0000020377,MH752032.1_Eimeria_ferrisi:0.0000020377)16:0.0000020377,MH752036.1_Eimeria_ferrisi:0.0000020377)25:0.0000020377,MH751930.1_Eimeria_ferrisi:0.0000020377)19:0.0000020377,MH751968.1_Eimeria_ferrisi:0.0000020377)19:0.0000020377,MH751939.1_Eimeria_ferrisi:0.0000020377)50:0.0000020377,(MH751953.1_Eimeria_ferrisi:0.0000020377,(MH751999.1_Eimeria_ferrisi:0.0000020377,MH752023.1_Eimeria_ferrisi:0.0000026900)77:0.0021981684)73:0.0020457173)39:0.0000020377)69:0.0007596745,((MH751927.1_Eimeria_ferrisi:0.0000020377,((MH751928.1_Eimeria_ferrisi:0.0000020377,(MH751994.1_Eimeria_ferrisi:0.0000020377,MH752022.1_Eimeria_ferrisi:0.0005322946)30:0.0002555509)26:0.0000020377,MH752007.1_Eimeria_ferrisi:0.0000020377)19:0.0000020377)29:0.0000020377,MH751958.1_Eimeria_ferrisi:0.0000020377)32:0.0000020377)26:0.0000020377,MH751947.1_Eimeria_ferrisi:0.0008041318)31:0.0000020377,((((((((((((((((((((MH751929.1_Eimeria_ferrisi:0.0000000000,MH751952.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH751990.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH752001.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH751931.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH751973.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH751971.1_Eimeria_ferrisi:0.0000000000):0.0000000000,MH751956.1_Eimeria_ferrisi:0.0000000000):0.0000020377,(MH751950.1_Eimeria_ferrisi:0.0000020377,MH751997.1_Eimeria_ferrisi:0.0000020377)96:0.0016124108)84:0.0009493911,MH751972.1_Eimeria_ferrisi:0.0000020377)79:0.0000020377,MH751965.1_Eimeria_ferrisi:0.0000020377)77:0.0000020377,MH751955.1_Eimeria_ferrisi:0.0000020377)78:0.0000020377,(MH751949.1_Eimeria_ferrisi:0.0000020377,MH751982.1_Eimeria_ferrisi:0.0000020377)79:0.0000020377)84:0.0008046697,MH751988.1_Eimeria_ferrisi:0.0000020377)79:0.0005361102,MH752035.1_Eimeria_ferrisi:0.0000020377)27:0.0002580249,MH751944.1_Eimeria_ferrisi:0.0000020377)9:0.0000020377,MH751992.1_Eimeria_ferrisi:0.0000020377)15:0.0000020377,MH751933.1_Eimeria_ferrisi:0.0010087262)12:0.0000020377,MH751936.1_Eimeria_ferrisi:0.0010113395)20:0.0000020377,(MH752002.1_Eimeria_ferrisi:0.0000021403,MH752020.1_Eimeria_ferrisi:0.0000020377)85:0.0033868371)28:0.0000020377,MH751932.1_Eimeria_ferrisi:0.0000020377)49:0.0000020377)56:0.0000020377,MH751991.1_Eimeria_ferrisi:0.0000020377)57:0.0000020377,MH751987.1_Eimeria_ferrisi:0.0000020377)60:0.0000020377,MH752024.1_Eimeria_ferrisi:0.0000020377)73:0.0004225223,(MH752021.1_Eimeria_ferrisi:0.0035491870,MH752031.1_Eimeria_ferrisi:0.0000020377)62:0.0010665049);
+
+TIME STAMP
+----------
+
+Date and time: Wed Nov 30 09:57:14 2022
+Total CPU time used: 5365.912705 seconds (1h:29m:25s)
+Total wall-clock time used: 3057.646407 seconds (0h:50m:57s)
+
