@@ -151,12 +151,12 @@ BS_ASV <- function(fer, phyloT, OutGroup) {
 ## import trees
 #phyloT <- read.tree("tmp/Eimeria18S_wild_lab_ref.fasta.contree")
 phyloT <- list()
-for (i in (1:9)){
+for (i in (1:10)){
     phyloT[[i]] <- ggtree::read.tree(paste("tmp/amplicon_alignments/amplicon", i, ".contree", sep=""))
 }
 
 # now assign species based on trees
-for (i in (1:9)){
+for (i in (1:length(phyloT))){
     amplicon$species <- species_ASV(fer, "ferrisi", phyloT[[i]], OutGroup)
     amplicon$species <- species_ASV(ver, "vermiformis", phyloT[[i]], OutGroup)
     amplicon$species <- species_ASV(fal, "falciformis", phyloT[[i]], OutGroup)
@@ -189,17 +189,26 @@ amplicon$BS[amplicon$names_ASVs=="wang1141_13_F.Nem_0425_6_3_R_ASV_2"] <- 43
 amplicon$species[amplicon$names_ASVs=="Prot1702_32_F.wang1624CR6S_16_R_ASV_2"] <- "falciformis"
 amplicon$BS[amplicon$names_ASVs=="Prot1702_32_F.wang1624CR6S_16_R_ASV_2"] <- 62
 
+amplicon$species[amplicon$names_ASVs=="Proti15_25_F.Proti440R_28_R_ASV_2"] <- "falciformis"
+amplicon$BS[amplicon$names_ASVs=="Proti15_25_F.Proti440R_28_R_ASV_2"] <- 52
+
 ## now we save this in a new table and remove the lab ASV's
 amplicon2 <- amplicon
 
-amplicon <- amplicon[-c(36, 37, 38, 39),]
+# removing lab ASVs
+amplicon
+
+amplicon <- amplicon[-grep("Lab", amplicon$names_ASVs),]
 
 #sanity check
-Eim@tax_table[,7] <- amplicon$spec
-Eim.TSS@tax_table[,7] <- amplicon$spec
-Eim.T@tax_table[,7] <- amplicon$spec
+Eim@tax_table[,7] <- amplicon$species
+Eim.TSS@tax_table[,7] <- amplicon$species
+Eim.T@tax_table[,7] <- amplicon$species
 
-get_taxa_unique(Eim, "Species")
+Eim.TSSw@tax_table[,7] <- amplicon$species
+Eim.Tw@tax_table[,7] <- amplicon$species
+
+get_taxa_unique(Eim.Tw, "Species")
 
 #########################################################
 # correlation matrix and network
@@ -211,9 +220,11 @@ library(igraph)
 Eim <- phyloseq::prune_samples(sample_sums(Eim)>0, Eim)
 Eim.TSS <- phyloseq::prune_samples(sample_sums(Eim.TSS)>0, Eim.TSS)
 Eim.T <- phyloseq::prune_samples(sample_sums(Eim.T)>0, Eim.T)
+Eim.TSSw <- phyloseq::prune_samples(sample_sums(Eim.TSSw)>0, Eim.TSSw)
+Eim.Tw <- phyloseq::prune_samples(sample_sums(Eim.Tw)>0, Eim.Tw)
 
-eim <- (Eim.T@otu_table)
-tax <- data.frame(Eim.T@tax_table) 
+eim <- (Eim.Tw@otu_table)
+tax <- data.frame(Eim.Tw@tax_table) 
 
 otu.cor <- rcorr(as.matrix(eim), type="spearman")
 otu.pval <- forceSymmetric(otu.cor$P)
@@ -239,6 +250,7 @@ rownames(adjm) <- names18S
 net.grph=graph.adjacency(adjm,mode="undirected",weighted=TRUE,diag=FALSE) 
 
 V(net.grph)
+
 ### negative correlations
 summary(adjm<0)
 ### colour negative edges
@@ -262,7 +274,7 @@ E(net.grph)$weight <- abs(E(net.grph)$weight)
 # now plotting
 pdf("fig/Eimeria_ASVs_Network.pdf",
                 width =15, height = 15)
-set.seed(1235)
+set.seed(1113)
 plot(net.grph,
      vertex.label=amplicon$species,
 #     edge.width=as.integer(cut(E(net.grph)$weight, breaks=6))/2,
@@ -288,58 +300,6 @@ amplicon$species_FINAL[amplicon$species=="vermiformis"] <- "vermiformis"
 Eim@tax_table[,7] <- amplicon$species_FINAL
 Eim.T@tax_table[,7] <- amplicon$species_FINAL
 Eim.TSS@tax_table[,7] <- amplicon$species_FINAL
+Eim.Tw@tax_table[,7] <- amplicon$species_FINAL
+Eim.TSSw@tax_table[,7] <- amplicon$species_FINAL
 
-############################ we need to normalise between amplicons, before we merge
-# z-score normalization
-
-# substract the mean Eimeria (species level) from the Eimeria in each sample divided by the standard deviation
-
-# first, divide 18S from 28S
-
-#Eim.T18
-
-#Eim.T28
-
-# then agglomerate species
-
-#Eim.T18@tax_table[,6] <- "Eimeria"
-
-#Eim.T28@tax_table[,6] <- "Eimeria"
-
-#Eim.T18_sp <- tax_glom(Eim.T18, "Species")
-#Eim.T28_sp <- tax_glom(Eim.T28, "Species")
-
-# do normalization
-
-#mean18 <- mean(sample_sums(Eim.T18_sp))
-#sd18 <- sd(sample_sums(Eim.T18_sp))
-#Z.Eim18 <- Eim.T18_sp
-#Z.Eim18@otu_table <- ((Eim.T18_sp@otu_table-mean18)/sd18)+
-
-#mean28 <- mean(sample_sums(Eim.T28_sp))
-#sd28 <- sd(sample_sums(Eim.T28_sp))
-#Z.Eim28 <- Eim.T28_sp
-#Z.Eim28@otu_table <- ((Eim.T28_sp@otu_table-mean28)/sd28)
-
-#Z.Eim28@otu_table
-
-
-# join
-
-##### Do this but for the sum of all ASVs per amplicon
-
-
-#Eim.T@tax_table[,6] <- "Eimeria"
-
-#Eim.T_sp <- tax_glom(Eim.T, "Species")
-
-
-#taxa_sums(Eim.T_sp)
-
-#Eim_s <- tax_glom(Eim, "Species")
-
-#Eim_s
-
-#fPS
-
-#161/619*100
