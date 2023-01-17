@@ -261,6 +261,9 @@ Eimdf$Locality <- as.factor(Eimdf$Locality)
 Eimdf <- as.data.frame(Eimdf)
 class(Eimdf) <- "data.frame"
 
+
+dis <- phyloseq::distance(Eim_sp, method="bray", type="samples")
+
 dis2 <- phyloseq::distance(prune_samples(rownames(Eimdf[!is.na(Eimdf$BMI),]), Eim_sp), method="bray", type="samples")
 
 Eimdf1 <- Eimdf[!is.na(Eimdf$BMI),]
@@ -275,6 +278,23 @@ permaPS=adonis2(dis2~
             permutations = 1000, method = "bray")
 
 permaPS
+
+#plotting PCOA
+dis_pcoa <- cmdscale(dis, eig=TRUE, add=TRUE)
+positions <- dis_pcoa$points
+colnames(positions) <- c("axis1", "axis2")
+percent_explained <- 100*dis_pcoa$eig/sum(dis_pcoa$eig)
+pretty_pe <- format(round(percent_explained, digits=1), nsmall=1, trim=TRUE)
+library(glue)
+labels <- c(glue("PCo Axis 1 ({pretty_pe[1]}%)"), glue("PCo Axis 2({pretty_pe[2]}%)"))
+# sanity check            
+rownames(positions)==sample_names(Eim_sp)
+positions <- as.data.frame(positions)
+
+ggplot(positions, aes(x=axis1, y=axis2))+
+    geom_point()+
+    labs(x=labels[1],y=labels[2])
+
 
 library(merTools)
 library(MuMIn)
@@ -303,6 +323,8 @@ r.squaredGLMM(BMIm)
 
 anova(BMIm, BMIm0)
 
+anova(BMIm, test="LRT")
+
 ranova(BMIm)
 
 library(sjPlot) #for plotting lmer and glmer mods
@@ -329,22 +351,12 @@ Fal_plot <- ggplot()+
     theme(panel.grid.major = element_blank(),
     panel.grid.minor = element_blank())
 
-Fig6 <- cowplot::plot_grid(Fer_plot, Fal_plot)
+Fig6 <- cowplot::plot_grid(Fer_plot, Fal_plot, labels="auto")
 
 ggsave("fig/Fig6_BMI_Eimeria.pdf", Fig6, height=4, width=9, dpi=400)
 ggsave("fig/Fig6_BMI_Eimeria.png", Fig6, height=4, width=9, dpi=400)
 
-#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0))
-#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0))
-#chisq.test(table(Eimdf$Ferrisi>0, Eimdf$Sp>0))
-#chisq.test(table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0))
-
-#table(Eimdf$Ferrisi>0, Eimdf$Falciformis>0)
-#table(Eimdf$Ferrisi>0, Eimdf$Vermiformis>0)
-#table(Eimdf$Falciformis>0, Eimdf$Vermiformis>0)
-
 library(lme4)
-
 Eimdf$fal[Eimdf$Falciformis>0] <- 1
 Eimdf$fal[Eimdf$Falciformis==0] <- 0
 
@@ -356,118 +368,35 @@ Eimdf$ver[Eimdf$Vermiformis==0] <- 0
 
 ### new variable with amplicon
 falModel <- glmer(fal~ver*fer + (1|Locality), family=binomial(), data=Eimdf)
-
 ferModel <- glmer(fer~ver*fal + (1|Locality), family=binomial(), data=Eimdf)
-
 verModel <- glmer(ver~fer*fal + (1|Locality), family=binomial(), data=Eimdf)
-
 summary(falModel)
-
 summary(ferModel)
-
 summary(verModel)
-
-#library("effects")
-
-#F.plot <- plot(effect("ver", ferModel),
-#     ylab="Probability of E. falciformis",
-#     xlab="E. vermiformis infection",
-#     main="")
-
-#png("fig/Vermiformis_effect.png", height=4, width=4, units="in", res=400)
-#V.plot
-#dev.off()
-
-#png("fig/Falciformis_effect.png", height=4, width=4, units="in", res=400)
-#Int
-#dev.off()
-
-#Int <- plot(effect("ver:fer", falModel, xlevels=list(fer=0:1)),
-#     ylab="Probability E. falciformis +",
-#     multiline=TRUE,
-#     main="E.falciformis* E.ferrisi")
 
 library(lmerTest)
 #ranova(falModel)
 
 #### quantit
-
 Eimdf$EimeriaTotal <- Eimdf$Falciformis+Eimdf$Vermiformis+Eimdf$Ferrisi
-
-Eimdf$EimeriaTotal
-
-#FalQ <- lmer(log(1+Falciformis)~log(1+Vermiformis)*log(1+Ferrisi)*log(1+Sp) + (1|Locality), data=Eimdf)
-
 FalQ <- lmer(Falciformis~Vermiformis*Ferrisi + (1|Locality), data=Eimdf)
-
 summary(FalQ)
 
 FerQ <- lmer(Ferrisi~Vermiformis*Falciformis + (1|Locality), data=Eimdf)
-
-
 summary(FerQ)
 
 VerQ <- lmer(Vermiformis~Ferrisi*Falciformis + (1|Locality), data=Eimdf)
-
 summary(VerQ)
 
-library(randomForest)
-
-Fal.fit <- randomForest(Falciformis ~ Ferrisi + Vermiformis, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
-Fal.fit
-varImpPlot(Fal.fit)
-
-
-ImpData <- as.data.frame(importance(Fal.fit))
-ImpData$Var.Names <- row.names(ImpData)
-
-ggplot(ImpData, aes(x=Var.Names, y=`%IncMSE`))+
-    geom_segment(aes(x=Var.Names, xend=Var.Names, y=0, yend=`%IncMSE`), color="skyblue") +
-    geom_point(aes(size = IncNodePurity), color="blue", alpha=0.6) +
-    theme_light() +
-    coord_flip() +
-    theme(
-        legend.position="bottom",
-        panel.grid.major.y = element_blank(),
-        panel.border = element_blank(),
-        axis.ticks.y = element_blank()
-                      )
-
-
-Fer.fit <- randomForest(Ferrisi ~ Falciformis + Vermiformis , data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
-Fer.fit
-varImpPlot(Fer.fit)
-
-Ver.fit <- randomForest(Vermiformis ~ Falciformis + Ferrisi, data=Eimdf, ntree=500, keep.forest=FALSE, importance=TRUE)
-Ver.fit
-varImpPlot(Ver.fit)
-
-#FalQ <- glmer.nb(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
-#FalQ <- lmer(Falciformis~Vermiformis*Ferrisi*Sp + (1|Locality), data=Eimdfq)
-
 ## terrible, even after transforming or using a NB
-#plot(FalQ)
-#qqnorm(residuals(FalQ))
+plot(FalQ)
+qqnorm(residuals(FalQ))
 #qqline(residuals(FalQ))
 
 library(lmerTest)
 ranova(FalQ) # not signigicant
 
-#FalModel <- glm(Falciformis~Vermiformis*Ferrisi, data=Eimdf)
-
-#plot(FalModel) # not too terrible
-
-#FalModel <- glm.nb(Falciformis~Vermiformis*Ferrisi*Sp, data=Eimdfq)
-summary(FalModel) # bad deviance too
-#plot(FalModel) # ugly! More variables?
-
-summary(as.factor(Eimdf$Concatenated))
-
-head(eim_sp)
-
 eim_sp$Concatenated <- as.factor(eim_sp$Concatenated)
-
-
 eim_c <- eim_sp[eim_sp$Abundance>0,]
 eim_c <- eim_c[!is.na(eim_c$Concatenated),]
 
@@ -477,13 +406,38 @@ length(unique(as.factor(eim_c$Mouse_ID)))
 
 eim_c[eim_c$Concatenated=="E_vermiformis", c("Abundance", "Mouse_ID", "Group_18S", "Group_COI_1", "Group_COI_2", "Group_ORF", "Concatenated", "Species")]
 
+test=transform(eim_c, dAbundance= ifelse(Concatenated=="ferrisi",
+                                          as.numeric(Abundance)-0.25,
+                                          as.numeric(Abundance)+0.25))
+
+eim_c$dConcatenated <- 200
+
+eim_c$dConcatenated[eim_c$Species=="falciformis"] <- as.numeric(eim_c$Concatenated)-0.25
+
+eim_c$dConcatenated[eim_c$Species=="ferrisi"] <- as.numeric(eim_c$Concatenated)
+
+eim_c$dConcatenated[eim_c$Species=="vermidormis"] <- as.numeric(eim_c$Concatenated)+0.25
+
+eim_c$dConcatenated[eim_c$Species=="falciformis"]
+
+eim_c$dConcatenated
+
+as.numeric(eim_c$Concatenated)-0.25
+
+eim_c$Concatenated
+
+test$dAbundance
+
+eim_c$Species
+
+                                        #https://stackoverflow.com/questions/44656299/lines-connecting-jittered-points-dodging-by-multiple-groups
 
 TISSUE_MA <- ggplot(eim_c, aes(x=Concatenated, y=Abundance, fill=Species))+
     scale_fill_manual(values=c("forestgreen", "dodgerblue4", "darkred"))+
-    geom_boxplot(alpha=0.3, colour="black", outlier.shape = NA)+
     geom_point(size=4, shape=21, position=position_jitterdodge(dodge.width=0.75, jitter.width=0.1), alpha=0.7)+
-    labs(x="genotyping PCR from tissue DNA", y="Proportion within all ASVs/ng DNA (log)")+    
-#    geom_bar(position="dodge", stat="identity")+
+    geom_boxplot(alpha=0.3, colour="black", outlier.shape = NA)+
+    geom_line(aes(x=dConcatenated, group=Sample), position=position_jitterdodge(dodge.width=0.75, jitter.width=0.1))+
+    labs(x="genotyping PCR from tissue DNA", y="Proportion within all ASVs/ng DNA (log)")+#    geom_bar(position="dodge", stat="identity")+
     guides(fill=guide_legend(ncol=4))+
     theme_classic()+
     theme(axis.text.y = element_text(colour = 'black', size = 14, face = 'italic'),
@@ -497,6 +451,8 @@ TISSUE_MA <- ggplot(eim_c, aes(x=Concatenated, y=Abundance, fill=Species))+
       legend.text = element_text(colour = 'black', size = 10, face = 'italic'),
       legend.position="none"
       )
+
+TISSUE_MA
 
 ggsave("fig/Eimeria_qPCR_MA.pdf", TISSUE_MA, height=4, width=5, dpi=400)
 ggsave("fig/Eimeria_qPCR_MA.png", TISSUE_MA, height=4, width=5, dpi=400)
